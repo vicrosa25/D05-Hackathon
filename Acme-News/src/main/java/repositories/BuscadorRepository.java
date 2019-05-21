@@ -20,10 +20,10 @@ public interface BuscadorRepository extends JpaRepository<Buscador, Integer> {
 		"?1) and n.estado=2 order by n.fecha desc")
 	Collection<Noticia> filterByKeyword(String keyword);
 
-	@Query("select n from Noticia n where p.fecha <= ?1 and n.estado=2 order by n.fecha desc")
+	@Query("select n from Noticia n where n.fecha <= ?1 and n.estado=2 order by n.fecha desc")
 	Collection<Noticia> filterByFechaFin(Date fechaFin);
 
-	@Query("select n from Noticia n where p.fecha >= ?1 and n.estado=2 order by n.fecha desc")
+	@Query("select n from Noticia n where n.fecha >= ?1 and n.estado=2 order by n.fecha desc")
 	Collection<Noticia> filterByFechaInicio(Date fechaInicio);
 
 	@Query("select n from Noticia n where n.categoria=?1 and n.estado=2 order by n.fecha desc")

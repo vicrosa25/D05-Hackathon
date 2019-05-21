@@ -42,6 +42,14 @@
 					<li><a href="usuario/cambiarEstatus.do"><spring:message code="usuario.cambiarEstatus" /></a></li>
 					
 					
+					
+				</ul>
+			</li>
+			<li><a class="fNiv"><spring:message	code="master.page.buscador" /></a>
+				<ul>
+					<li class="arrow"></li>
+					<li><a href="buscador/usuario/edit.do"><spring:message code="master.page.buscador.edit" /></a></li>
+					<li><a href="buscador/usuario/result.do"><spring:message code="master.page.buscador.result" /></a></li>
 				</ul>
 			</li>
 		</security:authorize>

@@ -31,6 +31,7 @@
 		<spring:message code="noticia.categoria" />:
 	</form:label>
 	<form:select path="categoria" >
+		<form:option label="--" value=""/>
 		<form:option label="${deportes}" value="DEPORTES"/>
 		<form:option label="${economia}" value="ECONOMIA"/>
 		<form:option label="${motor}" value="MOTOR"/>

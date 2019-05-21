@@ -10,5 +10,10 @@
 		<put-attribute name="title" value="Finder" />
 		<put-attribute name="body" value="/views/buscador/edit.jsp" />
 	</definition>
+
+	<definition name="buscador/usuario/result" extends="master.page">	
+		<put-attribute name="title" value="Search results" />
+		<put-attribute name="body" value="/views/noticia/listCategorias.jsp" />
+	</definition>
 	
 </tiles-definitions>
