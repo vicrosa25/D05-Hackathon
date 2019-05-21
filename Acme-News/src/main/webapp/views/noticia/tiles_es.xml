@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!-- 
+ * tiles_es.xml
+ *
+ * Copyright (C) 2017 Universidad de Sevilla
+ * 
+ * The use of this project is hereby constrained to the conditions of the 
+ * TDG Licence, a copy of which you may download from 
+ * http://www.tdg-seville.info/License.html
+ -->
+
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
+       "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
+      
+<tiles-definitions>
+
+	<definition name="noticia/listaDeportes" extends="master.page">	
+		<put-attribute name="title" value="Noticias de Deportes" />
+		<put-attribute name="body" value="/views/noticia/listCategorias.jsp" />
+	</definition>
+	
+	<definition name="noticia/listaEconomia" extends="master.page">	
+		<put-attribute name="title" value="Noticias de Economia" />
+		<put-attribute name="body" value="/views/noticia/listCategorias.jsp" />
+	</definition>
+		
+	<definition name="noticia/listaMotor" extends="master.page">	
+		<put-attribute name="title" value="Noticias de Motor" />
+		<put-attribute name="body" value="/views/noticia/listCategorias.jsp" />
+	</definition>
+		
+	<definition name="noticia/listaCultura" extends="master.page">	
+		<put-attribute name="title" value="Noticias de Cultura" />
+		<put-attribute name="body" value="/views/noticia/listCategorias.jsp" />
+	</definition>
+		
+	<definition name="noticia/listaOcio" extends="master.page">	
+		<put-attribute name="title" value="Noticias de Ocio" />
+		<put-attribute name="body" value="/views/noticia/listCategorias.jsp" />
+	</definition>
+		
+	<definition name="noticia/listaEspana" extends="master.page">	
+		<put-attribute name="title" value="Noticias de España" />
+		<put-attribute name="body" value="/views/noticia/listCategorias.jsp" />
+	</definition>
+		
+	<definition name="noticia/listaInternacional" extends="master.page">	
+		<put-attribute name="title" value="Noticias Internacionales" />
+		<put-attribute name="body" value="/views/noticia/listCategorias.jsp" />
+	</definition>
+		
+	<definition name="noticia/listaJuegos" extends="master.page">	
+		<put-attribute name="title" value="Noticias de Juegos" />
+		<put-attribute name="body" value="/views/noticia/listCategorias.jsp" />
+	</definition>
+		
+	<definition name="noticia/listaOtros" extends="master.page">	
+		<put-attribute name="title" value="Otras Noticias" />
+		<put-attribute name="body" value="/views/noticia/listCategorias.jsp" />
+	</definition>
+	
+	<definition name="noticia/display" extends="master.page">	
+		<put-attribute name="title" value="Noticia" />
+		<put-attribute name="body" value="/views/noticia/display.jsp" />
+	</definition>
+	
+	<definition name="noticia/busqueda" extends="master.page">	
+		<put-attribute name="title" value="Resultados de la Búsqueda" />
+		<put-attribute name="body" value="/views/noticia/listCategorias.jsp" />
+	</definition>
+	
+	<definition name="noticia/buscar" extends="master.page">	
+		<put-attribute name="title" value="Buscar Noticias" />
+		<put-attribute name="body" value="/views/noticia/buscar.jsp" />
+	</definition>
+	
+	<definition name="noticia/misNoticias" extends="master.page">	
+		<put-attribute name="title" value="Tus Noticias" />
+		<put-attribute name="body" value="/views/noticia/misNoticias.jsp" />
+	</definition>
+	
+	<definition name="noticia/crear" extends="master.page">	
+		<put-attribute name="title" value="Nueva Noticia" />
+		<put-attribute name="body" value="/views/noticia/crear.jsp" />
+	</definition>
+	
+	<definition name="noticia/listBanear" extends="master.page">	
+		<put-attribute name="title" value="Lista de Noticias Reportadas" />
+		<put-attribute name="body" value="/views/noticia/listBanear.jsp" />
+	</definition>
+	
+	<definition name="noticia/listPendientes" extends="master.page">	
+		<put-attribute name="title" value="Lista de Noticias Pendientes" />
+		<put-attribute name="body" value="/views/noticia/listPendientes.jsp" />
+	</definition>
+	
+	<definition name="noticia/reportes" extends="master.page">	
+		<put-attribute name="title" value="Reportes de la Noticia" />
+		<put-attribute name="body" value="/views/noticia/reportes.jsp" />
+	</definition>	
+	
+</tiles-definitions>

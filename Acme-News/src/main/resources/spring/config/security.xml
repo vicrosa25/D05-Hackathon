@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- 
+ * security.xml
+ *
+ * Copyright (C) 2017 Universidad de Sevilla
+ * 
+ * The use of this project is hereby constrained to the conditions of the 
+ * TDG Licence, a copy of which you may download from 
+ * http://www.tdg-seville.info/License.html
+ -->
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:security="http://www.springframework.org/schema/security"	
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd		
+        http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-3.2.xsd
+    ">
+
+	<!-- Security infrastructure -->
+
+	<bean id="loginService" class="security.LoginService" />
+
+	<bean id="passwordEncoder"
+		class="org.springframework.security.authentication.encoding.Md5PasswordEncoder" />
+
+	<!-- Access control -->
+
+	<security:http auto-config="true" use-expressions="true">
+		<security:intercept-url pattern="/" access="permitAll" /> 
+
+		<security:intercept-url pattern="/favicon.ico" access="permitAll" /> 
+		<security:intercept-url pattern="/images/**" access="permitAll" /> 
+		<security:intercept-url pattern="/scripts/**" access="permitAll" /> 
+		<security:intercept-url pattern="/styles/**" access="permitAll" /> 
+
+		<security:intercept-url pattern="/views/misc/index.jsp" access="permitAll" /> 
+
+		<security:intercept-url pattern="/security/login.do" access="permitAll" /> 
+		<security:intercept-url pattern="/security/loginFailure.do" access="permitAll" /> 
+
+		<security:intercept-url pattern="/welcome/index.do" access="permitAll" /> 
+		<security:intercept-url pattern="/registration/**" access="permitAll" /> 
+		<security:intercept-url pattern="/usuario/checkBan.do" access="permitAll" />
+		<security:intercept-url pattern="/usuario/listUsuariosToBan.do" access="hasRole('MODERADOR')" />
+
+			<!-- ADMIN -->
+		
+		<security:intercept-url pattern="/administrador/changeBanner.do" access="hasRole('ADMIN')" />
+		<security:intercept-url pattern="/premio/admin/**" access="hasRole('ADMIN')" />
+		<security:intercept-url pattern="/sorteo/admin/**" access="hasRole('ADMIN')" />
+		<security:intercept-url pattern="/administrator/dashboard.do" access="hasRole('ADMIN')" /> 
+		<security:intercept-url pattern="/tasa/administrator/**" access="hasRole('ADMIN')" />
+		
+			<!-- USUARIO -->
+		
+		<security:intercept-url pattern="/usuario/listUsuariosSiguiendo.do" access="hasRole('USUARIO')" /> 
+		<security:intercept-url pattern="/usuario/listInformacionDeQuienSigues.do" access="hasRole('USUARIO')" /> 
+		<security:intercept-url pattern="/usuario/seguirUsuario.do" access="hasRole('USUARIO')" />
+		<security:intercept-url pattern="/usuario/compartirInformacion.do" access="hasRole('USUARIO')" />
+		<security:intercept-url pattern="/usuario/noSeguirUsuario.do" access="hasRole('USUARIO')" />
+		<security:intercept-url pattern="/usuario/listNoticiasCompartidas.do" access="hasRole('USUARIO')" />
+		<security:intercept-url pattern="/usuario/listSorteosProximos.do" access="hasRole('USUARIO')" />
+		<security:intercept-url pattern="/usuario/listTusSorteos.do" access="hasRole('USUARIO')" />
+		<security:intercept-url pattern="/usuario/apuntarseSorteo.do" access="hasRole('USUARIO')" />
+		<security:intercept-url pattern="/usuario/cambiarEstatus.do" access="hasRole('USUARIO')" />
+		<security:intercept-url pattern="/usuario/cambiarEstatusMetodo.do" access="hasRole('USUARIO')" />
+		<security:intercept-url pattern="/reporte/**" access="hasRole('USUARIO')" />
+		<security:intercept-url pattern="/comentario/**" access="hasRole('USUARIO')" />
+		
+		<security:intercept-url pattern="/noticia/listaDeportes.do" access="permitAll" />
+		<security:intercept-url pattern="/noticia/listaEconomia.do" access="permitAll" /> 
+		<security:intercept-url pattern="/noticia/listaOcio.do" access="permitAll" /> 
+		<security:intercept-url pattern="/noticia/listaMotor.do" access="permitAll" /> 
+		<security:intercept-url pattern="/noticia/listaEspana.do" access="permitAll" /> 
+		<security:intercept-url pattern="/noticia/listaInternacional.do" access="permitAll" /> 
+		<security:intercept-url pattern="/noticia/listaOtros.do" access="permitAll" /> 
+		<security:intercept-url pattern="/noticia/listaJuegos.do" access="permitAll" /> 
+		<security:intercept-url pattern="/noticia/listaCultura.do" access="permitAll" /> 
+		<security:intercept-url pattern="/noticia/listaDisplay.do" access="permitAll" />  
+		<security:intercept-url pattern="/noticia/display.jsp" access="permitAll" />
+		<security:intercept-url pattern="/noticia/display.do" access="permitAll" />  
+		<security:intercept-url pattern="/noticia/listaCategorias.jsp" access="permitAll" />
+		<security:intercept-url pattern="/noticia/buscar.do" access="permitAll" />
+		<security:intercept-url pattern="/noticia/busqueda.do" access="permitAll" />  
+		
+		<security:intercept-url pattern="/periodista/display.do" access="permitAll" />
+		<security:intercept-url pattern="/noticia/misNoticias.do" access="hasRole('PERIODISTA')" />
+		<security:intercept-url pattern="/noticia/borrar.do" access="hasRole('PERIODISTA')" />
+		<security:intercept-url pattern="/noticia/crear.do" access="hasRole('PERIODISTA')" />
+		<security:intercept-url pattern="/evento/misEventos.do" access="hasRole('PERIODISTA')" />
+		<security:intercept-url pattern="/evento/borrar.do" access="hasRole('PERIODISTA')" />
+		<security:intercept-url pattern="/evento/crear.do" access="hasRole('PERIODISTA')" />
+
+		<security:intercept-url pattern="/noticia/listBanear.do" access="hasRole('MODERADOR')" />
+		<security:intercept-url pattern="/noticia/reportes.do" access="hasRole('MODERADOR')" />
+		<security:intercept-url pattern="/noticia/banear.do" access="hasRole('MODERADOR')" />
+		<security:intercept-url pattern="/noticia/listPendientes.do" access="hasRole('MODERADOR')" />
+		<security:intercept-url pattern="/noticia/aceptar.do" access="hasRole('MODERADOR')" />
+		<security:intercept-url pattern="/noticia/denegar.do" access="hasRole('MODERADOR')" />
+		
+		<security:intercept-url pattern="/evento/allEventos.do" access="permitAll" />
+		<security:intercept-url pattern="/evento/display.do" access="permitAll" />
+		
+		<security:intercept-url pattern="/usuario/display.do" access="hasRole('USUARIO')" />
+		<security:intercept-url pattern="/usuario/edit.do" access="hasRole('USUARIO')" />
+		
+		<security:intercept-url pattern="/periodista/edit.do" access="hasRole('PERIODISTA')" />
+		
+		<security:intercept-url pattern="/moderador/retirarDinero.do" access="hasRole('MODERADOR')" />
+		<security:intercept-url pattern="/periodista/retirarDinero.do" access="hasRole('PERIODISTA')" />
+		
+		<security:intercept-url pattern="/agencia/listNotFullAgencia.do" access="hasRole('PERIODISTA')" />
+		<security:intercept-url pattern="/agencia/join.do" access="hasRole('PERIODISTA')" />
+		<security:intercept-url pattern="/agencia/left.do" access="hasRole('PERIODISTA')" />
+		<security:intercept-url pattern="/agencia/listAgencia.do" access="hasRole('MANAGER')" />
+		<security:intercept-url pattern="/agencia/suscribe.do" access="hasRole('PERIODISTA')" />
+		
+		<security:intercept-url pattern="/agencia/update.do" access="hasRole('MANAGER')" />
+		<security:intercept-url pattern="/agencia/agenciaForm.do" access="hasRole('MANAGER')" />
+		<security:intercept-url pattern="/agencia/delete.do" access="hasRole('MANAGER')" />
+		<security:intercept-url pattern="/agencia/createAgencia.do" access="hasRole('MANAGER')" />
+		
+		<security:intercept-url pattern="/periodista/listPeriodista.do" access="hasRole('PERIODISTA')" />
+		
+		
+	
+		<security:intercept-url pattern="/**" access="hasRole('NONE')" />
+
+		<security:form-login 
+			login-page="/security/login.do"
+			password-parameter="password" 
+			username-parameter="username"
+			authentication-failure-url="/security/loginFailure.do" />
+
+		<security:logout 
+			logout-success-url="/" 
+			invalidate-session="true" />
+	</security:http>
+
+</beans>

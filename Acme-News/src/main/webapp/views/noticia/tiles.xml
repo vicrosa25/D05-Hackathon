@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!-- 
+ * tiles.xml
+ *
+ * Copyright (C) 2017 Universidad de Sevilla
+ * 
+ * The use of this project is hereby constrained to the conditions of the 
+ * TDG Licence, a copy of which you may download from 
+ * http://www.tdg-seville.info/License.html
+ -->
+
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
+       "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
+       
+<tiles-definitions>
+
+	<definition name="noticia/listaDeportes" extends="master.page">	
+		<put-attribute name="title" value="Sport News" />
+		<put-attribute name="body" value="/views/noticia/listCategorias.jsp" />
+	</definition>
+	
+	<definition name="noticia/listaEconomia" extends="master.page">	
+		<put-attribute name="title" value="Economic News" />
+		<put-attribute name="body" value="/views/noticia/listCategorias.jsp" />
+	</definition>
+		
+	<definition name="noticia/listaMotor" extends="master.page">	
+		<put-attribute name="title" value="Motor News" />
+		<put-attribute name="body" value="/views/noticia/listCategorias.jsp" />
+	</definition>
+		
+	<definition name="noticia/listaCultura" extends="master.page">	
+		<put-attribute name="title" value="Culture News" />
+		<put-attribute name="body" value="/views/noticia/listCategorias.jsp" />
+	</definition>
+		
+	<definition name="noticia/listaOcio" extends="master.page">	
+		<put-attribute name="title" value="Leisure News" />
+		<put-attribute name="body" value="/views/noticia/listCategorias.jsp" />
+	</definition>
+		
+	<definition name="noticia/listaEspana" extends="master.page">	
+		<put-attribute name="title" value="Spain News" />
+		<put-attribute name="body" value="/views/noticia/listCategorias.jsp" />
+	</definition>
+		
+	<definition name="noticia/listaInternacional" extends="master.page">	
+		<put-attribute name="title" value="International News" />
+		<put-attribute name="body" value="/views/noticia/listCategorias.jsp" />
+	</definition>
+		
+	<definition name="noticia/listaJuegos" extends="master.page">	
+		<put-attribute name="title" value="Game News" />
+		<put-attribute name="body" value="/views/noticia/listCategorias.jsp" />
+	</definition>
+		
+	<definition name="noticia/listaOtros" extends="master.page">	
+		<put-attribute name="title" value="Other News" />
+		<put-attribute name="body" value="/views/noticia/listCategorias.jsp" />
+	</definition>
+	
+	<definition name="noticia/display" extends="master.page">	
+		<put-attribute name="title" value="New" />
+		<put-attribute name="body" value="/views/noticia/display.jsp" />
+	</definition>
+
+	<definition name="noticia/busqueda" extends="master.page">	
+		<put-attribute name="title" value="Search Results" />
+		<put-attribute name="body" value="/views/noticia/listCategorias.jsp" />
+	</definition>
+	
+	<definition name="noticia/buscar" extends="master.page">	
+		<put-attribute name="title" value="Search News" />
+		<put-attribute name="body" value="/views/noticia/buscar.jsp" />
+	</definition>
+	
+	<definition name="noticia/misNoticias" extends="master.page">	
+		<put-attribute name="title" value="Your News" />
+		<put-attribute name="body" value="/views/noticia/misNoticias.jsp" />
+	</definition>
+	
+	<definition name="noticia/crear" extends="master.page">	
+		<put-attribute name="title" value="Create New" />
+		<put-attribute name="body" value="/views/noticia/crear.jsp" />
+	</definition>
+	
+	<definition name="noticia/listBanear" extends="master.page">	
+		<put-attribute name="title" value="List of Reported News" />
+		<put-attribute name="body" value="/views/noticia/listBanear.jsp" />
+	</definition>
+	
+	<definition name="noticia/listPendientes" extends="master.page">	
+		<put-attribute name="title" value="List of Pending News" />
+		<put-attribute name="body" value="/views/noticia/listPendientes.jsp" />
+	</definition>
+	
+	<definition name="noticia/reportes" extends="master.page">	
+		<put-attribute name="title" value="Reports of the New" />
+		<put-attribute name="body" value="/views/noticia/reportes.jsp" />
+	</definition>
+</tiles-definitions>

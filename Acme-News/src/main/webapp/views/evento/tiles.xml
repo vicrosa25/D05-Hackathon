@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
+       "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
+       
+<tiles-definitions>
+	
+	<definition name="evento/allEventos" extends="master.page">	
+		<put-attribute name="title" value="Actual Events" />
+		<put-attribute name="body" value="/views/evento/allEventos.jsp" />
+	</definition>
+	
+	<definition name="evento/display" extends="master.page">	
+		<put-attribute name="title" value="Event" />
+		<put-attribute name="body" value="/views/evento/display.jsp" />
+	</definition>
+
+	<definition name="evento/misEventos" extends="master.page">	
+		<put-attribute name="title" value="your Events" />
+		<put-attribute name="body" value="/views/evento/misEventos.jsp" />
+	</definition>
+	
+	<definition name="evento/crear" extends="master.page">	
+		<put-attribute name="title" value="New Event" />
+		<put-attribute name="body" value="/views/evento/crear.jsp" />
+	</definition>
+
+</tiles-definitions>

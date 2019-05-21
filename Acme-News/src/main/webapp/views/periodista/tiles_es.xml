@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!-- * tiles_es.xml * * Copyright (C) 2017 Universidad de Sevilla * * The 
+	use of this project is hereby constrained to the conditions of the * TDG 
+	Licence, a copy of which you may download from * http://www.tdg-seville.info/License.html -->
+
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
+       "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
+
+<tiles-definitions>
+
+	<definition name="periodista/display" extends="master.page">
+		<put-attribute name="title" value="Periodista" />
+		<put-attribute name="body" value="/views/periodista/display.jsp" />
+	</definition>
+
+	<definition name="periodista/edit" extends="master.page">
+		<put-attribute name="title" value="Editar Perfil de Periodista" />
+		<put-attribute name="body" value="/views/periodista/edit.jsp" />
+	</definition>
+
+	<definition name="periodista/retirarDinero" extends="master.page">
+		<put-attribute name="title" value="Retirar Dinero Obnetido" />
+		<put-attribute name="body"
+			value="/views/periodista/retirarDinero.jsp" />
+	</definition>
+
+	<definition name="periodista/listPeriodista" extends="master.page">
+		<put-attribute name="title" value="Lista de periodistas con agencias" />
+		<put-attribute name="body"
+			value="/views/periodista/listPeriodista.jsp" />
+	</definition>
+
+</tiles-definitions>

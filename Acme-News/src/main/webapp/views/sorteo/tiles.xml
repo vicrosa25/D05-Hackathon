@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!-- 
+ * tiles_es.xml
+ *
+ * Copyright (C) 2017 Universidad de Sevilla
+ * 
+ * The use of this project is hereby constrained to the conditions of the 
+ * TDG Licence, a copy of which you may download from 
+ * http://www.tdg-seville.info/License.html
+ -->
+
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
+       "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
+      
+<tiles-definitions>
+
+	<definition name="sorteo/admin/listAdmin" extends="master.page">
+		<put-attribute name="title" value="Raffles List" />
+		<put-attribute name="body" value="/views/sorteo/listAdmin.jsp" />
+	</definition>
+	
+	<definition name="sorteo/admin/displayAdmin" extends="master.page">
+		<put-attribute name="title" value="Raffle Info" />
+		<put-attribute name="body" value="/views/sorteo/displayAdmin.jsp" />
+	</definition>
+	
+		<definition name="sorteo/admin/edit" extends="master.page">
+		<put-attribute name="title" value="Edit Raffle" />
+		<put-attribute name="body" value="/views/sorteo/edit.jsp" />
+	</definition>
+	
+			<definition name="sorteo/admin/elegirGanadores" extends="master.page">
+
+	</definition>
+
+	
+</tiles-definitions>

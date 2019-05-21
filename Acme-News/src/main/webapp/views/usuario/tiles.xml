@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!-- 
+ * tiles.xml
+ *
+ * Copyright (C) 2017 Universidad de Sevilla
+ * 
+ * The use of this project is hereby constrained to the conditions of the 
+ * TDG Licence, a copy of which you may download from 
+ * http://www.tdg-seville.info/License.html
+ -->
+
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
+       "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
+       
+<tiles-definitions>
+	
+	<definition name="usuario/display" extends="master.page">	
+		<put-attribute name="title" value="Profile" />
+		<put-attribute name="body" value="/views/usuario/display.jsp" />
+	</definition>
+	
+	<definition name="usuario/edit" extends="master.page">	
+		<put-attribute name="title" value="Edit Profile" />
+		<put-attribute name="body" value="/views/usuario/edit.jsp" />
+	</definition>
+	
+	<definition name="usuario/listUsuariosSiguiendo" extends="master.page">	
+		<put-attribute name="title" value="Following list" />
+		<put-attribute name="body" value="/views/usuario/listUsuariosSiguiendo.jsp" />
+	</definition>
+	
+	
+	<definition name="usuario/listInformacionDeQuienSigues" extends="master.page">	
+		<put-attribute name="title" value="following's information.." />
+		<put-attribute name="body" value="/views/usuario/listInformacionDeQuienSigues.jsp" />
+	</definition>
+	
+		<definition name="usuario/listNoticiasCompartidas" extends="master.page">	
+		<put-attribute name="title" value="Information that you are sharing" />
+		<put-attribute name="body" value="/views/usuario/listNoticiasCompartidas.jsp" />
+	</definition>
+	
+	<definition name="usuario/listSorteosProximos" extends="master.page">	
+		<put-attribute name="title" value="Next draws" />
+		<put-attribute name="body" value="/views/usuario/listSorteosProximos.jsp" />
+	</definition>
+	
+	<definition name="usuario/listTusSorteos" extends="master.page">	
+		<put-attribute name="title" value="Your draws" />
+		<put-attribute name="body" value="/views/usuario/listTusSorteos.jsp" />
+	</definition>
+	
+	<definition name="usuario/cambiarEstatus" extends="master.page">	
+		<put-attribute name="title" value="Change Status" />
+		<put-attribute name="body" value="/views/usuario/cambiarEstatus.jsp" />
+	</definition>
+	
+		<definition name="usuario/listUsuariosToBan" extends="master.page">	
+		<put-attribute name="title" value="Ban / Unban Users" />
+		<put-attribute name="body" value="/views/usuario/listUsuariosToBan.jsp" />
+	</definition>
+
+	<definition name="usuario/checkBan" extends="master.page">	
+		<put-attribute name="title" value="Compruebe si está baneado " />
+		<put-attribute name="body" value="/views/usuario/checkBan.jsp" />
+	</definition>
+	
+</tiles-definitions>

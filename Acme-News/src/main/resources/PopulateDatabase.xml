@@ -1,0 +1,1374 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- * PopulateDatabase.xml * * Copyright (C) 2017 Universidad de Sevilla 
+	* * The use of this project is hereby constrained to the conditions of the 
+	* TDG Licence, a copy of which you may download from * http://www.tdg-seville.info/License.html -->
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+	">
+
+	<!-- ALVARO -->
+
+	<!-- User accounts -->
+
+	<bean id="userAccount1" class="security.UserAccount">
+		<property name="username" value="admin" />
+		<property name="password" value="21232f297a57a5a743894a0e4a801fc3" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="ADMIN" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="userAccount2" class="security.UserAccount">
+		<property name="username" value="manager1" />
+		<property name="password" value="c240642ddef994358c96da82c0361a58" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="MANAGER" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="userAccount3" class="security.UserAccount">
+		<property name="username" value="usuario1" />
+		<property name="password" value="122b738600a0f74f7c331c0ef59bc34c" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="USUARIO" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="userAccount4" class="security.UserAccount">
+		<property name="username" value="moderador1" />
+		<property name="password" value="20bca7bfb096355debce49667f9a5f0a" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="MODERADOR" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="userAccount5" class="security.UserAccount">
+		<property name="username" value="periodista1" />
+		<property name="password" value="e39fcda2d366c8fe1c4f6a59cd2c7e9b" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="PERIODISTA" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="userAccount6" class="security.UserAccount">
+		<property name="username" value="moderador2" />
+		<property name="password" value="938a0ff623add3ee858cb8588c79c7c7" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="MODERADOR" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="userAccount7" class="security.UserAccount">
+		<property name="username" value="periodista2" />
+		<property name="password" value="54fa26bfd1c6cfb849aa5640b49994c1" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="PERIODISTA" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="userAccount8" class="security.UserAccount">
+		<property name="username" value="periodista3" />
+		<property name="password" value="b7d37d4c180cc75b0f7721d160e583a6" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="PERIODISTA" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="userAccount9" class="security.UserAccount">
+		<property name="username" value="manager2" />
+		<property name="password" value="8df5127cd164b5bc2d2b78410a7eea0c" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="MANAGER" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="userAccount10" class="security.UserAccount">
+		<property name="username" value="manager3" />
+		<property name="password" value="2d3a5db4a2a9717b43698520a8de57d0" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="MANAGER" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="userAccount11" class="security.UserAccount">
+		<property name="username" value="periodista4" />
+		<property name="password" value="fbe4decd39c98f391c23a7b4677b8e59" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="PERIODISTA" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="userAccount12" class="security.UserAccount">
+		<property name="username" value="usuario2" />
+		<property name="password" value="2fb6c8d2f3842a5ceaa9bf320e649ff0" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="USUARIO" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="userAccount13" class="security.UserAccount">
+		<property name="username" value="usuario3" />
+		<property name="password" value="5a54c609c08a0ab3f7f8eef1365bfda6" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="USUARIO" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="userAccount14" class="security.UserAccount">
+		<property name="username" value="usuario4" />
+		<property name="password" value="0ddd0fbf933b170eb6d90987a67d0a5d" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="USUARIO" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="userAccount15" class="security.UserAccount">
+		<property name="username" value="usuario5" />
+		<property name="password" value="0b65933df3421cf1bdf4ff082ffc8901" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="USUARIO" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="userAccount16" class="security.UserAccount">
+		<property name="username" value="periodista5" />
+		<property name="password" value="ff58245b216e8b0c551b58ca57e51cb8" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="PERIODISTA" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+
+
+	<!-- ACTORES -->
+
+	<!-- ADMIN -->
+
+	<bean id="administrador1" class="domain.Administrador">
+		<property name="userAccount" ref="userAccount1" />
+		<property name="nombre" value="admin1Nombre" />
+		<property name="apellidos" value="admin1Apellidos" />
+		<property name="email" value="admin1@gmail.com" />
+	</bean>
+
+	<!-- MANAGERSS -->
+
+	<bean id="manager1" class="domain.Manager">
+		<property name="userAccount" ref="userAccount2" />
+		<property name="nombre" value="manager1Nombre" />
+		<property name="apellidos" value="manager1Apellidos" />
+		<property name="email" value="manager1@gmail.com" />
+		<property name="agencias">
+			<list>
+				<ref bean="agencia1" />
+				<ref bean="agencia2" />
+			</list>
+		</property>
+	</bean>
+
+	<bean id="manager2" class="domain.Manager">
+		<property name="userAccount" ref="userAccount9" />
+		<property name="nombre" value="manager2Nombre" />
+		<property name="apellidos" value="manager2Apellidos" />
+		<property name="email" value="manager2@gmail.com" />
+		<property name="agencias">
+			<list>
+				<ref bean="agencia3" />
+			</list>
+		</property>
+	</bean>
+
+	<bean id="manager3" class="domain.Manager">
+		<property name="userAccount" ref="userAccount10" />
+		<property name="nombre" value="manager3Nombre" />
+		<property name="apellidos" value="manager3Apellidos" />
+		<property name="email" value="manager3@gmail.com" />
+		<property name="agencias">
+			<list>
+
+			</list>
+		</property>
+	</bean>
+
+	<!-- USUARIOS -->
+
+	<bean id="usuario1" class="domain.Usuario">
+		<property name="userAccount" ref="userAccount3" />
+		<property name="nombre" value="usuario1Nombre" />
+		<property name="apellidos" value="usuario1Apellidos" />
+		<property name="email" value="usuario1@gmail.com" />
+		<property name="puntos" value="2000" />
+		<property name="estatus" value="PRINCIPIANTE" />
+		<property name="banned" value="false" />
+	
+		<property name="seguidores">
+			<list>
+				<ref bean="usuario2" />
+				<ref bean="usuario3" />
+			</list>
+		</property>
+		<property name="siguiendo">
+			<list>
+			</list>
+		</property>
+		<property name="comentarios">
+			<list>
+				<ref bean="comentario1" />
+				<ref bean="comentario2" />
+			</list>
+		</property>
+		<property name="reportes">
+			<list>
+				<ref bean="reporte1" />
+				<ref bean="reporte2" />
+				<ref bean="reporte3" />
+			</list>
+		</property>
+		<property name="informacionCompartida">
+			<list>
+				<ref bean="noticia1" />
+				<ref bean="noticia2" />
+			</list>
+		</property>
+		
+				<property name="sorteos">
+			<list>
+				<ref bean="sorteo1" />
+				<ref bean="sorteo2" />
+			</list>
+		</property>
+
+	</bean>
+
+	<bean id="usuario2" class="domain.Usuario">
+		<property name="userAccount" ref="userAccount12" />
+		<property name="nombre" value="usuario2Nombre" />
+		<property name="apellidos" value="usuario2Apellidos" />
+		<property name="email" value="usuario2@gmail.com" />
+		<property name="puntos" value="5" />
+		<property name="estatus" value="VETERANO" />
+		<property name="banned" value="false" />
+
+		<property name="seguidores">
+			<list>
+				<ref bean="usuario4" />
+				<ref bean="usuario5" />
+			</list>
+		</property>
+		<property name="siguiendo">
+			<list>
+				<ref bean="usuario1" />
+			</list>
+		</property>
+		<property name="comentarios">
+			<list>
+
+			</list>
+		</property>
+
+		<property name="reportes">
+			<list>
+				<ref bean="reporte4" />
+				<ref bean="reporte5" />
+				<ref bean="reporte6" />
+			</list>
+		</property>
+		<property name="informacionCompartida">
+			<list>
+				<ref bean="noticia2" />
+				<ref bean="noticia4" />
+				<ref bean="evento4" />
+			</list>
+		</property>
+						<property name="sorteos">
+			<list>
+				<ref bean="sorteo1" />
+				<ref bean="sorteo3" />
+			</list>
+		</property>
+	</bean>
+
+	<bean id="usuario3" class="domain.Usuario">
+		<property name="userAccount" ref="userAccount13" />
+		<property name="nombre" value="usuario3Nombre" />
+		<property name="apellidos" value="usuario3Apellidos" />
+		<property name="email" value="usuario3@gmail.com" />
+		<property name="puntos" value="1000" />
+		<property name="estatus" value="MAESTRO" />
+		<property name="banned" value="false" />
+
+		<property name="seguidores">
+			<list>
+			</list>
+		</property>
+		<property name="siguiendo">
+			<list>
+				<ref bean="usuario1" />
+			</list>
+		</property>
+		<property name="comentarios">
+			<list>
+				<ref bean="comentario3" />
+
+			</list>
+		</property>
+		<property name="reportes">
+			<list>
+				<ref bean="reporte7" />
+				<ref bean="reporte8" />
+				<ref bean="reporte9" />
+				<ref bean="reporte10" />
+			</list>
+		</property>
+		<property name="informacionCompartida">
+			<list>
+			</list>
+		</property>
+						<property name="sorteos">
+			<list>
+				<ref bean="sorteo3" />
+				<ref bean="sorteo2" />
+				<ref bean="sorteo4" />
+			</list>
+		</property>
+	</bean>
+
+	<bean id="usuario4" class="domain.Usuario">
+		<property name="userAccount" ref="userAccount14" />
+		<property name="nombre" value="usuario4Nombre" />
+		<property name="apellidos" value="usuario4Apellidos" />
+		<property name="email" value="usuario4@gmail.com" />
+		<property name="puntos" value="300" />
+		<property name="estatus" value="VETERANO" />
+		<property name="banned" value="false" />
+
+		<property name="seguidores">
+			<list>
+				<ref bean="usuario5" />
+			</list>
+		</property>
+		<property name="siguiendo">
+			<list>
+				<ref bean="usuario2" />
+
+			</list>
+		</property>
+		<property name="comentarios">
+			<list>
+				<ref bean="comentario4" />
+				<ref bean="comentario5" />
+			</list>
+		</property>
+		<property name="reportes">
+			<list>
+				<ref bean="reporte11" />
+			</list>
+		</property>
+		<property name="informacionCompartida">
+			<list>
+				<ref bean="noticia5" />
+				<ref bean="evento1" />
+				<ref bean="evento2" />
+			</list>
+		</property>
+								<property name="sorteos">
+			<list>
+				<ref bean="sorteo3" />
+			</list>
+		</property>
+	</bean>
+
+	<bean id="usuario5" class="domain.Usuario">
+		<property name="userAccount" ref="userAccount15" />
+		<property name="nombre" value="usuario5Nombre" />
+		<property name="apellidos" value="usuario5Apellidos" />
+		<property name="email" value="usuario5@gmail.com" />
+		<property name="puntos" value="0" />
+		<property name="estatus" value="PRINCIPIANTE" />
+		<property name="banned" value="false" />
+
+		<property name="seguidores">
+			<list>
+
+			</list>
+		</property>
+		<property name="siguiendo">
+			<list>
+				<ref bean="usuario4" />
+				<ref bean="usuario2" />
+			</list>
+		</property>
+		<property name="comentarios">
+			<list>
+				<ref bean="comentario7" />
+				<ref bean="comentario8" />
+				<ref bean="comentario6" />
+			</list>
+		</property>
+		<property name="reportes">
+			<list>
+			</list>
+		</property>
+		<property name="informacionCompartida">
+			<list>
+			</list>
+		</property>
+								<property name="sorteos">
+			<list>
+				<ref bean="sorteo3" />
+			</list>
+		</property>
+	</bean>
+
+	<!-- MODERADORESS -->
+
+	<bean id="moderador1" class="domain.Moderador">
+		<property name="userAccount" ref="userAccount4" />
+		<property name="nombre" value="moderador1Nombre" />
+		<property name="apellidos" value="moderador1Apellidos" />
+		<property name="email" value="moderador1@gmail.com" />
+		<property name="cartera" ref="cartera1" />
+	</bean>
+
+	<bean id="moderador2" class="domain.Moderador">
+		<property name="userAccount" ref="userAccount6" />
+		<property name="nombre" value="moderador2Nombre" />
+		<property name="apellidos" value="moderador2Apellidos" />
+		<property name="email" value="moderador2@gmail.com" />
+		<property name="cartera" ref="cartera2" />
+	</bean>
+
+	<!-- PERIODISTASS -->
+
+	<bean id="periodista1" class="domain.Periodista">
+		<property name="userAccount" ref="userAccount5" />
+		<property name="nombre" value="periodista1Nombre" />
+		<property name="apellidos" value="periodista1Apellidos" />
+		<property name="email" value="periodista1@gmail.com" />
+		<property name="cartera" ref="cartera3" />
+		<property name="foto"
+			value="https://pbs.twimg.com/profile_images/2254029636/foto_carnet_reasonably_small.jpg" />
+		<property name="agencia" ref="agencia1" />
+				<property name="informacion">
+			<list>
+				<ref bean="noticia1" />
+				<ref bean="noticia2" />
+				<ref bean="noticia3" />
+				<ref bean="evento1" />
+				<ref bean="evento2" />
+				
+			</list>
+		</property>
+	</bean>
+
+	<bean id="periodista2" class="domain.Periodista">
+		<property name="userAccount" ref="userAccount7" />
+		<property name="nombre" value="periodista2Nombre" />
+		<property name="apellidos" value="periodista2Apellidos" />
+		<property name="email" value="periodista2@gmail.com" />
+		<property name="cartera" ref="cartera4" />
+		<property name="foto"
+			value="https://pbs.twimg.com/profile_images/1536193136/foto_carnet_Alexis_reasonably_small.jpg" />
+		<property name="agencia" ref="agencia1" />
+						<property name="informacion">
+			<list>
+				<ref bean="noticia4" />
+				<ref bean="noticia5" />
+				<ref bean="evento3" />
+			</list>
+		</property>
+	</bean>
+
+	<bean id="periodista3" class="domain.Periodista">
+		<property name="userAccount" ref="userAccount8" />
+		<property name="nombre" value="periodista3Nombre" />
+		<property name="apellidos" value="periodista3Apellidos" />
+		<property name="email" value="periodista3@gmail.com" />
+		<property name="cartera" ref="cartera5" />
+		<property name="foto"
+			value="https://pbs.twimg.com/profile_images/2162163885/Carnet_reasonably_small.jpg" />
+		<property name="agencia" ref="agencia3" />
+						<property name="informacion">
+			<list>
+				<ref bean="noticia6" />
+				<ref bean="evento4" />
+			</list>
+		</property>
+	</bean>
+
+	<bean id="periodista4" class="domain.Periodista">
+		<property name="userAccount" ref="userAccount11" />
+		<property name="nombre" value="periodista4Nombre" />
+		<property name="apellidos" value="periodista4Apellidos" />
+		<property name="email" value="periodista4@gmail.com" />
+		<property name="cartera" ref="cartera6" />
+		<property name="foto"
+			value="https://pbs.twimg.com/profile_images/1423419535/foto_carnet_M__Angeles_reasonably_small.jpg" />
+							<property name="informacion">
+			<list>
+				<ref bean="noticia7" />
+				<ref bean="noticia8" />
+				<ref bean="noticia9" />
+			</list>
+		</property>
+	</bean>
+
+	<bean id="periodista5" class="domain.Periodista">
+		<property name="userAccount" ref="userAccount16" />
+		<property name="nombre" value="periodista5Nombre" />
+		<property name="apellidos" value="periodista5Apellidos" />
+		<property name="email" value="periodista5@gmail.com" />
+		<property name="cartera" ref="cartera7" />
+		<property name="foto"
+			value="https://pbs.twimg.com/profile_images/1423419535/foto_carnet_M__Angeles_reasonably_small.jpg" />
+							<property name="informacion">
+			<list>
+			</list>
+		</property>
+	</bean>
+
+	<!-- CARTERAS -->
+
+	<bean id="cartera1" class="datatypes.Cartera">
+		<property name="paypalEmail" value="paypalCorreoModerador1@gmail.com" />
+		<property name="saldoAcumulado" value="7.13" />
+		<property name="saldoAcumuladoTotal" value="7.13" />
+	</bean>
+
+	<bean id="cartera2" class="datatypes.Cartera">
+		<property name="paypalEmail" value="paypalCorreoModerador2@gmail.com" />
+		<property name="saldoAcumulado" value="4.13" />
+		<property name="saldoAcumuladoTotal" value="50.23" />
+	</bean>
+
+	<bean id="cartera3" class="datatypes.Cartera">
+		<property name="paypalEmail" value="paypalCorreoPeriodista1@gmail.com" />
+		<property name="saldoAcumulado" value="20.13" />
+		<property name="saldoAcumuladoTotal" value="50.23" />
+	</bean>
+
+	<bean id="cartera4" class="datatypes.Cartera">
+		<property name="paypalEmail" value="paypalCorreoPeriodista2@gmail.com" />
+		<property name="saldoAcumulado" value="11.33" />
+		<property name="saldoAcumuladoTotal" value="150.23" />
+	</bean>
+
+	<bean id="cartera5" class="datatypes.Cartera">
+		<property name="paypalEmail" value="paypalCorreoPeriodista3@gmail.com" />
+		<property name="saldoAcumulado" value="0.13" />
+		<property name="saldoAcumuladoTotal" value="300.23" />
+	</bean>
+
+	<bean id="cartera6" class="datatypes.Cartera">
+		<property name="paypalEmail" value="paypalCorreoPeriodista4@gmail.com" />
+		<property name="saldoAcumulado" value="3" />
+		<property name="saldoAcumuladoTotal" value="3" />
+	</bean>
+
+	<bean id="cartera7" class="datatypes.Cartera">
+		<property name="paypalEmail" value="paypalCorreoPeriodista5@gmail.com" />
+		<property name="saldoAcumulado" value="0" />
+		<property name="saldoAcumuladoTotal" value="0" />
+	</bean>
+
+	<!-- AGENCIASS -->
+
+	<bean id="agencia1" class="domain.Agencia">
+		<property name="manager" ref="manager1" />
+		<property name="titulo" value="tituloAgencia1" />
+		<property name="direccion" value="direccionAgencia1" />
+		<property name="capacidadDisponible" value="0" />
+		<property name="tasa" value="3.2" />
+		<property name="periodistas">
+			<list>
+				<ref bean="periodista1" />
+				<ref bean="periodista2" />
+			</list>
+		</property>
+
+	</bean>
+
+	<bean id="agencia2" class="domain.Agencia">
+		<property name="manager" ref="manager1" />
+		<property name="titulo" value="tituloAgencia2" />
+		<property name="direccion" value="direccionAgencia2" />
+		<property name="capacidadDisponible" value="3" />
+		<property name="tasa" value="3.2" />
+		<property name="periodistas">
+			<list>
+				<ref bean="periodista3" />
+			</list>
+		</property>
+
+	</bean>
+
+	<bean id="agencia3" class="domain.Agencia">
+		<property name="manager" ref="manager2" />
+		<property name="titulo" value="tituloAgencia3" />
+		<property name="direccion" value="direccionAgencia3" />
+		<property name="capacidadDisponible" value="1" />
+		<property name="tasa" value="4.2" />
+		<property name="periodistas">
+			<list>
+
+			</list>
+		</property>
+
+	</bean>
+
+	<!-- BANNER -->
+
+	<bean id="banner1" class="domain.Banner">
+		<property name="imagenes">
+			<list>
+				<value>http://www.daveallworthy.com/images/banner_3mx1m_AMS_banner.jpg</value>
+				<value>http://www.embertech.co.uk/wp-content/uploads/2013/02/header-banner.png</value>
+				<value>https://staff.brighton.ac.uk/is/media/PublishingImages/banner%20example%205.jpg</value>
+			</list>
+		</property>
+	</bean>
+
+	<!-- TASASS -->
+
+	<bean id="Tasa1" class="domain.Tasa">
+		<property name="tasaVisita" value="0.01" />
+		<property name="tasaModerador" value="0.03" />
+		<property name="puntosPrincipiante" value="10" />
+		<property name="puntosVeterano" value="20" />
+		<property name="puntosMaestro" value="30" />
+		<property name="costeVeterano" value="100" />
+		<property name="costeMaestro" value="150" />
+	</bean>
+
+	<!-- Aqui termina alvaro ALVARO -->
+
+
+
+	<!-- Eventos -->
+
+
+	<bean id="evento1" class="domain.Evento">
+		<property name="titulo" value="tituloEvento1" />
+		<property name="imagen"
+			value="http://tueventoenbogota.com/wp-content/uploads/2015/07/01_eventos_empresariales-1240x824.jpg" />
+		<property name="descripcion"
+			value="Fiesta Salvaje en Sevilla, no te la pierdas. Los mejores DJs y las mejores gogos. Ven a la discoteca y disfruta de una noche loca." />
+		<property name="direccion" value="calle falsa 123" />
+		<property name="fecha" value="2020/01/01" />
+		<property name="comentarios">
+			<list>
+				<ref bean="comentario2" />
+				<ref bean="comentario7" />
+			</list>
+		</property>
+				<property name="usuarios">
+			<list>
+				<ref bean="usuario4" />
+			</list>
+		</property>
+					<property name="periodista" ref="periodista1" />
+
+
+	</bean>
+
+	<bean id="evento2" class="domain.Evento">
+		<property name="titulo" value="tituloEvento2" />
+		<property name="imagen"
+			value="http://www.myfico.com/Images/sample_overlay.gif" />
+		<property name="descripcion" value="descripcionEvento2." />
+		<property name="direccion" value="direccion2" />
+		<property name="fecha" value="2020/01/01" />
+		<property name="comentarios">
+			<list>
+
+			</list>
+		</property>
+				<property name="usuarios">
+			<list>
+				<ref bean="usuario4" />
+			</list>
+		</property>
+					<property name="periodista" ref="periodista1" />
+
+
+	</bean>
+	<bean id="evento3" class="domain.Evento">
+		<property name="titulo" value="tituloEvento3" />
+		<property name="imagen"
+			value="http://www.myfico.com/Images/sample_overlay.gif" />
+		<property name="descripcion" value="descripcionEvento3." />
+		<property name="direccion" value="direccion3" />
+		<property name="fecha" value="2020/01/01" />
+		<property name="comentarios">
+			<list>
+			</list>
+		</property>
+				<property name="usuarios">
+			<list>
+			</list>
+		</property>
+					<property name="periodista" ref="periodista2" />
+
+
+	</bean>
+	<bean id="evento4" class="domain.Evento">
+		<property name="titulo" value="tituloEvento4" />
+		<property name="imagen"
+			value="http://www.myfico.com/Images/sample_overlay.gif" />
+		<property name="descripcion" value="descripcionEvento4." />
+		<property name="direccion" value="direccion4" />
+		<property name="fecha" value="2020/01/01" />
+		<property name="comentarios">
+			<list>
+				<ref bean="comentario7" />
+			</list>
+		</property>
+				<property name="usuarios">
+			<list>
+				<ref bean="usuario2" />
+			</list>
+		</property>
+					<property name="periodista" ref="periodista3" />
+
+
+	</bean>
+
+
+	<!-- Noticias -->
+
+	<bean id="noticia1" class="domain.Noticia">
+		<property name="titulo" value="Hackeo Telefónica" />
+		<property name="imagen"
+			value="https://s3.amazonaws.com/poderpda/2017/05/movistar-hackeo.jpg" />
+		<property name="descripcion"
+			value="Varios ordenadores de la red interna de Telefónica se han visto afectados este viernes por un software malicioso -'ransomware'- que ha llevado a la compañía a solicitar a todos los empleados de su sede central en Madrid que apaguen sus ordenadores.
+Lo ocurrido ha llenado las redes sociales de chistes sobre la compañía. Recopilamos algunos de ellos:
+Twitter, por suerte, sigue funcionando" />
+		<property name="video" value="https://www.youtube.com/embed/_5xU6TcPvvU" />
+		<property name="fecha" value="2017/05/12" />
+		<property name="numeroVisitas" value="700002145" />
+		<property name="reportes">
+			<list>
+				<ref bean="reporte1" />
+				<ref bean="reporte4" />
+				<ref bean="reporte7" />
+			</list>
+		</property>
+		<property name="comentarios">
+			<list>
+				<ref bean="comentario1" />
+				<ref bean="comentario3" />
+			</list>
+		</property>
+		<property name="estado" value="PUBLICADA" />
+		<property name="noticiasRelacionadas">
+			<list>
+				<ref bean="noticia2" />
+				<ref bean="noticia3" />
+			</list>
+		</property>
+		<property name="usuarios">
+			<list>
+				<ref bean="usuario1" />
+			</list>
+		</property>
+			<property name="periodista" ref="periodista1" />
+			<property name="categoria" value="ESPAÑA" />
+	</bean>
+
+
+	<bean id="noticia2" class="domain.Noticia">
+		<property name="titulo" value="noticia2" />
+		<property name="imagen"
+			value="http://www.myfico.com/Images/sample_overlay.gif" />
+		<property name="descripcion" value="descripciónNoticia2" />
+		<property name="video" value="https://www.youtube.com/embed/a3ICNMQW7Ok" />
+		<property name="fecha" value="2017/05/12" />
+		<property name="numeroVisitas" value="50" />
+		<property name="reportes">
+			<list>
+				<ref bean="reporte2" />
+				<ref bean="reporte5" />
+				<ref bean="reporte8" />
+			</list>
+		</property>
+		<property name="comentarios">
+			<list>
+
+			</list>
+		</property>
+		<property name="estado" value="DENEGADA" />
+		<property name="noticiasRelacionadas">
+			<list>
+				<ref bean="noticia1" />
+				<ref bean="noticia3" />
+				<ref bean="noticia4" />
+			</list>
+		</property>
+		<property name="usuarios">
+			<list>
+				<ref bean="usuario1" />
+				<ref bean="usuario2" />
+			</list>
+		</property>
+					<property name="periodista" ref="periodista1" />
+					<property name="categoria" value="OTROS" />
+	</bean>
+
+	<bean id="noticia3" class="domain.Noticia">
+		<property name="titulo" value="noticia3" />
+		<property name="imagen"
+			value="http://www.myfico.com/Images/sample_overlay.gif" />
+		<property name="descripcion" value="descripciónNoticia3" />
+		<property name="video" value="https://www.youtube.com/embed/a3ICNMQW7Ok" />
+		<property name="fecha" value="2017/04/11" />
+		<property name="numeroVisitas" value="51" />
+		<property name="reportes">
+			<list>
+				<ref bean="reporte3" />
+				<ref bean="reporte6" />
+				<ref bean="reporte9" />
+
+			</list>
+		</property>
+		<property name="comentarios">
+			<list>
+
+			</list>
+		</property>
+		<property name="estado" value="PUBLICADA" />
+
+		<property name="noticiasRelacionadas">
+			<list>
+				<ref bean="noticia1" />
+				<ref bean="noticia2" />
+				<ref bean="noticia5" />
+			</list>
+		</property>
+		<property name="usuarios">
+			<list>
+			</list>
+		</property>
+					<property name="periodista" ref="periodista1" />
+					<property name="categoria" value="CULTURA" />
+
+	</bean>
+
+	<bean id="noticia4" class="domain.Noticia">
+		<property name="titulo" value="noticia4" />
+		<property name="imagen"
+			value="http://www.myfico.com/Images/sample_overlay.gif" />
+		<property name="descripcion" value="descripciónNoticia4" />
+		<property name="video" value="https://www.youtube.com/embed/a3ICNMQW7Ok" />
+		<property name="fecha" value="2017/05/05" />
+		<property name="numeroVisitas" value="40" />
+		<property name="reportes">
+			<list>
+
+			</list>
+		</property>
+		<property name="comentarios">
+			<list>
+				<ref bean="comentario4" />
+			</list>
+		</property>
+		<property name="estado" value="PUBLICADA" />
+		<property name="noticiasRelacionadas">
+			<list>
+				<ref bean="noticia2" />
+				<ref bean="noticia8" />
+
+			</list>
+		</property>
+		<property name="usuarios">
+			<list>
+				<ref bean="usuario2" />
+			</list>
+		</property>
+					<property name="periodista" ref="periodista2" />
+					<property name="categoria" value="ECONOMIA" />
+	</bean>
+
+	<bean id="noticia5" class="domain.Noticia">
+		<property name="titulo" value="noticia5" />
+		<property name="imagen"
+			value="http://www.myfico.com/Images/sample_overlay.gif" />
+		<property name="descripcion" value="descripciónNoticia5" />
+		<property name="video" value="https://www.youtube.com/embed/a3ICNMQW7Ok" />
+		<property name="fecha" value="2017/05/11" />
+		<property name="numeroVisitas" value="29" />
+		<property name="reportes">
+			<list>
+				<ref bean="reporte3" />
+				<ref bean="reporte11" />
+
+			</list>
+		</property>
+		<property name="comentarios">
+			<list>
+				<ref bean="comentario5" />
+				<ref bean="comentario6" />
+			</list>
+		</property>
+		<property name="estado" value="PUBLICADA" />
+		<property name="noticiasRelacionadas">
+			<list>
+
+				<ref bean="noticia3" />
+
+			</list>
+		</property>
+		<property name="usuarios">
+			<list>
+				<ref bean="usuario4" />
+			</list>
+		</property>
+					<property name="periodista" ref="periodista2" />
+					<property name="categoria" value="MOTOR" />
+	</bean>
+
+
+	<bean id="noticia6" class="domain.Noticia">
+		<property name="titulo" value="noticia2" />
+		<property name="imagen"
+			value="http://www.myfico.com/Images/sample_overlay.gif" />
+		<property name="descripcion" value="descripciónNoticia6" />
+		<property name="video" value="https://www.youtube.com/embed/a3ICNMQW7Ok" />
+		<property name="fecha" value="2017/04/08" />
+		<property name="numeroVisitas" value="39" />
+		<property name="reportes">
+			<list>
+
+			</list>
+		</property>
+		<property name="comentarios">
+			<list>
+
+			</list>
+		</property>
+		<property name="estado" value="PENDIENTE" />
+		<property name="noticiasRelacionadas">
+			<list>
+
+
+			</list>
+		</property>
+		<property name="usuarios">
+			<list>
+			</list>
+		</property>
+					<property name="periodista" ref="periodista3" />
+					<property name="categoria" value="OCIO" />
+	</bean>
+
+
+	<bean id="noticia7" class="domain.Noticia">
+		<property name="titulo" value="noticia7" />
+		<property name="imagen"
+			value="http://www.myfico.com/Images/sample_overlay.gif" />
+		<property name="descripcion" value="descripciónNoticia7" />
+		<property name="video" value="https://www.youtube.com/embed/a3ICNMQW7Ok" />
+		<property name="fecha" value="2017/03/24" />
+		<property name="numeroVisitas" value="47" />
+		<property name="reportes">
+			<list>
+
+			</list>
+		</property>
+		<property name="comentarios">
+			<list>
+
+			</list>
+		</property>
+		<property name="estado" value="PENDIENTE" />
+		<property name="noticiasRelacionadas">
+			<list>
+
+
+			</list>
+		</property>
+		<property name="usuarios">
+			<list>
+			</list>
+		</property>
+					<property name="periodista" ref="periodista4" />
+					<property name="categoria" value="JUEGOS" />
+	</bean>
+
+	<bean id="noticia8" class="domain.Noticia">
+		<property name="titulo" value="noticia8" />
+		<property name="imagen"
+			value="http://www.myfico.com/Images/sample_overlay.gif" />
+		<property name="descripcion" value="descripciónNoticia8" />
+		<property name="video" value="https://www.youtube.com/embed/a3ICNMQW7Ok" />
+		<property name="fecha" value="2017/03/01" />
+		<property name="numeroVisitas" value="200000" />
+		<property name="reportes">
+			<list>
+
+			</list>
+		</property>
+		<property name="comentarios">
+			<list>
+
+			</list>
+		</property>
+		<property name="estado" value="PUBLICADA" />
+		<property name="noticiasRelacionadas">
+			<list>
+
+				<ref bean="noticia4" />
+
+			</list>
+		</property>
+		<property name="usuarios">
+			<list>
+			</list>
+		</property>
+					<property name="periodista" ref="periodista4" />
+					<property name="categoria" value="INTERNACIONAL" />
+	</bean>
+	
+	<bean id="noticia9" class="domain.Noticia">
+		<property name="titulo" value="noticia9" />
+		<property name="imagen"
+			value="http://www.myfico.com/Images/sample_overlay.gif" />
+		<property name="descripcion" value="descripciónNoticia8" />
+		<property name="video" value="https://www.youtube.com/embed/a3ICNMQW7Ok" />
+		<property name="fecha" value="2017/04/04" />
+		<property name="numeroVisitas" value="2000" />
+		<property name="reportes">
+			<list>
+			</list>
+		</property>
+		<property name="comentarios">
+			<list>
+			</list>
+		</property>
+		<property name="estado" value="PUBLICADA" />
+		<property name="noticiasRelacionadas">
+			<list>
+			</list>
+		</property>
+		<property name="usuarios">
+			<list>
+			</list>
+		</property>
+		<property name="periodista" ref="periodista4" />
+		<property name="categoria" value="INTERNACIONAL" />
+	</bean>
+	
+	
+		<!-- Reportes -->
+		
+	<bean id="reporte1" class="domain.Reporte">
+		<property name="texto"
+			value="Este periodista es un trollaso, La noticia es mas fake que un gitano médico!" />
+		<property name="noticia" ref="noticia1" />
+		<property name="usuario" ref="usuario1" />
+	</bean>
+
+	<bean id="reporte2" class="domain.Reporte">
+		<property name="texto" value="textoReporte2" />
+		<property name="noticia" ref="noticia2" />
+		<property name="usuario" ref="usuario1" />
+	</bean>
+
+	<bean id="reporte3" class="domain.Reporte">
+		<property name="texto" value="textoreporte3" />
+		<property name="noticia" ref="noticia3" />
+		<property name="usuario" ref="usuario1" />
+	</bean>
+
+	<bean id="reporte4" class="domain.Reporte">
+		<property name="texto" value="textoreporte4" />
+		<property name="noticia" ref="noticia1" />
+		<property name="usuario" ref="usuario2" />
+	</bean>
+
+	<bean id="reporte5" class="domain.Reporte">
+		<property name="texto" value="textoreporte5" />
+		<property name="noticia" ref="noticia2" />
+		<property name="usuario" ref="usuario2" />
+	</bean>
+
+
+	<bean id="reporte6" class="domain.Reporte">
+		<property name="texto" value="textoreporte6" />
+		<property name="noticia" ref="noticia3" />
+		<property name="usuario" ref="usuario2" />
+	</bean>
+
+
+	<bean id="reporte7" class="domain.Reporte">
+		<property name="texto" value="textoreporte7" />
+		<property name="noticia" ref="noticia1" />
+		<property name="usuario" ref="usuario3" />
+	</bean>
+
+
+	<bean id="reporte8" class="domain.Reporte">
+		<property name="texto" value="textoreporte8" />
+		<property name="noticia" ref="noticia2" />
+		<property name="usuario" ref="usuario3" />
+	</bean>
+
+
+	<bean id="reporte9" class="domain.Reporte">
+		<property name="texto" value="textoReporte9" />
+		<property name="noticia" ref="noticia3" />
+		<property name="usuario" ref="usuario3" />
+	</bean>
+
+
+	<bean id="reporte10" class="domain.Reporte">
+		<property name="texto" value="textoreporte10" />
+		<property name="noticia" ref="noticia5" />
+		<property name="usuario" ref="usuario3" />
+	</bean>
+
+
+	<bean id="reporte11" class="domain.Reporte">
+		<property name="texto" value="textoreporte11" />
+		<property name="noticia" ref="noticia5" />
+		<property name="usuario" ref="usuario4" />
+	</bean>
+
+
+
+	<!-- Comentarios -->
+	<bean id="comentario1" class="domain.Comentario">
+		<property name="titulo" value="jajaja" />
+		<property name="descripcion" value="menudos tolais, timofónica tenia que ser" />
+		<property name="fecha" value="2017/05/13" />
+		<property name="informacion" ref="noticia1" />
+		<property name="usuario" ref="usuario1" />
+	</bean>
+
+	<bean id="comentario2" class="domain.Comentario">
+		<property name="titulo" value="Fiestaaaa" />
+		<property name="descripcion"
+			value="Deseando que llegue la fecha, MUSICA Y ALCOHOL!!!!" />
+		<property name="fecha" value="2017/05/13" />
+		<property name="informacion" ref="evento1" />
+		<property name="usuario" ref="usuario1" />
+	</bean>
+
+	<bean id="comentario3" class="domain.Comentario">
+		<property name="titulo" value="tituloComentario3" />
+		<property name="descripcion" value="descripcionComentario3" />
+		<property name="fecha" value="2017/05/13" />
+		<property name="informacion" ref="noticia1" />
+		<property name="usuario" ref="usuario3" />
+	</bean>
+
+	<bean id="comentario4" class="domain.Comentario">
+		<property name="titulo" value="tituloComentario4" />
+		<property name="descripcion" value="descripcionComentario4" />
+		<property name="fecha" value="2017/05/13" />
+		<property name="informacion" ref="noticia4" />
+		<property name="usuario" ref="usuario4" />
+	</bean>
+
+	<bean id="comentario5" class="domain.Comentario">
+		<property name="titulo" value="tituloComentario5" />
+		<property name="descripcion" value="descripcionComentario5" />
+		<property name="fecha" value="2017/05/13" />
+		<property name="informacion" ref="noticia5" />
+		<property name="usuario" ref="usuario4" />
+	</bean>
+
+	<bean id="comentario6" class="domain.Comentario">
+		<property name="titulo" value="tituloComentario6" />
+		<property name="descripcion" value="descripcionComentario6" />
+		<property name="fecha" value="2017/05/13" />
+		<property name="informacion" ref="noticia5" />
+		<property name="usuario" ref="usuario5" />
+	</bean>
+
+	<bean id="comentario7" class="domain.Comentario">
+		<property name="titulo" value="tituloComentario7" />
+		<property name="descripcion" value="descripcionComentario7" />
+		<property name="fecha" value="2017/05/13" />
+		<property name="informacion" ref="evento1" />
+		<property name="usuario" ref="usuario5" />
+	</bean>
+
+	<bean id="comentario8" class="domain.Comentario">
+		<property name="titulo" value="tituloComentario8" />
+		<property name="descripcion" value="descripcionComentario8" />
+		<property name="fecha" value="2017/05/13" />
+		<property name="informacion" ref="evento4" />
+		<property name="usuario" ref="usuario5" />
+	</bean>
+
+	<!-- Sorteos -->
+	<bean id="sorteo1" class="domain.Sorteo">
+		<property name="titulo" value="Sorteo Bicicleta" />
+		<property name="descripcion" value="Sorteamos bicicleta de paseo." />
+		<property name="fechaVencimiento" value="2017/03/18" />
+		<property name="puntosNecesarios" value="20" />
+		<property name="fechaInicio" value="2017/01/13" />
+		<property name="ganador" value="Usuario 1, Email: usuario1@gmail.com." />
+		<property name="premio" ref="premio1" />
+								<property name="usuarios">
+			<list>
+				<ref bean="usuario1" />
+				<ref bean="usuario2" />
+			</list>
+		</property>
+
+
+	</bean>
+
+	<bean id="sorteo2" class="domain.Sorteo">
+		<property name="titulo" value="Sorteo2" />
+		<property name="descripcion" value="descripcionSorteo2." />
+		<property name="fechaVencimiento" value="2017/02/18" />
+		<property name="puntosNecesarios" value="10" />
+		<property name="fechaInicio" value="2017/01/13" />
+		<property name="ganador" value="" />
+		<property name="premio" ref="premio1" />
+										<property name="usuarios">
+			<list>
+				<ref bean="usuario1" />
+				<ref bean="usuario3" />
+			</list>
+		</property>
+
+	</bean>
+
+	<bean id="sorteo3" class="domain.Sorteo">
+		<property name="titulo" value="Sorteo3" />
+		<property name="descripcion" value="descripcionSorteo3." />
+		<property name="fechaVencimiento" value="2018/08/18" />
+		<property name="puntosNecesarios" value="30" />
+		<property name="fechaInicio" value="2018/01/13" />
+		<property name="ganador" value="" />
+		<property name="premio" ref="premio1" />
+										<property name="usuarios">
+			<list>
+				<ref bean="usuario2" />
+				<ref bean="usuario3" />
+				<ref bean="usuario4" />
+				<ref bean="usuario5" />
+			</list>
+		</property>
+
+	</bean>
+
+	<bean id="sorteo4" class="domain.Sorteo">
+		<property name="titulo" value="Sorteo4" />
+		<property name="descripcion" value="descripcionSorteo4." />
+		<property name="fechaVencimiento" value="2018/08/18" />
+		<property name="puntosNecesarios" value="100" />
+		<property name="fechaInicio" value="2017/01/13" />
+		<property name="ganador" value="" />
+		<property name="premio" ref="premio2" />
+												<property name="usuarios">
+			<list>
+				<ref bean="usuario3" />
+			</list>
+		</property>
+
+	</bean>
+	<!-- Premios -->
+	<bean id="premio1" class="domain.Premio">
+		<property name="nombre" value="Bicicleta de paseo" />
+		<property name="descripcion"
+			value="Bicicleta de paseo eléctrica, porque pedalear es de noobs.." />
+		<property name="precio" value="1200" />
+		<property name="imagen"
+			value="http://www.ondabike.es/images/thumbs/0000224_450.jpeg" />
+
+	</bean>
+
+	<bean id="premio2" class="domain.Premio">
+		<property name="nombre" value="NombrePremio2" />
+		<property name="descripcion" value="descripcionPremio2" />
+		<property name="precio" value="1234" />
+		<property name="imagen"
+			value="http://www.myfico.com/Images/sample_overlay.gif" />
+
+	</bean>
+
+	<bean id="premio3" class="domain.Premio">
+		<property name="nombre" value="NombrePremio3" />
+		<property name="descripcion" value="descripcionPremio3" />
+		<property name="precio" value="150" />
+		<property name="imagen"
+			value="http://www.myfico.com/Images/sample_overlay.gif" />
+
+	</bean>
+
+
+
+
+</beans>
