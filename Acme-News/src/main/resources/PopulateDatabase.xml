@@ -10,8 +10,6 @@
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 	">
 
-	<!-- ALVARO -->
-
 	<!-- User accounts -->
 
 	<bean id="userAccount1" class="security.UserAccount">
@@ -267,7 +265,7 @@
 		<property name="puntos" value="2000" />
 		<property name="estatus" value="PRINCIPIANTE" />
 		<property name="banned" value="false" />
-	
+		<property name="buscador" ref="buscador1" />
 		<property name="seguidores">
 			<list>
 				<ref bean="usuario2" />
@@ -315,7 +313,7 @@
 		<property name="puntos" value="5" />
 		<property name="estatus" value="VETERANO" />
 		<property name="banned" value="false" />
-
+		<property name="buscador" ref="buscador2" />
 		<property name="seguidores">
 			<list>
 				<ref bean="usuario4" />
@@ -363,7 +361,7 @@
 		<property name="puntos" value="1000" />
 		<property name="estatus" value="MAESTRO" />
 		<property name="banned" value="false" />
-
+		<property name="buscador" ref="buscador3" />
 		<property name="seguidores">
 			<list>
 			</list>
@@ -408,7 +406,7 @@
 		<property name="puntos" value="300" />
 		<property name="estatus" value="VETERANO" />
 		<property name="banned" value="false" />
-
+		<property name="buscador" ref="buscador4" />
 		<property name="seguidores">
 			<list>
 				<ref bean="usuario5" />
@@ -453,7 +451,7 @@
 		<property name="puntos" value="0" />
 		<property name="estatus" value="PRINCIPIANTE" />
 		<property name="banned" value="false" />
-
+		<property name="buscador" ref="buscador5" />
 		<property name="seguidores">
 			<list>
 
@@ -638,8 +636,38 @@
 		<property name="saldoAcumuladoTotal" value="0" />
 	</bean>
 
-	<!-- AGENCIASS -->
 
+	<!-- AGENCIASS -->
+	<bean id="buscador1" class="domain.Buscador">
+		<property name="ultimaActualizacion" value="01/01/2000" />
+		<property name="noticias">
+			<list>
+			</list>
+		</property>
+	</bean>
+	<bean id="buscador2" class="domain.Buscador">
+		<property name="ultimaActualizacion" value="01/01/2000" />
+		<property name="noticias">
+			<list>
+			</list>
+		</property>
+	</bean>
+	<bean id="buscador3" class="domain.Buscador">
+		<property name="ultimaActualizacion" value="01/01/2000" />
+		<property name="noticias">
+			<list>
+			</list>
+		</property>
+	</bean>
+	<bean id="buscador4" class="domain.Buscador">
+		<property name="ultimaActualizacion" value="01/01/2000" />
+		<property name="noticias">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<!-- AGENCIASS -->
 	<bean id="agencia1" class="domain.Agencia">
 		<property name="manager" ref="manager1" />
 		<property name="titulo" value="tituloAgencia1" />
