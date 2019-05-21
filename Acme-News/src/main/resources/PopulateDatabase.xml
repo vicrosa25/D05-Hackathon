@@ -666,6 +666,13 @@
 			</list>
 		</property>
 	</bean>
+	<bean id="buscador5" class="domain.Buscador">
+		<property name="ultimaActualizacion" value="01/01/2000" />
+		<property name="noticias">
+			<list>
+			</list>
+		</property>
+	</bean>
 	
 	<!-- AGENCIASS -->
 	<bean id="agencia1" class="domain.Agencia">

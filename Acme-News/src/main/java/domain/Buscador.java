@@ -77,11 +77,11 @@ public class Buscador extends DomainEntity {
 
 	@Valid
 	@ManyToMany
-	public Collection<Noticia> getPositions() {
+	public Collection<Noticia> getNoticias() {
 		return this.noticias;
 	}
 
-	public void setPositions(final Collection<Noticia> noticias) {
+	public void setNoticias(final Collection<Noticia> noticias) {
 		this.noticias = noticias;
 	}
 }
