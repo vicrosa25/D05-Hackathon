@@ -31,7 +31,7 @@
 		<value>/views/dashboard/tiles.xml</value>
 		<value>/views/tasa/tiles.xml</value>
 		<value>/views/agencia/tiles.xml</value>
-
+		<value>/views/buscador/tiles.xml</value>
 	</util:list>
 
 </beans>

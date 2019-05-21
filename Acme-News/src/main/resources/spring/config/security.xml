@@ -123,6 +123,11 @@
 		
 		<security:intercept-url pattern="/periodista/listPeriodista.do" access="hasRole('PERIODISTA')" />
 		
+		<!-- BUSCADOR  -->
+		<security:intercept-url pattern="buscador/usuario/edit.do" access="hasRole('USUARIO')" />
+		<security:intercept-url pattern="buscador/usuario/clear.do" access="hasRole('USUARIO')" />
+		<security:intercept-url pattern="buscador/usuario/result.do" access="hasRole('USUARIO')" />
+		
 		
 	
 		<security:intercept-url pattern="/**" access="hasRole('NONE')" />

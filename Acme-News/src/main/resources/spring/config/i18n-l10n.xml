@@ -30,7 +30,7 @@
 		<value>/views/dashboard/messages</value>
 		<value>/views/tasa/messages</value>
 		<value>/views/agencia/messages</value>
-
+		<value>/views/buscador/messages</value>
 	</util:list>
 
 </beans>
