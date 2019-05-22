@@ -1,13 +1,3 @@
-/*
- * AbstractController.java
- * 
- * Copyright (C) 2017 Universidad de Sevilla
- * 
- * The use of this project is hereby constrained to the conditions of the
- * TDG Licence, a copy of which you may download from
- * http://www.tdg-seville.info/License.html
- */
-
 package controllers;
 
 import org.apache.commons.lang.exception.ExceptionUtils;
@@ -31,6 +21,10 @@ public class AbstractController {
 		result.addObject("stackTrace", ExceptionUtils.getStackTrace(oops));
 
 		return result;
+	}
+
+	public ModelAndView forbiddenOpperation() {
+		return new ModelAndView("redirect:/");
 	}
 
 }

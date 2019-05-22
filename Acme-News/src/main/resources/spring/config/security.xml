@@ -1,15 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
-
-<!-- 
- * security.xml
- *
- * Copyright (C) 2017 Universidad de Sevilla
- * 
- * The use of this project is hereby constrained to the conditions of the 
- * TDG Licence, a copy of which you may download from 
- * http://www.tdg-seville.info/License.html
- -->
-
+<?xml version="1.0" encoding="UTF-8"?> 
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:security="http://www.springframework.org/schema/security"	
 	xsi:schemaLocation="

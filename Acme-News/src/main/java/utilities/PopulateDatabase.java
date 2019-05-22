@@ -1,11 +1,5 @@
 /*
  * PopulateDatabase.java
- * 
- * Copyright (C) 2017 Universidad de Sevilla
- * 
- * The use of this project is hereby constrained to the conditions of the
- * TDG Licence, a copy of which you may download from
- * http://www.tdg-seville.info/License.html
  */
 
 package utilities;
@@ -131,8 +125,8 @@ public class PopulateDatabase {
 			System.out.printf("> %s", name);
 			databaseUtil.persist(entity);
 			System.out.printf(": %s%n", entity.toString());
-			// TODO: print the entity using SchemaPrinter.  This should get a map in which 
-			// every persisted entity is mapped onto the corresponding bean name in the 
+			// TODO: print the entity using SchemaPrinter.  This should get a map in which
+			// every persisted entity is mapped onto the corresponding bean name in the
 			// PopulateDatabase.xml file; otherwise traceability will be a nightmare.
 		}
 		databaseUtil.closeTransaction();

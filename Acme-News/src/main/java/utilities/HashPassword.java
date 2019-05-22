@@ -1,11 +1,5 @@
 /*
  * HashPassword.java
- * 
- * Copyright (C) 2017 Universidad de Sevilla
- * 
- * The use of this project is hereby constrained to the conditions of the
- * TDG Licence, a copy of which you may download from
- * http://www.tdg-seville.info/License.html
  */
 
 package utilities;
@@ -39,7 +33,7 @@ public class HashPassword {
 		} catch (final Throwable oops) {
 			System.out.flush();
 			System.err.printf("%n%s%n", oops.getLocalizedMessage());
-			//oops.printStackTrace(System.out);			
+			//oops.printStackTrace(System.out);
 		}
 	}
 

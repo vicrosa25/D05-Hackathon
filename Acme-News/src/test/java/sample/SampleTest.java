@@ -1,7 +1,7 @@
 /*
  * SampleTest.java
  * 
- * Copyright (C) 2017 Universidad de Sevilla
+ * Copyright (C) 2019 Universidad de Sevilla
  * 
  * The use of this project is hereby constrained to the conditions of the
  * TDG Licence, a copy of which you may download from
@@ -31,8 +31,8 @@ public class SampleTest extends AbstractTest {
 
 	// Tests ------------------------------------------------------------------
 
-	// The following are fictitious test cases that are intended to check that 
-	// JUnit works well in this project.  Just righ-click this class and run 
+	// The following are fictitious test cases that are intended to check that
+	// JUnit works well in this project.  Just righ-click this class and run
 	// it using JUnit.
 
 	@Test
