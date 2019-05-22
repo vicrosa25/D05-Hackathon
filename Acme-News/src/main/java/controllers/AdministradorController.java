@@ -1,26 +1,16 @@
-/*
- * AdministradorController.java
- * 
- * Copyright (C) 2017 Universidad de Sevilla
- * 
- * The use of this project is hereby constrained to the conditions of the
- * TDG Licence, a copy of which you may download from
- * http://www.tdg-seville.info/License.html
- */
 
 package controllers;
 
 import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import services.BannerService;
-
 import domain.Banner;
 
 
@@ -33,10 +23,10 @@ public class AdministradorController extends AbstractController {
 
 	@Autowired
 	private BannerService bannerService;
-	
 
 
-	
+
+
 	public AdministradorController() {
 		super();
 	}
@@ -44,11 +34,11 @@ public class AdministradorController extends AbstractController {
 	@RequestMapping(value = "/changeBanner", method = RequestMethod.GET)
 	public ModelAndView changeBanner() {
 		ModelAndView result;
-		
-		Banner banner=bannerService.getBanner();
-		
-	
-		result = createEditModelAndView(banner);
+
+		Banner banner=this.bannerService.getBanner();
+
+
+		result = this.createEditModelAndView(banner);
 		return result;
 
 	}
@@ -56,34 +46,34 @@ public class AdministradorController extends AbstractController {
 	@RequestMapping(value = "/changeBanner", method = RequestMethod.POST, params = "save")
 	public ModelAndView saveBanner(@Valid Banner banner, BindingResult binding) {
 		ModelAndView result;
-		
-			if (binding.hasErrors()) {
-				result = createEditModelAndView(banner, "administrador.commit.errorBanner");
-				
 
-			} else {
-				try {
-					bannerService.isUrl(banner.getImagenes());
-					bannerService.save(banner);
-					
-					
-					result = new ModelAndView("redirect:../");
+		if (binding.hasErrors()) {
+			result = this.createEditModelAndView(banner, "administrador.commit.errorBanner");
 
-				} catch (Throwable oops) {
-					result = createEditModelAndView(banner, "administrador.commit.errorBanner");
-				}
 
+		} else {
+			try {
+				this.bannerService.isUrl(banner.getImagenes());
+				this.bannerService.save(banner);
+
+
+				result = new ModelAndView("redirect:../");
+
+			} catch (Throwable oops) {
+				result = this.createEditModelAndView(banner, "administrador.commit.errorBanner");
 			}
-		
+
+		}
+
 		return result;
 	}
-	
-	
-	
+
+
+
 	// Ancillary Methods--------------------------
 	protected ModelAndView createEditModelAndView(Banner banner) {
 		ModelAndView result;
-		result = createEditModelAndView(banner, null);
+		result = this.createEditModelAndView(banner, null);
 		return result;
 	}
 
@@ -96,6 +86,6 @@ public class AdministradorController extends AbstractController {
 
 		return result;
 	}
-	
+
 
 }

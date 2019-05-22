@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<!-- * PopulateDatabase.xml * * Copyright (C) 2017 Universidad de Sevilla 
+<!-- * PopulateDatabase.xml * * Copyright (C) 2019 Universidad de Sevilla 
 	* * The use of this project is hereby constrained to the conditions of the 
 	* TDG Licence, a copy of which you may download from * http://www.tdg-seville.info/License.html -->
 
@@ -847,7 +847,7 @@
 Lo ocurrido ha llenado las redes sociales de chistes sobre la compañía. Recopilamos algunos de ellos:
 Twitter, por suerte, sigue funcionando" />
 		<property name="video" value="https://www.youtube.com/embed/_5xU6TcPvvU" />
-		<property name="fecha" value="2017/05/12" />
+		<property name="fecha" value="2019/05/12" />
 		<property name="numeroVisitas" value="700002145" />
 		<property name="reportes">
 			<list>
@@ -885,7 +885,7 @@ Twitter, por suerte, sigue funcionando" />
 			value="http://www.myfico.com/Images/sample_overlay.gif" />
 		<property name="descripcion" value="descripciónNoticia2" />
 		<property name="video" value="https://www.youtube.com/embed/a3ICNMQW7Ok" />
-		<property name="fecha" value="2017/05/12" />
+		<property name="fecha" value="2019/05/12" />
 		<property name="numeroVisitas" value="50" />
 		<property name="reportes">
 			<list>
@@ -923,7 +923,7 @@ Twitter, por suerte, sigue funcionando" />
 			value="http://www.myfico.com/Images/sample_overlay.gif" />
 		<property name="descripcion" value="descripciónNoticia3" />
 		<property name="video" value="https://www.youtube.com/embed/a3ICNMQW7Ok" />
-		<property name="fecha" value="2017/04/11" />
+		<property name="fecha" value="2019/04/11" />
 		<property name="numeroVisitas" value="51" />
 		<property name="reportes">
 			<list>
@@ -962,7 +962,7 @@ Twitter, por suerte, sigue funcionando" />
 			value="http://www.myfico.com/Images/sample_overlay.gif" />
 		<property name="descripcion" value="descripciónNoticia4" />
 		<property name="video" value="https://www.youtube.com/embed/a3ICNMQW7Ok" />
-		<property name="fecha" value="2017/05/05" />
+		<property name="fecha" value="2019/05/05" />
 		<property name="numeroVisitas" value="40" />
 		<property name="reportes">
 			<list>
@@ -997,7 +997,7 @@ Twitter, por suerte, sigue funcionando" />
 			value="http://www.myfico.com/Images/sample_overlay.gif" />
 		<property name="descripcion" value="descripciónNoticia5" />
 		<property name="video" value="https://www.youtube.com/embed/a3ICNMQW7Ok" />
-		<property name="fecha" value="2017/05/11" />
+		<property name="fecha" value="2019/05/11" />
 		<property name="numeroVisitas" value="29" />
 		<property name="reportes">
 			<list>
@@ -1036,7 +1036,7 @@ Twitter, por suerte, sigue funcionando" />
 			value="http://www.myfico.com/Images/sample_overlay.gif" />
 		<property name="descripcion" value="descripciónNoticia6" />
 		<property name="video" value="https://www.youtube.com/embed/a3ICNMQW7Ok" />
-		<property name="fecha" value="2017/04/08" />
+		<property name="fecha" value="2019/04/08" />
 		<property name="numeroVisitas" value="39" />
 		<property name="reportes">
 			<list>
@@ -1070,7 +1070,7 @@ Twitter, por suerte, sigue funcionando" />
 			value="http://www.myfico.com/Images/sample_overlay.gif" />
 		<property name="descripcion" value="descripciónNoticia7" />
 		<property name="video" value="https://www.youtube.com/embed/a3ICNMQW7Ok" />
-		<property name="fecha" value="2017/03/24" />
+		<property name="fecha" value="2019/03/24" />
 		<property name="numeroVisitas" value="47" />
 		<property name="reportes">
 			<list>
@@ -1103,7 +1103,7 @@ Twitter, por suerte, sigue funcionando" />
 			value="http://www.myfico.com/Images/sample_overlay.gif" />
 		<property name="descripcion" value="descripciónNoticia8" />
 		<property name="video" value="https://www.youtube.com/embed/a3ICNMQW7Ok" />
-		<property name="fecha" value="2017/03/01" />
+		<property name="fecha" value="2019/03/01" />
 		<property name="numeroVisitas" value="200000" />
 		<property name="reportes">
 			<list>
@@ -1137,7 +1137,7 @@ Twitter, por suerte, sigue funcionando" />
 			value="http://www.myfico.com/Images/sample_overlay.gif" />
 		<property name="descripcion" value="descripciónNoticia8" />
 		<property name="video" value="https://www.youtube.com/embed/a3ICNMQW7Ok" />
-		<property name="fecha" value="2017/04/04" />
+		<property name="fecha" value="2019/04/04" />
 		<property name="numeroVisitas" value="2000" />
 		<property name="reportes">
 			<list>
@@ -1242,7 +1242,7 @@ Twitter, por suerte, sigue funcionando" />
 	<bean id="comentario1" class="domain.Comentario">
 		<property name="titulo" value="jajaja" />
 		<property name="descripcion" value="menudos tolais, timofónica tenia que ser" />
-		<property name="fecha" value="2017/05/13" />
+		<property name="fecha" value="2019/05/13" />
 		<property name="informacion" ref="noticia1" />
 		<property name="usuario" ref="usuario1" />
 	</bean>
@@ -1251,7 +1251,7 @@ Twitter, por suerte, sigue funcionando" />
 		<property name="titulo" value="Fiestaaaa" />
 		<property name="descripcion"
 			value="Deseando que llegue la fecha, MUSICA Y ALCOHOL!!!!" />
-		<property name="fecha" value="2017/05/13" />
+		<property name="fecha" value="2019/05/13" />
 		<property name="informacion" ref="evento1" />
 		<property name="usuario" ref="usuario1" />
 	</bean>
@@ -1259,7 +1259,7 @@ Twitter, por suerte, sigue funcionando" />
 	<bean id="comentario3" class="domain.Comentario">
 		<property name="titulo" value="tituloComentario3" />
 		<property name="descripcion" value="descripcionComentario3" />
-		<property name="fecha" value="2017/05/13" />
+		<property name="fecha" value="2019/05/13" />
 		<property name="informacion" ref="noticia1" />
 		<property name="usuario" ref="usuario3" />
 	</bean>
@@ -1267,7 +1267,7 @@ Twitter, por suerte, sigue funcionando" />
 	<bean id="comentario4" class="domain.Comentario">
 		<property name="titulo" value="tituloComentario4" />
 		<property name="descripcion" value="descripcionComentario4" />
-		<property name="fecha" value="2017/05/13" />
+		<property name="fecha" value="2019/05/13" />
 		<property name="informacion" ref="noticia4" />
 		<property name="usuario" ref="usuario4" />
 	</bean>
@@ -1275,7 +1275,7 @@ Twitter, por suerte, sigue funcionando" />
 	<bean id="comentario5" class="domain.Comentario">
 		<property name="titulo" value="tituloComentario5" />
 		<property name="descripcion" value="descripcionComentario5" />
-		<property name="fecha" value="2017/05/13" />
+		<property name="fecha" value="2019/05/13" />
 		<property name="informacion" ref="noticia5" />
 		<property name="usuario" ref="usuario4" />
 	</bean>
@@ -1283,7 +1283,7 @@ Twitter, por suerte, sigue funcionando" />
 	<bean id="comentario6" class="domain.Comentario">
 		<property name="titulo" value="tituloComentario6" />
 		<property name="descripcion" value="descripcionComentario6" />
-		<property name="fecha" value="2017/05/13" />
+		<property name="fecha" value="2019/05/13" />
 		<property name="informacion" ref="noticia5" />
 		<property name="usuario" ref="usuario5" />
 	</bean>
@@ -1291,7 +1291,7 @@ Twitter, por suerte, sigue funcionando" />
 	<bean id="comentario7" class="domain.Comentario">
 		<property name="titulo" value="tituloComentario7" />
 		<property name="descripcion" value="descripcionComentario7" />
-		<property name="fecha" value="2017/05/13" />
+		<property name="fecha" value="2019/05/13" />
 		<property name="informacion" ref="evento1" />
 		<property name="usuario" ref="usuario5" />
 	</bean>
@@ -1299,7 +1299,7 @@ Twitter, por suerte, sigue funcionando" />
 	<bean id="comentario8" class="domain.Comentario">
 		<property name="titulo" value="tituloComentario8" />
 		<property name="descripcion" value="descripcionComentario8" />
-		<property name="fecha" value="2017/05/13" />
+		<property name="fecha" value="2019/05/13" />
 		<property name="informacion" ref="evento4" />
 		<property name="usuario" ref="usuario5" />
 	</bean>
@@ -1308,9 +1308,9 @@ Twitter, por suerte, sigue funcionando" />
 	<bean id="sorteo1" class="domain.Sorteo">
 		<property name="titulo" value="Sorteo Bicicleta" />
 		<property name="descripcion" value="Sorteamos bicicleta de paseo." />
-		<property name="fechaVencimiento" value="2017/03/18" />
+		<property name="fechaVencimiento" value="2019/03/18" />
 		<property name="puntosNecesarios" value="20" />
-		<property name="fechaInicio" value="2017/01/13" />
+		<property name="fechaInicio" value="2019/01/13" />
 		<property name="ganador" value="Usuario 1, Email: usuario1@gmail.com." />
 		<property name="premio" ref="premio1" />
 								<property name="usuarios">
@@ -1326,9 +1326,9 @@ Twitter, por suerte, sigue funcionando" />
 	<bean id="sorteo2" class="domain.Sorteo">
 		<property name="titulo" value="Sorteo2" />
 		<property name="descripcion" value="descripcionSorteo2." />
-		<property name="fechaVencimiento" value="2017/02/18" />
+		<property name="fechaVencimiento" value="2019/02/18" />
 		<property name="puntosNecesarios" value="10" />
-		<property name="fechaInicio" value="2017/01/13" />
+		<property name="fechaInicio" value="2019/01/13" />
 		<property name="ganador" value="" />
 		<property name="premio" ref="premio1" />
 										<property name="usuarios">
@@ -1364,7 +1364,7 @@ Twitter, por suerte, sigue funcionando" />
 		<property name="descripcion" value="descripcionSorteo4." />
 		<property name="fechaVencimiento" value="2018/08/18" />
 		<property name="puntosNecesarios" value="100" />
-		<property name="fechaInicio" value="2017/01/13" />
+		<property name="fechaInicio" value="2019/01/13" />
 		<property name="ganador" value="" />
 		<property name="premio" ref="premio2" />
 												<property name="usuarios">

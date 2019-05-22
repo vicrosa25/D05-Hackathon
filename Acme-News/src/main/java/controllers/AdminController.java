@@ -1,26 +1,18 @@
-/*
- * AdministratorController.java
- * 
- * Copyright (C) 2017 Universidad de Sevilla
- * 
- * The use of this project is hereby constrained to the conditions of the
- * TDG Licence, a copy of which you may download from
- * http://www.tdg-seville.info/License.html
- */
-
 package controllers;
 import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
+
 import repositories.AdminRepository;
 
 @Controller
 @RequestMapping("/administrator")
 public class AdminController extends AbstractController {
 
-	
+
 	@Autowired
 	private AdminRepository adminRepository;
 	// Constructors -----------------------------------------------------------
@@ -46,16 +38,16 @@ public class AdminController extends AbstractController {
 		Integer query5=this.adminRepository.getQueryH5();
 		//query6
 		List<String> query6=this.adminRepository.getQueryH6();
-		
+
 		//query7
 		List<String> query7=this.adminRepository.getQueryH7();
-				
-		
+
+
 		//query8
 		Integer query8=this.adminRepository.getQueryH8();
 		//query9
 		Integer query9=this.adminRepository.getQueryH9();
-		
+
 		result = new ModelAndView("administrator/dashboard");
 		result.addObject("query1",query1);
 		result.addObject("query2",query2);
@@ -70,8 +62,8 @@ public class AdminController extends AbstractController {
 		result.addObject("query9",query9);
 		return result;
 	}
-	
-	
-	
+
+
+
 
 }

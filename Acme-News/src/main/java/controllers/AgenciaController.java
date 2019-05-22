@@ -1,13 +1,3 @@
-/*
- * ProfileController.java
- * 
- * Copyright (C) 2017 Universidad de Sevilla
- * 
- * The use of this project is hereby constrained to the conditions of the
- * TDG Licence, a copy of which you may download from
- * http://www.tdg-seville.info/License.html
- */
-
 package controllers;
 
 import java.util.Collection;
@@ -39,7 +29,7 @@ public class AgenciaController extends AbstractController {
 	// List not full Agencias
 	@RequestMapping("/listNotFullAgencia")
 	public ModelAndView listNotFull() {
-		Collection<Agencia> notFullAgencia = agenciaService.findAllNotFull();
+		Collection<Agencia> notFullAgencia = this.agenciaService.findAllNotFull();
 
 		ModelAndView result = new ModelAndView("agencia/listNotFullAgencia");
 		result.addObject("agencias", notFullAgencia);
@@ -51,14 +41,14 @@ public class AgenciaController extends AbstractController {
 	@RequestMapping(value = "/join", method = RequestMethod.GET)
 	public ModelAndView join(@RequestParam int agenciaId) {
 
-		Collection<Agencia> notFullAgencia = agenciaService.findAllNotFull();
+		Collection<Agencia> notFullAgencia = this.agenciaService.findAllNotFull();
 
 		ModelAndView result = new ModelAndView("agencia/listNotFullAgencia");
 		result.addObject("agencias", notFullAgencia);
 
 		String loggedUsername = LoginService.getPrincipal().getUsername();
-		Periodista logged = (Periodista) actorRepository
-				.findOneByName(loggedUsername);
+		Periodista logged = (Periodista) this.actorRepository
+			.findOneByName(loggedUsername);
 		if (logged.getAgencia() != null) {
 			result.addObject("message", "commit.error.alreadyInAgencia");
 		} else {
@@ -70,14 +60,14 @@ public class AgenciaController extends AbstractController {
 	// Left an agency method
 	@RequestMapping(value = "/left", method = RequestMethod.GET)
 	public ModelAndView left() {
-		Collection<Agencia> notFullAgencia = agenciaService.findAllNotFull();
+		Collection<Agencia> notFullAgencia = this.agenciaService.findAllNotFull();
 
 		ModelAndView result = new ModelAndView("agencia/listNotFullAgencia");
 		result.addObject("agencias", notFullAgencia);
 
 		String loggedUsername = LoginService.getPrincipal().getUsername();
-		Periodista logged = (Periodista) actorRepository
-				.findOneByName(loggedUsername);
+		Periodista logged = (Periodista) this.actorRepository
+			.findOneByName(loggedUsername);
 		if (logged.getAgencia() != null) {
 			this.agenciaService.left(logged.getAgencia().getId());
 		} else {
@@ -89,14 +79,14 @@ public class AgenciaController extends AbstractController {
 	// List Agencias for Manager
 	@RequestMapping("/listAgencia")
 	public ModelAndView list() {
-		Collection<Agencia> agencias = agenciaService.findAll();
+		Collection<Agencia> agencias = this.agenciaService.findAll();
 
 		ModelAndView result = new ModelAndView("agencia/listAgencia");
 		result.addObject("agencias", agencias);
 
 		String loggedUsername = LoginService.getPrincipal().getUsername();
-		Manager logged = (Manager) actorRepository
-				.findOneByName(loggedUsername);
+		Manager logged = (Manager) this.actorRepository
+			.findOneByName(loggedUsername);
 		result.addObject("logged", logged);
 
 		return result;
@@ -105,7 +95,7 @@ public class AgenciaController extends AbstractController {
 	// update an agency method
 	@RequestMapping(value = "/update", method = RequestMethod.GET)
 	public ModelAndView update(@RequestParam int agenciaId) {
-		Agencia agencia = agenciaService.findOne(agenciaId);
+		Agencia agencia = this.agenciaService.findOne(agenciaId);
 
 		ModelAndView result = new ModelAndView("agencia/agenciaForm");
 		result.addObject("agencia", agencia);
@@ -117,14 +107,14 @@ public class AgenciaController extends AbstractController {
 	@RequestMapping(value = "/agenciaForm", method = RequestMethod.POST, params = "save")
 	public ModelAndView save(Agencia agencia, BindingResult binding) {
 		ModelAndView result = new ModelAndView("agencia/agenciaForm");
-		agencia = agenciaService.reconstruct(agencia, binding);
+		agencia = this.agenciaService.reconstruct(agencia, binding);
 		if (binding.hasErrors()) {
 			result.addObject("agencia", agencia);
 			result.addObject("actualCapacity", agencia.getPeriodistas().size());
 			result.addObject("message", "commit.error.agencia");
 		} else {
 			try {
-				agenciaService.save(agencia);
+				this.agenciaService.save(agencia);
 				result = new ModelAndView("redirect:../agencia/listAgencia.do");
 			} catch (Throwable oops) {
 				result.addObject("agencia", agencia);
@@ -135,16 +125,16 @@ public class AgenciaController extends AbstractController {
 
 		return result;
 	}
-	
+
 	//Create an agency
 	@RequestMapping(value = "/createAgencia", method = RequestMethod.GET)
 	public ModelAndView create() {
 		Agencia agencia = new Agencia();
-		
+
 		String loggedUsername = LoginService.getPrincipal().getUsername();
-		Manager manager = (Manager) actorRepository
-				.findOneByName(loggedUsername);
-		
+		Manager manager = (Manager) this.actorRepository
+			.findOneByName(loggedUsername);
+
 		agencia.setImportancia((long) 1);
 		agencia.setManager(manager);
 
@@ -156,7 +146,7 @@ public class AgenciaController extends AbstractController {
 	@RequestMapping(value = "/createAgencia", method = RequestMethod.POST, params = "save")
 	public ModelAndView create(Agencia agencia, BindingResult binding) {
 		ModelAndView result = new ModelAndView("agencia/createAgencia");
-		agencia = agenciaService.reconstruct(agencia, binding);
+		agencia = this.agenciaService.reconstruct(agencia, binding);
 		if (binding.hasErrors()) {
 			result.addObject("agencia", agencia);
 			result.addObject("actualCapacity", agencia.getPeriodistas().size());
@@ -164,7 +154,7 @@ public class AgenciaController extends AbstractController {
 			//result.addObject("message", "commit.error.agencia");
 		} else {
 			try {
-				agenciaService.save(agencia);
+				this.agenciaService.save(agencia);
 				result = new ModelAndView("redirect:../agencia/listAgencia.do");
 			} catch (Throwable oops) {
 				result.addObject("agencia", agencia);
@@ -176,14 +166,14 @@ public class AgenciaController extends AbstractController {
 
 		return result;
 	}
-	
-	
+
+
 	// Delete an agency method
 	@RequestMapping(value = "/delete", method = RequestMethod.GET)
 	public ModelAndView delete(@RequestParam int agenciaId) {
 		ModelAndView result = new ModelAndView(
-				"redirect:../agencia/listAgencia.do");
-		agenciaService.delete(agenciaId);
+			"redirect:../agencia/listAgencia.do");
+		this.agenciaService.delete(agenciaId);
 		return result;
 	}
 }
