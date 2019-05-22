@@ -43,5 +43,8 @@
  <spring:message code="reporte.create" var="editHeader" />
  <security:authorize access="hasRole('USUARIO')">
 <a href=comentario/create.do?informacionId=${noticia.id}><spring:message code="comentario.create" /></a>
-</security:authorize> 
+<br>
+<a href=noticia/usuario/enviar.do?noticiaId=${noticia.id}><spring:message code="noticia.enviar" /></a>
+</security:authorize>
+<br>
 <a href=""><input type="button" name="goBack" value="<spring:message code="noticia.goBack"/>" /></a>
