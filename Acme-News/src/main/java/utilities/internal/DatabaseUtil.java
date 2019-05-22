@@ -1,5 +1,11 @@
 /*
  * DatabaseUtil.java
+ * 
+ * Copyright (C) 2019 Universidad de Sevilla
+ * 
+ * The use of this project is hereby constrained to the conditions of the
+ * TDG Licence, a copy of which you may download from
+ * http://www.tdg-seville.info/License.html
  */
 
 package utilities.internal;
@@ -8,11 +14,11 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Properties;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -23,16 +29,17 @@ import javax.persistence.metamodel.EmbeddableType;
 import javax.persistence.metamodel.EntityType;
 import javax.persistence.metamodel.Metamodel;
 import javax.persistence.spi.PersistenceProvider;
-import javax.persistence.spi.PersistenceProviderResolver;
-import javax.persistence.spi.PersistenceProviderResolverHolder;
 
 import org.apache.commons.lang.StringUtils;
 import org.hibernate.Session;
 import org.hibernate.cfg.Configuration;
+import org.hibernate.cfg.NamingStrategy;
 import org.hibernate.dialect.Dialect;
 import org.hibernate.internal.util.ReflectHelper;
 import org.hibernate.jdbc.Work;
 import org.hibernate.jpa.HibernatePersistenceProvider;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import utilities.DatabaseConfig;
 import domain.DomainEntity;
@@ -45,45 +52,23 @@ public class DatabaseUtil {
 	}
 
 
-	// Properties -------------------------------------------------------------
+	// Internal state ---------------------------------------------------------
 
-	private PersistenceProviderResolver	resolver;
-	private PersistenceProvider			persistenceProvider;
-	private EntityManagerFactory		entityManagerFactory;
-	private EntityManager				entityManager;
-	private Map<String, Object>			properties;
-	private String						databaseUrl;
-	private String						databaseName;
-	private String						databaseDialectName;
-	private Dialect						databaseDialect;
-	private Configuration				configuration;
-	private EntityTransaction			entityTransaction;
-	private List<PersistenceProvider>	providers;
+	// private PersistenceProviderResolver	resolver;
+	// private List<PersistenceProvider>	providers;
+	private PersistenceProvider		persistenceProvider;
+	private EntityManagerFactory	entityManagerFactory;
+	private EntityManager			entityManager;
+	private Map<String, Object>		properties;
+	private String					databaseUrl;
+	private String					databaseName;
+	private String					databaseDialectName;
+	private Dialect					databaseDialect;
+	private Configuration			configuration;
+	private EntityTransaction		entityTransaction;
 
 
-	public PersistenceProviderResolver getResolver() {
-		return this.resolver;
-	}
-
-	public PersistenceProvider getPersistenceProvider() {
-		return this.persistenceProvider;
-	}
-
-	public EntityManagerFactory getEntityManagerFactory() {
-		return this.entityManagerFactory;
-	}
-
-	public EntityManager getEntityManager() {
-		return this.entityManager;
-	}
-
-	public Map<String, Object> getProperties() {
-		return this.properties;
-	}
-
-	public String getDatabaseUrl() {
-		return this.databaseUrl;
-	}
+	// Internal state ---------------------------------------------------------
 
 	public String getDatabaseName() {
 		return this.databaseName;
@@ -93,34 +78,22 @@ public class DatabaseUtil {
 		return this.databaseDialectName;
 	}
 
-	public Dialect getDatabaseDialect() {
-		return this.databaseDialect;
-	}
-
-	public Configuration getConfiguration() {
-		return this.configuration;
-	}
-
-	public EntityTransaction getEntityTransaction() {
-		return this.entityTransaction;
-	}
-
-	public List<PersistenceProvider> getProviders() {
-		return this.providers;
-	}
-
 	// Business methods -------------------------------------------------------
 
-	public void open() throws InstantiationException, IllegalAccessException, ClassNotFoundException {
-		this.resolver = PersistenceProviderResolverHolder.getPersistenceProviderResolver();
-		this.providers = this.resolver.getPersistenceProviders();
+	public void initialise() throws InstantiationException, IllegalAccessException, ClassNotFoundException {
+		// this.resolver = PersistenceProviderResolverHolder.getPersistenceProviderResolver();
+		// this.providers = this.resolver.getPersistenceProviders();
+
 		this.persistenceProvider = new HibernatePersistenceProvider();
 		this.entityManagerFactory = this.persistenceProvider.createEntityManagerFactory(DatabaseConfig.PersistenceUnit, null);
 		if (this.entityManagerFactory == null)
-			throw new RuntimeException(String.format("Couldn't load persistence unit `%s'", DatabaseConfig.PersistenceUnit));
+			throw new RuntimeException(String.format("Couldn't create an entity manager factory for persistence unit `%s'", DatabaseConfig.PersistenceUnit));
+
 		this.entityManager = this.entityManagerFactory.createEntityManager();
 		if (this.entityManager == null)
 			throw new RuntimeException(String.format("Couldn't create an entity manager for persistence unit `%s'", DatabaseConfig.PersistenceUnit));
+		this.entityManager.setFlushMode(FlushModeType.AUTO);
+
 		this.properties = this.entityManagerFactory.getProperties();
 		// printProperties(properties);
 
@@ -132,28 +105,9 @@ public class DatabaseUtil {
 		this.configuration = this.buildConfiguration();
 
 		this.entityTransaction = this.entityManager.getTransaction();
-
-		this.entityManager.setFlushMode(FlushModeType.AUTO);
 	}
 
-	public void recreateDatabase() throws Throwable {
-		List<String> databaseScript;
-		List<String> schemaScript;
-		String[] statements;
-
-		databaseScript = new ArrayList<String>();
-		databaseScript.add(String.format("drop database `%s`", this.databaseName));
-		databaseScript.add(String.format("create database `%s`", this.databaseName));
-		this.executeScript(databaseScript);
-
-		schemaScript = new ArrayList<String>();
-		schemaScript.add(String.format("use `%s`", this.databaseName));
-		statements = this.configuration.generateSchemaCreationScript(this.databaseDialect);
-		schemaScript.addAll(Arrays.asList(statements));
-		this.executeScript(schemaScript);
-	}
-
-	public void close() {
+	public void shutdown() {
 		if (this.entityTransaction != null && this.entityTransaction.isActive())
 			this.entityTransaction.rollback();
 		if (this.entityManager != null && this.entityManager.isOpen())
@@ -162,21 +116,57 @@ public class DatabaseUtil {
 			this.entityManagerFactory.close();
 	}
 
-	public void openTransaction() {
+	public void recreateDatabase() throws Throwable {
+		List<String> databaseScript;
+		List<String> schemaScript;
+		String[] statements;
+
+		databaseScript = new ArrayList<String>();
+		databaseScript.add(String.format("drop database if exists `%s`;", this.databaseName));
+		databaseScript.add(String.format("create database `%s`;", this.databaseName));
+		this.executeScript(databaseScript);
+
+		schemaScript = new ArrayList<String>();
+		schemaScript.add(String.format("use `%s`;", this.databaseName));
+		statements = this.configuration.generateSchemaCreationScript(this.databaseDialect);
+		for (final String statement : statements)
+			schemaScript.add(String.format("%s;", statement));
+
+		this.executeScript(schemaScript);
+	}
+
+	public void setReadUncommittedIsolationLevel() {
+		List<String> script;
+
+		script = new ArrayList<String>();
+		script.add("set transaction isolation level read uncommitted;");
+
+		this.executeScript(script);
+	}
+
+	public void setReadCommittedIsolationLevel() {
+		List<String> script;
+
+		script = new ArrayList<String>();
+		script.add("set transaction isolation level read committed;");
+
+		this.executeScript(script);
+	}
+
+	public void startTransaction() {
 		this.entityTransaction.begin();
 	}
 
-	public void closeTransaction() {
+	public void commitTransaction() {
 		this.entityTransaction.commit();
 	}
 
-	public void undoTransaction() {
+	public void rollbackTransaction() {
 		this.entityTransaction.rollback();
 	}
 
 	public void persist(final DomainEntity entity) {
 		this.entityManager.persist(entity);
-		// entityManager.flush();
 	}
 
 	public int executeUpdate(final String line) {
@@ -209,11 +199,29 @@ public class DatabaseUtil {
 
 	protected Configuration buildConfiguration() {
 		Configuration result;
+		final ApplicationContext context;
+		final Properties properties;
+		String namingStrategyClassName;
+		Class<?> namingStrategyClass;
+		NamingStrategy namingStrategy;
 		Metamodel metamodel;
 		Collection<EntityType<?>> entities;
 		Collection<EmbeddableType<?>> embeddables;
 
 		result = new Configuration();
+
+		context = new ClassPathXmlApplicationContext("classpath:spring/datasource.xml");
+		properties = (Properties) context.getBean("jpaProperties");
+		namingStrategyClassName = properties.getProperty("hibernate.ejb.naming_strategy", "org.hibernate.cfg.ImprovedNamingStrategy");
+		try {
+			namingStrategyClass = Class.forName(namingStrategyClassName);
+			namingStrategy = (NamingStrategy) namingStrategyClass.newInstance();
+		} catch (final Throwable oops) {
+			throw new RuntimeException(oops);
+		}
+
+		result.setNamingStrategy(namingStrategy);
+
 		metamodel = this.entityManagerFactory.getMetamodel();
 
 		entities = metamodel.getEntities();
@@ -236,10 +244,13 @@ public class DatabaseUtil {
 			public void execute(final Connection connection) throws SQLException {
 				Statement statement;
 
+				//System.out.println();
 				statement = connection.createStatement();
 				for (final String line : script)
+					//System.out.println(line);
 					statement.execute(line);
 				connection.commit();
+				//System.out.println();
 			}
 		});
 	}

@@ -117,6 +117,8 @@
 		<security:intercept-url pattern="/buscador/usuario/clear.do" access="hasRole('USUARIO')" />
 		<security:intercept-url pattern="/buscador/usuario/result.do" access="hasRole('USUARIO')" />
 		
+		<!-- Noticia  -->
+		<security:intercept-url pattern="/noticia/usuario/enviar.do" access="hasRole('USUARIO')" />
 		
 	
 		<security:intercept-url pattern="/**" access="hasRole('NONE')" />

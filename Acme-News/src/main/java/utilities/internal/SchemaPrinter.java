@@ -1,5 +1,11 @@
 /*
  * SchemaPrinter.java
+ * 
+ * Copyright (C) 2019 Universidad de Sevilla
+ * 
+ * The use of this project is hereby constrained to the conditions of the
+ * TDG Licence, a copy of which you may download from
+ * http://www.tdg-seville.info/License.html
  */
 
 package utilities.internal;
@@ -10,8 +16,6 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
-
-import domain.DomainEntity;
 
 public class SchemaPrinter {
 
@@ -35,7 +39,7 @@ public class SchemaPrinter {
 	}
 
 	protected static void printValue(final StringBuffer buffer, final Object value, final boolean summary) {
-		if (SchemaPrinter.isPrimitive(value))
+		if (SchemaPrinter.isPrimitive(value) || SchemaPrinter.isEnum(value))
 			SchemaPrinter.printPrimitive(buffer, value, summary);
 		else if (SchemaPrinter.isArray(value))
 			SchemaPrinter.printArray(buffer, (Object[]) value, summary);
@@ -49,8 +53,7 @@ public class SchemaPrinter {
 		List<Class<?>> superClazzes;
 		Class<?> clazz;
 
-		if (obj instanceof DomainEntity)
-			buffer.append(obj.toString());
+		buffer.append(obj.toString());
 		if (!summary) {
 			clazz = obj.getClass();
 			superClazzes = new ArrayList<Class<?>>();
@@ -175,6 +178,14 @@ public class SchemaPrinter {
 		return result;
 	}
 
+	protected static boolean isEnum(final Object obj) {
+		boolean result;
+
+		result = (obj == null || obj instanceof Enum);
+
+		return result;
+	}
+
 	protected static boolean isCollection(final Object obj) {
 		boolean result;
 
@@ -186,7 +197,7 @@ public class SchemaPrinter {
 	protected static boolean isValue(final Object obj) {
 		boolean result;
 
-		result = (SchemaPrinter.isPrimitive(obj) || SchemaPrinter.isArray(obj));
+		result = (SchemaPrinter.isPrimitive(obj) || SchemaPrinter.isArray(obj) || SchemaPrinter.isEnum(obj));
 
 		return result;
 	}
