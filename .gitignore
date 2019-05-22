@@ -30,5 +30,8 @@ hs_err_pid*
 ###################
 Acme-News/.classpath
 Acme-News/.settings
-Acme-News/.idea
+Acme-News/.project
+Acme-News/.idea/
+Acme-News/target/
+Acme-News/out/
 Acme-News/src/main/resources/Entities.map
