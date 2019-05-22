@@ -77,17 +77,15 @@ public class Usuario extends Actor {
 
 	//  -----------------------------------------------------------
 	@NotNull
-	@ManyToMany(mappedBy="siguiendo")
+	@ManyToMany
 	public Collection<Usuario> getSeguidores() {
 		return this.seguidores;
 	}
 
-
-
-
 	public void setSeguidores(Collection<Usuario> seguidores) {
 		this.seguidores = seguidores;
 	}
+
 	@NotNull
 	@ManyToMany
 	public Collection<Usuario> getSiguiendo() {
@@ -116,7 +114,7 @@ public class Usuario extends Actor {
 		this.reportes=reportes;
 	}
 
-	@ManyToMany(mappedBy="usuarios")
+	@ManyToMany
 	public Collection<Informacion> getInformacionCompartida(){
 		return this.informacionCompartida;
 	}
@@ -124,7 +122,7 @@ public class Usuario extends Actor {
 		this.informacionCompartida=informacionCompartida;
 	}
 
-	@ManyToMany(mappedBy="usuarios")
+	@ManyToMany
 	public Collection<Sorteo> getSorteos(){
 		return this.sorteos;
 	}
