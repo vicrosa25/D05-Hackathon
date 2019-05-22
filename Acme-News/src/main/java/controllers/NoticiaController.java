@@ -111,6 +111,25 @@ public class NoticiaController extends AbstractController {
 	}
 	// Listas de categorias ---------------------------------------------------------------
 
+	@RequestMapping(value="usuario/recibidas",method=RequestMethod.GET)
+	public ModelAndView recibidas() {
+		ModelAndView result;
+		Collection<Mensaje> mensajes;
+		try{
+			mensajes = this.mensajeService.mensajesRecibidos();
+
+			result = new ModelAndView("noticia/usuario/recibidas");
+			result.addObject("mensajes", mensajes);
+			result.addObject("requestURI", "noticia/usuario/recibidas.do");
+		}catch(Throwable oops){
+			System.out.println(oops.getMessage());
+			oops.printStackTrace();
+			result = super.forbiddenOpperation();
+		}
+
+		return result;
+	}
+
 	@RequestMapping(value="/listaDeportes",method=RequestMethod.GET)
 	public ModelAndView listaDeportes() {
 		ModelAndView result;

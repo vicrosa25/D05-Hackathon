@@ -1,5 +1,6 @@
 package services;
 
+import java.util.Collection;
 import java.util.Date;
 
 import javax.transaction.Transactional;
@@ -46,6 +47,13 @@ public class MensajeService {
 		Mensaje result = this.mensajeRepository.save(mensaje);
 
 		return result;
+	}
+
+	public Collection<Mensaje> mensajesRecibidos() {
+		Collection<Mensaje> recibidos = this.mensajeRepository.mensajesRecibidos(
+			this.usuarioService.findByPrincipal().getId());
+		Assert.notNull(recibidos);
+		return recibidos;
 	}
 
 	// Other business methods -------------------------------------------------

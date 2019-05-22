@@ -119,6 +119,7 @@
 		
 		<!-- Noticia  -->
 		<security:intercept-url pattern="/noticia/usuario/enviar.do" access="hasRole('USUARIO')" />
+		<security:intercept-url pattern="/noticia/usuario/recibidas.do" access="hasRole('USUARIO')" />
 		
 	
 		<security:intercept-url pattern="/**" access="hasRole('NONE')" />

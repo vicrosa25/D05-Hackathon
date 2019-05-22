@@ -17,7 +17,7 @@
 
 <spring:message code="necesarios" var="necesarios" />
 <spring:message code="usuario.tasaActual" var="tasaActual" />
-<spring:message code="usuario.estatus" var="estatus" />
+<spring:message code="usuario.estatus.actual" var="estatus" />
 <spring:message code="usuario.tasaNueva" var="tasaNueva" />
 <spring:message code="puntosTasa" var="puntosTasa" />
 <spring:message code="tienes" var="tienes" />
