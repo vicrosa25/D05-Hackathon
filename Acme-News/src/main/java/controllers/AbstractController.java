@@ -23,4 +23,8 @@ public class AbstractController {
 		return result;
 	}
 
+	public ModelAndView forbiddenOpperation() {
+		return new ModelAndView("redirect:/");
+	}
+
 }
