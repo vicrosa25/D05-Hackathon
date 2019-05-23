@@ -13,5 +13,34 @@
 		<put-attribute name="body" value="/views/administrador/changeBanner.jsp" />
 	</definition>
 
+	<!-- CACHE -->
+	<definition name="administrator/config/cache" extends="master.page">
+		<put-attribute name="title" value="Configuración de la Caché" />
+		<put-attribute name="body" value="/views/administrator/config/cache/edit.jsp" />
+	</definition>
+
+	<!-- Alive config -->
+	<definition name="administrator/config/aliveConfig/edit" extends="master.page">
+		<put-attribute name="title" value="Configuración" />
+		<put-attribute name="body" value="/views/administrator/config/aliveConfig/edit.jsp" />
+	</definition>
+
+
+	<!-- SPAM -->
+	<definition name="administrator/config/spam/list" extends="master.page">
+		<put-attribute name="title" value="Gestionar Palabras Spam" />
+		<put-attribute name="body" value="/views/administrator/config/spam/list.jsp" />
+	</definition>
+
+	<definition name="administrator/config/spam/add" extends="master.page">
+		<put-attribute name="title" value="Añadir Palabras Spam" />
+		<put-attribute name="body" value="/views/administrator/config/spam/add.jsp" />
+	</definition>
+
+	<definition name="administrator/config/spam/edit" extends="master.page">
+		<put-attribute name="title" value="Editar Palabras Spam" />
+		<put-attribute name="body" value="/views/administrator/config/spam/edit.jsp" />
+	</definition>
+
 	
 </tiles-definitions>

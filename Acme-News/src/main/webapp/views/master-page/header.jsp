@@ -1,6 +1,5 @@
 
 <%@page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
-
 <%@taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@taglib prefix="security" uri="http://www.springframework.org/security/tags"%>
 
@@ -16,6 +15,14 @@
 				<ul>
 					<li class="arrow"></li>
 					
+				</ul>
+			</li>
+			<li><a class="fNiv"><spring:message code="master.page.configurations" /></a>
+				<ul>
+					<li class="arrow"></li>
+					<li><a href="administrator/config/cache/edit.do"><spring:message code="master.page.cache" /></a></li>
+					<li><a href="administrator/config/aliveConfig/edit.do"><spring:message code="master.page.settings" /></a></li>
+					<li><a href="administrator/config/spam/list.do"><spring:message code="master.page.spam.words" /></a></li>
 				</ul>
 			</li>
 		</security:authorize>
