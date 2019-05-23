@@ -24,7 +24,6 @@
 		<value>/views/moderador/tiles.xml</value>
 		<value>/views/premio/tiles.xml</value>
 		<value>/views/sorteo/tiles.xml</value>
-		<value>/views/dashboard/tiles.xml</value>
 		<value>/views/tasa/tiles.xml</value>
 		<value>/views/agencia/tiles.xml</value>
 		<value>/views/buscador/tiles.xml</value>

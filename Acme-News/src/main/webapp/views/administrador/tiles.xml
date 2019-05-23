@@ -11,6 +11,12 @@
 		<put-attribute name="title" value="Administrador: Change Banner" />
 		<put-attribute name="body" value="/views/administrador/changeBanner.jsp" />
 	</definition>
+	
+	<!-- DASHBOARD -->
+	<definition name="administrator/dashboard" extends="master.page">	
+		<put-attribute name="title" value="DashBoard" />
+		<put-attribute name="body" value="/views/administrador/dashboard.jsp" />
+	</definition>
 
 	<!-- CACHE -->
 	<definition name="administrator/config/cache/edit" extends="master.page">	

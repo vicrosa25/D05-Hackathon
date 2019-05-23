@@ -10,11 +10,19 @@
 <div>
 	<ul id="jMenu">
 		<!-- Do not forget the "fNiv" class for the first level links !! -->
+		
+		
+		
+		<!-- ADMIN -->
 		<security:authorize access="hasRole('ADMIN')">
 			<li><a class="fNiv"><spring:message	code="master.page.administrator" /></a>
 				<ul>
 					<li class="arrow"></li>
-					
+					<li><a href="administrator/dashboard.do"><spring:message code="master.page.administrator.dashboard" /></a></li>
+					<li><a href="administrador/changeBanner.do"><spring:message code="master.page.administrador.banner" /></a></li>
+					<li><a href="premio/admin/listAdmin.do"><spring:message code="master.page.administrator.premios" /></a></li>
+					<li><a href="sorteo/admin/listAdmin.do"><spring:message code="master.page.administrator.sorteos" /></a></li>
+					<li><a href="tasa/administrator/changeTasa.do"><spring:message code="master.page.administrator.changeFee" /></a></li>
 				</ul>
 			</li>
 			<li><a class="fNiv"><spring:message code="master.page.configurations" /></a>
@@ -56,15 +64,7 @@
 			</li>
 		</security:authorize>
 		
-		
-		<security:authorize access="hasRole('ADMIN')">
-				<li><a href="administrador/changeBanner.do"><spring:message code="master.page.administrador.banner" /></a></li>
-				<li><a href="premio/admin/listAdmin.do"><spring:message code="master.page.administrator.premios" /></a></li>
-				<li><a href="sorteo/admin/listAdmin.do"><spring:message code="master.page.administrator.sorteos" /></a></li>
-				<li><a href="administrator/dashboard.do"><spring:message code="master.page.administrator.dashboard" /></a></li>
-				<li><a href="tasa/administrator/changeTasa.do"><spring:message code="master.page.administrator.changeFee" /></a></li>
-		</security:authorize>
-		
+	
 		<security:authorize access="hasRole('PERIODISTA')">
 			<li><a class="fNiv"><spring:message	code="master.page.profile" /></a>
 				<ul>
