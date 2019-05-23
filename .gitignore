@@ -34,10 +34,11 @@ hs_err_pid*
 *.iml
 
 ###################
+Acme-News/.settings/
 Acme-News/.classpath
 Acme-News/.project
 Acme-News/.idea/
 Acme-News/target/
 Acme-News/out/
 Acme-News/src/main/resources/Entities.map
-Acme-News/.settings/**
+
