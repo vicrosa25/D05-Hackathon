@@ -3,8 +3,9 @@
 <%@taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@taglib prefix="security" uri="http://www.springframework.org/security/tags"%>
 
+
 <div>
-	<img src="images/logo.png" alt="Acme-News Co., Inc." />
+	<a href="#"><img src="${logo}" alt="${title}" width="800" height="240" /></a>
 </div>
 
 <div>

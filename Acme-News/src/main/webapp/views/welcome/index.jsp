@@ -10,8 +10,14 @@
 
 <p><spring:message code="welcome.greeting.prefix" /> ${name}<spring:message code="welcome.greeting.suffix" /></p>
 
-<p><spring:message code="welcome.greeting.current.time" /> ${moment}</p> 
 
+<!-- Manage greeting -->
+<jstl:if test="${language == 'en'}">
+	<p>${englishMessage} ${moment}</p> 
+</jstl:if>
+<jstl:if test="${language == 'es'}">
+	<p>${spanishMessage} ${moment}</p> 
+</jstl:if>
 
 	 
-	  <img src="${bannerAleatorio}">
+<img src="${bannerAleatorio}">
