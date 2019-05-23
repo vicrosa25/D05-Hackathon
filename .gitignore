@@ -39,5 +39,5 @@ Acme-News/.project
 Acme-News/.idea/
 Acme-News/target/
 Acme-News/out/
-Acme-News/.settings
 Acme-News/src/main/resources/Entities.map
+**/.settings/
