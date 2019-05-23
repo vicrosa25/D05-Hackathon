@@ -19,7 +19,6 @@
 		<put-attribute name="body" value="/views/administrator/config/cache/edit.jsp" />
 	</definition>
 
-
 	<!-- Alive config -->
 	<definition name="administrator/config/aliveConfig/edit"
 				extends="master.page">

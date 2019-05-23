@@ -33,8 +33,7 @@
 		<security:intercept-url pattern="/usuario/checkBan.do" access="permitAll" />
 		<security:intercept-url pattern="/usuario/listUsuariosToBan.do" access="hasRole('MODERADOR')" />
 
-			<!-- ADMIN -->
-		
+		<!-- ADMIN -->
 		<security:intercept-url pattern="/administrador/changeBanner.do" access="hasRole('ADMIN')" />
 		<security:intercept-url pattern="/premio/admin/**" access="hasRole('ADMIN')" />
 		<security:intercept-url pattern="/sorteo/admin/**" access="hasRole('ADMIN')" />

@@ -12,6 +12,8 @@
 		<value>/views/misc/tiles.xml</value>
 		<value>/views/security/tiles.xml</value>
 		<value>/views/welcome/tiles.xml</value>
+		
+		<value>/views/administrador/tiles.xml</value>
 		<value>/views/registration/tiles.xml</value>
 		<value>/views/usuario/tiles.xml</value>
 		<value>/views/periodista/tiles.xml</value>
@@ -19,8 +21,6 @@
 		<value>/views/noticia/tiles.xml</value>
 		<value>/views/reporte/tiles.xml</value>
 		<value>/views/comentario/tiles.xml</value>
-		<value>/views/administrador/tiles.xml</value>
-
 		<value>/views/moderador/tiles.xml</value>
 		<value>/views/premio/tiles.xml</value>
 		<value>/views/sorteo/tiles.xml</value>

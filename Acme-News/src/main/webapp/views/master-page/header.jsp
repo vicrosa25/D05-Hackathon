@@ -84,7 +84,6 @@
 					
 				</ul>
 				<li><a href="periodista/retirarDinero.do"><spring:message code="master.page.administrator.retirarDinero" /></a></li>
-			</li>
 			<li><a class="fNiv"><spring:message	code="master.page.agencia" /></a>
 				<ul>
 					<li class="arrow"></li>
