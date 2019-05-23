@@ -32,6 +32,8 @@
 <spring:message code="administrator.dashboard.veterano" var="veteranoHeader" />
 <spring:message code="administrator.dashboard.maestro" var="maestroHeader" />
 <spring:message code="administrator.dashboard.total" var="totalHeader" />
+
+
 <head>
 <link rel="stylesheet" href="styles/tablas.css" type="text/css">
 </head>

@@ -18,6 +18,9 @@
 
 
 <form:form action="administrator/config/cache/edit.do" modelAttribute="configurations">
+
+
+	<%-- hidden properties --%>
 	<form:hidden path="id" />
 	<form:hidden path="version" />
 	<form:hidden path="title" />

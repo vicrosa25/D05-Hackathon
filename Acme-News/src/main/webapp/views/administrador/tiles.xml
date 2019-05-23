@@ -7,40 +7,38 @@
        
 <tiles-definitions>
 
-
 	<definition name="administrador/changeBanner" extends="master.page">
 		<put-attribute name="title" value="Administrador: Change Banner" />
 		<put-attribute name="body" value="/views/administrador/changeBanner.jsp" />
 	</definition>
 
 	<!-- CACHE -->
-	<definition name="administrator/config/cache/edit" extends="master.page">
+	<definition name="administrator/config/cache/edit" extends="master.page">	
 		<put-attribute name="title" value="Config Cache" />
-		<put-attribute name="body" value="/views/administrator/config/cache/edit.jsp" />
+		<put-attribute name="body" value="/views/administrador/config/cache/edit.jsp" />
 	</definition>
 
 	<!-- Alive config -->
-	<definition name="administrator/config/aliveConfig/edit"
-				extends="master.page">
+	<definition name="administrator/config/aliveConfig/edit" extends="master.page">	
 		<put-attribute name="title" value="Configurations" />
-		<put-attribute name="body" value="/views/administrator/config/aliveConfig/edit.jsp" />
+		<put-attribute name="body" value="/views/administrador/config/aliveConfig/edit.jsp" />
 	</definition>
 
 
 	<!-- SPAM -->
 	<definition name="administrator/config/spam/list" extends="master.page">
 		<put-attribute name="title" value="Manage Spam Words" />
-		<put-attribute name="body" value="/views/administrator/config/spam/list.jsp" />
+		<put-attribute name="body" value="/views/administrador/config/spam/list.jsp" />
 	</definition>
 
 	<definition name="administrator/config/spam/add" extends="master.page">
 		<put-attribute name="title" value="Add Spam Word" />
-		<put-attribute name="body" value="/views/administrator/config/spam/add.jsp" />
+		<put-attribute name="body" value="/views/administrador/config/spam/add.jsp" />
 	</definition>
 
 	<definition name="administrator/config/spam/edit" extends="master.page">
 		<put-attribute name="title" value="Edit Spam Word" />
-		<put-attribute name="body" value="/views/administrator/config/spam/edit.jsp" />
+		<put-attribute name="body" value="/views/administrador/config/spam/edit.jsp" />
 	</definition>
 	
 	
