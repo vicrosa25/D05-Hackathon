@@ -27,6 +27,12 @@ hs_err_pid*
 # Mac
 .DS_Store
 
+# File-based project format
+*.iws
+
+# Maven with auto-import
+*.iml
+
 ###################
 Acme-News/.classpath
 Acme-News/.settings
