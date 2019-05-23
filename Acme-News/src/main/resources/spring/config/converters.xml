@@ -45,6 +45,10 @@
 
 		<bean class="converters.ManagerToStringConverter" />
 		<bean class="converters.StringToManagerConverter" />
+
+		<bean class="converters.ConfigurationsToStringConverter" />
+		<bean class="converters.StringToConfigurationsConverter" />
+
 	</util:list>
 
 </beans>
