@@ -1403,6 +1403,30 @@ Twitter, por suerte, sigue funcionando" />
 
 	</bean>
 
+	<!-- configurations *************************************************************************** -->
+	<bean id="configurations" class="domain.Configurations">
+		<property name="cacheTime" value="1" />
+		<property name="finderMaxResult" value="10" />
+		<property name="countryCode" value="+34" />
+		<property name="title" value="Acme Hacker News Co., Inc." />
+		<property name="logo" value="https://i.imgur.com/7b8lu4b.png " />
+		<property name="spanishMessage" value="¡Bienvenidos a Acme News!" />
+		<property name="englishMessage" value="Welcome to Acme News!" />
+		<property name="spamWords">
+			<list>
+				<value>sex</value>
+				<value>viagra</value>
+				<value>cialis</value>
+				<value>one million</value>
+				<value>you've been selected</value>
+				<value>Nigeria</value>
+				<value>sexo</value>
+				<value>un millón</value>
+				<value>ha sido seleccionado</value>
+			</list>
+		</property>
+	</bean>
+
 
 
 
