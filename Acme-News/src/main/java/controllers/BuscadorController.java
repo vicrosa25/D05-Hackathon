@@ -107,7 +107,7 @@ public class BuscadorController extends AbstractController {
 
 			result = new ModelAndView("buscador/usuario/result");
 			result.addObject("noticias", noticias);
-			result.addObject("requestURI", "buscador/usuario/result");
+			result.addObject("requestURI", "buscador/usuario/result.do");
 		} catch (final Throwable oops) {
 			System.out.println(oops.getMessage());
 			System.out.println(oops.getClass());
