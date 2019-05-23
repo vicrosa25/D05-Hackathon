@@ -23,7 +23,7 @@
 	<display:column>
 	<form:form action="usuario/noSeguirPeriodista.do?periodistaId=${row.id}">
 	<input type="submit" name="noSeguir" value="<spring:message code="usuario.noSeguir" />"
-	onclick="return confirm('<spring:message code="usuario.confirmar.noSeguir" />')" />&nbsp;
+	onclick="return confirm('<spring:message code="periodista.confirmar.noSeguir" />')" />&nbsp;
 	</form:form>
 	</display:column>
 </display:table>
@@ -48,7 +48,7 @@
 	<display:column>
 <form:form action="usuario/seguirPeriodista.do?periodistaId=${row.id}">
 <input type="submit" name="Seguir" value="<spring:message code="usuario.seguir" />"
-			onclick="return confirm('<spring:message code="usuario.confirmar.seguir" />')" />&nbsp;
+			onclick="return confirm('<spring:message code="periodista.confirmar.seguir" />')" />&nbsp;
 </form:form>
 </display:column>
 
