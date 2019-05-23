@@ -35,9 +35,9 @@ hs_err_pid*
 
 ###################
 Acme-News/.classpath
-D05-Hackathon/Acme-News/.settings
 Acme-News/.project
 Acme-News/.idea/
 Acme-News/target/
 Acme-News/out/
+Acme-News/.settings
 Acme-News/src/main/resources/Entities.map
