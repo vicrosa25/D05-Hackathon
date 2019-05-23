@@ -26,9 +26,6 @@
 					<li class="arrow"></li>
 					<li><a href="usuario/display.do"><spring:message code="master.page.diplay" /></a></li>
 					<li><a href="usuario/edit.do"><spring:message code="master.page.edit" /></a></li>
-					<li><a href="usuario/listUsuariosSiguiendo.do"><spring:message code="usuario.siguiendo" /></a></li>
-					<li><a href="usuario/listInformacionDeQuienSigues.do"><spring:message code="usuario.informacionDeQuienSigues" /></a></li>
-					<li><a href="noticia/usuario/recibidas.do"><spring:message code="usuario.recibidas" /></a></li>
 					<li><a href="usuario/listSorteosProximos.do"><spring:message code="usuario.listSorteosProximos" /></a></li>
 					<li><a href="usuario/listTusSorteos.do"><spring:message code="usuario.listTusSorteos" /></a></li>
 					<li><a href="usuario/cambiarEstatus.do"><spring:message code="usuario.cambiarEstatus" /></a></li>			
@@ -39,6 +36,14 @@
 					<li class="arrow"></li>
 					<li><a href="buscador/usuario/edit.do"><spring:message code="master.page.buscador.edit" /></a></li>
 					<li><a href="buscador/usuario/result.do"><spring:message code="master.page.buscador.result" /></a></li>
+				</ul>
+			</li>
+			<li><a class="fNiv"><spring:message	code="master.page.social" /></a>
+				<ul>
+					<li class="arrow"></li>
+					<li><a href="usuario/listUsuariosSiguiendo.do"><spring:message code="usuario.siguiendo" /></a></li>
+					<li><a href="usuario/listInformacionDeQuienSigues.do"><spring:message code="usuario.informacionDeQuienSigues" /></a></li>
+					<li><a href="noticia/usuario/recibidas.do"><spring:message code="usuario.recibidas" /></a></li>
 				</ul>
 			</li>
 		</security:authorize>

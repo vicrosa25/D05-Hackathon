@@ -9,6 +9,7 @@
 <%@taglib prefix="security" uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 
+<jstl:if test="${not empty usuariosSiguiendo}">
 <display:table name="usuariosSiguiendo" id="row" requestURI="/usuario/listUsuariosSiguiendo.do" pagesize="5" class="displaytag">
 
 	<spring:message code="usuario.nombre" var="nombreHeader" />
@@ -30,7 +31,13 @@
 	</form:form>
 	</display:column>
 </display:table>
+</jstl:if>
+<jstl:if test="${empty usuariosSiguiendo}">
+	<spring:message code="usuario.siguiendo.vacio"/>
+	<br>
+</jstl:if>
 
+<jstl:if test="${not empty usuarios}">
 <display:table name="usuarios" id="row" requestURI="/usuario/listUsuariosSiguiendo.do" pagesize="5" class="displaytag">
 
 	<spring:message code="usuario.nombre" var="nombreHeader" />
@@ -53,3 +60,8 @@
 </display:column>
 
 </display:table>
+</jstl:if>
+<jstl:if test="${empty usuarios}">
+	<spring:message code="usuario.siguiendo.lleno"/>
+	<br>
+</jstl:if>
