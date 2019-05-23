@@ -25,6 +25,7 @@ public class Usuario extends Actor {
 	// --------------------------------------------------
 	private Collection<Usuario>		seguidores;
 	private Collection<Usuario>		siguiendo;
+	private Collection<Periodista>	periodistas;
 	private Collection<Comentario>	comentarios;
 	private Collection<Reporte>		reportes;
 	private Collection<Informacion>	informacionCompartida;
@@ -93,6 +94,14 @@ public class Usuario extends Actor {
 	}
 	public void setSiguiendo(Collection<Usuario> siguiendo) {
 		this.siguiendo = siguiendo;
+	}
+
+	@ManyToMany
+	public Collection<Periodista> getPeriodistas() {
+		return this.periodistas;
+	}
+	public void setPeriodistas(Collection<Periodista> periodistas) {
+		this.periodistas = periodistas;
 	}
 
 	@NotNull

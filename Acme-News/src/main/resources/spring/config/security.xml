@@ -50,11 +50,14 @@
 		
 			<!-- USUARIO -->
 		
-		<security:intercept-url pattern="/usuario/listUsuariosSiguiendo.do" access="hasRole('USUARIO')" /> 
+		<security:intercept-url pattern="/usuario/listUsuariosSiguiendo.do" access="hasRole('USUARIO')" />
+		<security:intercept-url pattern="/usuario/listPeriodistasSiguiendo.do" access="hasRole('USUARIO')" /> 
 		<security:intercept-url pattern="/usuario/listInformacionDeQuienSigues.do" access="hasRole('USUARIO')" /> 
 		<security:intercept-url pattern="/usuario/seguirUsuario.do" access="hasRole('USUARIO')" />
+		<security:intercept-url pattern="/usuario/seguirPeriodista.do" access="hasRole('USUARIO')" />
 		<security:intercept-url pattern="/usuario/compartirInformacion.do" access="hasRole('USUARIO')" />
 		<security:intercept-url pattern="/usuario/noSeguirUsuario.do" access="hasRole('USUARIO')" />
+		<security:intercept-url pattern="/usuario/noSeguirPeriodista.do" access="hasRole('USUARIO')" />
 		<security:intercept-url pattern="/usuario/listNoticiasCompartidas.do" access="hasRole('USUARIO')" />
 		<security:intercept-url pattern="/usuario/listSorteosProximos.do" access="hasRole('USUARIO')" />
 		<security:intercept-url pattern="/usuario/listTusSorteos.do" access="hasRole('USUARIO')" />

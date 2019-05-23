@@ -15,18 +15,17 @@ import org.springframework.web.servlet.ModelAndView;
 import services.ActorService;
 import services.InformacionService;
 import services.NoticiaService;
+import services.PeriodistaService;
 import services.SorteoService;
 import services.TasaService;
 import services.UsuarioService;
 import utilities.Md5;
 import domain.Estatus;
 import domain.Informacion;
+import domain.Periodista;
 import domain.Sorteo;
 import domain.Tasa;
 import domain.Usuario;
-
-
-
 
 @Controller
 @RequestMapping("/usuario")
@@ -51,6 +50,9 @@ public class UsuarioController extends AbstractController {
 
 	@Autowired
 	private InformacionService informacionService;
+
+	@Autowired
+	private PeriodistaService periodistaService;
 
 
 	// Constructor
@@ -153,6 +155,30 @@ public class UsuarioController extends AbstractController {
 		return result;
 	}
 
+	@RequestMapping(value="/listPeriodistasSiguiendo",method=RequestMethod.GET)
+	public ModelAndView listPeriodistasSiguiendo() {
+		ModelAndView result;
+
+		try {
+			result = new ModelAndView("usuario/listPeriodistasSiguiendo");
+			Collection<Periodista> periodistasSiguiendo= new ArrayList<Periodista>();
+			Collection<Periodista> periodistas = new ArrayList<Periodista>(this.periodistaService.findAll());
+
+			periodistasSiguiendo = this.usuarioService.findByPrincipal().getPeriodistas();
+			periodistas.removeAll(periodistasSiguiendo);
+
+			result.addObject("periodistas", periodistas);
+			result.addObject("periodistasSiguiendo", periodistasSiguiendo);
+
+		} catch (Throwable oops) {
+			oops.printStackTrace();
+			System.out.println(oops.getMessage());
+			result = super.forbiddenOpperation();
+		}
+
+		return result;
+	}
+
 
 	@RequestMapping(value="/listInformacionDeQuienSigues",method=RequestMethod.GET)
 	public ModelAndView listCompartidaOtros() {
@@ -173,7 +199,7 @@ public class UsuarioController extends AbstractController {
 		ModelAndView result;
 		Usuario usuario;
 		try{
-			usuario= this.usuarioService.getUsuarioRepository().findOne(usuarioId);
+			usuario= this.usuarioService.findOne(usuarioId);
 			Assert.notNull(usuario);
 			if(this.usuarioService.seguirUsuario(usuario)){
 				result = this.createEditModelAndViewSeguir(usuario, "usuario.seguir.exito");
@@ -190,12 +216,33 @@ public class UsuarioController extends AbstractController {
 		return result;
 	}
 
+	@RequestMapping(value = "/seguirPeriodista", method = RequestMethod.POST)
+	public ModelAndView seguirPeriodista(@RequestParam int periodistaId) {
+		ModelAndView result;
+		Periodista periodista;
+		try{
+			periodista= this.periodistaService.findOne(periodistaId);
+			if(this.usuarioService.seguirPeriodista(periodista)){
+				result = this.createEditModelAndViewSeguir(periodista, "periodista.seguir.exito");
+			}else{
+				result = this.createEditModelAndViewSeguir(periodista, "periodista.seguir.error");
+			}
+
+		} catch (Throwable oops) {
+			oops.printStackTrace();
+			System.out.println(oops.getMessage());
+			result = super.forbiddenOpperation();
+		}
+
+		return result;
+	}
+
 	@RequestMapping(value = "/noSeguirUsuario", method = RequestMethod.POST)
 	public ModelAndView noSeguirUsuario(@RequestParam int usuarioId) {
 		ModelAndView result;
 		Usuario usuario;
 		try{
-			usuario= this.usuarioService.getUsuarioRepository().findOne(usuarioId);
+			usuario= this.usuarioService.findOne(usuarioId);
 			Assert.notNull(usuario);
 			if(this.usuarioService.noSeguirUsuario(usuario)){
 				result = this.createEditModelAndViewSeguir(usuario, "usuario.noSeguir.exito");
@@ -211,23 +258,43 @@ public class UsuarioController extends AbstractController {
 		return result;
 	}
 
+	@RequestMapping(value = "/noSeguirPeriodista", method = RequestMethod.POST)
+	public ModelAndView noSeguirPeriodista(@RequestParam int periodistaId) {
+		ModelAndView result;
+		Periodista periodista;
+		try{
+			periodista= this.periodistaService.findOne(periodistaId);
+			Assert.notNull(periodista);
+			if(this.usuarioService.noSeguirPeriodista(periodista)){
+				result = this.createEditModelAndViewSeguir(periodista, "periodista.noSeguir.exito");
+			}else{
+				result = this.createEditModelAndViewSeguir(periodista, "periodista.noSeguir.error");
+			}
+		} catch (Throwable oops) {
+			oops.printStackTrace();
+			System.out.println(oops.getMessage());
+			result = super.forbiddenOpperation();
+		}
+
+		return result;
+	}
+
 
 	protected ModelAndView createEditModelAndViewSeguir(Usuario usuario) {
 		ModelAndView result;
-		result = this.createEditModelAndView(usuario, null);
+		result = this.createEditModelAndViewSeguir(usuario, null);
+		return result;
+	}
+	protected ModelAndView createEditModelAndViewSeguir(Periodista periodista) {
+		ModelAndView result;
+		result = this.createEditModelAndViewSeguir(periodista, null);
 		return result;
 	}
 
 	protected ModelAndView createEditModelAndViewSeguir(Usuario usuario, String message) {
 		ModelAndView result;
 		try {
-			result = new ModelAndView("usuario/listUsuariosSiguiendo");/*
-			Collection<Usuario> usuariosSiguiendo= new ArrayList<Usuario>();
-
-
-
-			result.addObject("usuarios", usuarios);
-			result.addObject("usuariosSiguiendo", usuariosSiguiendo);*/
+			result = new ModelAndView("usuario/listUsuariosSiguiendo");
 			Collection<Usuario> usuariosSiguiendo= new ArrayList<Usuario>();
 			Collection<Usuario> usuarios = new ArrayList<Usuario>(this.usuarioService.findAll());
 
@@ -238,6 +305,29 @@ public class UsuarioController extends AbstractController {
 			result.addObject("usuarios", usuarios);
 			result.addObject("message", message);
 			result.addObject("usuariosSiguiendo", usuariosSiguiendo);
+
+		} catch (Throwable oops) {
+			oops.printStackTrace();
+			System.out.println(oops.getMessage());
+			result = super.forbiddenOpperation();
+		}
+
+		return result;
+	}
+
+	protected ModelAndView createEditModelAndViewSeguir(Periodista periodista, String message) {
+		ModelAndView result;
+		try {
+			result = new ModelAndView("usuario/listPeriodistasSiguiendo");
+			Collection<Periodista> periodistasSiguiendo= new ArrayList<Periodista>();
+			Collection<Periodista> periodistas = new ArrayList<Periodista>(this.periodistaService.findAll());
+
+			periodistasSiguiendo=this.usuarioService.findByPrincipal().getPeriodistas();
+			periodistas.removeAll(periodistasSiguiendo);
+
+			result.addObject("periodistas", periodistas);
+			result.addObject("message", message);
+			result.addObject("periodistasSiguiendo", periodistasSiguiendo);
 
 		} catch (Throwable oops) {
 			oops.printStackTrace();

@@ -49,6 +49,7 @@
 				<ul>
 					<li class="arrow"></li>
 					<li><a href="usuario/listUsuariosSiguiendo.do"><spring:message code="usuario.siguiendo" /></a></li>
+					<li><a href="usuario/listPeriodistasSiguiendo.do"><spring:message code="periodista.siguiendo" /></a></li>
 					<li><a href="usuario/listInformacionDeQuienSigues.do"><spring:message code="usuario.informacionDeQuienSigues" /></a></li>
 					<li><a href="noticia/usuario/recibidas.do"><spring:message code="usuario.recibidas" /></a></li>
 				</ul>
