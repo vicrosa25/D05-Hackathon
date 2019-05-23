@@ -1,33 +1,20 @@
 package controllers;
 
-
-
-
-
-
-
-
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import services.ComentarioService;
+import services.InformacionService;
+import domain.Comentario;
 import domain.Informacion;
 import domain.Noticia;
-import domain.Comentario;
-
-import services.InformacionService;
-import services.ComentarioService;
-
-
-
-
 
 @Controller
 @RequestMapping("/comentario")
@@ -36,110 +23,76 @@ public class ComentarioController extends AbstractController {
 	//constructor
 	public ComentarioController() {
 		super();
-		
 	}
-	
+
 	//Services
-	
 	@Autowired
 	private ComentarioService comentarioService;
 
-
-
-	
 	@Autowired
 	private InformacionService informacionService;
-		
 
-	
-	
-		
-		
-		@RequestMapping(value = "/create", method = RequestMethod.GET)
-		public ModelAndView create(@RequestParam int informacionId) {
-			
-			ModelAndView result;
-			Comentario comentario;
-			Informacion informacion= informacionService.findOne(informacionId);
-		
-			comentario = comentarioService.create(informacion);
+
+	/** Methods **/
+	@RequestMapping(value = "/create", method = RequestMethod.GET)
+	public ModelAndView create(@RequestParam int informacionId) {
+		ModelAndView result;
+		Comentario comentario;
+		try{
+			Informacion informacion= this.informacionService.findOne(informacionId);
+
+			comentario = this.comentarioService.create(informacion);
 			result = new ModelAndView("comentario/edit");
 			result.addObject("comentario", comentario);
-			System.out.println(informacion);
-			System.out.println(informacionId);
-			System.out.println("hola");
-			System.out.println(comentario.getInformacion());
 
-			return result;
+		}catch(Throwable oops){
+			System.out.println(oops.getMessage());
+			oops.printStackTrace();
+			result = super.forbiddenOpperation();
 		}
+		return result;
+	}
 
+	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
+	public ModelAndView save(@Valid Comentario comentario, BindingResult binding) {
+		ModelAndView result;
 
-
-		@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
-		public ModelAndView save(@Valid Comentario comentario, BindingResult binding) {
-			ModelAndView result;
-			
-			
-			
-			if (binding.hasErrors()) {
-				System.out.println(binding.getAllErrors().toString());
-				result = createEditModelAndView(comentario);
-			
-				
-			} else {
-				try {
-					comentarioService.save(comentario);
-					System.out.println("hola2");
-					String redirect=null;
-					if(comentario.getInformacion() instanceof Noticia){
-						redirect="redirect:/noticia/display.do?noticiaId=";
-					}else{
-						 redirect="redirect:/evento/display.do?eventoId=";
-					}
-					
-					
-					redirect=redirect+comentario.getInformacion().getId();
-					result = new ModelAndView(redirect);
-//					result = createEditModelAndView(comentario,"exito");
-					System.out.println(redirect);
-					
-				} catch (Throwable oops) {
-				
-					result = createEditModelAndView(comentario, "comentario.commit.error");
+		if (binding.hasErrors()) {
+			System.out.println(binding.getAllErrors().toString());
+			result = this.createEditModelAndView(comentario);
+		} else {
+			try {
+				this.comentarioService.save(comentario);
+				String redirect=null;
+				if(comentario.getInformacion() instanceof Noticia){
+					redirect="redirect:/noticia/display.do?noticiaId=";
+				}else{
+					redirect="redirect:/evento/display.do?eventoId=";
 				}
-			
+				redirect=redirect+comentario.getInformacion().getId();
+				result = new ModelAndView(redirect);
+			} catch (Throwable oops) {
+				System.out.println(oops.getMessage());
+				oops.printStackTrace();
+				result = this.createEditModelAndView(comentario, "comentario.commit.error");
 			}
-			return result;
+
 		}
+		return result;
+	}
 
+	// Ancillary Methods--------------------------
+	protected ModelAndView createEditModelAndView(Comentario comentario) {
+		ModelAndView result;
+		result = this.createEditModelAndView(comentario, null);
+		return result;
+	}
 
-		
-	
-		
-		
-
-		// Ancillary Methods--------------------------
-		protected ModelAndView createEditModelAndView(Comentario comentario) {
-			ModelAndView result;
-			result = createEditModelAndView(comentario, null);
-			return result;
-		}
-
-		protected ModelAndView createEditModelAndView(Comentario comentario, String message) {
-			ModelAndView result;
-			result = new ModelAndView("comentario/edit");
-			result.addObject("comentario", comentario);
-			result.addObject("message", message);
-			
-			
-			
-			return result;
-		}
-		
-		
-
-
-
-
+	protected ModelAndView createEditModelAndView(Comentario comentario, String message) {
+		ModelAndView result;
+		result = new ModelAndView("comentario/edit");
+		result.addObject("comentario", comentario);
+		result.addObject("message", message);
+		return result;
+	}
 }
-

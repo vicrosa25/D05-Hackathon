@@ -28,23 +28,19 @@
 
 <h2>${noticia.comentarios.size()} <spring:message code="noticia.comentarios"/></h2>
 <jstl:forEach items="${noticia.comentarios }" var="comentario">
-	<h2>${comentario.titulo} | ${comentario.fecha}</h2>
+	<h3>${comentario.titulo} | ${comentario.fecha}</h3>
 	<div id="descripcion">${comentario.descripcion}</div>
 	<br/>
+	<hr>
 	<br/>
 </jstl:forEach>
-<br/>
-<br/>
- <spring:message code="reporte.create" var="editHeader" />
- <security:authorize access="hasRole('USUARIO')">
-<a href=reporte/create.do?noticiaId=${noticia.id}><spring:message code="reporte.create" /></a>
-</security:authorize> 
-<br/>
- <spring:message code="reporte.create" var="editHeader" />
- <security:authorize access="hasRole('USUARIO')">
+
+<security:authorize access="hasRole('USUARIO')">
+	<a href=reporte/create.do?noticiaId=${noticia.id}><spring:message code="reporte.create" /></a>
+|  |
 <a href=comentario/create.do?informacionId=${noticia.id}><spring:message code="comentario.create" /></a>
-<br>
+|  |
 <a href=noticia/usuario/enviar.do?noticiaId=${noticia.id}><spring:message code="noticia.enviar" /></a>
 </security:authorize>
-<br>
+<br><br>
 <a href=""><input type="button" name="goBack" value="<spring:message code="noticia.goBack"/>" /></a>

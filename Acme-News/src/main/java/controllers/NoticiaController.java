@@ -342,7 +342,7 @@ public class NoticiaController extends AbstractController {
 		}else{
 			result = new ModelAndView("noticia/busqueda");
 			result.addObject("noticias", this.noticiaService.buscarPorPalabraClave(search.getWord()));
-			result.addObject("requestURI", "noticia/busqueda.do");
+			result.addObject("requestURI", "noticia/buscar.do");
 		}
 		return result;
 	}
