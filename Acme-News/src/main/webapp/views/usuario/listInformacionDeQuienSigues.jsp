@@ -18,8 +18,9 @@
 	
 	<spring:message code="informacion.descripcion" var="descripcionHeader" />
 	<display:column property="descripcion" title="${descripcionHeader}" sortable="true" />
-	
-	
 
+	<display:column sortable="false" >
+		<img src="${row.imagen}" width="500" height="120" />
+	</display:column>
 
 </display:table>
