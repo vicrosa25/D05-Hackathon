@@ -12,8 +12,7 @@
 
 
 <ul>
-	<acme:field code="usuario.username" value="${usuario.userAccount.username}" />
-	<acme:field code="usuario.pass" value="${usuario.userAccount.password}" />	
+	<acme:field code="usuario.username" value="${usuario.userAccount.username}" />	
 	<acme:field code="usuario.nombre" value="${usuario.nombre}" />	
 	<acme:field code="usuario.apellidos" value="${usuario.apellidos}" />
 	<acme:field code="usuario.email" value="${usuario.email}" />		
