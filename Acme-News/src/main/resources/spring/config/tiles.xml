@@ -17,6 +17,8 @@
 		<value>/views/registration/tiles.xml</value>
 		<value>/views/usuario/tiles.xml</value>
 		<value>/views/periodista/tiles.xml</value>
+		<value>/views/manager/tiles.xml</value>
+		
 		<value>/views/evento/tiles.xml</value>
 		<value>/views/noticia/tiles.xml</value>
 		<value>/views/reporte/tiles.xml</value>

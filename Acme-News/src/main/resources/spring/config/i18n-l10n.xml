@@ -16,6 +16,7 @@
 		<value>/views/administrator/messages</value>
 		<value>/views/periodista/messages</value>
 		<value>/views/usuario/messages</value>
+		<value>/views/manager/messages</value>
 		<value>/views/evento/messages</value>
 		<value>/views/noticia/messages</value>
 		<value>/views/reporte/messages</value>
