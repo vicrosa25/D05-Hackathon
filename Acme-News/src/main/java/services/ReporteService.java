@@ -3,10 +3,12 @@ package services;
 
 
 
+import java.util.Collection;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
+import org.springframework.util.Assert;
 
 import repositories.ReporteRepository;
 import domain.Noticia;
@@ -21,7 +23,7 @@ public class ReporteService {
 	// Managed repository -----------------------------------------------------
 	@Autowired
 	private ReporteRepository reporteRepository;
-	
+
 	@Autowired
 	private UsuarioService usuarioService;
 
@@ -33,44 +35,34 @@ public class ReporteService {
 	}
 
 	// Simple CRUD methods ----------------------------------------------------
-	
+
 	public Reporte create(Noticia noticiaId) {
 		Reporte result = new Reporte();
 		assert noticiaId != null;
-		result.setUsuario(usuarioService.findByPrincipal());
+		result.setUsuario(this.usuarioService.findByPrincipal());
 		result.setNoticia(noticiaId);
 
 		return result;
 	}
-	
-	
-
-
-	
 
 	public Reporte findOne(int reporteID) {
-		Reporte result;
+		Reporte result = this.reporteRepository.findOne(reporteID);
+		Assert.notNull(result);
 
-		result = reporteRepository.findOne(reporteID);
+		return result;
+	}
+
+	public Collection<Reporte> findAll() {
+		Collection<Reporte> result = this.reporteRepository.findAll();
+		Assert.notNull(result);
 
 		return result;
 	}
 
 	public Reporte save(Reporte reporte) {
-		assert reporte != null;
+		Assert.notNull(reporte);
+		Reporte result = this.reporteRepository.save(reporte);
 
-		Reporte result;
-
-		result = reporteRepository.save(reporte);
 		return result;
 	}
-
-
-	
-	
-	public ReporteRepository getReporteRepository() {
-		return reporteRepository;
-	}
-	
-
 }
