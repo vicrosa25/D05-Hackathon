@@ -8,6 +8,17 @@
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@taglib prefix="security" uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
+<%@ taglib prefix="acme" tagdir="/WEB-INF/tags" %>
+ 
+<acme:cancel code="noticia.deportes" url="noticia/listaDeportes.do" />
+<acme:cancel code="noticia.economia" url="noticia/listaEconomia.do" />
+<acme:cancel code="noticia.motor" url="noticia/listaMotor.do" />
+<acme:cancel code="noticia.cultura" url="noticia/listaCultura.do" />
+<acme:cancel code="noticia.ocio" url="noticia/listaOcio.do" />
+<acme:cancel code="noticia.españa" url="noticia/listaEspana.do" />
+<acme:cancel code="noticia.internacional" url="noticia/listaInternacional.do" />
+<acme:cancel code="noticia.juegos" url="noticia/listaJuegos.do" />
+<acme:cancel code="noticia.otros" url="noticia/listaOtros.do" />
 
 <display:table name="noticias" id="row" requestURI="${requestURI}" pagesize="5" class="displaytag">
 

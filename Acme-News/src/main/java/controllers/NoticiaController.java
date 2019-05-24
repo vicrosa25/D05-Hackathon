@@ -130,6 +130,24 @@ public class NoticiaController extends AbstractController {
 		return result;
 	}
 
+	@RequestMapping(value="/lista",method=RequestMethod.GET)
+	public ModelAndView lista() {
+		ModelAndView result;
+		Collection<Noticia> noticias;
+		try{
+			noticias = this.noticiaService.findAllPublicadas();
+
+			result = new ModelAndView("noticia/lista");
+			result.addObject("noticias", noticias);
+			result.addObject("requestURI", "noticia/lista.do");
+		}catch(Throwable oops){
+			System.out.println(oops.getMessage());
+			oops.printStackTrace();
+			result = super.forbiddenOpperation();
+		}
+		return result;
+	}
+
 	@RequestMapping(value="/listaDeportes",method=RequestMethod.GET)
 	public ModelAndView listaDeportes() {
 		ModelAndView result;
@@ -340,9 +358,9 @@ public class NoticiaController extends AbstractController {
 		if(binding.hasErrors()){
 			result = new ModelAndView("redirect:buscar.do");
 		}else{
-			result = new ModelAndView("noticia/busqueda");
+			result = new ModelAndView("noticia/lista");
 			result.addObject("noticias", this.noticiaService.buscarPorPalabraClave(search.getWord()));
-			result.addObject("requestURI", "noticia/busqueda.do");
+			result.addObject("requestURI", "noticia/lista.do");
 		}
 		return result;
 	}

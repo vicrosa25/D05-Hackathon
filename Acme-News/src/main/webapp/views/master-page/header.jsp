@@ -129,15 +129,7 @@
 				<ul>
 					<li class="arrow"></li>
 					<li><a href="noticia/buscar.do"><spring:message code="noticia.buscar" /></a></li>
-					<li><a href="noticia/listaDeportes.do"><spring:message code="noticia.deportes" /></a></li>
-					<li><a href="noticia/listaEconomia.do"><spring:message code="noticia.economia" /></a></li>
-					<li><a href="noticia/listaMotor.do"><spring:message code="noticia.motor" /></a></li>
-					<li><a href="noticia/listaCultura.do"><spring:message code="noticia.cultura" /></a></li>
-					<li><a href="noticia/listaOcio.do"><spring:message code="noticia.ocio" /></a></li>
-					<li><a href="noticia/listaEspana.do"><spring:message code="noticia.españa" /></a></li>
-					<li><a href="noticia/listaInternacional.do"><spring:message code="noticia.internacional" /></a></li>
-					<li><a href="noticia/listaJuegos.do"><spring:message code="noticia.juegos" /></a></li>
-					<li><a href="noticia/listaOtros.do"><spring:message code="noticia.otros" /></a></li>
+					<li><a href="noticia/lista.do"><spring:message code="noticia.todas" /></a></li>
 				</ul>
 			</li>
 			<li><a class="fNiv" href="evento/allEventos.do"><spring:message code="master.page.eventos" /></a></li>
