@@ -83,6 +83,21 @@ public class ManagerService {
 		return result;
 	}
 	
+	public Manager update(Manager manager) {
+		Assert.notNull(manager);
+		Manager result;
+		
+		Actor principal;
+
+		// Check principal must be an admin
+		principal = this.actorService.findByPrincipal();
+		Assert.isInstanceOf(Manager.class, principal);
+
+		result = this.managerRepository.save(manager);
+
+		return result;
+	}
+	
 	/************************************************************************************************/
 	// Other business methods
 	public Manager findByPrincipal() {

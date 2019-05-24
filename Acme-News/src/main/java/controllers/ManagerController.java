@@ -89,4 +89,41 @@ public class ManagerController extends AbstractController {
 		return result;
 	}
 
+	// Update -----------------------------------------------------------
+	@RequestMapping(value = "/update", method = RequestMethod.GET)
+	public ModelAndView edit() {
+		ModelAndView result;
+		Manager manager;
+
+		manager = this.managerService.findByPrincipal();
+		result = new ModelAndView("manager/update");
+		result.addObject("manager", manager);
+
+		return result;
+	}
+
+	// Save Update ----------------------------------------------------------
+	@RequestMapping(value = "/update", method = RequestMethod.POST, params = "update")
+	public ModelAndView edit(@Valid final Manager manager, final BindingResult binding) {
+		ModelAndView result;
+
+		if (binding.hasErrors()) {
+			final List<ObjectError> errors = binding.getAllErrors();
+			for (final ObjectError e : errors)
+				System.out.println(e.toString());
+			result = new ModelAndView("manager/update");
+			result.addObject("manager", manager);
+		} else
+			try {
+				this.managerService.update(manager);
+				result = new ModelAndView("redirect:../");
+			} catch (final Throwable oops) {
+				oops.printStackTrace();
+				result = new ModelAndView("manager/update");
+				result.addObject("manager", manager);
+				result.addObject("message", "manager.commit.error");
+			}
+		return result;
+	}
+
 }

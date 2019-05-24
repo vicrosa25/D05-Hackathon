@@ -40,18 +40,6 @@
 		<security:intercept-url pattern="/administrator/dashboard.do" access="hasRole('ADMIN')" /> 
 		<security:intercept-url pattern="/tasa/administrator/**" access="hasRole('ADMIN')" />
 		
-		<!-- MANAGER -->
-		<security:intercept-url pattern="/manager/admin/list.do" 	access="hasRole('ADMIN')" />
-		<security:intercept-url pattern="/manager/admin/create.do"  access="hasRole('ADMIN')" />
-
-		<!-- CONFIGURATIONS -->
-		<security:intercept-url pattern="/administrator/config/cache/edit.do" access="hasRole('ADMIN')" />
-		<security:intercept-url pattern="/administrator/config/aliveConfig/edit.do" access="hasRole('ADMIN')" />
-		<security:intercept-url pattern="/administrator/config/spam/list.do" access="hasRole('ADMIN')" />
-		<security:intercept-url pattern="/administrator/config/spam/add.do" access="hasRole('ADMIN')" />
-		<security:intercept-url pattern="/administrator/config/spam/edit.do" access="hasRole('ADMIN')" />
-		<security:intercept-url pattern="/administrator/removeSpamWord.do" access="hasRole('ADMIN')" />
-		
 		<!-- USUARIO -->
 		<security:intercept-url pattern="/usuario/listUsuariosSiguiendo.do" access="hasRole('USUARIO')" />
 		<security:intercept-url pattern="/usuario/listPeriodistasSiguiendo.do" access="hasRole('USUARIO')" /> 
@@ -86,7 +74,7 @@
 		<security:intercept-url pattern="/noticia/buscar.do" access="permitAll" />
 		<security:intercept-url pattern="/noticia/busqueda.do" access="permitAll" />  
 		
-		<security:intercept-url pattern="/periodista/display.do" access="permitAll" />
+		
 		<security:intercept-url pattern="/noticia/misNoticias.do" access="hasRole('PERIODISTA')" />
 		<security:intercept-url pattern="/noticia/borrar.do" access="hasRole('PERIODISTA')" />
 		<security:intercept-url pattern="/noticia/crear.do" access="hasRole('PERIODISTA')" />
@@ -107,30 +95,46 @@
 		<security:intercept-url pattern="/usuario/display.do" access="hasRole('USUARIO')" />
 		<security:intercept-url pattern="/usuario/edit.do" access="hasRole('USUARIO')" />
 		
+		<!-- PERIODISTA -->
+		<security:intercept-url pattern="/periodista/display.do" access="permitAll" />
 		<security:intercept-url pattern="/periodista/edit.do" access="hasRole('PERIODISTA')" />
-		
-		<security:intercept-url pattern="/moderador/retirarDinero.do" access="hasRole('MODERADOR')" />
 		<security:intercept-url pattern="/periodista/retirarDinero.do" access="hasRole('PERIODISTA')" />
+		<security:intercept-url pattern="/periodista/listPeriodista.do" access="hasRole('PERIODISTA')" />
 		
+		<!-- MODERADOR -->
+		<security:intercept-url pattern="/moderador/retirarDinero.do" access="hasRole('MODERADOR')" />
+		
+		<!-- MANAGER -->
+		<security:intercept-url pattern="/manager/admin/list.do" 	access="hasRole('ADMIN')" />
+		<security:intercept-url pattern="/manager/admin/create.do"  access="hasRole('ADMIN')" />
+		<security:intercept-url pattern="/manager/update.do"  		access="hasRole('MANAGER')" />
+		
+		<!-- AGENCIA -->
 		<security:intercept-url pattern="/agencia/listNotFullAgencia.do" access="hasRole('PERIODISTA')" />
 		<security:intercept-url pattern="/agencia/join.do" access="hasRole('PERIODISTA')" />
 		<security:intercept-url pattern="/agencia/left.do" access="hasRole('PERIODISTA')" />
 		<security:intercept-url pattern="/agencia/listAgencia.do" access="hasRole('MANAGER')" />
 		<security:intercept-url pattern="/agencia/suscribe.do" access="hasRole('PERIODISTA')" />
-		
 		<security:intercept-url pattern="/agencia/update.do" access="hasRole('MANAGER')" />
 		<security:intercept-url pattern="/agencia/agenciaForm.do" access="hasRole('MANAGER')" />
 		<security:intercept-url pattern="/agencia/delete.do" access="hasRole('MANAGER')" />
 		<security:intercept-url pattern="/agencia/createAgencia.do" access="hasRole('MANAGER')" />
 		
-		<security:intercept-url pattern="/periodista/listPeriodista.do" access="hasRole('PERIODISTA')" />
+		<!-- CONFIGURATIONS -->
+		<security:intercept-url pattern="/administrator/config/cache/edit.do" access="hasRole('ADMIN')" />
+		<security:intercept-url pattern="/administrator/config/aliveConfig/edit.do" access="hasRole('ADMIN')" />
+		<security:intercept-url pattern="/administrator/config/spam/list.do" access="hasRole('ADMIN')" />
+		<security:intercept-url pattern="/administrator/config/spam/add.do" access="hasRole('ADMIN')" />
+		<security:intercept-url pattern="/administrator/config/spam/edit.do" access="hasRole('ADMIN')" />
+		<security:intercept-url pattern="/administrator/removeSpamWord.do" access="hasRole('ADMIN')" />
+		
 		
 		<!-- BUSCADOR  -->
 		<security:intercept-url pattern="/buscador/usuario/edit.do" access="hasRole('USUARIO')" />
 		<security:intercept-url pattern="/buscador/usuario/clear.do" access="hasRole('USUARIO')" />
 		<security:intercept-url pattern="/buscador/usuario/result.do" access="hasRole('USUARIO')" />
 		
-		<!-- Noticia  -->
+		<!-- NOTICIA  -->
 		<security:intercept-url pattern="/noticia/usuario/enviar.do" access="hasRole('USUARIO')" />
 		<security:intercept-url pattern="/noticia/usuario/recibidas.do" access="hasRole('USUARIO')" />
 		<security:intercept-url pattern="/noticia/lista.do" access="permitAll" />

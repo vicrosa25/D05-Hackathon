@@ -6,24 +6,28 @@
 <%@taglib prefix="security" uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 
-<form:form action="${action}" modelAttribute="${modelAttribute}">
-
+<form:form action="manager/update.do" modelAttribute="manager">
+	
+	<%-- Hidden properties --%>
+	<form:hidden path="id" />
 	<form:hidden path="version" />
+	<form:hidden path="userAccount" />
+	<form:hidden path="agencias" />
 	
 	<!-- Nombre -->
-    <acme:textbox code="usuario.nombre" path="nombre" />
+    <acme:textbox code="manager.name" path="nombre" />
     <br />
     
     <!-- Apellidos -->
-    <acme:textbox code="usuario.apellidos" path="apellidos" />
+    <acme:textbox code="manager.surname" path="apellidos" />
     <br />
     
     <!-- Email -->
-    <acme:textbox code="usuario.email" path="email" />
+    <acme:textbox code="manager.email" path="email" />
     <br />   
     
 	
-	<acme:submit code="master.page.save" name="save" />
-	<a href=""><input type="button" name="goBack" value="<spring:message code="usuario.goBack"/>" /></a>
+	<acme:submit name="update" code="manager.update" />
+	<acme:cancel url="/" code="manager.cancel"/>
 		
 </form:form>

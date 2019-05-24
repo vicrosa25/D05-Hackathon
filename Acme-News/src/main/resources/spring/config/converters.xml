@@ -34,6 +34,9 @@
 		<bean class="converters.InformacionToStringConverter" />
 		<bean class="converters.StringToInformacionConverter" />
 
+		<bean class="converters.AgenciaToStringConverter" />
+		<bean class="converters.StringToAgenciaConverter" />
+		
 		<bean class="converters.ReporteToStringConverter" />
 		<bean class="converters.StringToReporteConverter" />
 
@@ -51,6 +54,9 @@
 
 		<bean class="converters.ConfigurationsToStringConverter" />
 		<bean class="converters.StringToConfigurationsConverter" />
+		
+		<bean class="converters.UserAccountToStringConverter" />
+		<bean class="converters.StringToUserAccountConverter" />
 
 	</util:list>
 

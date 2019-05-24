@@ -12,6 +12,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import domain.Estatus;
+import domain.Informacion;
+import domain.Periodista;
+import domain.Sorteo;
+import domain.Tasa;
+import domain.Usuario;
 import services.ActorService;
 import services.InformacionService;
 import services.NoticiaService;
@@ -20,12 +26,6 @@ import services.SorteoService;
 import services.TasaService;
 import services.UsuarioService;
 import utilities.Md5;
-import domain.Estatus;
-import domain.Informacion;
-import domain.Periodista;
-import domain.Sorteo;
-import domain.Tasa;
-import domain.Usuario;
 
 @Controller
 @RequestMapping("/usuario")
@@ -83,7 +83,6 @@ public class UsuarioController extends AbstractController {
 	}
 
 	// Save --------------------------------------------------------------
-
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
 	public ModelAndView save(Usuario usuario, BindingResult binding) {
 		ModelAndView result;
