@@ -23,11 +23,9 @@ public class ComentarioController extends AbstractController {
 	//constructor
 	public ComentarioController() {
 		super();
-
 	}
 
 	//Services
-
 	@Autowired
 	private ComentarioService comentarioService;
 

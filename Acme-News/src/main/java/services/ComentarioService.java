@@ -1,8 +1,5 @@
 package services;
 
-
-
-
 import java.util.Collection;
 import java.util.Date;
 
@@ -16,8 +13,6 @@ import domain.Comentario;
 import domain.Estatus;
 import domain.Informacion;
 import domain.Usuario;
-
-
 
 @Service
 @Transactional
@@ -45,9 +40,9 @@ public class ComentarioService {
 	public Comentario create(Informacion informacionId) {
 		Comentario result = new Comentario();
 		result.setUsuario(this.usuarioService.findByPrincipal());
+
 		result.setInformacion(informacionId);
-		Date date = new Date();
-		result.setFecha(date);
+		result.setFecha(new Date());
 
 		return result;
 	}
@@ -71,7 +66,7 @@ public class ComentarioService {
 		assert comentario.getTitulo() != null;
 		assert comentario.getDescripcion() != null;
 		Comentario result = this.comentarioRepository.save(comentario);
-
+		
 		Usuario usuarioLogued= this.usuarioService.findByPrincipal();
 		Double tasa=0.;
 		if(usuarioLogued.getEstatus().equals(Estatus.PRINCIPIANTE)){

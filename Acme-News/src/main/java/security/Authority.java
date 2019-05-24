@@ -1,11 +1,11 @@
-/* Authority.java
- *
- * Copyright (C) 2016 Universidad de Sevilla
+/*
+ * Authority.java
  * 
- * The use of this project is hereby constrained to the conditions of the 
- * TDG Licence, a copy of which you may download from 
+ * Copyright (C) 2019 Universidad de Sevilla
+ * 
+ * The use of this project is hereby constrained to the conditions of the
+ * TDG Licence, a copy of which you may download from
  * http://www.tdg-seville.info/License.html
- * 
  */
 
 package security;
@@ -40,7 +40,7 @@ public class Authority implements GrantedAuthority {
 	public static final String MANAGER = "MANAGER";
 	public static final String PERIODISTA = "PERIODISTA";
 	public static final String MODERADOR = "MODERADOR";
-	
+
 
 	// Attributes -------------------------------------------------------------
 
@@ -50,7 +50,7 @@ public class Authority implements GrantedAuthority {
 	@Pattern(regexp = "^" + ADMIN + "|" + USUARIO + "|" + MANAGER + "|" + PERIODISTA + "|"  + MODERADOR+  "$")
 	@Override
 	public String getAuthority() {
-		return authority;
+		return this.authority;
 	}
 
 	public void setAuthority(String authority) {
@@ -70,24 +70,24 @@ public class Authority implements GrantedAuthority {
 		authority = new Authority();
 		authority.setAuthority(USUARIO);
 		result.add(authority);
-		
+
 		authority = new Authority();
 		authority.setAuthority(MANAGER);
 		result.add(authority);
-		
+
 		authority = new Authority();
 		authority.setAuthority(PERIODISTA);
 		result.add(authority);
-		
+
 		authority = new Authority();
 		authority.setAuthority(MODERADOR);
 		result.add(authority);
-		
+
 
 		return result;
 	}
 
-	// Equality ---------------------------------------------------------------
+	// Object interface -------------------------------------------------------
 
 	@Override
 	public int hashCode() {
@@ -95,7 +95,7 @@ public class Authority implements GrantedAuthority {
 	}
 
 	@Override
-	public boolean equals(Object other) {
+	public boolean equals(final Object other) {
 		boolean result;
 
 		if (this == other)
@@ -109,9 +109,10 @@ public class Authority implements GrantedAuthority {
 
 		return result;
 	}
-	
-	public String toString(){
-		return("Authority:\n "+this.getAuthority());
+
+	@Override
+	public String toString() {
+		return this.authority;
 	}
 
 }
