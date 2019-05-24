@@ -22,7 +22,7 @@
 		<bean class="converters.PeriodistaToStringConverter" />
 		<bean class="converters.StringToPeriodistaConverter" />
 		
-		<bean class="converters.MangerToStringConverter" />
+		<bean class="converters.ManagerToStringConverter" />
 		<bean class="converters.StringToManagerConverter" />
 
 		<bean class="converters.ModeradorToStringConverter" />

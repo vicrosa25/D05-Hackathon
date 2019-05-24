@@ -35,7 +35,7 @@ public class Actor extends DomainEntity {
 
 	/********************* Attributes getters and setters *****************************************************************/
 
-	
+	@NotBlank
 	public String getNombre() {
 		return nombre;
 	}
@@ -44,6 +44,7 @@ public class Actor extends DomainEntity {
 		this.nombre = nombre;
 	}
 
+	@NotBlank
 	public String getApellidos() {
 		return apellidos;
 	}

@@ -9,6 +9,6 @@ import domain.Manager;
 @Repository
 public interface ManagerRepository extends JpaRepository<Manager, Integer> {
 
-	@Query("select m from Manager a where m.userAccount.id = ?1")
+	@Query("select m from Manager m where m.userAccount.id = ?1")
 	Manager findByUserAccountId(int id);
 }

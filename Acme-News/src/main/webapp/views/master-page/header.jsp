@@ -19,6 +19,7 @@
 			<li><a class="fNiv"><spring:message	code="master.page.administrator" /></a>
 				<ul>
 					<li class="arrow"></li>
+					<li><a href="manager/admin/list.do"><spring:message code="master.page.manager.list" /></a></li>
 					<li><a href="administrator/dashboard.do"><spring:message code="master.page.administrator.dashboard" /></a></li>
 					<li><a href="administrador/changeBanner.do"><spring:message code="master.page.administrador.banner" /></a></li>
 					<li><a href="premio/admin/listAdmin.do"><spring:message code="master.page.administrator.premios" /></a></li>
