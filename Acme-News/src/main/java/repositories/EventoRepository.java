@@ -11,10 +11,10 @@ import domain.Evento;
 
 @Repository
 public interface EventoRepository extends JpaRepository<Evento, Integer> {
-	@Query("select n from Evento n where n.periodista.id=?1 order by n.fecha asc")
-	List<Evento> searchByJournalist(Integer id);
-	
-	@Query("select e from Evento e  where e.fecha > NOW() order by e.periodista.agencia.importancia DESC")
+	@Query("select n from Evento n where n.agencia.manager.id=?1 order by n.fecha asc")
+	List<Evento> searchByManager(int managerId);
+
+	@Query("select e from Evento e  where e.fecha > NOW() order by e.agencia.importancia DESC")
 	List<Evento> listActualEvents();
 }
 

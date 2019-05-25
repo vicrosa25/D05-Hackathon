@@ -66,7 +66,7 @@ public class ComentarioService {
 		assert comentario.getTitulo() != null;
 		assert comentario.getDescripcion() != null;
 		Comentario result = this.comentarioRepository.save(comentario);
-		
+
 		Usuario usuarioLogued= this.usuarioService.findByPrincipal();
 		Double tasa=0.;
 		if(usuarioLogued.getEstatus().equals(Estatus.PRINCIPIANTE)){
@@ -78,5 +78,13 @@ public class ComentarioService {
 		usuarioLogued.setPuntos((int) (usuarioLogued.getPuntos()+tasa));
 
 		return result;
+	}
+
+	public void delete(Comentario comentario) {
+		Assert.notNull(comentario);
+		comentario.getUsuario().getComentarios().remove(comentario);
+		comentario.getInformacion().getComentarios().remove(comentario);
+
+		this.comentarioRepository.delete(comentario);
 	}
 }

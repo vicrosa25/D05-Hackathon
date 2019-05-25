@@ -13,10 +13,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import services.EventoService;
-import services.PeriodistaService;
+import services.ManagerService;
 import domain.Comentario;
 import domain.Evento;
-import domain.Periodista;
+import domain.Manager;
 
 
 @Controller
@@ -26,19 +26,19 @@ public class EventoController extends AbstractController {
 	//constructor
 	public EventoController() {
 		super();
-		
+
 	}
-	
+
 	//Services
 	@Autowired
 	private EventoService eventoService;
 
 	@Autowired
-	private PeriodistaService periodistaService;
+	private ManagerService managerService;
 
 
 	// Listing ----------------------------------------------------------------
-	
+
 	@RequestMapping(value="/allEventos", method = RequestMethod.GET)
 	public ModelAndView allEvents(){
 		ModelAndView result;
@@ -48,82 +48,106 @@ public class EventoController extends AbstractController {
 		result.addObject("eventos", eventos);
 		return result;
 	}
-	
-	@RequestMapping(value="/misEventos",method=RequestMethod.GET)
+
+	@RequestMapping(value="/manager/misEventos",method=RequestMethod.GET)
 	public ModelAndView misEventos() {
 		ModelAndView result;
 		Collection<Evento> eventos;
-		Periodista periodista;
-				
-		periodista = this.periodistaService.findByPrincipal();
-		eventos = this.eventoService.buscarPorPeriodista(periodista.getId());
+		Manager manager;
+		try{
+			manager = this.managerService.findByPrincipal();
+			eventos = this.eventoService.buscarPorManager(manager);
 
-		result = new ModelAndView("evento/misEventos");
-		result.addObject("eventos", eventos);
+			result = new ModelAndView("evento/manager/misEventos");
+			result.addObject("eventos", eventos);
+		}catch(Throwable oops){
+			oops.printStackTrace();
+			System.out.println(oops.getMessage());
+			result= super.forbiddenOpperation();
+		}
 
 		return result;
 	}
-	
+
 	// Display --------------------------------------------------------------------------------------
 	@RequestMapping("/display")
 	public ModelAndView display(@RequestParam int eventoId) {
 		ModelAndView result;
-		Evento evento = eventoService.findOne(eventoId);
-		Collection<Comentario> comentarios = evento.getComentarios(); 
-		result=new ModelAndView("evento/display");
-		result.addObject("evento",evento);
-		result.addObject("comentarios", comentarios );
-		return result;	
+		try{
+			Evento evento = this.eventoService.findOne(eventoId);
+			Collection<Comentario> comentarios = evento.getComentarios();
+			result=new ModelAndView("evento/display");
+			result.addObject("evento",evento);
+			result.addObject("comentarios", comentarios );
+		}catch(Throwable oops){
+			oops.printStackTrace();
+			System.out.println(oops.getMessage());
+			result= super.forbiddenOpperation();
+		}
+		return result;
 	}
-	
+
 	// Borrar --------------------------------------------------------------------------------------
-	@RequestMapping(value="/borrar",method=RequestMethod.GET)
+	@RequestMapping(value="/manager/borrar",method=RequestMethod.GET)
 	public ModelAndView borrar(@RequestParam int eventoId) {
 		ModelAndView result;
-		
-		Evento evento = eventoService.findOne(eventoId);
-		this.eventoService.delete(evento);
-		
-		result=new ModelAndView("redirect:misEventos.do");
+		try{
+			Evento evento = this.eventoService.findOne(eventoId);
+			this.eventoService.delete(evento);
 
-		return result;	
-	}
-
-	// CREAR -----------------------------------------------------------------------------------------
-	@RequestMapping(value = "/crear", method = RequestMethod.GET)
-	public ModelAndView crear() {
-		ModelAndView result;
-		Evento evento;
-		
-		if(this.periodistaService.checkAgencia()){
-			evento = eventoService.create();
-			result = new ModelAndView("evento/crear");
-			result.addObject("evento", evento);
-		}else{
 			result=new ModelAndView("redirect:misEventos.do");
+		}catch(Throwable oops){
+			oops.printStackTrace();
+			System.out.println(oops.getMessage());
+			result= super.forbiddenOpperation();
 		}
 
 		return result;
 	}
-	
-	@RequestMapping(value = "/crear", method = RequestMethod.POST, params = "save")
+
+	// CREAR -----------------------------------------------------------------------------------------
+	@RequestMapping(value = "/manager/crear", method = RequestMethod.GET)
+	public ModelAndView crear() {
+		ModelAndView result;
+		Evento evento;
+
+		try{
+			Manager manager = this.managerService.findByPrincipal();
+
+			evento = this.eventoService.create();
+			result = new ModelAndView("evento/manager/crear");
+			result.addObject("evento", evento);
+			result.addObject("agencias", manager.getAgencias());
+		}catch(Throwable oops){
+			oops.printStackTrace();
+			System.out.println(oops.getMessage());
+			result= super.forbiddenOpperation();
+		}
+
+		return result;
+	}
+
+	@RequestMapping(value = "/manager/crear", method = RequestMethod.POST, params = "save")
 	public ModelAndView guardar(@Valid Evento evento, BindingResult binding) {
-		ModelAndView result;	
+		ModelAndView result;
 
 		if (binding.hasErrors()) {
-			result = new ModelAndView("evento/crear");
+			result = new ModelAndView("evento/manager/crear");
 			result.addObject("evento", evento);
+			result.addObject("agencias", this.managerService.findByPrincipal().getAgencias());
 		} else {
-			try {			
-				eventoService.saveNew(evento);
+			try {
+				this.eventoService.saveNew(evento);
 				result = new ModelAndView("redirect:misEventos.do");
 			} catch (Throwable oops) {
+				oops.printStackTrace();
 				System.out.println(oops.getMessage());
-				result = new ModelAndView("evento/crear");
-				result.addObject("evento", evento);			
+				result = new ModelAndView("evento/manager/crear");
+				result.addObject("agencias", this.managerService.findByPrincipal().getAgencias());
+				result.addObject("evento", evento);
 			}
 		}
-		
+
 		return result;
 	}
 }
