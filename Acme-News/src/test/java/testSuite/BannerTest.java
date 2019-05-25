@@ -11,11 +11,8 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.util.Assert;
 
-
 import domain.Banner;
-
 import services.BannerService;
-
 import utilities.AbstractTest;
 
 
@@ -30,13 +27,21 @@ public class BannerTest extends AbstractTest {
 
 	//Se cambia el banner autentificado como administrador.
 	@Test
-	public void testChangeBanner(){
-		this.authenticate("admin");	
-		String urlNueva="http://www.marketingsgm.es/wp-content/uploads/anuncio-ford.jpg";
-		Banner banner=bannerService.getBanner();
-		banner.getImagenes().add(urlNueva);
-		bannerService.save(banner);
-		Assert.isTrue(banner.getImagenes().contains(urlNueva));
+	public void testCreateBanner(){
+		Banner banner;
+		Banner saved;
+		
+		super.authenticate("admin");	
+		
+		
+		String url="http://www.marketingsgm.es/wp-content/uploads/anuncio-ford.jpg";
+		
+		banner=bannerService.create();
+		banner.setUrl(url);
+		saved = bannerService.save(banner);
+		Assert.isTrue(this.bannerService.findAll().contains(saved));
+		
+		super.unauthenticate();
 		
 	
 	}
@@ -44,24 +49,40 @@ public class BannerTest extends AbstractTest {
 	//se intenta cambiar el banner autentificado como usuario. El resultado esperado es que no se pueda.
 	@Test(expected = IllegalArgumentException.class)
 	public void testChangeBannerNotLogguedAsAdmin(){
-		this.authenticate("usuario4");	
-		String urlNueva="http://www.marketingsgm.es/wp-content/uploads/anuncio-ford.jpg";
-		Banner banner=bannerService.getBanner();
-		banner.getImagenes().add(urlNueva);
-		bannerService.save(banner);
-		Assert.isTrue(banner.getImagenes().contains(urlNueva));
+		Banner banner;
+		Banner saved;
+		
+		super.authenticate("usuario4");	
+		
+		
+		String url="http://www.marketingsgm.es/wp-content/uploads/anuncio-ford.jpg";
+		
+		banner=bannerService.create();
+		banner.setUrl(url);
+		saved = bannerService.save(banner);
+		Assert.isTrue(this.bannerService.findAll().contains(saved));
+		
+		super.unauthenticate();
 	
 	}
 	
 	//se intenta cambiar el banner sin autentificarse. El resultado esperado es que no se pueda.
 	@Test(expected = IllegalArgumentException.class)
 	public void testChangeBannerNotLoggued(){
-		this.authenticate(null);	
-		String urlNueva="http://www.marketingsgm.es/wp-content/uploads/anuncio-ford.jpg";
-		Banner banner=bannerService.getBanner();
-		banner.getImagenes().add(urlNueva);
-		bannerService.save(banner);
-		Assert.isTrue(banner.getImagenes().contains(urlNueva));
+		Banner banner;
+		Banner saved;
+		
+		super.authenticate(null);	
+		
+		
+		String url="http://www.marketingsgm.es/wp-content/uploads/anuncio-ford.jpg";
+		
+		banner=bannerService.create();
+		banner.setUrl(url);
+		saved = bannerService.save(banner);
+		Assert.isTrue(this.bannerService.findAll().contains(saved));
+		
+		super.unauthenticate();
 	
 	}
 	
