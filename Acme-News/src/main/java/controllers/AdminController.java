@@ -1,4 +1,4 @@
-
+	
 package controllers;
 
 import java.util.List;
@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import domain.Configurations;
-import repositories.AdminRepository;
+import services.AdminService;
 import services.ConfigurationsService;
 
 @Controller
@@ -24,7 +24,7 @@ import services.ConfigurationsService;
 public class AdminController extends AbstractController {
 
 	@Autowired
-	private AdminRepository			adminRepository;
+	private AdminService			adminService;
 
 	@Autowired
 	private ConfigurationsService	configurationsService;
@@ -43,29 +43,35 @@ public class AdminController extends AbstractController {
 	public ModelAndView dashboard() {
 		ModelAndView result;
 		//query1
-		Object[] query1 = this.adminRepository.getQueryH1();
+		Object[] query1 = this.adminService.query1();
+		
 		//query2
-		List<String> query2 = this.adminRepository.getQueryH2();
+		List<String> query2 = this.adminService.query2();
+		
 		//query3
-		Integer query3_1 = this.adminRepository.getQueryh3_1();
-		Integer query3_2 = this.adminRepository.getQueryh3_2();
-		Integer query3_3 = this.adminRepository.getQueryh3_3();
+		Integer query3_1 = this.adminService.query3_1();
+		Integer query3_2 = this.adminService.query3_2();
+		Integer query3_3 = this.adminService.query3_3();
+		
 		//query4
-		Object[] query4 = this.adminRepository.getQueryH4();
+		Object[] query4 = this.adminService.query4();
 
 		//query5
-		Integer query5 = this.adminRepository.getQueryH5();
+		Integer query5 = this.adminService.query5();
+		
 		//query6
-		List<String> query6 = this.adminRepository.getQueryH6();
+		List<String> query6 = this.adminService.query6();
 
 		//query7
-		List<String> query7 = this.adminRepository.getQueryH7();
+		List<String> query7 = this.adminService.query7();
 
 		//query8
-		Integer query8 = this.adminRepository.getQueryH8();
+		Integer query8 = this.adminService.query8();
+		
 		//query9
-		Integer query9 = this.adminRepository.getQueryH9();
+		Integer query9 = this.adminService.query9();
 
+		
 		result = new ModelAndView("administrator/dashboard");
 		result.addObject("query1", query1);
 		result.addObject("query2", query2);

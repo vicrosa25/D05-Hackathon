@@ -12,36 +12,36 @@ import domain.Administrador;
 public interface AdminRepository extends JpaRepository<Administrador, Integer> {
 
 	@Query("select min(p.noticias.size),max(p.noticias.size),avg(p.noticias.size) from Periodista p")
-	Object[] getQueryH1();
+	Object[] query1();
 
 	@Query("select p.nombre from Periodista p ORDER BY (p.cartera.saldoAcumulado + p.cartera.saldoAcumuladoTotal) DESC")
-	List<String> getQueryH2();
+	List<String> query2();
 
 	@Query("select count(u) from Usuario u where u.estatus = (0)")
-	Integer getQueryh3_1();
+	Integer query3_1();
 
 	@Query("select count(u) from Usuario u where u.estatus = (1)")
-	Integer getQueryh3_2();
+	Integer query3_2();
 
 	@Query("select count(u) from Usuario u where u.estatus = (2)")
-	Integer getQueryh3_3();
-
+	Integer query3_3();
 
 	@Query("select min(p.puntosNecesarios),max(p.puntosNecesarios),avg(p.puntosNecesarios) from Sorteo p")
-	Object[] getQueryH4();
+	Object[] query4();
 
 	@Query("select SUM(u.puntos) from Usuario u")
-	Integer getQueryH5();
+	Integer query5();
 
 	@Query("select p.nombre from Usuario p ORDER BY (p.puntos) DESC")
-	List<String> getQueryH6();
+	List<String> query6();
+	
 	@Query("select p.nombre from Periodista p join p.noticias i ORDER BY i.numeroVisitas DESC")
-	List<String> getQueryH7();
+	List<String> query7();
+	
 	@Query("select count(c)  from Noticia c where c.estado=(0)")
-	Integer getQueryH8();
-
+	Integer query8();
 
 	@Query("select count(c)  from Sorteo c")
-	Integer getQueryH9();
+	Integer query9();
 }
 
