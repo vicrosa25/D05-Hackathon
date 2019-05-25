@@ -13,8 +13,8 @@ import domain.Sorteo;
 
 @Repository
 public interface SorteoRepository extends JpaRepository<Sorteo, Integer> {
-	
-	@Query("select e from Sorteo e  where e.fechaInicio <= now() and e.fechaVencimiento >= now() order by  e.fechaInicio DESC")
+
+	@Query("select e from Sorteo e  where e.fechaInicio <= now() and e.fechaVencimiento >= now() order by  e.fechaVencimiento ASC")
 	List<Sorteo> findSorteosProximos();
 
 	@Query(" select a from Sorteo a  where a.titulo=?1")
