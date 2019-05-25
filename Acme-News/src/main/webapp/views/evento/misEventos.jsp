@@ -9,7 +9,7 @@
 <%@taglib prefix="security" uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 
-<display:table name="eventos" id="row" requestURI="evento/misEventos.do" pagesize="5" class="displaytag">
+<display:table name="eventos" id="row" requestURI="evento/manager/misEventos.do" pagesize="5" class="displaytag">
 
 	<spring:message code="evento.titulo" var="tituloHeader" />
 	<display:column property="titulo" title="${tituloHeader}" sortable="false" />
@@ -23,9 +23,8 @@
 	<display:column><a href="evento/display.do?eventoId=${row.id}">
  	<spring:message code="evento.display"/></a></display:column> 
 
-	<display:column><a href="evento/borrar.do?eventoId=${row.id}">
+	<display:column><a href="evento/manager/borrar.do?eventoId=${row.id}">
  	<spring:message code="evento.borrar"/></a></display:column> 
 </display:table>
- <a href="evento/crear.do"><spring:message code="evento.crear" /></a>
+ <a href="evento/manager/crear.do"><spring:message code="evento.crear" /></a>
  <br/>
- <spring:message code="evento.checkAgencia"/>

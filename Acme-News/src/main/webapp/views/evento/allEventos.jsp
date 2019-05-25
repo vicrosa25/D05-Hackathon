@@ -9,9 +9,6 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@taglib prefix="acme" tagdir="/WEB-INF/tags" %>
 
-
-
-
 <display:table name="eventos" id="row" requestURI="evento/allEventos.do" pagesize="5" class="displaytag">
 
 	<spring:message code="evento.titulo" var="tituloHeader" />
@@ -22,12 +19,9 @@
 	
 	<spring:message code="evento.fecha" var="fechaHeader" />
 	<display:column property="fecha" title="${fechaHeader}" sortable="false" />
-	
-	<spring:message code="evento.periodista" var="periodistaHeader" />
-	<display:column property="periodista.nombre" title="${periodistaHeader}" sortable="false" />
 
 	<spring:message code="evento.agencia" var="agenciaHeader" />
-	<display:column property="periodista.agencia.titulo" title="${agenciaHeader}" sortable="false" />
+	<display:column property="agencia.titulo" title="${agenciaHeader}" sortable="false" />
 
 
 <display:column><a href="evento/display.do?eventoId=${row.id}">
@@ -46,8 +40,4 @@
 	
 </display:table>
 
-<a href="welcome/index.do"><input type="button" name="goBack" value="<spring:message code="evento.return"/>" /></a>
-
-		
-
-	
+<a href="welcome/index.do"><input type="button" name="goBack" value="<spring:message code="evento.return"/>" /></a>	

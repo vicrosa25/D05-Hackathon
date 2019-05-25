@@ -78,9 +78,9 @@
 		<security:intercept-url pattern="/noticia/misNoticias.do" access="hasRole('PERIODISTA')" />
 		<security:intercept-url pattern="/noticia/borrar.do" access="hasRole('PERIODISTA')" />
 		<security:intercept-url pattern="/noticia/crear.do" access="hasRole('PERIODISTA')" />
-		<security:intercept-url pattern="/evento/misEventos.do" access="hasRole('PERIODISTA')" />
-		<security:intercept-url pattern="/evento/borrar.do" access="hasRole('PERIODISTA')" />
-		<security:intercept-url pattern="/evento/crear.do" access="hasRole('PERIODISTA')" />
+		<security:intercept-url pattern="/evento/manager/misEventos.do" access="hasRole('MANAGER')" />
+		<security:intercept-url pattern="/evento/manager/borrar.do" access="hasRole('MANAGER')" />
+		<security:intercept-url pattern="/evento/manager/crear.do" access="hasRole('MANAGER')" />
 
 		<security:intercept-url pattern="/noticia/listBanear.do" access="hasRole('MODERADOR')" />
 		<security:intercept-url pattern="/noticia/reportes.do" access="hasRole('MODERADOR')" />
