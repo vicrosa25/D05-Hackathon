@@ -4,6 +4,7 @@ package services;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
+import java.util.Iterator;
 
 import javax.transaction.Transactional;
 
@@ -11,9 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
-import repositories.ComentarioRepository;
 import repositories.NoticiaRepository;
-import repositories.ReporteRepository;
 import datatypes.Cartera;
 import domain.Categoria;
 import domain.Comentario;
@@ -42,9 +41,9 @@ public class NoticiaService {
 	@Autowired
 	private TasaService tasaService;
 	@Autowired
-	private ReporteRepository reporteRepository;
+	private ReporteService reporteService;
 	@Autowired
-	private ComentarioRepository comentarioRepository;
+	private ComentarioService comentarioService;
 
 	public NoticiaService() {
 		super();
@@ -96,11 +95,20 @@ public class NoticiaService {
 			informacionCompartida.remove(noticia);
 			usuario.setInformacionCompartida(informacionCompartida);
 		}
-		for(Reporte r:noticia.getReportes()){
-			this.reporteRepository.delete(r.getId());
+
+		Iterator<Comentario> comentarios	= new ArrayList<Comentario>(noticia.getComentarios()).iterator();
+		Iterator<Reporte> reportes	= new ArrayList<Reporte>(noticia.getReportes()).iterator();
+
+		while (comentarios.hasNext()) {
+			Comentario next = comentarios.next();
+			this.comentarioService.delete(next);
+			comentarios.remove();
 		}
-		for(Comentario c:noticia.getComentarios()){
-			this.comentarioRepository.delete(c.getId());
+
+		while (reportes.hasNext()) {
+			Reporte next = reportes.next();
+			this.reporteService.delete(next);
+			reportes.remove();
 		}
 
 		this.noticiaRepository.delete(noticia);
@@ -122,10 +130,6 @@ public class NoticiaService {
 		Noticia result;
 		result = this.noticiaRepository.findOne(id);
 		return result;
-	}
-
-	public NoticiaRepository getNoticiaRepository() {
-		return this.noticiaRepository;
 	}
 
 	// Listing methods -------------------------------------------------------------------------
@@ -163,7 +167,7 @@ public class NoticiaService {
 		autor.setCartera(cartera);
 		this.periodistaService.save(autor);
 
-		return this.getNoticiaRepository().save(result);
+		return this.noticiaRepository.save(result);
 	}
 
 	// Ban ----------------------------------------------------------------------------
@@ -173,7 +177,7 @@ public class NoticiaService {
 	public void banearNoticia(Noticia noticia){
 		this.moderadorService.findByPrincipal();
 		noticia.setEstado(Estado.DENEGADA);
-		this.getNoticiaRepository().save(noticia);
+		this.noticiaRepository.save(noticia);
 	}
 
 	// ACEPTAR Y DENEGAR NOTICIAS
@@ -199,7 +203,7 @@ public class NoticiaService {
 		this.cobrarReolucionNoticia(moderador);
 
 		noticia.setEstado(Estado.PUBLICADA);
-		this.getNoticiaRepository().save(noticia);
+		this.noticiaRepository.save(noticia);
 	}
 	public void denegarNoticia(Noticia noticia){
 		Moderador moderador;
@@ -208,7 +212,7 @@ public class NoticiaService {
 		this.cobrarReolucionNoticia(moderador);
 
 		noticia.setEstado(Estado.DENEGADA);
-		this.getNoticiaRepository().save(noticia);
+		this.noticiaRepository.save(noticia);
 	}
 	// other methods
 

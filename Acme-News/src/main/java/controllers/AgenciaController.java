@@ -10,11 +10,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import repositories.ActorRepository;
-import security.LoginService;
 import services.AgenciaService;
+import services.ManagerService;
+import services.PeriodistaService;
 import domain.Agencia;
-import domain.Manager;
 import domain.Periodista;
 
 @Controller
@@ -24,35 +23,49 @@ public class AgenciaController extends AbstractController {
 	@Autowired
 	AgenciaService agenciaService;
 	@Autowired
-	private ActorRepository actorRepository;
+	private PeriodistaService periodistaService;
+	@Autowired
+	private ManagerService managerService;
 
 	// List not full Agencias
 	@RequestMapping("/listNotFullAgencia")
 	public ModelAndView listNotFull() {
-		Collection<Agencia> notFullAgencia = this.agenciaService.findAllNotFull();
+		ModelAndView result;
+		try{
+			Collection<Agencia> notFullAgencia = this.agenciaService.findAllNotFull();
 
-		ModelAndView result = new ModelAndView("agencia/listNotFullAgencia");
-		result.addObject("agencias", notFullAgencia);
-
+			result = new ModelAndView("agencia/listNotFullAgencia");
+			result.addObject("agencias", notFullAgencia);
+			result.addObject("agencia", this.periodistaService.findByPrincipal().getAgencia());
+		}catch(Throwable oops){
+			oops.printStackTrace();
+			System.out.println(oops.getMessage());
+			result = super.forbiddenOpperation();
+		}
 		return result;
 	}
 
 	// Join to an agency method
 	@RequestMapping(value = "/join", method = RequestMethod.GET)
 	public ModelAndView join(@RequestParam int agenciaId) {
+		ModelAndView result;
+		try{
+			Collection<Agencia> notFullAgencia = this.agenciaService.findAllNotFull();
 
-		Collection<Agencia> notFullAgencia = this.agenciaService.findAllNotFull();
+			result = new ModelAndView("agencia/listNotFullAgencia");
+			result.addObject("agencias", notFullAgencia);
+			result.addObject("agencia", this.periodistaService.findByPrincipal().getAgencia());
 
-		ModelAndView result = new ModelAndView("agencia/listNotFullAgencia");
-		result.addObject("agencias", notFullAgencia);
-
-		String loggedUsername = LoginService.getPrincipal().getUsername();
-		Periodista logged = (Periodista) this.actorRepository
-			.findOneByName(loggedUsername);
-		if (logged.getAgencia() != null) {
-			result.addObject("message", "commit.error.alreadyInAgencia");
-		} else {
-			this.agenciaService.join(agenciaId);
+			Periodista logged = this.periodistaService.findByPrincipal();
+			if (logged.getAgencia() != null) {
+				result.addObject("message", "commit.error.alreadyInAgencia");
+			} else {
+				this.agenciaService.join(agenciaId);
+			}
+		}catch(Throwable oops){
+			oops.printStackTrace();
+			System.out.println(oops.getMessage());
+			result = super.forbiddenOpperation();
 		}
 		return result;
 	}
@@ -60,18 +73,23 @@ public class AgenciaController extends AbstractController {
 	// Left an agency method
 	@RequestMapping(value = "/left", method = RequestMethod.GET)
 	public ModelAndView left() {
-		Collection<Agencia> notFullAgencia = this.agenciaService.findAllNotFull();
+		ModelAndView result;
+		try{
+			Collection<Agencia> notFullAgencia = this.agenciaService.findAllNotFull();
 
-		ModelAndView result = new ModelAndView("agencia/listNotFullAgencia");
-		result.addObject("agencias", notFullAgencia);
+			result = new ModelAndView("agencia/listNotFullAgencia");
+			result.addObject("agencias", notFullAgencia);
 
-		String loggedUsername = LoginService.getPrincipal().getUsername();
-		Periodista logged = (Periodista) this.actorRepository
-			.findOneByName(loggedUsername);
-		if (logged.getAgencia() != null) {
-			this.agenciaService.left(logged.getAgencia().getId());
-		} else {
-			result.addObject("message", "commit.error.agencia");
+			Periodista logged = this.periodistaService.findByPrincipal();
+			if (logged.getAgencia() != null) {
+				this.agenciaService.left(logged.getAgencia().getId());
+			} else {
+				result.addObject("message", "commit.error.agencia");
+			}
+		}catch(Throwable oops){
+			oops.printStackTrace();
+			System.out.println(oops.getMessage());
+			result = super.forbiddenOpperation();
 		}
 		return result;
 	}
@@ -79,28 +97,38 @@ public class AgenciaController extends AbstractController {
 	// List Agencias for Manager
 	@RequestMapping("/listAgencia")
 	public ModelAndView list() {
-		Collection<Agencia> agencias = this.agenciaService.findAll();
+		ModelAndView result;
+		try{
+			Collection<Agencia> agencias = this.agenciaService.findAll();
 
-		ModelAndView result = new ModelAndView("agencia/listAgencia");
-		result.addObject("agencias", agencias);
+			result = new ModelAndView("agencia/listAgencia");
+			result.addObject("agencias", agencias);
+			result.addObject("logged",  this.managerService.findByPrincipal());
 
-		String loggedUsername = LoginService.getPrincipal().getUsername();
-		Manager logged = (Manager) this.actorRepository
-			.findOneByName(loggedUsername);
-		result.addObject("logged", logged);
-
+		}catch(Throwable oops){
+			oops.printStackTrace();
+			System.out.println(oops.getMessage());
+			result = super.forbiddenOpperation();
+		}
 		return result;
 	}
 
 	// update an agency method
 	@RequestMapping(value = "/update", method = RequestMethod.GET)
 	public ModelAndView update(@RequestParam int agenciaId) {
-		Agencia agencia = this.agenciaService.findOne(agenciaId);
+		ModelAndView result;
+		try{
+			Agencia agencia = this.agenciaService.findOne(agenciaId);
 
-		ModelAndView result = new ModelAndView("agencia/agenciaForm");
-		result.addObject("agencia", agencia);
-		result.addObject("actualCapacity", agencia.getPeriodistas().size());
+			result = new ModelAndView("agencia/agenciaForm");
+			result.addObject("agencia", agencia);
+			result.addObject("actualCapacity", agencia.getPeriodistas().size());
 
+		}catch(Throwable oops){
+			oops.printStackTrace();
+			System.out.println(oops.getMessage());
+			result = super.forbiddenOpperation();
+		}
 		return result;
 	}
 
@@ -129,18 +157,21 @@ public class AgenciaController extends AbstractController {
 	//Create an agency
 	@RequestMapping(value = "/createAgencia", method = RequestMethod.GET)
 	public ModelAndView create() {
-		Agencia agencia = new Agencia();
+		ModelAndView result;
+		try{
+			Agencia agencia = new Agencia();
 
-		String loggedUsername = LoginService.getPrincipal().getUsername();
-		Manager manager = (Manager) this.actorRepository
-			.findOneByName(loggedUsername);
+			agencia.setImportancia((long) 1);
+			agencia.setManager(this.managerService.findByPrincipal());
 
-		agencia.setImportancia((long) 1);
-		agencia.setManager(manager);
+			result = new ModelAndView("agencia/createAgencia");
+			result.addObject("agencia", agencia);
 
-		ModelAndView result = new ModelAndView("agencia/createAgencia");
-		result.addObject("agencia", agencia);
-
+		} catch (Throwable oops) {
+			oops.printStackTrace();
+			System.out.println(oops.getMessage());
+			result = super.forbiddenOpperation();
+		}
 		return result;
 	}
 	@RequestMapping(value = "/createAgencia", method = RequestMethod.POST, params = "save")
@@ -171,9 +202,17 @@ public class AgenciaController extends AbstractController {
 	// Delete an agency method
 	@RequestMapping(value = "/delete", method = RequestMethod.GET)
 	public ModelAndView delete(@RequestParam int agenciaId) {
-		ModelAndView result = new ModelAndView(
-			"redirect:../agencia/listAgencia.do");
-		this.agenciaService.delete(agenciaId);
+		ModelAndView result;
+		try{
+			result = new ModelAndView(
+				"redirect:../agencia/listAgencia.do");
+			this.agenciaService.delete(agenciaId);
+
+		} catch (Throwable oops) {
+			oops.printStackTrace();
+			System.out.println(oops.getMessage());
+			result = super.forbiddenOpperation();
+		}
 		return result;
 	}
 }

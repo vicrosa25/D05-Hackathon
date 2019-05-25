@@ -6,7 +6,6 @@
 <%@taglib prefix="security" uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 
-<h2>All not empty agencies</h2>
 <display:table pagesize="5" class="displaytag" name="agencias" requestURI="agencia/listNotFullAgencia.do" id="row">	
 	
 	<!-- Title -->
@@ -25,11 +24,36 @@
 	<spring:message code="agencia.tasa" var="taxHeader" />
 	<display:column property="tasa" title="${taxHeader}" />
 	
-	<!-- Join -->	
-	<spring:message code="agencia.join" var="joinHeader" />
+	<!-- Join -->
 	<display:column>
 			<a href="agencia/join.do?agenciaId=${ row.id }"> <spring:message code="agencia.join" /> </a>
 	</display:column>
 
 	
+</display:table>
+
+<display:table pagesize="5" class="displaytag" name="agencia" requestURI="agencia/listNotFullAgencia.do" id="row">	
+	
+	<!-- Title -->
+	<spring:message code="agencia.titulo" var="titleHeader" />
+	<display:column property="titulo" title="${titleHeader}" />
+	
+	<!-- Address -->
+	<spring:message code="agencia.direccion" var="addressHeader" />
+	<display:column property="direccion" title="${addressHeader}" />
+	
+	<!-- Capacity -->
+	<spring:message code="agencia.capacidadDisponible" var="capacityHeader" />
+	<display:column property="capacidadDisponible" title="${capacityHeader}" />
+	
+	<!-- Tax -->
+	<spring:message code="agencia.tasa" var="taxHeader" />
+	<display:column property="tasa" title="${taxHeader}" />
+	
+	<!-- left -->	
+	<display:column>
+			<a href="agencia/left.do"> <spring:message code="master.page.left.agencia" /> </a>
+	</display:column>
+
+	<display:caption><spring:message code="periodista.tuAgencia"/></display:caption>
 </display:table>

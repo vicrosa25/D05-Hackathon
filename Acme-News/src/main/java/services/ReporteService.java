@@ -65,4 +65,12 @@ public class ReporteService {
 
 		return result;
 	}
+
+	public void delete(Reporte reporte) {
+		Assert.notNull(reporte);
+		reporte.getUsuario().getReportes().remove(reporte);
+		reporte.getNoticia().getReportes().remove(reporte);
+
+		this.reporteRepository.delete(reporte);
+	}
 }
