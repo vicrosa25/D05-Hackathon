@@ -10,7 +10,13 @@ import domain.Administrador;
 
 @Repository
 public interface AdminRepository extends JpaRepository<Administrador, Integer> {
-
+	
+	
+	@Query("select admin from Administrador admin where admin.userAccount.id = ?1")
+	Administrador findByUserAccountId(int id);
+	
+	
+	// Dashboard Queries
 	@Query("select min(p.noticias.size),max(p.noticias.size),avg(p.noticias.size) from Periodista p")
 	Object[] query1();
 

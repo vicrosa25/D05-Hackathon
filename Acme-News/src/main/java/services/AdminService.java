@@ -63,12 +63,31 @@ public class AdminService {
 
 	public Administrador save(Administrador admin) {
 		Assert.notNull(admin);
-		UserAccount userAccount;
+		Actor principal;
 
-		userAccount = LoginService.getPrincipal();
-		Assert.isTrue(userAccount.equals(admin.getUserAccount()));
+		// Check principal must be an admin
+		principal = this.actorService.findByPrincipal();
+		Assert.isInstanceOf(Administrador.class, principal);
 		
 		return this.adminRepository.save(admin);
+	}
+	
+	public Administrador update(Administrador admin) {
+		Assert.notNull(admin);
+		Administrador result;
+		Actor principal;
+		UserAccount userAccount;
+
+		// Check principal must be an admin
+		principal = this.actorService.findByPrincipal();
+		Assert.isInstanceOf(Administrador.class, principal);
+		
+		userAccount = LoginService.getPrincipal();
+		Assert.isTrue(userAccount.equals(admin.getUserAccount()));
+
+		result = this.adminRepository.save(admin);
+
+		return result;
 	}
 
 	public void delete(final Administrador admin) {
@@ -190,5 +209,29 @@ public class AdminService {
 		Assert.isInstanceOf(Administrador.class, principal);
 
 		return this.adminRepository.query9();
+	}
+	
+	// Other methods
+	public Administrador findByPrincipal() {
+		Administrador result;
+		UserAccount userAccount;
+
+		userAccount = LoginService.getPrincipal();
+		Assert.notNull(userAccount);
+
+		result = this.findByUserAccount(userAccount);
+		Assert.notNull(result);
+
+		return result;
+	}
+
+	public Administrador findByUserAccount(final UserAccount userAccount) {
+		Assert.notNull(userAccount);
+
+		Administrador result;
+
+		result = this.adminRepository.findByUserAccountId(userAccount.getId());
+
+		return result;
 	}
 }

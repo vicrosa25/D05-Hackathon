@@ -19,6 +19,7 @@
 			<li><a class="fNiv"><spring:message	code="master.page.administrator" /></a>
 				<ul>
 					<li class="arrow"></li>
+					<li><a href="administrator/list.do"><spring:message code="master.page.admin.list" /></a></li>
 					<li><a href="manager/admin/list.do"><spring:message code="master.page.manager.list" /></a></li>
 					<li><a href="administrator/dashboard.do"><spring:message code="master.page.administrator.dashboard" /></a></li>
 					<li><a href="banner/admin/list.do"><spring:message code="master.page.administrador.banner" /></a></li>
@@ -32,7 +33,12 @@
 					<li class="arrow"></li>
 					<li><a href="administrator/config/cache/edit.do"><spring:message code="master.page.cache" /></a></li>
 					<li><a href="administrator/config/aliveConfig/edit.do"><spring:message code="master.page.settings" /></a></li>
-					<li><a href="administrator/config/spam/list.do"><spring:message code="master.page.spam.words" /></a></li>
+				</ul>
+			</li>
+			<li><a class="fNiv"><spring:message	code="master.page.profile" /></a>
+				<ul>
+					<li class="arrow"></li>
+					<li><a href="administrator/update.do"><spring:message code="master.page.manager.update" /></a></li>			
 				</ul>
 			</li>
 		</security:authorize>
