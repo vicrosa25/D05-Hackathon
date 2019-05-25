@@ -776,7 +776,6 @@
 				<ref bean="usuario4" />
 			</list>
 		</property>
-		<property name="periodista" ref="periodista1" />
 		<property name="agencia" ref="agencia1" />
 	</bean>
 
@@ -797,8 +796,6 @@
 				<ref bean="usuario4" />
 			</list>
 		</property>
-
-		<property name="periodista" ref="periodista1" />
 		<property name="agencia" ref="agencia2" />
 	</bean>
 	
@@ -816,8 +813,6 @@
 			<list>
 			</list>
 		</property>
-
-		<property name="periodista" ref="periodista2" />
 		<property name="agencia" ref="agencia3" />
 	</bean>
 	
@@ -837,7 +832,6 @@
 				<ref bean="usuario2" />
 			</list>
 		</property>
-		<property name="periodista" ref="periodista3" />
 		<property name="agencia" ref="agencia1" />
 	</bean>
 
@@ -1326,7 +1320,7 @@ Twitter, por suerte, sigue funcionando" />
 	<bean id="sorteo2" class="domain.Sorteo">
 		<property name="titulo" value="Sorteo2" />
 		<property name="descripcion" value="descripcionSorteo2." />
-		<property name="fechaVencimiento" value="2019/02/18" />
+		<property name="fechaVencimiento" value="2019/07/18" />
 		<property name="puntosNecesarios" value="10" />
 		<property name="fechaInicio" value="2019/01/13" />
 		<property name="ganador" value="" />
@@ -1342,7 +1336,7 @@ Twitter, por suerte, sigue funcionando" />
 	<bean id="sorteo3" class="domain.Sorteo">
 		<property name="titulo" value="Sorteo3" />
 		<property name="descripcion" value="descripcionSorteo3." />
-		<property name="fechaVencimiento" value="2018/08/18" />
+		<property name="fechaVencimiento" value="2019/08/18" />
 		<property name="puntosNecesarios" value="30" />
 		<property name="fechaInicio" value="2018/01/13" />
 		<property name="ganador" value="" />
@@ -1360,7 +1354,7 @@ Twitter, por suerte, sigue funcionando" />
 	<bean id="sorteo4" class="domain.Sorteo">
 		<property name="titulo" value="Sorteo4" />
 		<property name="descripcion" value="descripcionSorteo4." />
-		<property name="fechaVencimiento" value="2018/08/18" />
+		<property name="fechaVencimiento" value="2019/07/01" />
 		<property name="puntosNecesarios" value="100" />
 		<property name="fechaInicio" value="2019/01/13" />
 		<property name="ganador" value="" />
