@@ -2,22 +2,18 @@ package controllers;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.Assert;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import domain.Estatus;
-import domain.Informacion;
-import domain.Periodista;
-import domain.Sorteo;
-import domain.Tasa;
-import domain.Usuario;
 import services.ActorService;
 import services.InformacionService;
 import services.NoticiaService;
@@ -26,6 +22,12 @@ import services.SorteoService;
 import services.TasaService;
 import services.UsuarioService;
 import utilities.Md5;
+import domain.Estatus;
+import domain.Informacion;
+import domain.Periodista;
+import domain.Sorteo;
+import domain.Tasa;
+import domain.Usuario;
 
 @Controller
 @RequestMapping("/usuario")
@@ -77,8 +79,15 @@ public class UsuarioController extends AbstractController {
 	@RequestMapping(value = "/edit", method = RequestMethod.GET)
 	public ModelAndView edit() {
 		ModelAndView result;
-		Usuario usuario = (Usuario) this.actorService.findByPrincipal();
-		result = this.createEditModelAndView(usuario);
+
+		try{
+			Usuario usuario = (Usuario) this.actorService.findByPrincipal();
+			result = this.createEditModelAndView(usuario);
+		}catch(Throwable oops){
+			oops.printStackTrace();
+			System.out.println(oops.getMessage());
+			result = super.forbiddenOpperation();
+		}
 		return result;
 	}
 
@@ -90,6 +99,9 @@ public class UsuarioController extends AbstractController {
 
 		usuario = this.usuarioService.reconstruct(usuario, binding);
 		if(binding.hasErrors()) {
+			final List<ObjectError> errors = binding.getAllErrors();
+			for (final ObjectError e : errors)
+				System.out.println(e.toString());
 			result = this.createEditModelAndView(usuario);
 		} else {
 			try {
@@ -98,6 +110,8 @@ public class UsuarioController extends AbstractController {
 				this.usuarioService.save(usuario);
 				result = new ModelAndView("redirect:/welcome/index.do");
 			} catch(Throwable oops) {
+				System.out.println(oops.getMessage());
+				oops.printStackTrace();
 				result = this.createEditModelAndView(usuario, "periodista.duplicated");
 			}
 		}
@@ -549,7 +563,4 @@ public class UsuarioController extends AbstractController {
 
 		return result;
 	}
-
-
-
 }
