@@ -7,6 +7,7 @@ import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -20,28 +21,29 @@ import org.springframework.format.annotation.DateTimeFormat;
 @Entity
 @Access(AccessType.PROPERTY)
 public class Noticia extends Informacion {
-	
-	
+
+
 	// Attributes -------------------------------------------------------------
 	private String video;
 	private Categoria categoria;
 	private Estado estado;
 	private Long numeroVisitas;
 	private Date fecha;
-	
+
 	//  -------------------------------------------------------------
 
 	private Collection<Noticia> noticiasRelacionadas;
 	private Collection<Reporte> reportes;
-	
-	
+	private Periodista periodista;
+
+
 	// Constructor ----------------------------------------------------------
 	public Noticia(){
 		super();
 	}
 
 	//  ----------------------------------------------------------
-	
+
 	@URL
 	public String getVideo() {
 		return this.video;
@@ -49,18 +51,18 @@ public class Noticia extends Informacion {
 	public void setVideo(String video) {
 		this.video = video;
 	}
-	
+
 	@NotNull
 	public Categoria getCategoria() {
-		return categoria;
+		return this.categoria;
 	}
 	public void setCategoria(Categoria categoria) {
 		this.categoria = categoria;
 	}
-//	
+	//
 	@NotNull
 	public Estado getEstado() {
-		return estado;
+		return this.estado;
 	}
 	public void setEstado(Estado estado) {
 		this.estado = estado;
@@ -68,14 +70,14 @@ public class Noticia extends Informacion {
 
 	@NotNull
 	@Temporal(TemporalType.DATE)
-	@DateTimeFormat(pattern = "yyyy/MM/dd")	
+	@DateTimeFormat(pattern = "yyyy/MM/dd")
 	public Date getFecha() {
-		return fecha;
+		return this.fecha;
 	}
 	public void setFecha(Date fecha) {
 		this.fecha = fecha;
 	}
-	
+
 	@Min(0)
 	public Long getNumeroVisitas(){
 		return this.numeroVisitas;
@@ -83,8 +85,8 @@ public class Noticia extends Informacion {
 	public void setNumeroVisitas(Long num){
 		this.numeroVisitas=num;
 	}
-	
-	
+
+
 	//----------------------------------------
 	@NotNull
 	@ManyToMany
@@ -102,8 +104,17 @@ public class Noticia extends Informacion {
 	public void setReportes(Collection<Reporte> reportes){
 		this.reportes=reportes;
 	}
-	
-	
+
+	@ManyToOne(optional=false)
+	public Periodista getPeriodista() {
+		return this.periodista;
+	}
+
+	public void setPeriodista(Periodista periodista) {
+		this.periodista = periodista;
+	}
+
+
 	public String toString(){
 		return "Noticia: "+this.getTitulo();
 	}
