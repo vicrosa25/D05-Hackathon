@@ -27,6 +27,7 @@
 		<value>/views/tasa/messages</value>
 		<value>/views/agencia/messages</value>
 		<value>/views/buscador/messages</value>
+		<value>/views/banner/messages</value>
 	</util:list>
 
 </beans>

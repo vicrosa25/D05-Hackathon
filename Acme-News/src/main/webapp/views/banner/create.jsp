@@ -9,31 +9,27 @@
  --%>
 
 <%@page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
-
 <%@taglib prefix="jstl"	uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@taglib prefix="security" uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
+<%@ taglib prefix="acme" tagdir="/WEB-INF/tags" %>
 
 
-<!-- modelAttribute="configurations" -->
-
-<form:form action="${ action }" >
+<form:form action="banner/admin/create.do" modelAttribute="banner">
 	
-	
-	<%-- Add word --%>
-	<spring:message code="admin.addWord" />
-	<input name="word" />
+	<%-- Hidden properties --%>	
+	<form:hidden path="id" />
+	<form:hidden path="version" />	
+		
+	<%-- Url --%>
+	<acme:textbox code="banner.url" path="url"/>
 	<br>
 	<br>
-
 
 	<%-- Buttons --%>
-	<input type="submit" name="save" value="<spring:message code="admin.addWord"/>" />
-	
-	
-	<input type="button" name="cancel" value="<spring:message code="administrator.cancel" />"
-		   onClick="javascript: window.location.replace('administrator/config/spam/list.do')" />
+	<acme:submit name="save" code="banner.create"/>
+	<acme:cancel url="banner/admin/list.do" code="banner.cancel"/>
 
 </form:form>

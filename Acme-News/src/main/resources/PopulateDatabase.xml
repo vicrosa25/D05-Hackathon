@@ -10,8 +10,7 @@
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 	">
 
-	<!-- User accounts -->
-
+	<!-- User accounts *************************************************************************************-->
 	<bean id="userAccount1" class="security.UserAccount">
 		<property name="username" value="admin" />
 		<property name="password" value="21232f297a57a5a743894a0e4a801fc3" />
@@ -205,10 +204,8 @@
 	</bean>
 
 
-	<!-- ACTORES -->
 
-	<!-- ADMIN -->
-
+	<!-- ADMIN ************************************************************************************************-->
 	<bean id="administrador1" class="domain.Administrador">
 		<property name="userAccount" ref="userAccount1" />
 		<property name="nombre" value="admin1Nombre" />
@@ -216,8 +213,7 @@
 		<property name="email" value="admin1@gmail.com" />
 	</bean>
 
-	<!-- MANAGERSS -->
-
+	<!-- MANAGERSS ********************************************************************************************-->
 	<bean id="manager1" class="domain.Manager">
 		<property name="userAccount" ref="userAccount2" />
 		<property name="nombre" value="manager1Nombre" />
@@ -255,8 +251,7 @@
 		</property>
 	</bean>
 
-	<!-- USUARIOS -->
-
+	<!-- USUARIOS ************************************************************************************************-->
 	<bean id="usuario1" class="domain.Usuario">
 		<property name="userAccount" ref="userAccount3" />
 		<property name="nombre" value="usuario1Nombre" />
@@ -503,8 +498,7 @@
 		<property name="cartera" ref="cartera2" />
 	</bean>
 
-	<!-- PERIODISTASS -->
-
+	<!-- PERIODISTAS *********************************************************************************************-->
 	<bean id="periodista1" class="domain.Periodista">
 		<property name="userAccount" ref="userAccount5" />
 		<property name="nombre" value="periodista1Nombre" />
@@ -592,8 +586,7 @@
 		</property>
 	</bean>
 
-	<!-- CARTERAS -->
-
+	<!-- CARTERAS **********************************************************************************************-->
 	<bean id="cartera1" class="datatypes.Cartera">
 		<property name="paypalEmail" value="paypalCorreoModerador1@gmail.com" />
 		<property name="saldoAcumulado" value="7.13" />
@@ -637,7 +630,7 @@
 	</bean>
 
 
-	<!-- AGENCIASS -->
+	<!-- Buscadores ************************************************************************************************-->
 	<bean id="buscador1" class="domain.Buscador">
 		<property name="ultimaActualizacion" value="01/01/2000" />
 		<property name="noticias">
@@ -674,7 +667,7 @@
 		</property>
 	</bean>
 	
-	<!-- AGENCIASS -->
+	<!-- Agencias ************************************************************************************************-->
 	<bean id="agencia1" class="domain.Agencia">
 		<property name="manager" ref="manager1" />
 		<property name="titulo" value="tituloAgencia1" />
@@ -718,20 +711,30 @@
 
 	</bean>
 
-	<!-- BANNER -->
-
+	<!-- Banners ***************************************************************************************** -->
 	<bean id="banner1" class="domain.Banner">
-		<property name="imagenes">
+		<property name="url" value="http://www.daveallworthy.com/images/banner_3mx1m_AMS_banner.jpg" />
+	</bean>
+	
+	<bean id="banner2" class="domain.Banner">
+		<property name="url" value="http://www.embertech.co.uk/wp-content/uploads/2013/02/header-banner.png" />
+	</bean>	
+	
+	<bean id="banner3" class="domain.Banner">
+		<property name="url" value="https://staff.brighton.ac.uk/is/media/PublishingImages/banner%20example%205.jpg" />
+	</bean>	
+		
+<!-- 		<property name="imagenes">
 			<list>
-				<value>http://www.daveallworthy.com/images/banner_3mx1m_AMS_banner.jpg</value>
+				<value></value>
 				<value>http://www.embertech.co.uk/wp-content/uploads/2013/02/header-banner.png</value>
 				<value>https://staff.brighton.ac.uk/is/media/PublishingImages/banner%20example%205.jpg</value>
 			</list>
-		</property>
-	</bean>
+		</property> -->
 
-	<!-- TASASS -->
 
+
+	<!-- Tasas **********************************************************************************************-->
 	<bean id="Tasa1" class="domain.Tasa">
 		<property name="tasaVisita" value="0.01" />
 		<property name="tasaModerador" value="0.03" />
@@ -742,19 +745,12 @@
 		<property name="costeMaestro" value="150" />
 	</bean>
 
-	<!-- Aqui termina alvaro ALVARO -->
 
-
-
-	<!-- Eventos -->
-
-
+	<!-- Eventos *********************************************************************************************-->
 	<bean id="evento1" class="domain.Evento">
 		<property name="titulo" value="tituloEvento1" />
-		<property name="imagen"
-			value="http://tueventoenbogota.com/wp-content/uploads/2015/07/01_eventos_empresariales-1240x824.jpg" />
-		<property name="descripcion"
-			value="Fiesta Salvaje en Sevilla, no te la pierdas. Los mejores DJs y las mejores gogos. Ven a la discoteca y disfruta de una noche loca." />
+		<property name="imagen" value="http://tueventoenbogota.com/wp-content/uploads/2015/07/01_eventos_empresariales-1240x824.jpg" />
+		<property name="descripcion" value="Fiesta Salvaje en Sevilla, no te la pierdas. Los mejores DJs y las mejores gogos. Ven a la discoteca y disfruta de una noche loca." />
 		<property name="direccion" value="calle falsa 123" />
 		<property name="fecha" value="2020/01/01" />
 		<property name="comentarios">
@@ -768,9 +764,7 @@
 				<ref bean="usuario4" />
 			</list>
 		</property>
-					<property name="periodista" ref="periodista1" />
-
-
+		<property name="periodista" ref="periodista1" />
 	</bean>
 
 	<bean id="evento2" class="domain.Evento">
@@ -790,14 +784,12 @@
 				<ref bean="usuario4" />
 			</list>
 		</property>
-					<property name="periodista" ref="periodista1" />
-
-
+		<property name="periodista" ref="periodista1" />
 	</bean>
+	
 	<bean id="evento3" class="domain.Evento">
 		<property name="titulo" value="tituloEvento3" />
-		<property name="imagen"
-			value="http://www.myfico.com/Images/sample_overlay.gif" />
+		<property name="imagen" value="http://www.myfico.com/Images/sample_overlay.gif" />
 		<property name="descripcion" value="descripcionEvento3." />
 		<property name="direccion" value="direccion3" />
 		<property name="fecha" value="2020/01/01" />
@@ -809,14 +801,12 @@
 			<list>
 			</list>
 		</property>
-					<property name="periodista" ref="periodista2" />
-
-
+		<property name="periodista" ref="periodista2" />
 	</bean>
+	
 	<bean id="evento4" class="domain.Evento">
 		<property name="titulo" value="tituloEvento4" />
-		<property name="imagen"
-			value="http://www.myfico.com/Images/sample_overlay.gif" />
+		<property name="imagen" value="http://www.myfico.com/Images/sample_overlay.gif" />
 		<property name="descripcion" value="descripcionEvento4." />
 		<property name="direccion" value="direccion4" />
 		<property name="fecha" value="2020/01/01" />
@@ -830,20 +820,15 @@
 				<ref bean="usuario2" />
 			</list>
 		</property>
-					<property name="periodista" ref="periodista3" />
-
-
+		<property name="periodista" ref="periodista3" />
 	</bean>
 
 
-	<!-- Noticias -->
-
+	<!-- Noticias ***********************************************************************************************-->
 	<bean id="noticia1" class="domain.Noticia">
 		<property name="titulo" value="Hackeo Telefónica" />
-		<property name="imagen"
-			value="https://s3.amazonaws.com/poderpda/2017/05/movistar-hackeo.jpg" />
-		<property name="descripcion"
-			value="Varios ordenadores de la red interna de Telefónica se han visto afectados este viernes por un software malicioso -'ransomware'- que ha llevado a la compañía a solicitar a todos los empleados de su sede central en Madrid que apaguen sus ordenadores.
+		<property name="imagen" value="https://s3.amazonaws.com/poderpda/2017/05/movistar-hackeo.jpg" />
+		<property name="descripcion" value="Varios ordenadores de la red interna de Telefónica se han visto afectados este viernes por un software malicioso -'ransomware'- que ha llevado a la compañía a solicitar a todos los empleados de su sede central en Madrid que apaguen sus ordenadores.
 Lo ocurrido ha llenado las redes sociales de chistes sobre la compañía. Recopilamos algunos de ellos:
 Twitter, por suerte, sigue funcionando" />
 		<property name="video" value="https://www.youtube.com/embed/_5xU6TcPvvU" />
@@ -881,8 +866,7 @@ Twitter, por suerte, sigue funcionando" />
 
 	<bean id="noticia2" class="domain.Noticia">
 		<property name="titulo" value="noticia2" />
-		<property name="imagen"
-			value="http://www.myfico.com/Images/sample_overlay.gif" />
+		<property name="imagen" value="http://www.myfico.com/Images/sample_overlay.gif" />
 		<property name="descripcion" value="descripciónNoticia2" />
 		<property name="video" value="https://www.youtube.com/embed/a3ICNMQW7Ok" />
 		<property name="fecha" value="2019/05/12" />
@@ -913,14 +897,14 @@ Twitter, por suerte, sigue funcionando" />
 				<ref bean="usuario2" />
 			</list>
 		</property>
-					<property name="periodista" ref="periodista1" />
-					<property name="categoria" value="OTROS" />
+		<property name="periodista" ref="periodista1" />
+		<property name="categoria" value="OTROS" />
 	</bean>
+	
 
 	<bean id="noticia3" class="domain.Noticia">
 		<property name="titulo" value="noticia3" />
-		<property name="imagen"
-			value="http://www.myfico.com/Images/sample_overlay.gif" />
+		<property name="imagen" value="http://www.myfico.com/Images/sample_overlay.gif" />
 		<property name="descripcion" value="descripciónNoticia3" />
 		<property name="video" value="https://www.youtube.com/embed/a3ICNMQW7Ok" />
 		<property name="fecha" value="2019/04/11" />
@@ -951,10 +935,10 @@ Twitter, por suerte, sigue funcionando" />
 			<list>
 			</list>
 		</property>
-					<property name="periodista" ref="periodista1" />
-					<property name="categoria" value="CULTURA" />
-
+		<property name="periodista" ref="periodista1" />
+		<property name="categoria" value="CULTURA" />
 	</bean>
+	
 
 	<bean id="noticia4" class="domain.Noticia">
 		<property name="titulo" value="noticia4" />
@@ -987,14 +971,14 @@ Twitter, por suerte, sigue funcionando" />
 				<ref bean="usuario2" />
 			</list>
 		</property>
-					<property name="periodista" ref="periodista2" />
-					<property name="categoria" value="ECONOMIA" />
+		<property name="periodista" ref="periodista2" />
+		<property name="categoria" value="ECONOMIA" />
 	</bean>
 
+	
 	<bean id="noticia5" class="domain.Noticia">
 		<property name="titulo" value="noticia5" />
-		<property name="imagen"
-			value="http://www.myfico.com/Images/sample_overlay.gif" />
+		<property name="imagen" value="http://www.myfico.com/Images/sample_overlay.gif" />
 		<property name="descripcion" value="descripciónNoticia5" />
 		<property name="video" value="https://www.youtube.com/embed/a3ICNMQW7Ok" />
 		<property name="fecha" value="2019/05/11" />
@@ -1025,15 +1009,15 @@ Twitter, por suerte, sigue funcionando" />
 				<ref bean="usuario4" />
 			</list>
 		</property>
-					<property name="periodista" ref="periodista2" />
-					<property name="categoria" value="MOTOR" />
+		<property name="periodista" ref="periodista2" />
+		<property name="categoria" value="MOTOR" />
 	</bean>
 
 
+	
 	<bean id="noticia6" class="domain.Noticia">
 		<property name="titulo" value="noticia2" />
-		<property name="imagen"
-			value="http://www.myfico.com/Images/sample_overlay.gif" />
+		<property name="imagen" value="http://www.myfico.com/Images/sample_overlay.gif" />
 		<property name="descripcion" value="descripciónNoticia6" />
 		<property name="video" value="https://www.youtube.com/embed/a3ICNMQW7Ok" />
 		<property name="fecha" value="2019/04/08" />
@@ -1059,15 +1043,15 @@ Twitter, por suerte, sigue funcionando" />
 			<list>
 			</list>
 		</property>
-					<property name="periodista" ref="periodista3" />
-					<property name="categoria" value="OCIO" />
+		<property name="periodista" ref="periodista3" />
+		<property name="categoria" value="OCIO" />
 	</bean>
 
 
+	
 	<bean id="noticia7" class="domain.Noticia">
 		<property name="titulo" value="noticia7" />
-		<property name="imagen"
-			value="http://www.myfico.com/Images/sample_overlay.gif" />
+		<property name="imagen" value="http://www.myfico.com/Images/sample_overlay.gif" />
 		<property name="descripcion" value="descripciónNoticia7" />
 		<property name="video" value="https://www.youtube.com/embed/a3ICNMQW7Ok" />
 		<property name="fecha" value="2019/03/24" />
@@ -1093,14 +1077,14 @@ Twitter, por suerte, sigue funcionando" />
 			<list>
 			</list>
 		</property>
-					<property name="periodista" ref="periodista4" />
-					<property name="categoria" value="JUEGOS" />
+		<property name="periodista" ref="periodista4" />
+		<property name="categoria" value="JUEGOS" />
 	</bean>
 
+	
 	<bean id="noticia8" class="domain.Noticia">
 		<property name="titulo" value="noticia8" />
-		<property name="imagen"
-			value="http://www.myfico.com/Images/sample_overlay.gif" />
+		<property name="imagen" value="http://www.myfico.com/Images/sample_overlay.gif" />
 		<property name="descripcion" value="descripciónNoticia8" />
 		<property name="video" value="https://www.youtube.com/embed/a3ICNMQW7Ok" />
 		<property name="fecha" value="2019/03/01" />
@@ -1127,14 +1111,14 @@ Twitter, por suerte, sigue funcionando" />
 			<list>
 			</list>
 		</property>
-					<property name="periodista" ref="periodista4" />
-					<property name="categoria" value="INTERNACIONAL" />
+		<property name="periodista" ref="periodista4" />
+		<property name="categoria" value="INTERNACIONAL" />
 	</bean>
+	
 	
 	<bean id="noticia9" class="domain.Noticia">
 		<property name="titulo" value="noticia9" />
-		<property name="imagen"
-			value="http://www.myfico.com/Images/sample_overlay.gif" />
+		<property name="imagen" value="http://www.myfico.com/Images/sample_overlay.gif" />
 		<property name="descripcion" value="descripciónNoticia8" />
 		<property name="video" value="https://www.youtube.com/embed/a3ICNMQW7Ok" />
 		<property name="fecha" value="2019/04/04" />
@@ -1161,8 +1145,7 @@ Twitter, por suerte, sigue funcionando" />
 	</bean>
 	
 	
-		<!-- Reportes -->
-		
+	<!-- Reportes ***********************************************************************************************-->
 	<bean id="reporte1" class="domain.Reporte">
 		<property name="texto"
 			value="Este periodista es un trollaso, La noticia es mas fake que un gitano médico!" />
@@ -1238,7 +1221,7 @@ Twitter, por suerte, sigue funcionando" />
 
 
 
-	<!-- Comentarios -->
+	<!-- Comentarios *******************************************************************************************-->
 	<bean id="comentario1" class="domain.Comentario">
 		<property name="titulo" value="jajaja" />
 		<property name="descripcion" value="menudos tolais, timofónica tenia que ser" />
@@ -1304,7 +1287,8 @@ Twitter, por suerte, sigue funcionando" />
 		<property name="usuario" ref="usuario5" />
 	</bean>
 
-	<!-- Sorteos -->
+
+	<!-- Sorteos ************************************************************************************************-->
 	<bean id="sorteo1" class="domain.Sorteo">
 		<property name="titulo" value="Sorteo Bicicleta" />
 		<property name="descripcion" value="Sorteamos bicicleta de paseo." />
@@ -1313,14 +1297,12 @@ Twitter, por suerte, sigue funcionando" />
 		<property name="fechaInicio" value="2019/01/13" />
 		<property name="ganador" value="Usuario 1, Email: usuario1@gmail.com." />
 		<property name="premio" ref="premio1" />
-								<property name="usuarios">
+		<property name="usuarios">
 			<list>
 				<ref bean="usuario1" />
 				<ref bean="usuario2" />
 			</list>
 		</property>
-
-
 	</bean>
 
 	<bean id="sorteo2" class="domain.Sorteo">
@@ -1331,13 +1313,12 @@ Twitter, por suerte, sigue funcionando" />
 		<property name="fechaInicio" value="2019/01/13" />
 		<property name="ganador" value="" />
 		<property name="premio" ref="premio1" />
-										<property name="usuarios">
+		<property name="usuarios">
 			<list>
 				<ref bean="usuario1" />
 				<ref bean="usuario3" />
 			</list>
 		</property>
-
 	</bean>
 
 	<bean id="sorteo3" class="domain.Sorteo">
@@ -1348,7 +1329,7 @@ Twitter, por suerte, sigue funcionando" />
 		<property name="fechaInicio" value="2018/01/13" />
 		<property name="ganador" value="" />
 		<property name="premio" ref="premio1" />
-										<property name="usuarios">
+		<property name="usuarios">
 			<list>
 				<ref bean="usuario2" />
 				<ref bean="usuario3" />
@@ -1356,7 +1337,6 @@ Twitter, por suerte, sigue funcionando" />
 				<ref bean="usuario5" />
 			</list>
 		</property>
-
 	</bean>
 
 	<bean id="sorteo4" class="domain.Sorteo">
@@ -1367,40 +1347,34 @@ Twitter, por suerte, sigue funcionando" />
 		<property name="fechaInicio" value="2019/01/13" />
 		<property name="ganador" value="" />
 		<property name="premio" ref="premio2" />
-												<property name="usuarios">
+		<property name="usuarios">
 			<list>
 				<ref bean="usuario3" />
 			</list>
 		</property>
-
 	</bean>
-	<!-- Premios -->
+	
+	
+	<!-- Premios ***********************************************************************************************-->
 	<bean id="premio1" class="domain.Premio">
 		<property name="nombre" value="Bicicleta de paseo" />
-		<property name="descripcion"
-			value="Bicicleta de paseo eléctrica, porque pedalear es de noobs.." />
+		<property name="descripcion" value="Bicicleta de paseo eléctrica, porque pedalear es de noobs.." />
 		<property name="precio" value="1200" />
-		<property name="imagen"
-			value="http://www.ondabike.es/images/thumbs/0000224_450.jpeg" />
-
+		<property name="imagen" value="http://www.ondabike.es/images/thumbs/0000224_450.jpeg" />
 	</bean>
 
 	<bean id="premio2" class="domain.Premio">
 		<property name="nombre" value="NombrePremio2" />
 		<property name="descripcion" value="descripcionPremio2" />
 		<property name="precio" value="1234" />
-		<property name="imagen"
-			value="http://www.myfico.com/Images/sample_overlay.gif" />
-
+		<property name="imagen" value="http://www.myfico.com/Images/sample_overlay.gif" />
 	</bean>
 
 	<bean id="premio3" class="domain.Premio">
 		<property name="nombre" value="NombrePremio3" />
 		<property name="descripcion" value="descripcionPremio3" />
 		<property name="precio" value="150" />
-		<property name="imagen"
-			value="http://www.myfico.com/Images/sample_overlay.gif" />
-
+		<property name="imagen" value="http://www.myfico.com/Images/sample_overlay.gif" />
 	</bean>
 
 	<!-- configurations *************************************************************************** -->

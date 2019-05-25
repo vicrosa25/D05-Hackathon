@@ -34,7 +34,7 @@ public class WelcomeController extends AbstractController {
 	private ConfigurationsService	configurationsService;
 	
 	@Autowired
-	private BannerService bannerService;
+	private BannerService 			bannerService;
 
 	
 	
@@ -58,15 +58,15 @@ public class WelcomeController extends AbstractController {
 		formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm");
 		moment = formatter.format(new Date());
 		
-		Banner  banner = this.bannerService.getBannerWellcome();
+		//Banner  banner = this.bannerService.getBannerWellcome();
 		
 		englishMessage = this.configurationsService.getConfiguration().getEnglishMessage();
 		spanishMessage = this.configurationsService.getConfiguration().getSpanishMessage();
 		
 
-		List<String> urls= new ArrayList<String>(banner.getImagenes());
-		Integer aleatorio=(int) (Math.random() * urls.size()); // numero aleatorio generado entre 0 y el numero de urls
-		String bannerAleatorio = urls.get(aleatorio);
+		List<Banner> banners= new ArrayList<Banner>(this.bannerService.findAll());
+		Integer aleatorio=(int) (Math.random() * banners.size()); // numero aleatorio generado entre 0 y el numero de urls
+		String bannerAleatorio = banners.get(aleatorio).getUrl();
 		
 		
 		
