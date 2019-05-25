@@ -44,6 +44,7 @@ public class BuscadorService {
 		ultimaActualizacion.add(Calendar.YEAR, -1);
 
 		result.setUltimaActualizacion(ultimaActualizacion.getTime());
+
 		return this.buscadorRepository.save(result);
 	}
 

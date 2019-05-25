@@ -51,6 +51,9 @@ public class UsuarioService {
 	@Autowired
 	private TasaService tasaService;
 
+	@Autowired
+	private BuscadorService buscadorService;
+
 	// Validator
 	@Autowired
 	@Qualifier("validator")
@@ -122,10 +125,12 @@ public class UsuarioService {
 		result.setUserAccount(usuarioForm.getUserAccount());
 		result.getUserAccount().setAuthorities(authorities);
 
+
 		// Usuario
 		result.setNombre(usuarioForm.getNombre());
 		result.setApellidos(usuarioForm.getApellidos());
 		result.setEmail(usuarioForm.getEmail());
+		result.setBuscador(this.buscadorService.create());
 
 		this.validator.validate(result, binding);
 
@@ -153,6 +158,7 @@ public class UsuarioService {
 		authorities.add(authority);
 
 		newOne.setId(oldOne.getId());
+		newOne.setVersion(oldOne.getVersion());
 		newOne.setUserAccount(oldOne.getUserAccount());
 		newOne.setBanned(oldOne.getBanned());
 		newOne.setPuntos(oldOne.getPuntos());
@@ -164,6 +170,7 @@ public class UsuarioService {
 		newOne.setReportes(oldOne.getReportes());
 		newOne.setInformacionCompartida(oldOne.getInformacionCompartida());
 		newOne.setSorteos(oldOne.getSorteos());
+		newOne.setBuscador(oldOne.getBuscador());
 	}
 
 	private Usuario findByPrincipalToEdit() {
