@@ -1,19 +1,21 @@
 package controllers;
 
+import org.springframework.beans.TypeMismatchException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
+
 import services.TasaService;
-import controllers.AbstractController;
 import domain.Tasa;
 
 @Controller
 @RequestMapping("/tasa/administrator")
 public class TasaController extends AbstractController {
-	
+
 	// Services ---------------------------------------------------------------
 
 	@Autowired
@@ -25,47 +27,53 @@ public class TasaController extends AbstractController {
 	public TasaController() {
 		super();
 	}
-	
+
+
+	@ExceptionHandler(TypeMismatchException.class)
+	public ModelAndView handleMismatchException(final TypeMismatchException oops) {
+		return new ModelAndView("redirect:/");
+	}
+
 	// Edit -------------------------------------------------------------------
-	
+
 	@RequestMapping(value = "changeTasa", method = RequestMethod.GET)
 	public ModelAndView edit() {
-		ModelAndView result = createEditModelAndView(tasaService.find());
+		ModelAndView result = this.createEditModelAndView(this.tasaService.find());
 
 		return result;
 	}
-	
+
 	// Save -------------------------------------------------------------------
-	
+
 	@RequestMapping(value = "changeTasa", method = RequestMethod.POST, params = "save")
 	public ModelAndView save(Tasa tasa, BindingResult binding) {
 		ModelAndView result;
 
-		tasa = tasaService.reconstruct(tasa, binding);
+		tasa = this.tasaService.reconstruct(tasa, binding);
 		if (binding.hasErrors()) {
-			result = createEditModelAndView(tasa);
+			result = this.createEditModelAndView(tasa);
 		} else {
 			try {
-				tasaService.save(tasa);
+				this.tasaService.save(tasa);
 				result = new ModelAndView("redirect:/welcome/index.do");
 			} catch (Throwable oops) {
-				result = createEditModelAndView(tasa, "tasa.commit.error");
+				result = this.createEditModelAndView(tasa, "tasa.commit.error");
 			}
 		}
 
 		return result;
 	}
-	
 
-	
+
+
 	// Ancillary methods ------------------------------------------------------
-	
+
 	//** Model and view ********************************************************//
 
 	private ModelAndView createEditModelAndView(Tasa tasa) {
 		ModelAndView result;
 
-		result = createEditModelAndView(tasa, null);
+		result = this.createEditModelAndView(tasa, null);
 
 		return result;
 	}

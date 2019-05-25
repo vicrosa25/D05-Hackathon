@@ -66,7 +66,7 @@ public class ReporteTest extends AbstractTest {
 
 			this.authenticate(username);
 			Integer antes= this.reporteService.findAll().size();
-			Noticia noticia=this.noticiaService.getNoticiaRepository().findOneByName(noticiaTitulo);
+			Noticia noticia=this.noticiaService.findOneByName(noticiaTitulo);
 			Reporte reporte= this.reporteService.create(noticia);
 			reporte.setTexto("Prueba testCreateReporteAuthenticateAsUsuario");
 			Reporte reporte2=this.reporteService.save(reporte);

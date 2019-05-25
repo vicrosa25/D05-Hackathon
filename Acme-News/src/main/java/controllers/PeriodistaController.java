@@ -3,10 +3,12 @@ package controllers;
 import java.util.Collection;
 import java.util.List;
 
+import org.springframework.beans.TypeMismatchException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -34,6 +36,12 @@ public class PeriodistaController extends AbstractController {
 		super();
 	}
 
+
+	@ExceptionHandler(TypeMismatchException.class)
+	public ModelAndView handleMismatchException(final TypeMismatchException oops) {
+		return new ModelAndView("redirect:/");
+	}
+
 	// Display
 	// --------------------------------------------------------------------------------------
 	@RequestMapping("/display")
@@ -52,7 +60,7 @@ public class PeriodistaController extends AbstractController {
 	@RequestMapping(value = "/edit", method = RequestMethod.GET)
 	public ModelAndView edit() {
 		ModelAndView result;
-		Periodista periodista = (Periodista) actorService.findByPrincipal();
+		Periodista periodista = (Periodista) this.actorService.findByPrincipal();
 		result = this.createEditModelAndView(periodista);
 		return result;
 	}
@@ -65,23 +73,23 @@ public class PeriodistaController extends AbstractController {
 		ModelAndView result;
 		String password;
 
-		periodista = periodistaService.reconstruct(periodista, binding);
+		periodista = this.periodistaService.reconstruct(periodista, binding);
 		if (binding.hasErrors()) {
 			List<ObjectError> errors = binding.getAllErrors();
 			for (ObjectError e : errors) {
 				System.out.println(e.toString());
 			}
-			result = createEditModelAndView(periodista);
+			result = this.createEditModelAndView(periodista);
 		} else {
 			try {
 				password = Md5.encodeMd5(periodista.getUserAccount()
-						.getPassword());
+					.getPassword());
 				periodista.getUserAccount().setPassword(password);
-				periodistaService.save(periodista);
+				this.periodistaService.save(periodista);
 				result = new ModelAndView("redirect:/welcome/index.do");
 			} catch (Throwable oops) {
-				result = createEditModelAndView(periodista,
-						"periodista.duplicated");
+				result = this.createEditModelAndView(periodista,
+					"periodista.duplicated");
 			}
 		}
 
@@ -92,12 +100,12 @@ public class PeriodistaController extends AbstractController {
 	// methods-------------------------------------------------------------------------------------------------------
 	private ModelAndView createEditModelAndView(Periodista periodista) {
 		ModelAndView result;
-		result = createEditModelAndView(periodista, null);
+		result = this.createEditModelAndView(periodista, null);
 		return result;
 	}
 
 	private ModelAndView createEditModelAndView(Periodista periodista,
-			String message) {
+		String message) {
 		ModelAndView result;
 		result = new ModelAndView("periodista/edit");
 		result.addObject("action", "periodista/edit.do");
@@ -111,10 +119,10 @@ public class PeriodistaController extends AbstractController {
 	public ModelAndView retirarDinero() {
 		ModelAndView result;
 		Periodista actual = this.periodistaService.getPeriodistaRepository()
-				.findByUserAccountId(LoginService.getPrincipal().getId());
+			.findByUserAccountId(LoginService.getPrincipal().getId());
 		Double dineroAcumulado = actual.getCartera().getSaldoAcumulado();
 		Double dineroAcumuladoTotal = actual.getCartera()
-				.getSaldoAcumuladoTotal();
+			.getSaldoAcumuladoTotal();
 		result = new ModelAndView("periodista/retirarDinero");
 		result.addObject("dineroAcumulado", dineroAcumulado);
 		result.addObject("dineroAcumuladoTotal", dineroAcumuladoTotal);
@@ -126,10 +134,10 @@ public class PeriodistaController extends AbstractController {
 	public ModelAndView retirar() {
 		ModelAndView result;
 		Periodista actual = this.periodistaService.getPeriodistaRepository()
-				.findByUserAccountId(LoginService.getPrincipal().getId());
+			.findByUserAccountId(LoginService.getPrincipal().getId());
 		Double dineroAcumulado = actual.getCartera().getSaldoAcumulado();
 		if (dineroAcumulado >= 5.0) {
-			periodistaService.retirarDinero();
+			this.periodistaService.retirarDinero();
 			result = this.retirarDinero();
 		} else {
 			int error = 1;
@@ -143,7 +151,7 @@ public class PeriodistaController extends AbstractController {
 	// List not full Agencias
 	@RequestMapping("/listPeriodista")
 	public ModelAndView listNotFull() {
-		Collection<Periodista> allPeriodista = periodistaService.findAll();
+		Collection<Periodista> allPeriodista = this.periodistaService.findAll();
 
 		ModelAndView result = new ModelAndView("periodista/listPeriodista");
 		result.addObject("periodistas", allPeriodista);

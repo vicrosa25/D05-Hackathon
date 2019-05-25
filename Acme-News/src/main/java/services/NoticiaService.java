@@ -224,4 +224,10 @@ public class NoticiaService {
 		long tmp = Math.round(value);
 		return (double) tmp / factor;
 	}
+
+	public Noticia findOneByName(String noticiaTitulo) {
+		Noticia result = this.noticiaRepository.findOneByName(noticiaTitulo);
+		Assert.notNull(result);
+		return result;
+	}
 }

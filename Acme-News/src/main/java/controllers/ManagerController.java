@@ -4,7 +4,6 @@ package controllers;
 import java.util.Collection;
 import java.util.List;
 
-import javax.swing.JOptionPane;
 import javax.validation.Valid;
 
 import org.hibernate.TypeMismatchException;
@@ -17,9 +16,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import domain.Manager;
 import services.ManagerService;
 import utilities.Md5;
+import domain.Manager;
 
 @Controller
 @RequestMapping("/manager")
@@ -31,7 +30,6 @@ public class ManagerController extends AbstractController {
 
 	@ExceptionHandler(TypeMismatchException.class)
 	public ModelAndView handleMismatchException(final TypeMismatchException oops) {
-		JOptionPane.showMessageDialog(null, "Forbidden operation");
 		return new ModelAndView("redirect:/");
 	}
 

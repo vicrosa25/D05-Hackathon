@@ -116,7 +116,7 @@ public class PeriodistaService {
 	}
 
 
-	// To edit a usuario's profile
+	// To edit
 	public Periodista reconstruct(Periodista periodista, BindingResult binding) {
 		Periodista result = periodista;
 
