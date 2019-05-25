@@ -26,22 +26,18 @@
 	<form:hidden path="reportes" />
 	<%-- --------------------------- --%>
 	
-	<acme:textarea code="noticia.titulo" path="titulo"/>
-	<br />
+	<acme:textbox code="noticia.titulo" path="titulo"/>
 	<br />
 	
 	<acme:textarea code="noticia.descripcion" path="descripcion"/>
 	<br />
-	<br />
 	
 	<acme:textbox code="noticia.imagen" path="imagen"/>
-	<br />
 	<br />
 	
 	<spring:message code="noticia.placeholder.video" var="placeholder" />
 	<acme:textbox code="noticia.video" path="video" placeholder="${placeholder}"/>
 	
-	<br />
 	<br />
 	<spring:message code="noticia.deportes" var="deportes" />
 	<spring:message code="noticia.economia" var="economia" />
@@ -68,7 +64,6 @@
 	</form:select>
 	<form:errors cssClass="error" path="categoria" />
 	<br/>
-	<br />
 
 <input type="submit" name="save"
 		value="<spring:message code="noticia.save" />" />&nbsp; 
