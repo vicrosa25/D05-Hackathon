@@ -9,7 +9,7 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags" %>
 
-<form:form action="evento/crear.do" modelAttribute="evento">
+<form:form action="evento/manager/crear.do" modelAttribute="evento">
 	<%-- Hidden properties from Domain--%>
 	<form:hidden path="id" />
 	<form:hidden path="version" />
@@ -20,25 +20,24 @@
 	
 	<%-- --------------------- --%>
 	
-	<acme:textarea code="evento.titulo" path="titulo"/>
-	<br />
+	<acme:textbox code="evento.titulo" path="titulo"/>
 	<br />
 	
 	<acme:textarea code="evento.descripcion" path="descripcion"/>
 	<br />
-	<br />
 	
 	<acme:textbox code="evento.imagen" path="imagen"/>
-	<br />
 	<br />
 
 	<acme:textbox code="evento.direccion" path="direccion"/>
 	<br />
-	<br />
 	
 	<acme:textbox code="evento.fecha" path="fecha" placeholder="yyyy/MM/dd"/>
 	<br />
-	<br />
+	
+	<!-- Select Agencia -->
+	<acme:select items="${ agencias }" itemLabel="titulo" code="evento.agencia" path="agencia"/>
+	<br>
 
 	<input type="submit" name="save"
 		value="<spring:message code="evento.save" />" />&nbsp; 

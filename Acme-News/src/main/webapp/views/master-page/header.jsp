@@ -71,7 +71,6 @@
 			<li><a class="fNiv"><spring:message	code="master.page.profile" /></a>
 				<ul>
 					<li class="arrow"></li>
-<%-- 				<li><a href="usuario/display.do"><spring:message code="master.page.diplay" /></a></li> --%>
 					<li><a href="periodista/edit.do"><spring:message code="master.page.edit" /></a></li>
 					
 				</ul>
@@ -81,8 +80,6 @@
 					<li class="arrow"></li>
 					<li><a href="noticia/misNoticias.do"><spring:message code="periodista.misNoticias" /></a></li>
 					<li><a href="noticia/crear.do"><spring:message code="periodista.noticia.create" /></a></li>
-					<li><a href="evento/misEventos.do"><spring:message code="periodista.misEventos" /></a></li>
-					<li><a href="evento/crear.do"><spring:message code="periodista.evento.create" /></a></li>
 					<li><a href="periodista/listPeriodista.do"><spring:message code="periodista.list.others" /></a></li>
 					
 				</ul>
@@ -103,6 +100,15 @@
 					<li class="arrow"></li>
 					<li><a href="agencia/listAgencia.do"><spring:message code="master.page.agencia.listAll" /></a></li>
 					<li><a href="agencia/createAgencia.do"><spring:message code="master.page.agencia.create" /></a></li>
+					
+				</ul>
+			</li>
+			
+			<li><a class="fNiv"><spring:message	code="master.page.eventos.manage" /></a>
+				<ul>
+					<li class="arrow"></li>
+					<li><a href="evento/manager/misEventos.do"><spring:message code="periodista.misEventos" /></a></li>
+					<li><a href="evento/manager/crear.do"><spring:message code="periodista.evento.create" /></a></li>
 					
 				</ul>
 			</li>

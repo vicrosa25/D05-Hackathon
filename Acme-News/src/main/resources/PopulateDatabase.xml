@@ -508,13 +508,11 @@
 		<property name="foto"
 			value="https://pbs.twimg.com/profile_images/2254029636/foto_carnet_reasonably_small.jpg" />
 		<property name="agencia" ref="agencia1" />
-				<property name="informacion">
+		<property name="noticias">
 			<list>
 				<ref bean="noticia1" />
 				<ref bean="noticia2" />
 				<ref bean="noticia3" />
-				<ref bean="evento1" />
-				<ref bean="evento2" />
 				
 			</list>
 		</property>
@@ -529,11 +527,10 @@
 		<property name="foto"
 			value="https://pbs.twimg.com/profile_images/1536193136/foto_carnet_Alexis_reasonably_small.jpg" />
 		<property name="agencia" ref="agencia1" />
-						<property name="informacion">
+		<property name="noticias">
 			<list>
 				<ref bean="noticia4" />
 				<ref bean="noticia5" />
-				<ref bean="evento3" />
 			</list>
 		</property>
 	</bean>
@@ -547,10 +544,9 @@
 		<property name="foto"
 			value="https://pbs.twimg.com/profile_images/2162163885/Carnet_reasonably_small.jpg" />
 		<property name="agencia" ref="agencia3" />
-						<property name="informacion">
+		<property name="noticias">
 			<list>
 				<ref bean="noticia6" />
-				<ref bean="evento4" />
 			</list>
 		</property>
 	</bean>
@@ -563,7 +559,7 @@
 		<property name="cartera" ref="cartera6" />
 		<property name="foto"
 			value="https://pbs.twimg.com/profile_images/1423419535/foto_carnet_M__Angeles_reasonably_small.jpg" />
-							<property name="informacion">
+		<property name="noticias">
 			<list>
 				<ref bean="noticia7" />
 				<ref bean="noticia8" />
@@ -580,7 +576,7 @@
 		<property name="cartera" ref="cartera7" />
 		<property name="foto"
 			value="https://pbs.twimg.com/profile_images/1423419535/foto_carnet_M__Angeles_reasonably_small.jpg" />
-							<property name="informacion">
+		<property name="noticias">
 			<list>
 			</list>
 		</property>
@@ -680,6 +676,12 @@
 				<ref bean="periodista2" />
 			</list>
 		</property>
+		<property name="eventos">
+			<list>
+				<ref bean="evento1" />
+				<ref bean="evento4" />
+			</list>
+		</property>
 
 	</bean>
 
@@ -694,6 +696,11 @@
 				<ref bean="periodista3" />
 			</list>
 		</property>
+		<property name="eventos">
+			<list>
+				<ref bean="evento2" />
+			</list>
+		</property>
 
 	</bean>
 
@@ -706,6 +713,11 @@
 		<property name="periodistas">
 			<list>
 
+			</list>
+		</property>
+		<property name="eventos">
+			<list>
+				<ref bean="evento3" />
 			</list>
 		</property>
 
@@ -765,6 +777,7 @@
 			</list>
 		</property>
 		<property name="periodista" ref="periodista1" />
+		<property name="agencia" ref="agencia1" />
 	</bean>
 
 	<bean id="evento2" class="domain.Evento">
@@ -784,7 +797,9 @@
 				<ref bean="usuario4" />
 			</list>
 		</property>
+
 		<property name="periodista" ref="periodista1" />
+		<property name="agencia" ref="agencia2" />
 	</bean>
 	
 	<bean id="evento3" class="domain.Evento">
@@ -801,7 +816,9 @@
 			<list>
 			</list>
 		</property>
+
 		<property name="periodista" ref="periodista2" />
+		<property name="agencia" ref="agencia3" />
 	</bean>
 	
 	<bean id="evento4" class="domain.Evento">
@@ -821,6 +838,7 @@
 			</list>
 		</property>
 		<property name="periodista" ref="periodista3" />
+		<property name="agencia" ref="agencia1" />
 	</bean>
 
 

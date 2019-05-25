@@ -1,5 +1,3 @@
-<%-- Manu --%>
-
 <%@page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 
@@ -11,8 +9,10 @@
 <%@taglib prefix="security" uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 
+<jstl:if test="${not empry evento.imagen }">
 <img src="${evento.imagen}" style="width:304px;height:228px;">
 <br/>
+</jstl:if>
 
 <display:table name="evento" id="row" requestURI="evento/display.do">
 	<spring:message code="evento.titulo" var="tituloHeader" />
@@ -24,11 +24,8 @@
 	<spring:message code="evento.direccion" var="direccionHeader" />
 	<display:column property="direccion" title="${direccionHeader}" sortable="false" />
 	
-	<spring:message code="evento.periodista" var="periodistaHeader" />
-	<display:column property="periodista.nombre" title="${periodistaHeader}" sortable="false" />
-	
 	<spring:message code="evento.agencia" var="agenciaHeader" />
-	<display:column property="periodista.agencia.titulo" title="${agenciaHeader}" sortable="false" />
+	<display:column property="agencia.titulo" title="${agenciaHeader}" sortable="false" />
 </display:table>
 <br/>
 
@@ -56,9 +53,6 @@
 	<spring:message code="comentario.usuario" var="usuarioHeader" />
 	<display:column property="usuario.nombre" title="${usuarioHeader}" sortable="false" />
 </display:table>
-
-
-
 
 <input type="button" name="goBack" value="<spring:message code="evento.return"/>" 
 onclick="javascript: window.location.replace('evento/allEventos.do')"/>

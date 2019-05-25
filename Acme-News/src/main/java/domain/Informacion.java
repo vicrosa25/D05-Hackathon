@@ -6,7 +6,6 @@ import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
 
@@ -26,7 +25,6 @@ public class Informacion extends DomainEntity {
 	// Relationships ----------------------------------------------------------
 	private Collection<Comentario> comentarios;
 	private Collection<Usuario> usuarios;
-	private Periodista periodista;
 
 	// Constructor
 	public Informacion() {
@@ -34,10 +32,10 @@ public class Informacion extends DomainEntity {
 	}
 
 	// Getters and Setters
-	
+
 	@NotBlank
 	public String getTitulo() {
-		return titulo;
+		return this.titulo;
 	}
 
 	public void setTitulo(String titulo) {
@@ -46,7 +44,7 @@ public class Informacion extends DomainEntity {
 	@NotNull
 	@URL
 	public String getImagen() {
-		return imagen;
+		return this.imagen;
 	}
 
 	public void setImagen(String imagen) {
@@ -56,7 +54,7 @@ public class Informacion extends DomainEntity {
 	@NotBlank
 	@Type(type = "org.hibernate.type.StringClobType")
 	public String getDescripcion() {
-		return descripcion;
+		return this.descripcion;
 	}
 
 	public void setDescripcion(String descripcion) {
@@ -79,18 +77,7 @@ public class Informacion extends DomainEntity {
 	public Collection<Usuario> getUsuarios() {
 		return this.usuarios;
 	}
-	 
-	 
-	 public void setUsuarios(Collection<Usuario> usuarios) {
-	 this.usuarios = usuarios;
-	 }
-	 
-	@ManyToOne(optional=false)
-	public Periodista getPeriodista() {
-		return periodista;
-	}
-
-	public void setPeriodista(Periodista periodista) {
-		this.periodista = periodista;
+	public void setUsuarios(Collection<Usuario> usuarios) {
+		this.usuarios = usuarios;
 	}
 }

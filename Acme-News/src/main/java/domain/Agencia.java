@@ -27,6 +27,7 @@ public class Agencia extends DomainEntity {
 
 	// Relationships ----------------------------------------------------------
 	private Collection<Periodista> periodistas;
+	private Collection<Evento> eventos;
 	private Manager manager;
 
 	// Constructor
@@ -39,7 +40,7 @@ public class Agencia extends DomainEntity {
 
 	@NotBlank
 	public String getTitulo() {
-		return titulo;
+		return this.titulo;
 	}
 
 	public void setTitulo(String titulo) {
@@ -48,7 +49,7 @@ public class Agencia extends DomainEntity {
 
 	@NotBlank
 	public String getDireccion() {
-		return direccion;
+		return this.direccion;
 	}
 
 	public void setDireccion(String direccion) {
@@ -57,7 +58,7 @@ public class Agencia extends DomainEntity {
 
 	@Min(0)
 	public int getCapacidadDisponible() {
-		return capacidadDisponible;
+		return this.capacidadDisponible;
 	}
 
 	public void setCapacidadDisponible(int capacidadDisponible) {
@@ -67,7 +68,7 @@ public class Agencia extends DomainEntity {
 	@NotNull
 	@Min(0)
 	public double getTasa() {
-		return tasa;
+		return this.tasa;
 	}
 
 	public void setTasa(double tasa) {
@@ -77,13 +78,11 @@ public class Agencia extends DomainEntity {
 	@Transient
 	public Long getImportancia() {
 		Long result = (long) 0;
-		if (periodistas != null) {
-			for (Periodista periodista : periodistas) {
-				for (Informacion infor : periodista.getInformacion())
-					if (infor.getClass().equals(Noticia.class)) {
-						Long visitas = ((Noticia) infor).getNumeroVisitas();
-						result = result + visitas;
-					}
+		if (this.periodistas != null) {
+			for (Periodista periodista : this.periodistas) {
+				for (Noticia noticia : periodista.getNoticias()){
+					result = result + noticia.getNumeroVisitas();
+				}
 			}
 		}
 		return result;
@@ -98,7 +97,7 @@ public class Agencia extends DomainEntity {
 
 	@OneToMany
 	public Collection<Periodista> getPeriodistas() {
-		return periodistas;
+		return this.periodistas;
 	}
 
 	public void setPeriodistas(Collection<Periodista> periodistas) {
@@ -107,7 +106,7 @@ public class Agencia extends DomainEntity {
 
 	@ManyToOne(optional = true)
 	public Manager getManager() {
-		return manager;
+		return this.manager;
 	}
 
 	public void setManager(Manager manager) {
@@ -120,6 +119,15 @@ public class Agencia extends DomainEntity {
 
 	public void removePeriodistas(Periodista periodista) {
 		this.periodistas.remove(periodista);
+	}
+
+	@NotNull
+	@OneToMany(mappedBy="agencia")
+	public Collection<Evento> getEventos() {
+		return this.eventos;
+	}
+	public void setEventos(Collection<Evento> eventos) {
+		this.eventos = eventos;
 	}
 
 }
