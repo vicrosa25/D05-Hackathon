@@ -20,4 +20,5 @@
 
 <br/>
 <a href=""><input type="button" name="goBack" value="<spring:message code="usuario.goBack"/>" /></a>
+<acme:cancel code="actor.export" url="/usuario/generatePDF.do" />
 <br><br>
