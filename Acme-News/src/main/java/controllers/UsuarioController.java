@@ -1,8 +1,16 @@
 package controllers;
 
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.IOException;
+import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+
+import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.TypeMismatchException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,12 +24,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import domain.Estatus;
-import domain.Informacion;
-import domain.Periodista;
-import domain.Sorteo;
-import domain.Tasa;
-import domain.Usuario;
 import services.ActorService;
 import services.InformacionService;
 import services.NoticiaService;
@@ -30,6 +32,12 @@ import services.SorteoService;
 import services.TasaService;
 import services.UsuarioService;
 import utilities.Md5;
+import domain.Estatus;
+import domain.Informacion;
+import domain.Periodista;
+import domain.Sorteo;
+import domain.Tasa;
+import domain.Usuario;
 
 @Controller
 @RequestMapping("/usuario")
@@ -74,9 +82,17 @@ public class UsuarioController extends AbstractController {
 	@RequestMapping(value = "/display", method = RequestMethod.GET)
 	public ModelAndView display() {
 		ModelAndView result;
-		Usuario usuario = (Usuario) this.actorService.findByPrincipal();
-		result = new ModelAndView("usuario/display");
-		result.addObject("usuario", usuario);
+		try{
+			Usuario usuario = (Usuario) this.actorService.findByPrincipal();
+			result = new ModelAndView("usuario/display");
+			result.addObject("usuario", usuario);
+		} catch (final Throwable oops) {
+			System.out.println(oops.getMessage());
+			System.out.println(oops.getClass());
+			System.out.println(oops.getCause());
+			oops.printStackTrace();
+			result =super.forbiddenOpperation();
+		}
 		return result;
 	}
 
@@ -202,13 +218,17 @@ public class UsuarioController extends AbstractController {
 	@RequestMapping(value="/listInformacionDeQuienSigues",method=RequestMethod.GET)
 	public ModelAndView listCompartidaOtros() {
 		ModelAndView result;
+		try{
+			result = new ModelAndView("usuario/listInformacionDeQuienSigues");
+			result.addObject("informacionDeQuienSigues", this.usuarioService.findInformacionDeQuienSigues());
 
-
-		result = new ModelAndView("usuario/listInformacionDeQuienSigues");
-
-
-		result.addObject("informacionDeQuienSigues", this.usuarioService.findInformacionDeQuienSigues());
-
+		} catch (final Throwable oops) {
+			System.out.println(oops.getMessage());
+			System.out.println(oops.getClass());
+			System.out.println(oops.getCause());
+			oops.printStackTrace();
+			result =super.forbiddenOpperation();
+		}
 		return result;
 	}
 
@@ -362,17 +382,24 @@ public class UsuarioController extends AbstractController {
 	public ModelAndView compartirNoticia(@RequestParam int informacionId) {
 		ModelAndView result;
 		Informacion informacion;
+		try{
+			informacion= this.informacionService.findOne(informacionId);
+			Assert.notNull(informacion);
 
-		informacion= this.informacionService.findOne(informacionId);
-		Assert.notNull(informacion);
+			if(this.usuarioService.compartirInformacion(informacion)){
 
-		if(this.usuarioService.compartirInformacion(informacion)){
+				result = this.createEditModelAndViewCompartirNoticia("usuario.compartirInformacion.exito");
 
-			result = this.createEditModelAndViewCompartirNoticia("usuario.compartirInformacion.exito");
+			}else{
 
-		}else{
-
-			result = this.createEditModelAndViewCompartirNoticia("usuario.compartirInformacion.error");
+				result = this.createEditModelAndViewCompartirNoticia("usuario.compartirInformacion.error");
+			}
+		} catch (final Throwable oops) {
+			System.out.println(oops.getMessage());
+			System.out.println(oops.getClass());
+			System.out.println(oops.getCause());
+			oops.printStackTrace();
+			result =super.forbiddenOpperation();
 		}
 
 		return result;
@@ -380,48 +407,70 @@ public class UsuarioController extends AbstractController {
 
 	protected ModelAndView createEditModelAndViewCompartirNoticia(String message) {
 		ModelAndView result;
-		result = new ModelAndView("usuario/listNoticiasCompartidas");
-
-
-		result.addObject("noticiasCompartidas", this.usuarioService.findByPrincipal().getInformacionCompartida());
-		result.addObject("message", message);
-
-
+		try{
+			result = new ModelAndView("usuario/listNoticiasCompartidas");
+			result.addObject("noticiasCompartidas", this.usuarioService.findByPrincipal().getInformacionCompartida());
+			result.addObject("message", message);
+		} catch (final Throwable oops) {
+			System.out.println(oops.getMessage());
+			System.out.println(oops.getClass());
+			System.out.println(oops.getCause());
+			oops.printStackTrace();
+			result =super.forbiddenOpperation();
+		}
 
 		return result;
 	}
 
 	protected ModelAndView createEditModelAndViewApuntarseSorteo(String message,Integer puntos) {
 		ModelAndView result;
-		result = new ModelAndView("usuario/listSorteosProximos");
+		try{
+			result = new ModelAndView("usuario/listSorteosProximos");
+			result.addObject("listSorteosProximos", this.usuarioService.findSorteosProximos());
+			result.addObject("message", message);
+			result.addObject("puntos", puntos);
+		} catch (final Throwable oops) {
+			System.out.println(oops.getMessage());
+			System.out.println(oops.getClass());
+			System.out.println(oops.getCause());
+			oops.printStackTrace();
+			result =super.forbiddenOpperation();
+		}
 
-
-		result.addObject("listSorteosProximos", this.usuarioService.findSorteosProximos());
-
-		result.addObject("message", message);
-
-		result.addObject("puntos", puntos);
 		return result;
-
-
 	}
 
 
 	@RequestMapping(value="/listSorteosProximos",method=RequestMethod.GET)
 	public ModelAndView listSorteosProximos() {
 		ModelAndView result;
-		result = new ModelAndView("usuario/listSorteosProximos");
-
-
-		result.addObject("listSorteosProximos", this.usuarioService.findSorteosProximos());
+		try{
+			result = new ModelAndView("usuario/listSorteosProximos");
+			result.addObject("listSorteosProximos", this.usuarioService.findSorteosProximos());
+		} catch (final Throwable oops) {
+			System.out.println(oops.getMessage());
+			System.out.println(oops.getClass());
+			System.out.println(oops.getCause());
+			oops.printStackTrace();
+			result =super.forbiddenOpperation();
+		}
 		return result;
 	}
 
 	@RequestMapping(value="/listTusSorteos",method=RequestMethod.GET)
 	public ModelAndView listTusSorteos() {
 		ModelAndView result;
-		result = new ModelAndView("usuario/listTusSorteos");
-		result.addObject("listTusSorteos", this.usuarioService.findByPrincipal().getSorteos());
+		try{
+			result = new ModelAndView("usuario/listTusSorteos");
+			result.addObject("listTusSorteos", this.usuarioService.findByPrincipal().getSorteos());
+
+		} catch (final Throwable oops) {
+			System.out.println(oops.getMessage());
+			System.out.println(oops.getClass());
+			System.out.println(oops.getCause());
+			oops.printStackTrace();
+			result =super.forbiddenOpperation();
+		}
 		return result;
 	}
 
@@ -431,19 +480,27 @@ public class UsuarioController extends AbstractController {
 	public ModelAndView apuntarseSorteo(@RequestParam int sorteoId) {
 		ModelAndView result;
 		Sorteo sorteo;
-		sorteo= this.sorteoService.findOne(sorteoId);
-		Assert.notNull(sorteo);
-		if(this.usuarioService.apuntarseSorteo(sorteo)==2){
+		try{
+			sorteo= this.sorteoService.findOne(sorteoId);
+			Assert.notNull(sorteo);
+			if(this.usuarioService.apuntarseSorteo(sorteo)==2){
 
-			result = this.createEditModelAndViewApuntarseSorteo("usuario.apuntarseSorteo.exito",null);
+				result = this.createEditModelAndViewApuntarseSorteo("usuario.apuntarseSorteo.exito",null);
 
-		}else if (this.usuarioService.apuntarseSorteo(sorteo)==1){
-			Integer puntosRestantes=sorteo.getPuntosNecesarios()-this.usuarioService.findByPrincipal().getPuntos();
-			result = this.createEditModelAndViewApuntarseSorteo("usuario.apuntarseSorteo.puntosInsuficientes",puntosRestantes);
-		}else{
-			result = this.createEditModelAndViewApuntarseSorteo("usuario.apuntarseSorteo.apuntandoPreviamente",null);
+			}else if (this.usuarioService.apuntarseSorteo(sorteo)==1){
+				Integer puntosRestantes=sorteo.getPuntosNecesarios()-this.usuarioService.findByPrincipal().getPuntos();
+				result = this.createEditModelAndViewApuntarseSorteo("usuario.apuntarseSorteo.puntosInsuficientes",puntosRestantes);
+			}else{
+				result = this.createEditModelAndViewApuntarseSorteo("usuario.apuntarseSorteo.apuntandoPreviamente",null);
+			}
+
+		} catch (final Throwable oops) {
+			System.out.println(oops.getMessage());
+			System.out.println(oops.getClass());
+			System.out.println(oops.getCause());
+			oops.printStackTrace();
+			result =super.forbiddenOpperation();
 		}
-
 		return result;
 	}
 
@@ -451,74 +508,97 @@ public class UsuarioController extends AbstractController {
 	@RequestMapping(value="/cambiarEstatusMetodo",method = RequestMethod.POST)
 	public ModelAndView cambiarEstatusMetodo() {
 		ModelAndView result;
-		Usuario usuarioLogued=this.usuarioService.findByPrincipal();
-		Integer aux=null;
-		aux=this.usuarioService.cambiarEstatus();
+		try{
+			Usuario usuarioLogued=this.usuarioService.findByPrincipal();
+			Integer aux=null;
+			aux=this.usuarioService.cambiarEstatus();
 
 
-		if(aux==1){ //tiene puntos suficientes y cambia de estatus
+			if(aux==1){ //tiene puntos suficientes y cambia de estatus
 
-			result = this.createEditModelAndViewcambiarEstatusMetodo("usuario.CambiarEstatus.exito",null);
+				result = this.createEditModelAndViewcambiarEstatusMetodo("usuario.CambiarEstatus.exito",null);
 
-		}else if(aux==2) { //no tenia puntos suficientes
+			}else if(aux==2) { //no tenia puntos suficientes
 
-			Tasa tasa= this.tasaService.getTasaRepository().findAll().get(0);
-			Integer puntosRestantes;
+				Tasa tasa= this.tasaService.getTasaRepository().findAll().get(0);
+				Integer puntosRestantes;
 
-			if(usuarioLogued.getEstatus().equals(Estatus.PRINCIPIANTE)){  //se calcula lo que te falta en caso de que seas principiante
-				puntosRestantes=tasa.getCosteVeterano()-usuarioLogued.getPuntos();
-				result = this.createEditModelAndViewcambiarEstatusMetodo("usuario.cambiarAVeterano.puntosInsuficientes",puntosRestantes);
+				if(usuarioLogued.getEstatus().equals(Estatus.PRINCIPIANTE)){  //se calcula lo que te falta en caso de que seas principiante
+					puntosRestantes=tasa.getCosteVeterano()-usuarioLogued.getPuntos();
+					result = this.createEditModelAndViewcambiarEstatusMetodo("usuario.cambiarAVeterano.puntosInsuficientes",puntosRestantes);
+				}
+				else{ //se calcula lo que te falta en caso de que seas veterano
+					puntosRestantes=tasa.getCosteMaestro()-usuarioLogued.getPuntos();
+					result = this.createEditModelAndViewcambiarEstatusMetodo("usuario.cambiarAMaestro.puntosInsuficientes",puntosRestantes);
+				}
+
+
+			} else{
+				result = this.createEditModelAndViewcambiarEstatusMetodo("usuario.CambiarEstatus.exito",null);
 			}
-			else{ //se calcula lo que te falta en caso de que seas veterano
-				puntosRestantes=tasa.getCosteMaestro()-usuarioLogued.getPuntos();
-				result = this.createEditModelAndViewcambiarEstatusMetodo("usuario.cambiarAMaestro.puntosInsuficientes",puntosRestantes);
-			}
-
-
-		} else{
-			result = this.createEditModelAndViewcambiarEstatusMetodo("usuario.CambiarEstatus.exito",null);
+		} catch (final Throwable oops) {
+			System.out.println(oops.getMessage());
+			System.out.println(oops.getClass());
+			System.out.println(oops.getCause());
+			oops.printStackTrace();
+			result =super.forbiddenOpperation();
 		}
 		return result;
 	}
 
 	protected ModelAndView createEditModelAndViewcambiarEstatusMetodo(String message,Integer puntos) {
 		ModelAndView result;
-		result = new ModelAndView("usuario/cambiarEstatus");
-		Usuario usuarioLogued=this.usuarioService.findByPrincipal();
-		result.addObject("usuario",usuarioLogued);
-		Estatus estatusMaestro= Estatus.MAESTRO;
-		Estatus estatusVeterano= Estatus.VETERANO;
-		Estatus estatusPrincipiante= Estatus.PRINCIPIANTE;
-		Tasa tasa= this.tasaService.getTasaRepository().findAll().get(0);
-		result.addObject("usuario",usuarioLogued);
-		result.addObject("tasa",tasa);
-		result.addObject("estatusMaestro",estatusMaestro);
-		result.addObject("estatusVeterano",estatusVeterano);
-		result.addObject("estatusPrincipiante",estatusPrincipiante);
+		try{
+			result = new ModelAndView("usuario/cambiarEstatus");
+			Usuario usuarioLogued=this.usuarioService.findByPrincipal();
+			result.addObject("usuario",usuarioLogued);
+			Estatus estatusMaestro= Estatus.MAESTRO;
+			Estatus estatusVeterano= Estatus.VETERANO;
+			Estatus estatusPrincipiante= Estatus.PRINCIPIANTE;
+			Tasa tasa= this.tasaService.getTasaRepository().findAll().get(0);
+			result.addObject("usuario",usuarioLogued);
+			result.addObject("tasa",tasa);
+			result.addObject("estatusMaestro",estatusMaestro);
+			result.addObject("estatusVeterano",estatusVeterano);
+			result.addObject("estatusPrincipiante",estatusPrincipiante);
 
-		result.addObject("message", message);
+			result.addObject("message", message);
 
-		result.addObject("puntos", puntos);
+			result.addObject("puntos", puntos);
+		} catch (final Throwable oops) {
+			System.out.println(oops.getMessage());
+			System.out.println(oops.getClass());
+			System.out.println(oops.getCause());
+			oops.printStackTrace();
+			result =super.forbiddenOpperation();
+		}
 		return result;
 
 
 	}
 
-
 	@RequestMapping(value="/cambiarEstatus",method=RequestMethod.GET)
 	public ModelAndView cambiarEstatus() {
 		ModelAndView result;
-		result = new ModelAndView("usuario/cambiarEstatus");
-		Usuario usuarioLogued=this.usuarioService.findByPrincipal();
-		Estatus estatusMaestro= Estatus.MAESTRO;
-		Estatus estatusVeterano= Estatus.VETERANO;
-		Estatus estatusPrincipiante= Estatus.PRINCIPIANTE;
-		Tasa tasa= this.tasaService.getTasaRepository().findAll().get(0);
-		result.addObject("usuario",usuarioLogued);
-		result.addObject("tasa",tasa);
-		result.addObject("estatusMaestro",estatusMaestro);
-		result.addObject("estatusVeterano",estatusVeterano);
-		result.addObject("estatusPrincipiante",estatusPrincipiante);
+		try{
+			result = new ModelAndView("usuario/cambiarEstatus");
+			Usuario usuarioLogued=this.usuarioService.findByPrincipal();
+			Estatus estatusMaestro= Estatus.MAESTRO;
+			Estatus estatusVeterano= Estatus.VETERANO;
+			Estatus estatusPrincipiante= Estatus.PRINCIPIANTE;
+			Tasa tasa= this.tasaService.getTasaRepository().findAll().get(0);
+			result.addObject("usuario",usuarioLogued);
+			result.addObject("tasa",tasa);
+			result.addObject("estatusMaestro",estatusMaestro);
+			result.addObject("estatusVeterano",estatusVeterano);
+			result.addObject("estatusPrincipiante",estatusPrincipiante);
+		} catch (final Throwable oops) {
+			System.out.println(oops.getMessage());
+			System.out.println(oops.getClass());
+			System.out.println(oops.getCause());
+			oops.printStackTrace();
+			result =super.forbiddenOpperation();
+		}
 		return result;
 	}
 
@@ -534,16 +614,51 @@ public class UsuarioController extends AbstractController {
 	@RequestMapping(value = "/checkBan", method = RequestMethod.POST )
 	public ModelAndView checkBan2(@RequestParam("username") String username) {
 		ModelAndView result;
-		int banned=0;
-		if(this.usuarioService.getUsuarioRepository().userAccountExist(username)>0)
-			banned=2;
-		else banned=1;
+		try{
+			int banned=0;
+			if(this.usuarioService.getUsuarioRepository().userAccountExist(username)>0)
+				banned=2;
+			else banned=1;
 
-		result = new ModelAndView("usuario/checkBan");
-		result.addObject("holder",username);
-		result.addObject("banned",banned);
-
-
+			result = new ModelAndView("usuario/checkBan");
+			result.addObject("holder",username);
+			result.addObject("banned",banned);
+		} catch (final Throwable oops) {
+			System.out.println(oops.getMessage());
+			System.out.println(oops.getClass());
+			System.out.println(oops.getCause());
+			oops.printStackTrace();
+			result =super.forbiddenOpperation();
+		}
 		return result;
+	}
+
+	// Generate pdf ------------------------------------------------------------------------------------
+	@RequestMapping(value = "/generatePDF")
+	public void generatePDF(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		Usuario usuario;
+
+		try {
+			final ServletContext servletContext = request.getSession().getServletContext();
+			final File tempDirectory = (File) servletContext.getAttribute("javax.servlet.context.tempdir");
+			final String temperotyFilePath = tempDirectory.getAbsolutePath();
+			usuario = this.usuarioService.findByPrincipal();
+
+			String fileName = usuario.getNombre() + ".pdf";
+			response.setContentType("application/pdf");
+			response.setHeader("Content-disposition", "attachment; filename=" + fileName);
+
+			this.actorService.generatePersonalInformationPDF(usuario, temperotyFilePath + "\\" + fileName);
+			ByteArrayOutputStream baos = new ByteArrayOutputStream();
+			baos = this.convertPDFToByteArrayOutputStream(temperotyFilePath + "\\" + fileName);
+			OutputStream os = response.getOutputStream();
+			baos.writeTo(os);
+			os.flush();
+		} catch (final Throwable oops) {
+			System.out.println(oops.getMessage());
+			System.out.println(oops.getClass());
+			System.out.println(oops.getCause());
+			oops.printStackTrace();
+		}
 	}
 }
