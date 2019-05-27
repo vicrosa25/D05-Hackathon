@@ -2,6 +2,7 @@ package services;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -11,20 +12,28 @@ import org.springframework.util.Assert;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.Validator;
 
+import domain.Moderador;
+import domain.Usuario;
+import forms.ModeradorForm;
 import repositories.ModeradorRepository;
 import security.Authority;
 import security.LoginService;
 import security.UserAccount;
-import domain.Moderador;
-import forms.ModeradorForm;
 
 @Service
 @Transactional
 public class ModeradorService {
 	
-	// Managed repository------------------------------------------------------------------------------------------------
+	// Managed repository----------------------------------------------------------------------------------------------
 	@Autowired
 	private ModeradorRepository moderadorRepository;
+	
+	
+	// Supporting services --------------------------------------------------------------------------------------------
+	@Autowired
+	private UsuarioService 		usuarioService;
+	
+	
 	
 	
 	// Validator
@@ -97,9 +106,48 @@ public class ModeradorService {
 		return result;
 	}
 	
-	public ModeradorRepository getModeradorRepository() {
-		return moderadorRepository;
+	
+	// Ban/Unban Usuario
+	public List<Usuario> getUsuariosToBan() {
+		//return this.usuarioRepository.getUsersNotBanned();
+		return this.usuarioService.getUsuariosToBan();
+		
 	}
+
+	public List<Usuario> getUsuariosToUnBan() {
+		//return this.usuarioRepository.getUsersBanned();
+		return this.usuarioService.getUsuariosToUnBan();
+	}
+	
+	public Usuario saveBanUnban(int id) {
+		Authority authority = new Authority();
+		authority.setAuthority(Authority.MODERADOR);
+		Assert.notNull(this.usuarioService.findOne(id));
+		Assert.isTrue(LoginService.getPrincipal().getAuthorities().contains(authority));
+		
+		Usuario toBanUnban = this.usuarioService.findOne(id);
+		Boolean probe = toBanUnban.getBanned();
+		
+		if (toBanUnban.getBanned() == false) {
+			toBanUnban.setUsernameCopyForBan(toBanUnban.getUserAccount()
+				.getUsername());
+			toBanUnban.getUserAccount().setUsername(null);
+			toBanUnban.setBanned(true);
+		} else {
+			toBanUnban.getUserAccount().setUsername(toBanUnban.getUsernameCopyForBan());
+			toBanUnban.setBanned(false);
+		}
+		
+		Usuario saved = this.usuarioService.save(toBanUnban);
+		Assert.isTrue(!probe.equals(toBanUnban.getBanned()));
+		return saved;
+	}
+	
+	
+	
+//	public ModeradorRepository getModeradorRepository() {
+//		return moderadorRepository;
+//	}
 	
 	public Moderador findByPrincipal(){
 		Moderador result;

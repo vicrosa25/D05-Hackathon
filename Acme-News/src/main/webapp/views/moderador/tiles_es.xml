@@ -5,14 +5,15 @@
        "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
       
 <tiles-definitions>
-
 	
-		<definition name="moderador/retirarDinero" extends="master.page">	
+	<definition name="moderador/retirarDinero" extends="master.page">	
 		<put-attribute name="title" value="Retirar Dinero Obnetido" />
 		<put-attribute name="body" value="/views/moderador/retirarDinero.jsp" />
 	</definition>
 	
-
-
+	<definition name="moderador/usuarios/ban" extends="master.page">	
+		<put-attribute name="title" value="Banear y Desbanear Usuarios" />
+		<put-attribute name="body" value="/views/moderador/usuarios/ban.jsp" />
+	</definition>
 	
 </tiles-definitions>

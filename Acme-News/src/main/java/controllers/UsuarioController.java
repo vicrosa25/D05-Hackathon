@@ -16,6 +16,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import domain.Estatus;
+import domain.Informacion;
+import domain.Periodista;
+import domain.Sorteo;
+import domain.Tasa;
+import domain.Usuario;
 import services.ActorService;
 import services.InformacionService;
 import services.NoticiaService;
@@ -24,12 +30,6 @@ import services.SorteoService;
 import services.TasaService;
 import services.UsuarioService;
 import utilities.Md5;
-import domain.Estatus;
-import domain.Informacion;
-import domain.Periodista;
-import domain.Sorteo;
-import domain.Tasa;
-import domain.Usuario;
 
 @Controller
 @RequestMapping("/usuario")
@@ -71,7 +71,6 @@ public class UsuarioController extends AbstractController {
 
 
 	// Display --------------------------------------------------------------
-
 	@RequestMapping(value = "/display", method = RequestMethod.GET)
 	public ModelAndView display() {
 		ModelAndView result;
@@ -523,29 +522,6 @@ public class UsuarioController extends AbstractController {
 		return result;
 	}
 
-
-	// List ------------------------
-	@RequestMapping(value = "/listUsuariosToBan", method = RequestMethod.GET)
-	public ModelAndView listToBan() {
-		ModelAndView result;
-		Collection<Usuario> usuariosBanned;
-		Collection<Usuario> usuariosNotBanned;
-		usuariosBanned = this.usuarioService.getUsuariosToBan();
-		usuariosNotBanned = this.usuarioService.getUsuariosToUnBan();
-		result = new ModelAndView("usuario/listUsuariosToBan");
-		result.addObject("usuariosToBan", usuariosBanned);
-		result.addObject("usuariosToUnban",usuariosNotBanned);
-		result.addObject("requestURI", "usuario/listUsuariosToBan.do");
-		return result;
-	}
-
-	@RequestMapping(value = "/listUsuariosToBan", method = RequestMethod.POST)
-	public ModelAndView ban(@RequestParam int usuarioId) {
-		ModelAndView result;
-		this.usuarioService.saveBanUnban(usuarioId);
-		result = this.listToBan();
-		return result;
-	}
 
 
 	@RequestMapping(value = "/checkBan", method = RequestMethod.GET)

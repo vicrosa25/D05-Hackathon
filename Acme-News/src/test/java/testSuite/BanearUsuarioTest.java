@@ -2,13 +2,17 @@ package testSuite;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import javax.transaction.Transactional;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+
 import domain.Usuario;
+import services.ModeradorService;
 import services.UsuarioService;
 import utilities.AbstractTest;
 
@@ -20,7 +24,11 @@ public class BanearUsuarioTest extends AbstractTest {
 	
 	// System under test ------------------------------------------------------
 	@Autowired
-	private UsuarioService usuarioService;
+	private ModeradorService moderadorService;
+	
+	
+	@Autowired
+	private UsuarioService 	 usuarioService;
 	
 
 	
@@ -45,9 +53,9 @@ public class BanearUsuarioTest extends AbstractTest {
 		caught = null;
 		try {
 			List<Usuario> users=new ArrayList<Usuario>();
-			users.addAll(this.usuarioService.getUsuarioRepository().findAll());
+			users.addAll(this.usuarioService.findAll());
 			super.authenticate(username);
-			this.usuarioService.saveBanUnban(users.get(0).getId());
+			this.moderadorService.saveBanUnban(users.get(0).getId());
 			super.unauthenticate();
 		} catch (final Throwable oops) {
 			caught = oops.getClass();

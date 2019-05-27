@@ -14,10 +14,6 @@ import org.springframework.util.Assert;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.Validator;
 
-import repositories.UsuarioRepository;
-import security.Authority;
-import security.LoginService;
-import security.UserAccount;
 import domain.Comentario;
 import domain.Estatus;
 import domain.Informacion;
@@ -27,6 +23,10 @@ import domain.Sorteo;
 import domain.Tasa;
 import domain.Usuario;
 import forms.UsuarioForm;
+import repositories.UsuarioRepository;
+import security.Authority;
+import security.LoginService;
+import security.UserAccount;
 
 @Service
 @Transactional
@@ -173,6 +173,8 @@ public class UsuarioService {
 		newOne.setBuscador(oldOne.getBuscador());
 	}
 
+	
+	// Other Methods
 	private Usuario findByPrincipalToEdit() {
 		Usuario result = (Usuario) this.actorService.findByPrincipal();
 		return result;
@@ -376,41 +378,4 @@ public class UsuarioService {
 	public List<Usuario> getUsuariosToUnBan() {
 		return this.usuarioRepository.getUsersBanned();
 	}
-
-	public Usuario saveBanUnban(int id) {
-		Authority authority = new Authority();
-		authority.setAuthority(Authority.MODERADOR);
-		Assert.notNull(this.usuarioRepository.findOne(id));
-		Assert.isTrue(LoginService.getPrincipal().getAuthorities()
-			.contains(authority));
-		Usuario toBanUnban = this.usuarioRepository.findOne(id);
-		Boolean probe = toBanUnban.getBanned();
-		if (toBanUnban.getBanned() == false) {
-
-			toBanUnban.setUsernameCopyForBan(toBanUnban.getUserAccount()
-				.getUsername());
-			toBanUnban.getUserAccount().setUsername(null);
-			toBanUnban.setBanned(true);
-		} else {
-			toBanUnban.getUserAccount().setUsername(
-				toBanUnban.getUsernameCopyForBan());
-			toBanUnban.setBanned(false);
-		}
-		Usuario saved = this.usuarioRepository.save(toBanUnban);
-		Assert.isTrue(!probe.equals(toBanUnban.getBanned()));
-		return saved;
-	}
-
-
-
-
-
-
-
-
-
-
-
-
-
 }

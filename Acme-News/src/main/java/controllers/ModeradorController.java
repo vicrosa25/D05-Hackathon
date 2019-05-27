@@ -1,13 +1,17 @@
 package controllers;
 
 
+import java.util.Collection;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+
 import domain.Moderador;
-import security.LoginService;
+import domain.Usuario;
 import services.ModeradorService;
 
 
@@ -20,6 +24,7 @@ public class ModeradorController extends AbstractController {
 	
 		@Autowired
 		private ModeradorService moderadorService;
+		
 
 		
 		// Constructor
@@ -27,16 +32,16 @@ public class ModeradorController extends AbstractController {
 			super();
 		}
 		
-		
-	
-		
 		// List ------------------------
 		@RequestMapping(value = "/retirarDinero", method = RequestMethod.GET)
 		public ModelAndView retirarDinero() {
 			ModelAndView result;
-			Moderador actual= this.moderadorService.getModeradorRepository().findByUserAccountId(LoginService.getPrincipal().getId());
-			Double dineroAcumulado= actual.getCartera().getSaldoAcumulado();
-			Double dineroAcumuladoTotal= actual.getCartera().getSaldoAcumuladoTotal();
+			Moderador actual; 
+					
+			actual = this.moderadorService.findByPrincipal();
+			Double dineroAcumulado = actual.getCartera().getSaldoAcumulado();
+			Double dineroAcumuladoTotal = actual.getCartera().getSaldoAcumuladoTotal();
+			
 			result = new ModelAndView("moderador/retirarDinero");
 			result.addObject("dineroAcumulado", dineroAcumulado);
 			result.addObject("dineroAcumuladoTotal",dineroAcumuladoTotal);
@@ -44,11 +49,44 @@ public class ModeradorController extends AbstractController {
 			return result;
 		}
 		
+		// Ban/Uban usuario -------------------------------------------------------------------------------------
+		@RequestMapping(value = "/usuarios/ban", method = RequestMethod.GET)
+		public ModelAndView listToBan() {
+			ModelAndView result;
+			Collection<Usuario> usuariosBanned;
+			Collection<Usuario> usuariosNotBanned;
+			
+			usuariosBanned = this.moderadorService.getUsuariosToBan();
+			usuariosNotBanned = this.moderadorService.getUsuariosToUnBan();
+			
+			result = new ModelAndView("moderador/usuarios/ban");
+			result.addObject("usuariosToBan", usuariosBanned);
+			result.addObject("usuariosToUnban",usuariosNotBanned);
+			result.addObject("requestURI", "moderador/usuarios/ban.do");
+			
+			return result;
+		}
+		
+		
+		@RequestMapping(value = "/usuarios/ban", method = RequestMethod.POST)
+		public ModelAndView ban(@RequestParam int usuarioId) {
+			ModelAndView result;
+			this.moderadorService.saveBanUnban(usuarioId);
+			result = this.listToBan();
+			return result;
+		}
+		
+		
+		// Retirar Dinero ---------------------------------------------------------------------------------------------
 		@RequestMapping(value = "/retirarDinero", method = RequestMethod.POST)
 		public ModelAndView retirar() {
 			ModelAndView result;
-			Moderador actual= this.moderadorService.getModeradorRepository().findByUserAccountId(LoginService.getPrincipal().getId());
+			Moderador actual;
+			
+			actual = this.moderadorService.findByPrincipal();
 			Double dineroAcumulado= actual.getCartera().getSaldoAcumulado();
+			
+			
 			if(dineroAcumulado>=5.0){
 			moderadorService.retirarDinero();
 			result = this.retirarDinero();

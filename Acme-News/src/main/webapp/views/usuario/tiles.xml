@@ -50,10 +50,6 @@
 		<put-attribute name="body" value="/views/usuario/cambiarEstatus.jsp" />
 	</definition>
 	
-		<definition name="usuario/listUsuariosToBan" extends="master.page">	
-		<put-attribute name="title" value="Ban / Unban Users" />
-		<put-attribute name="body" value="/views/usuario/listUsuariosToBan.jsp" />
-	</definition>
 
 	<definition name="usuario/checkBan" extends="master.page">	
 		<put-attribute name="title" value="Check if your account is banned" />

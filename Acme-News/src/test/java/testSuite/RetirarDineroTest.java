@@ -2,7 +2,9 @@ package testSuite;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import javax.transaction.Transactional;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,7 +46,7 @@ public class RetirarDineroTest extends AbstractTest {
 		caught = null;
 		try {
 			List<Moderador> moderadores=new ArrayList<Moderador>();
-			moderadores.addAll(this.moderadorService.getModeradorRepository().findAll());
+			moderadores.addAll(this.moderadorService.findAll());
 			moderadores.get(0).getCartera().setSaldoAcumulado(500);
 			moderadores.get(1).getCartera().setSaldoAcumulado(2);
 			super.authenticate(moderadores.get(i).getUserAccount().getUsername());
