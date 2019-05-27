@@ -11,13 +11,13 @@ import org.springframework.util.Assert;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.Validator;
 
+import domain.Noticia;
+import domain.Periodista;
+import forms.PeriodistaForm;
 import repositories.PeriodistaRepository;
 import security.Authority;
 import security.LoginService;
 import security.UserAccount;
-import domain.Noticia;
-import domain.Periodista;
-import forms.PeriodistaForm;
 
 @Service
 @Transactional
@@ -73,6 +73,25 @@ public class PeriodistaService {
 		Periodista periodista = this.periodistaRepository.findOne(id);
 		Assert.notNull(periodista);
 		return periodista;
+	}
+	
+	
+	public Collection<Periodista> findWithBannedNews() {
+		Collection<Periodista> result = new ArrayList<Periodista>();
+		Collection<Periodista> periodistas = this.periodistaRepository.findWithBannedNew();
+		
+		for (Periodista periodista : periodistas) {
+			if (periodista.getIsBanned() == false) {
+				result.add(periodista);
+			}
+		}
+		
+		return result;
+	}
+	
+	
+	public Collection<Periodista> findBanned() {
+		return this.getPeriodistaRepository().findBanned();
 	}
 
 

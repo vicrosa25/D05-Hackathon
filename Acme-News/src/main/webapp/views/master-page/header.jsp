@@ -134,6 +134,7 @@
 		<security:authorize access="hasRole('MODERADOR')">
 			<li><a href="noticia/listBanear.do"><spring:message code="moderador.listBanear" /></a></li>
 			<li><a href="moderador/usuarios/ban.do"><spring:message code="master.page.administrator.usuariosToBan" /></a></li>
+			<li><a href="moderador/periodistas/ban.do"><spring:message code="master.page.administrator.periodistasToBan" /></a></li>
 			<li><a href="noticia/listPendientes.do"><spring:message code="moderador.listPendientes" /></a></li>
 			<li><a href="moderador/retirarDinero.do"><spring:message code="master.page.administrator.retirarDinero" /></a></li>
 		</security:authorize>

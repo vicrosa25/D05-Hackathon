@@ -20,12 +20,14 @@ public class Periodista extends Actor {
 
 
 	// Attributes -------------------------------------------------------------
-	private String foto;
-	private Cartera cartera;
+	private String 					foto;
+	private Cartera 				cartera;
+	private Boolean					isBanned;
+	private String 					usernameCopyForBan;
 
 	// Relationships ----------------------------------------------------------
-	private Agencia agencia;
-	private Collection<Noticia> noticias;
+	private Agencia 				agencia;
+	private Collection<Noticia> 	noticias;
 
 
 	// Constructor
@@ -40,23 +42,48 @@ public class Periodista extends Actor {
 	public String getFoto() {
 		return this.foto;
 	}
+	
+	
 	public void setFoto(String foto) {
 		this.foto = foto;
 	}
 
+	
 	@NotNull
 	@Valid
 	public Cartera getCartera() {
 		return this.cartera;
 	}
+	
+	
 	public void setCartera(Cartera cartera) {
 		this.cartera = cartera;
 	}
+	
+	
+	public String getUsernameCopyForBan() {
+		return usernameCopyForBan;
+	}
 
 
+	
+	public void setUsernameCopyForBan(String usernameCopyForBan) {
+		this.usernameCopyForBan = usernameCopyForBan;
+	}
+
+
+	public Boolean getIsBanned() {
+		return isBanned;
+	}
+
+
+	
+	public void setIsBanned(Boolean isBanned) {
+		this.isBanned = isBanned;
+	}
+	
 
 	// Relationships  Getters and Setters	----------------------------------------------------------
-
 	@ManyToOne(optional = true)
 	public Agencia getAgencia() {
 		return this.agencia;

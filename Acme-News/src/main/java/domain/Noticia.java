@@ -24,17 +24,18 @@ public class Noticia extends Informacion {
 
 
 	// Attributes -------------------------------------------------------------
-	private String video;
-	private Categoria categoria;
-	private Estado estado;
-	private Long numeroVisitas;
-	private Date fecha;
+	private String 				video;
+	private Categoria 			categoria;
+	private Estado 				estado;
+	private Long 				numeroVisitas;
+	private Date 				fecha;
+	private Boolean				isBanned;
 
 	//  -------------------------------------------------------------
 
 	private Collection<Noticia> noticiasRelacionadas;
 	private Collection<Reporte> reportes;
-	private Periodista periodista;
+	private Periodista 			periodista;
 
 
 	// Constructor ----------------------------------------------------------
@@ -85,6 +86,18 @@ public class Noticia extends Informacion {
 	public void setNumeroVisitas(Long num){
 		this.numeroVisitas=num;
 	}
+	
+	public Boolean getIsBanned() {
+		return isBanned;
+	}
+
+	
+	public void setIsBanned(Boolean isBanned) {
+		this.isBanned = isBanned;
+	}
+	
+	
+	
 
 
 	//----------------------------------------

@@ -505,6 +505,7 @@
 		<property name="apellidos" value="periodista1Apellidos" />
 		<property name="email" value="periodista1@gmail.com" />
 		<property name="cartera" ref="cartera3" />
+		<property name="isBanned" value="false" />
 		<property name="foto"
 			value="https://pbs.twimg.com/profile_images/2254029636/foto_carnet_reasonably_small.jpg" />
 		<property name="agencia" ref="agencia1" />
@@ -524,6 +525,7 @@
 		<property name="apellidos" value="periodista2Apellidos" />
 		<property name="email" value="periodista2@gmail.com" />
 		<property name="cartera" ref="cartera4" />
+		<property name="isBanned" value="false" />
 		<property name="foto"
 			value="https://pbs.twimg.com/profile_images/1536193136/foto_carnet_Alexis_reasonably_small.jpg" />
 		<property name="agencia" ref="agencia1" />
@@ -541,6 +543,7 @@
 		<property name="apellidos" value="periodista3Apellidos" />
 		<property name="email" value="periodista3@gmail.com" />
 		<property name="cartera" ref="cartera5" />
+		<property name="isBanned" value="false" />
 		<property name="foto"
 			value="https://pbs.twimg.com/profile_images/2162163885/Carnet_reasonably_small.jpg" />
 		<property name="agencia" ref="agencia3" />
@@ -557,6 +560,7 @@
 		<property name="apellidos" value="periodista4Apellidos" />
 		<property name="email" value="periodista4@gmail.com" />
 		<property name="cartera" ref="cartera6" />
+		<property name="isBanned" value="false" />
 		<property name="foto"
 			value="https://pbs.twimg.com/profile_images/1423419535/foto_carnet_M__Angeles_reasonably_small.jpg" />
 		<property name="noticias">
@@ -574,6 +578,7 @@
 		<property name="apellidos" value="periodista5Apellidos" />
 		<property name="email" value="periodista5@gmail.com" />
 		<property name="cartera" ref="cartera7" />
+		<property name="isBanned" value="false" />
 		<property name="foto"
 			value="https://pbs.twimg.com/profile_images/1423419535/foto_carnet_M__Angeles_reasonably_small.jpg" />
 		<property name="noticias">
@@ -846,6 +851,7 @@ Twitter, por suerte, sigue funcionando" />
 		<property name="video" value="https://www.youtube.com/embed/_5xU6TcPvvU" />
 		<property name="fecha" value="2019/05/12" />
 		<property name="numeroVisitas" value="700002145" />
+		<property name="isBanned" value="false" />
 		<property name="reportes">
 			<list>
 				<ref bean="reporte1" />
@@ -883,6 +889,7 @@ Twitter, por suerte, sigue funcionando" />
 		<property name="video" value="https://www.youtube.com/embed/a3ICNMQW7Ok" />
 		<property name="fecha" value="2019/05/12" />
 		<property name="numeroVisitas" value="50" />
+		<property name="isBanned" value="false" />
 		<property name="reportes">
 			<list>
 				<ref bean="reporte2" />
@@ -921,6 +928,7 @@ Twitter, por suerte, sigue funcionando" />
 		<property name="video" value="https://www.youtube.com/embed/a3ICNMQW7Ok" />
 		<property name="fecha" value="2019/04/11" />
 		<property name="numeroVisitas" value="51" />
+		<property name="isBanned" value="false" />
 		<property name="reportes">
 			<list>
 				<ref bean="reporte3" />
@@ -960,6 +968,7 @@ Twitter, por suerte, sigue funcionando" />
 		<property name="video" value="https://www.youtube.com/embed/a3ICNMQW7Ok" />
 		<property name="fecha" value="2019/05/05" />
 		<property name="numeroVisitas" value="40" />
+		<property name="isBanned" value="false" />
 		<property name="reportes">
 			<list>
 
@@ -995,6 +1004,7 @@ Twitter, por suerte, sigue funcionando" />
 		<property name="video" value="https://www.youtube.com/embed/a3ICNMQW7Ok" />
 		<property name="fecha" value="2019/05/11" />
 		<property name="numeroVisitas" value="29" />
+		<property name="isBanned" value="false" />
 		<property name="reportes">
 			<list>
 				<ref bean="reporte3" />
@@ -1034,6 +1044,7 @@ Twitter, por suerte, sigue funcionando" />
 		<property name="video" value="https://www.youtube.com/embed/a3ICNMQW7Ok" />
 		<property name="fecha" value="2019/04/08" />
 		<property name="numeroVisitas" value="39" />
+		<property name="isBanned" value="false" />
 		<property name="reportes">
 			<list>
 
@@ -1068,6 +1079,7 @@ Twitter, por suerte, sigue funcionando" />
 		<property name="video" value="https://www.youtube.com/embed/a3ICNMQW7Ok" />
 		<property name="fecha" value="2019/03/24" />
 		<property name="numeroVisitas" value="47" />
+		<property name="isBanned" value="false" />
 		<property name="reportes">
 			<list>
 
@@ -1101,6 +1113,7 @@ Twitter, por suerte, sigue funcionando" />
 		<property name="video" value="https://www.youtube.com/embed/a3ICNMQW7Ok" />
 		<property name="fecha" value="2019/03/01" />
 		<property name="numeroVisitas" value="200000" />
+		<property name="isBanned" value="false" />
 		<property name="reportes">
 			<list>
 
@@ -1135,6 +1148,7 @@ Twitter, por suerte, sigue funcionando" />
 		<property name="video" value="https://www.youtube.com/embed/a3ICNMQW7Ok" />
 		<property name="fecha" value="2019/04/04" />
 		<property name="numeroVisitas" value="2000" />
+		<property name="isBanned" value="false" />
 		<property name="reportes">
 			<list>
 			</list>
@@ -1144,6 +1158,35 @@ Twitter, por suerte, sigue funcionando" />
 			</list>
 		</property>
 		<property name="estado" value="PUBLICADA" />
+		<property name="noticiasRelacionadas">
+			<list>
+			</list>
+		</property>
+		<property name="usuarios">
+			<list>
+			</list>
+		</property>
+		<property name="periodista" ref="periodista4" />
+		<property name="categoria" value="INTERNACIONAL" />
+	</bean>
+	
+	<bean id="noticia10" class="domain.Noticia">
+		<property name="titulo" value="noticia10" />
+		<property name="imagen" value="http://www.myfico.com/Images/sample_overlay.gif" />
+		<property name="descripcion" value="descripciónNoticia8" />
+		<property name="video" value="https://www.youtube.com/embed/a3ICNMQW7Ok" />
+		<property name="fecha" value="2019/04/04" />
+		<property name="numeroVisitas" value="2000" />
+		<property name="isBanned" value="true" />
+		<property name="reportes">
+			<list>
+			</list>
+		</property>
+		<property name="comentarios">
+			<list>
+			</list>
+		</property>
+		<property name="estado" value="DENEGADA" />
 		<property name="noticiasRelacionadas">
 			<list>
 			</list>

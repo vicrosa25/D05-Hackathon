@@ -105,11 +105,13 @@
 		<!-- MODERADOR -->
 		<security:intercept-url pattern="/moderador/retirarDinero.do" access="hasRole('MODERADOR')" />
 		<security:intercept-url pattern="/noticia/reportes.do" access="hasRole('MODERADOR')" />
+		<security:intercept-url pattern="/noticia/listBanear.do" access="hasRole('MODERADOR')" />
 		<security:intercept-url pattern="/noticia/banear.do" access="hasRole('MODERADOR')" />
 		<security:intercept-url pattern="/noticia/listPendientes.do" access="hasRole('MODERADOR')" />
 		<security:intercept-url pattern="/noticia/aceptar.do" access="hasRole('MODERADOR')" />
 		<security:intercept-url pattern="/noticia/denegar.do" access="hasRole('MODERADOR')" />
 		<security:intercept-url pattern="/moderador/usuarios/ban.do" access="hasRole('MODERADOR')" />
+		<security:intercept-url pattern="/moderador/periodistas/ban.do" access="hasRole('MODERADOR')" />
 		
 		<!-- MANAGER -->
 		<security:intercept-url pattern="/manager/admin/list.do" 	access="hasRole('ADMIN')" />
