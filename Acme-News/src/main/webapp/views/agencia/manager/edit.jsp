@@ -11,13 +11,15 @@
 <form:form action="agencia/agenciaForm.do" modelAttribute="agencia">
 
 	<form:hidden path="version" />
-		<!-- Title -->
+	
+	<!-- Title -->
     <acme:textbox code="agencia.titulo" path="titulo" />
     <br />
     
     <!-- Address -->
     <acme:textbox code="agencia.direccion" path="direccion" />
     <br />
+    
     <!-- Capacity -->
     <spring:message code="agencia.capacidadDisponible" />
     <form:input path="capacidadDisponible" code="agencia.capacidadDisponible" type="number" min="${ actualCapacity }"/>
@@ -30,6 +32,6 @@
     <!-- Save -->
 	<acme:submit code="agencia.save" name="save" />	
 	<!-- Cancel -->
-	<acme:cancel code="agencia.cancel" url="agencia/listAgencia.do" />
+	<acme:cancel code="agencia.cancel" url="agencia/manager/list.do" />
 
 </form:form>

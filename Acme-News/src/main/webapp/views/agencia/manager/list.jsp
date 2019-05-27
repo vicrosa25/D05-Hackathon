@@ -5,8 +5,8 @@
 <%@taglib prefix="security" uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 
-<h2>All not empty agencies</h2>
-<display:table pagesize="5" class="displaytag" name="agencias" requestURI="agencia/listAgencia.do" id="row">	
+
+<display:table name="agencias" id="row" requestURI="${ requestURI }" pagesize="5" class="displaytag">	
 	
 	<!-- Title -->
 	<spring:message code="agencia.titulo" var="titleHeader" />

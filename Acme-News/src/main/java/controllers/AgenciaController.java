@@ -12,11 +12,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import domain.Agencia;
+import domain.Periodista;
 import services.AgenciaService;
 import services.ManagerService;
 import services.PeriodistaService;
-import domain.Agencia;
-import domain.Periodista;
 
 @Controller
 @RequestMapping("/agencia")
@@ -103,14 +103,15 @@ public class AgenciaController extends AbstractController {
 	}
 
 	// List Agencias for Manager
-	@RequestMapping("/listAgencia")
+	@RequestMapping("/manager/list")
 	public ModelAndView list() {
 		ModelAndView result;
 		try{
 			Collection<Agencia> agencias = this.agenciaService.findAll();
 
-			result = new ModelAndView("agencia/listAgencia");
+			result = new ModelAndView("agencia/manager/list");
 			result.addObject("agencias", agencias);
+			result.addObject("requestURI", "agencia/manager/list.do");
 			result.addObject("logged",  this.managerService.findByPrincipal());
 
 		}catch(Throwable oops){
@@ -122,13 +123,13 @@ public class AgenciaController extends AbstractController {
 	}
 
 	// update an agency method
-	@RequestMapping(value = "/update", method = RequestMethod.GET)
+	@RequestMapping(value = "/manager/edit", method = RequestMethod.GET)
 	public ModelAndView update(@RequestParam int agenciaId) {
 		ModelAndView result;
 		try{
 			Agencia agencia = this.agenciaService.findOne(agenciaId);
 
-			result = new ModelAndView("agencia/agenciaForm");
+			result = new ModelAndView("agencia/manager/edit");
 			result.addObject("agencia", agencia);
 			result.addObject("actualCapacity", agencia.getPeriodistas().size());
 
@@ -140,10 +141,12 @@ public class AgenciaController extends AbstractController {
 		return result;
 	}
 
-	@RequestMapping(value = "/agenciaForm", method = RequestMethod.POST, params = "save")
+	@RequestMapping(value = "/manager/edit", method = RequestMethod.POST, params = "save")
 	public ModelAndView save(Agencia agencia, BindingResult binding) {
 		ModelAndView result = new ModelAndView("agencia/agenciaForm");
+		
 		agencia = this.agenciaService.reconstruct(agencia, binding);
+		
 		if (binding.hasErrors()) {
 			result.addObject("agencia", agencia);
 			result.addObject("actualCapacity", agencia.getPeriodistas().size());
@@ -151,7 +154,7 @@ public class AgenciaController extends AbstractController {
 		} else {
 			try {
 				this.agenciaService.save(agencia);
-				result = new ModelAndView("redirect:../agencia/listAgencia.do");
+				result = new ModelAndView("redirect:../agencia/manager/list.do");
 			} catch (Throwable oops) {
 				result.addObject("agencia", agencia);
 				result.addObject("actualCapacity", agencia.getPeriodistas().size());

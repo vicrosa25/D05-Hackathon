@@ -109,7 +109,7 @@
 			<li><a class="fNiv"><spring:message	code="master.page.agencia" /></a>
 				<ul>
 					<li class="arrow"></li>
-					<li><a href="agencia/listAgencia.do"><spring:message code="master.page.agencia.listAll" /></a></li>
+					<li><a href="agencia/manager/list.do"><spring:message code="master.page.agencia.listAll" /></a></li>
 					<li><a href="agencia/createAgencia.do"><spring:message code="master.page.agencia.create" /></a></li>
 					
 				</ul>
