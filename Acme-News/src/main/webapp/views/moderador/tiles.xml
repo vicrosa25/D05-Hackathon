@@ -6,6 +6,11 @@
        
 <tiles-definitions>
 
+	<definition name="moderador/edit" extends="master.page">	
+		<put-attribute name="title" value="Edit Moderator" />
+		<put-attribute name="body" value="/views/moderador/edit.jsp" />
+	</definition>
+
 	<definition name="moderador/retirarDinero" extends="master.page">	
 		<put-attribute name="title" value="Withdraw Money obtained on the web" />
 		<put-attribute name="body" value="/views/moderador/retirarDinero.jsp" />

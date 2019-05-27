@@ -33,9 +33,12 @@ public class ModeradorService {
 	// Supporting services --------------------------------------------------------------------------------------------
 	@Autowired
 	private UsuarioService		usuarioService;
+
+	@Autowired
+	private PeriodistaService	periodistaService;
 	
-	@Autowired 
-	private PeriodistaService	periodistaService;	
+	@Autowired
+	private ActorService		actorService;
 
 	// Validator
 	@Autowired
@@ -105,6 +108,33 @@ public class ModeradorService {
 		return result;
 	}
 
+	// To edit
+	public Moderador reconstruct(Moderador moderador, BindingResult binding) {
+		Moderador result = moderador;
+
+		// The pruned object is completed with the required fields
+		this.registerOthersFields(result);
+
+		this.validator.validate(result, binding);
+		return result;
+	}
+
+	private void registerOthersFields(Moderador newOne) {
+		Moderador oldOne = this.findByPrincipalToEdit();
+
+		// Moderador
+		newOne.setId(oldOne.getId());
+		newOne.setUserAccount(oldOne.getUserAccount());
+		newOne.getCartera().setSaldoAcumulado(oldOne.getCartera().getSaldoAcumulado());
+		newOne.getCartera().setSaldoAcumuladoTotal(oldOne.getCartera().getSaldoAcumuladoTotal());
+
+	}
+	
+	private Moderador findByPrincipalToEdit() {
+		Moderador result = (Moderador) this.actorService.findByPrincipal();
+		return result;
+	}
+
 	// Ban/Unban USUARIO -----------------------------------------------------------------------------------------
 	public List<Usuario> getUsuariosToBan() {
 		return this.usuarioService.getUsuariosToBan();
@@ -147,8 +177,7 @@ public class ModeradorService {
 	public Collection<Periodista> getPeriodistasToUnBan() {
 		return this.periodistaService.findBanned();
 	}
-	
-	
+
 	public Periodista saveBanUnbanPeriodista(int id) {
 		Authority authority = new Authority();
 		authority.setAuthority(Authority.MODERADOR);
@@ -171,18 +200,6 @@ public class ModeradorService {
 		Assert.isTrue(!probe.equals(toBanUnban.getIsBanned()));
 		return saved;
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 
 	public Moderador findByPrincipal() {
 		Moderador result;

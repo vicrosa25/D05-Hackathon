@@ -14,11 +14,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import domain.Periodista;
 import security.LoginService;
 import services.ActorService;
 import services.PeriodistaService;
 import utilities.Md5;
-import domain.Periodista;
 
 @Controller
 @RequestMapping("/periodista")
@@ -95,26 +95,8 @@ public class PeriodistaController extends AbstractController {
 
 		return result;
 	}
-
-	// Other
-	// methods-------------------------------------------------------------------------------------------------------
-	private ModelAndView createEditModelAndView(Periodista periodista) {
-		ModelAndView result;
-		result = this.createEditModelAndView(periodista, null);
-		return result;
-	}
-
-	private ModelAndView createEditModelAndView(Periodista periodista,
-		String message) {
-		ModelAndView result;
-		result = new ModelAndView("periodista/edit");
-		result.addObject("action", "periodista/edit.do");
-		result.addObject("modelAttribute", "periodista");
-		result.addObject("periodista", periodista);
-		result.addObject("message", message);
-		return result;
-	}
-
+	
+	
 	@RequestMapping(value = "/retirarDinero", method = RequestMethod.GET)
 	public ModelAndView retirarDinero() {
 		ModelAndView result;
@@ -148,7 +130,7 @@ public class PeriodistaController extends AbstractController {
 		return result;
 	}
 
-	// List not full Agencias
+	// List not full Agencias ------------------------------------------------------------------------------------
 	@RequestMapping("/listPeriodista")
 	public ModelAndView listNotFull() {
 		Collection<Periodista> allPeriodista = this.periodistaService.findAll();
@@ -158,5 +140,27 @@ public class PeriodistaController extends AbstractController {
 
 		return result;
 	}
+
+	
+	
+	// Other methods-------------------------------------------------------------------------------------------------------
+	private ModelAndView createEditModelAndView(Periodista periodista) {
+		ModelAndView result;
+		result = this.createEditModelAndView(periodista, null);
+		return result;
+	}
+
+	private ModelAndView createEditModelAndView(Periodista periodista,
+		String message) {
+		ModelAndView result;
+		result = new ModelAndView("periodista/edit");
+		result.addObject("action", "periodista/edit.do");
+		result.addObject("modelAttribute", "periodista");
+		result.addObject("periodista", periodista);
+		result.addObject("message", message);
+		return result;
+	}
+
+	
 
 }

@@ -79,22 +79,16 @@
 		<security:intercept-url pattern="/noticia/listaCategorias.jsp" access="permitAll" />
 		<security:intercept-url pattern="/noticia/buscar.do" access="permitAll" />
 		<security:intercept-url pattern="/noticia/busqueda.do" access="permitAll" />  
-		
-		
 		<security:intercept-url pattern="/noticia/misNoticias.do" access="hasRole('PERIODISTA')" />
 		<security:intercept-url pattern="/noticia/borrar.do" access="hasRole('PERIODISTA')" />
 		<security:intercept-url pattern="/noticia/crear.do" access="hasRole('PERIODISTA')" />
+		
+		<!-- EVENTO -->
+		<security:intercept-url pattern="/evento/allEventos.do" access="permitAll" />
+		<security:intercept-url pattern="/evento/display.do" access="permitAll" />
 		<security:intercept-url pattern="/evento/manager/misEventos.do" access="hasRole('MANAGER')" />
 		<security:intercept-url pattern="/evento/manager/borrar.do" access="hasRole('MANAGER')" />
 		<security:intercept-url pattern="/evento/manager/crear.do" access="hasRole('MANAGER')" />
-
-		
-		
-		
-		<security:intercept-url pattern="/evento/allEventos.do" access="permitAll" />
-		<security:intercept-url pattern="/evento/display.do" access="permitAll" />
-		
-		
 		
 		<!-- PERIODISTA -->
 		<security:intercept-url pattern="/periodista/display.do" access="permitAll" />
@@ -103,6 +97,7 @@
 		<security:intercept-url pattern="/periodista/listPeriodista.do" access="hasRole('PERIODISTA')" />
 		
 		<!-- MODERADOR -->
+		<security:intercept-url pattern="/moderador/edit.do" access="hasRole('MODERADOR')" />
 		<security:intercept-url pattern="/moderador/retirarDinero.do" access="hasRole('MODERADOR')" />
 		<security:intercept-url pattern="/noticia/reportes.do" access="hasRole('MODERADOR')" />
 		<security:intercept-url pattern="/noticia/listBanear.do" access="hasRole('MODERADOR')" />

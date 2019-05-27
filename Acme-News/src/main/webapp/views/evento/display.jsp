@@ -9,7 +9,7 @@
 <%@taglib prefix="security" uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 
-<jstl:if test="${not empry evento.imagen }">
+<jstl:if test="${not empty evento.imagen }">
 <img src="${evento.imagen}" style="width:304px;height:228px;">
 <br/>
 </jstl:if>
@@ -53,6 +53,7 @@
 	<spring:message code="comentario.usuario" var="usuarioHeader" />
 	<display:column property="usuario.nombre" title="${usuarioHeader}" sortable="false" />
 </display:table>
+<br/>
 
 <input type="button" name="goBack" value="<spring:message code="evento.return"/>" 
 onclick="javascript: window.location.replace('evento/allEventos.do')"/>
