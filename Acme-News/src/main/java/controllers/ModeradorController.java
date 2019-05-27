@@ -23,12 +23,10 @@ import org.springframework.web.servlet.ModelAndView;
 
 import services.ActorService;
 import services.ModeradorService;
+import utilities.Md5;
 import domain.Moderador;
 import domain.Periodista;
 import domain.Usuario;
-import services.ActorService;
-import services.ModeradorService;
-import utilities.Md5;
 
 @Controller
 @RequestMapping("/moderador")
@@ -39,9 +37,6 @@ public class ModeradorController extends AbstractController {
 
 	@Autowired
 	private ActorService		actorService;
-
-	@Autowired
-	private ActorService actorService;
 
 
 	// Constructor
@@ -79,7 +74,7 @@ public class ModeradorController extends AbstractController {
 	public ModelAndView edit() {
 		ModelAndView result;
 		Moderador moderador;
-		
+
 		moderador = (Moderador) this.actorService.findByPrincipal();
 		result = this.createEditModelAndView(moderador);
 		return result;
