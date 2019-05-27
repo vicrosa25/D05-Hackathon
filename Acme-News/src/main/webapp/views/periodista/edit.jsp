@@ -33,7 +33,8 @@
     <br />    
     
 	
-	<acme:submit code="master.page.save" name="save" />
-	<a href=""><input type="button" name="goBack" value="<spring:message code="periodista.goBack"/>" /></a>
+<acme:submit code="master.page.save" name="save" />
+<a href=""><input type="button" name="goBack" value="<spring:message code="periodista.goBack"/>" /></a>
+<acme:cancel code="actor.export" url="/periodista/generatePDF.do" />
 		
 </form:form>

@@ -10,9 +10,7 @@
 
 <div>
 	<ul id="jMenu">
-		<!-- Do not forget the "fNiv" class for the first level links !! -->
-		
-		
+		<!-- Do not forget the "fNiv" class for the first level links !! -->		
 		
 		<!-- ADMIN -->
 		<security:authorize access="hasRole('ADMIN')">
@@ -83,6 +81,7 @@
 				<ul>
 					<li class="arrow"></li>
 					<li><a href="periodista/edit.do"><spring:message code="master.page.edit" /></a></li>
+					<li><a href="periodista/display.do"><spring:message code="master.page.diplay" /></a></li>
 					
 				</ul>
 			</li>
@@ -132,6 +131,14 @@
 		</security:authorize>
 			
 		<security:authorize access="hasRole('MODERADOR')">
+			<li><a class="fNiv"><spring:message	code="master.page.profile" /></a>
+				<ul>
+					<li class="arrow"></li>
+					<li><a href="moderador/edit.do"><spring:message code="master.page.edit" /></a></li>
+					<li><a href="moderador/generatePDF.do"><spring:message code="actor.export" /></a></li>		
+				</ul>
+			</li>
+
 			<li><a class="fNiv"><spring:message	code="master.page.moderador" /></a>
 				<ul>
 					<li class="arrow"></li>
@@ -140,12 +147,6 @@
 					<li><a href="moderador/periodistas/ban.do"><spring:message code="master.page.administrator.periodistasToBan" /></a></li>
 					<li><a href="noticia/listPendientes.do"><spring:message code="moderador.listPendientes" /></a></li>
 					<li><a href="moderador/retirarDinero.do"><spring:message code="master.page.administrator.retirarDinero" /></a></li>
-				</ul>
-			</li>
-			<li><a class="fNiv"><spring:message	code="master.page.profile" /></a>
-				<ul>
-					<li class="arrow"></li>
-					<li><a href="moderador/edit.do"><spring:message code="master.page.edit" /></a></li>
 				</ul>
 			</li>
 		</security:authorize>
