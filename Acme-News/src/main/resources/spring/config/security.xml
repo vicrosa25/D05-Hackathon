@@ -102,8 +102,10 @@
 		<security:intercept-url pattern="/periodista/edit.do" access="hasRole('PERIODISTA')" />
 		<security:intercept-url pattern="/periodista/retirarDinero.do" access="hasRole('PERIODISTA')" />
 		<security:intercept-url pattern="/periodista/listPeriodista.do" access="hasRole('PERIODISTA')" />
+		<security:intercept-url pattern="/periodista/generatePDF.do" access="hasRole('PERIODISTA')" />
 		
 		<!-- MODERADOR -->
+		<security:intercept-url pattern="/moderador/generatePDF.do" access="hasRole('MODERADOR')" />
 		<security:intercept-url pattern="/moderador/retirarDinero.do" access="hasRole('MODERADOR')" />
 		<security:intercept-url pattern="/noticia/reportes.do" access="hasRole('MODERADOR')" />
 		<security:intercept-url pattern="/noticia/listBanear.do" access="hasRole('MODERADOR')" />
