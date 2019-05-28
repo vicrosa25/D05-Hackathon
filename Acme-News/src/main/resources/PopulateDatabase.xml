@@ -225,30 +225,6 @@
 		</property>
 	</bean>
 
-	<bean id="userAccountModeradorUnknown" class="security.UserAccount">
-		<property name="username" value="UnknownModerator" />
-		<property name="authorities">
-			<list>
-				<bean class="security.Authority">
-					<property name="authority" value="MODERADOR" />
-				</bean>
-			</list>
-		</property>
-	</bean>
-
-	<bean id="userAccountManagerUnknown" class="security.UserAccount">
-		<property name="username" value="UnknownManager" />
-		<property name="authorities">
-			<list>
-				<bean class="security.Authority">
-					<property name="authority" value="MANAGER" />
-				</bean>
-			</list>
-		</property>
-	</bean>
-
-
-
 	<!-- ADMIN ************************************************************************************************-->
 	<bean id="administrador1" class="domain.Administrador">
 		<property name="userAccount" ref="userAccount1" />
@@ -288,18 +264,6 @@
 		<property name="nombre" value="manager3Nombre" />
 		<property name="apellidos" value="manager3Apellidos" />
 		<property name="email" value="manager3@gmail.com" />
-		<property name="agencias">
-			<list>
-
-			</list>
-		</property>
-	</bean>
-
-	<bean id="unknownManager" class="domain.Manager">
-		<property name="userAccount" ref="userAccountManagerUnknown" />
-		<property name="nombre" value="desconocido" />
-		<property name="apellidos" value="desconocido" />
-		<property name="email" value="it@wont.work" />
 		<property name="agencias">
 			<list>
 
@@ -587,14 +551,6 @@
 		<property name="apellidos" value="moderador2Apellidos" />
 		<property name="email" value="moderador2@gmail.com" />
 		<property name="cartera" ref="cartera2" />
-	</bean>
-
-	<bean id="moderadorUnknown" class="domain.Moderador">
-		<property name="userAccount" ref="userAccountModeradorUnknown" />
-		<property name="nombre" value="desconocido" />
-		<property name="apellidos" value="desconocido" />
-		<property name="email" value="desconocido@desconocido.com" />
-		<property name="cartera" ref="carteraX" />
 	</bean>
 
 	<!-- PERIODISTAS *********************************************************************************************-->

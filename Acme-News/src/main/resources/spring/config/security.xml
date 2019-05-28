@@ -103,6 +103,7 @@
 		<!-- MODERADOR -->
 		<security:intercept-url pattern="/moderador/edit.do" access="hasRole('MODERADOR')" />
 		<security:intercept-url pattern="/moderador/generatePDF.do" access="hasRole('MODERADOR')" />
+		<security:intercept-url pattern="/moderador/delete.do" access="hasRole('MODERADOR')" />
 		<security:intercept-url pattern="/moderador/retirarDinero.do" access="hasRole('MODERADOR')" />
 		<security:intercept-url pattern="/noticia/reportes.do" access="hasRole('MODERADOR')" />
 		<security:intercept-url pattern="/noticia/listBanear.do" access="hasRole('MODERADOR')" />

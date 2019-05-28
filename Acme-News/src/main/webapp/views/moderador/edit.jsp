@@ -30,7 +30,11 @@
     <br />    
     
 	
-	<acme:submit code="master.page.save" name="save" />
-	<a href=""><input type="button" name="goBack" value="<spring:message code="moderador.goBack"/>" /></a>
+<acme:submit code="master.page.save" name="save" />
+<a href=""><input type="button" name="goBack" value="<spring:message code="moderador.goBack"/>" /></a>
 		
+<acme:cancel code="actor.export" url="/moderador/generatePDF.do" />
+
+<a href="/Acme-News/moderador/delete.do"><input type="button" name="delete" value="<spring:message code="actor.delete"/>" 
+	onclick="return confirm('<spring:message code="actor.delete.confirm" />')"/></a>
 </form:form>

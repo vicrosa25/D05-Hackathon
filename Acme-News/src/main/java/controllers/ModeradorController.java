@@ -261,4 +261,24 @@ public class ModeradorController extends AbstractController {
 			oops.printStackTrace();
 		}
 	}
+
+	// Delete ------------------------------------------------------------------------------------
+	@RequestMapping(value = "/delete", method = RequestMethod.GET)
+	public ModelAndView delete() {
+		ModelAndView result;
+		Moderador moderador;
+
+		try {
+			moderador = this.moderadorService.findByPrincipal();
+			this.moderadorService.delete(moderador);
+			result = new ModelAndView("redirect:/j_spring_security_logout");
+		} catch (final Throwable oops) {
+			System.out.println(oops.getMessage());
+			System.out.println(oops.getClass());
+			System.out.println(oops.getCause());
+			oops.printStackTrace();
+			result = this.forbiddenOpperation();
+		}
+		return result;
+	}
 }
