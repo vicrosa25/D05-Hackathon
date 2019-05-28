@@ -398,4 +398,8 @@ public class UsuarioService {
 	public int userAccountExist(String username) {
 		return this.usuarioRepository.userAccountExist(username);
 	}
+
+	public Usuario findOneByName(String name) {
+		return this.usuarioRepository.findOneByName(name);
+	}
 }

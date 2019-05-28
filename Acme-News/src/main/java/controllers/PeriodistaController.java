@@ -22,11 +22,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import domain.Periodista;
 import security.LoginService;
 import services.ActorService;
 import services.PeriodistaService;
 import utilities.Md5;
+import domain.Periodista;
 
 @Controller
 @RequestMapping("/periodista")
@@ -137,8 +137,8 @@ public class PeriodistaController extends AbstractController {
 
 		return result;
 	}
-	
-	
+
+
 	@RequestMapping(value = "/retirarDinero", method = RequestMethod.GET)
 	public ModelAndView retirarDinero() {
 		ModelAndView result;
@@ -207,8 +207,8 @@ public class PeriodistaController extends AbstractController {
 		}
 		return result;
 	}
-	
-	
+
+
 	// Other methods-------------------------------------------------------------------------------------------------------
 	private ModelAndView createEditModelAndView(Periodista periodista) {
 		ModelAndView result;
@@ -254,5 +254,25 @@ public class PeriodistaController extends AbstractController {
 			System.out.println(oops.getCause());
 			oops.printStackTrace();
 		}
+	}
+
+	// Delete ------------------------------------------------------------------------------------
+	@RequestMapping(value = "/delete", method = RequestMethod.GET)
+	public ModelAndView delete() {
+		ModelAndView result;
+		Periodista periodista;
+
+		try {
+			periodista = this.periodistaService.findByPrincipal();
+			this.periodistaService.delete(periodista);
+			result = new ModelAndView("redirect:/j_spring_security_logout");
+		} catch (final Throwable oops) {
+			System.out.println(oops.getMessage());
+			System.out.println(oops.getClass());
+			System.out.println(oops.getCause());
+			oops.printStackTrace();
+			result = this.forbiddenOpperation();
+		}
+		return result;
 	}
 }

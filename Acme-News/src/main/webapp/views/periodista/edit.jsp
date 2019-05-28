@@ -36,5 +36,7 @@
 <acme:submit code="master.page.save" name="save" />
 <a href=""><input type="button" name="goBack" value="<spring:message code="periodista.goBack"/>" /></a>
 <acme:cancel code="actor.export" url="/periodista/generatePDF.do" />
-		
+
+<a href="/Acme-News/periodista/delete.do"><input type="button" name="delete" value="<spring:message code="actor.delete"/>" 
+	onclick="return confirm('<spring:message code="actor.delete.confirm" />')"/></a>
 </form:form>

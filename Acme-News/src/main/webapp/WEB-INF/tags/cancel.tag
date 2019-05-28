@@ -1,5 +1,3 @@
- 
- 
 <%@ tag language="java" body-content="empty" %>
  
  <%-- Taglibs --%>
@@ -22,24 +20,3 @@
 <button type="button" onclick="javascript: relativeRedir('${url}')" >
 	<spring:message code="${code}" />
 </button>
-
-<%-- Notes --%>
-
-<%-- 
-
-	If you wish to use this custom tag, you need add the following 
-	script in your master page: 
-
-	<script type="text/javascript">
-		function relativeRedir(loc) {	
-			var b = document.getElementsByTagName('base');
-			if (b && b[0] && b[0].href) {
-	  			if (b[0].href.substr(b[0].href.length - 1) == '/' && loc.charAt(0) == '/')
-	    		loc = loc.substr(1);
-	  			loc = b[0].href + loc;
-			}
-			window.location.replace(loc);
-		}
-	</script>
-
---%>

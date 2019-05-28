@@ -98,6 +98,7 @@
 		<security:intercept-url pattern="/periodista/retirarDinero.do" access="hasRole('PERIODISTA')" />
 		<security:intercept-url pattern="/periodista/listPeriodista.do" access="hasRole('PERIODISTA')" />
 		<security:intercept-url pattern="/periodista/generatePDF.do" access="hasRole('PERIODISTA')" />
+		<security:intercept-url pattern="/periodista/delete.do" access="hasRole('PERIODISTA')" />
 		
 		<!-- MODERADOR -->
 		<security:intercept-url pattern="/moderador/edit.do" access="hasRole('MODERADOR')" />
