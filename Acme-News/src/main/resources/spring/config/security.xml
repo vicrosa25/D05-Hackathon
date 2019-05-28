@@ -60,6 +60,7 @@
 		<security:intercept-url pattern="/usuario/display.do" access="hasRole('USUARIO')" />
 		<security:intercept-url pattern="/usuario/edit.do" access="hasRole('USUARIO')" />
 		<security:intercept-url pattern="/usuario/generatePDF.do" access="hasRole('USUARIO')" />
+		<security:intercept-url pattern="/usuario/delete.do" access="hasRole('USUARIO')" />
 		
 		
 		<security:intercept-url pattern="/reporte/**" access="hasRole('USUARIO')" />

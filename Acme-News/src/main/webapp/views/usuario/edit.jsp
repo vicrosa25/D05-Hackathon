@@ -26,5 +26,6 @@
 <acme:submit code="master.page.save" name="save" />
 <a href=""><input type="button" name="goBack" value="<spring:message code="usuario.goBack"/>" /></a>
 <acme:cancel code="actor.export" url="/usuario/generatePDF.do" />
+<acme:cancel code="actor.delete" url="/usuario/delete.do" />
 		
 </form:form>
