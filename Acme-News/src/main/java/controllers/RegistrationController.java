@@ -28,13 +28,13 @@ import utilities.Md5;
 public class RegistrationController extends AbstractController {
 
 	@Autowired
-	private UsuarioService usuarioService;
+	private UsuarioService 		usuarioService;
 
 	@Autowired
-	private PeriodistaService periodistaService;
+	private PeriodistaService 	periodistaService;
 
 	@Autowired
-	private ModeradorService moderadorService;
+	private ModeradorService 	moderadorService;
 
 	// Constructor
 	public RegistrationController() {

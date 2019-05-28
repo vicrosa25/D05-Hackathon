@@ -16,14 +16,14 @@
 		<put-attribute name="body" value="/views/agencia/manager/list.jsp" />
 	</definition>
 	
-	<definition name="agencia/agenciaForm" extends="master.page">	
-		<put-attribute name="title" value="Modify the agency" />
-		<put-attribute name="body" value="/views/agencia/agenciaForm.jsp" />
+	<definition name="agencia/manager/edit" extends="master.page">	
+		<put-attribute name="title" value="Edit agency" />
+		<put-attribute name="body" value="/views/agencia/manager/edit.jsp" />
 	</definition>
 	
-	<definition name="agencia/createAgencia" extends="master.page">	
+	<definition name="agencia/manager/create" extends="master.page">	
 		<put-attribute name="title" value="Create Agency" />
-		<put-attribute name="body" value="/views/agencia/createAgencia.jsp" />
+		<put-attribute name="body" value="/views/agencia/manager/create.jsp" />
 	</definition>
 
 </tiles-definitions>

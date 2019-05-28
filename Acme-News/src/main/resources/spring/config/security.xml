@@ -120,12 +120,12 @@
 		<security:intercept-url pattern="/agencia/listNotFullAgencia.do" access="hasRole('PERIODISTA')" />
 		<security:intercept-url pattern="/agencia/join.do" access="hasRole('PERIODISTA')" />
 		<security:intercept-url pattern="/agencia/left.do" access="hasRole('PERIODISTA')" />
-		<security:intercept-url pattern="/agencia/manager/list.do" access="hasRole('MANAGER')" />
 		<security:intercept-url pattern="/agencia/suscribe.do" access="hasRole('PERIODISTA')" />
-		<security:intercept-url pattern="/agencia/update.do" access="hasRole('MANAGER')" />
-		<security:intercept-url pattern="/agencia/agenciaForm.do" access="hasRole('MANAGER')" />
+		<security:intercept-url pattern="/agencia/manager/list.do" access="hasRole('MANAGER')" />
+		<security:intercept-url pattern="/agencia/manager/create.do" access="hasRole('MANAGER')" />
+		<security:intercept-url pattern="/agencia/manager/edit.do" access="hasRole('MANAGER')" />
 		<security:intercept-url pattern="/agencia/delete.do" access="hasRole('MANAGER')" />
-		<security:intercept-url pattern="/agencia/createAgencia.do" access="hasRole('MANAGER')" />
+		
 		
 		<!-- CONFIGURATIONS -->
 		<security:intercept-url pattern="/administrator/config/cache/edit.do" access="hasRole('ADMIN')" />

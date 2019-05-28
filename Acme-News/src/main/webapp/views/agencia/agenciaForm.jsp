@@ -8,15 +8,9 @@
 <%@taglib prefix="security"	uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 
-<form:form action="${ action }" modelAttribute="agencia">
+<form:form action="agencia/agenciaForm.do" modelAttribute="agencia">
 
-	<!-- Hidden Attributes  -->
-	<form:hidden path="id" />
 	<form:hidden path="version" />
-	<form:hidden path="importancia" />
-	<form:hidden path="eventos" />
-	<form:hidden path="periodistas" />
-	<form:hidden path="manager" />
 	
 	<!-- Title -->
     <acme:textbox code="agencia.titulo" path="titulo" />

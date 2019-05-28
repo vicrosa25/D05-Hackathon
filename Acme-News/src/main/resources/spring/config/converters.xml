@@ -60,6 +60,10 @@
 		
 		<bean class="converters.BannerToStringConverter" />
 		<bean class="converters.StringToBannerConverter" />
+		
+		<bean class="converters.EventoToStringConverter" />
+		<bean class="converters.StringToEventoConverter" />
+		
 
 	</util:list>
 

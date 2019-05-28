@@ -18,17 +18,16 @@ import org.springframework.data.annotation.Transient;
 public class Agencia extends DomainEntity {
 
 	// Attributes -------------------------------------------------------------
-	private String titulo;
-	private String direccion;
-	private int capacidadDisponible;
-	private double tasa;
-	@SuppressWarnings("unused")
-	private Long importancia;
+	private String 		titulo;
+	private String 		direccion;
+	private int 		capacidadDisponible;
+	private double 		tasa;
+	private Long 		importancia;
 
 	// Relationships ----------------------------------------------------------
-	private Collection<Periodista> periodistas;
-	private Collection<Evento> eventos;
-	private Manager manager;
+	private Collection<Periodista> 	periodistas;
+	private Collection<Evento> 		eventos;
+	private Manager 				manager;
 
 	// Constructor
 	public Agencia() {
@@ -85,7 +84,8 @@ public class Agencia extends DomainEntity {
 				}
 			}
 		}
-		return result;
+		this.importancia = result;
+		return this.importancia;
 	}
 
 	public void setImportancia(Long importancia) {

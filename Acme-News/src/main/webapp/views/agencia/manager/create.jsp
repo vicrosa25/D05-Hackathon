@@ -8,29 +8,40 @@
 <%@taglib prefix="security"	uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 
-<form:form action="agencia/createAgencia.do" modelAttribute="agencia">
-	<form:hidden path="version" />
+<form:form action="${ action }" modelAttribute="agencia">
 	
-		<!-- Title -->
+	
+	<!-- Hidden Attributes  -->
+	<form:hidden path="id" />
+	<form:hidden path="version" />
+	<form:hidden path="importancia" />
+	<form:hidden path="eventos" />
+	<form:hidden path="periodistas" />
+	<form:hidden path="manager" />
+	
+	
+	<!-- Title -->
     <acme:textbox code="agencia.titulo" path="titulo" />
-    <br />
+    <br>
     
     <!-- Address -->
     <acme:textbox code="agencia.direccion" path="direccion" />
-    <br />
+    <br>
     
     <!-- Capacity -->
     <spring:message code="agencia.capacidadDisponible" />
-    <form:input path="capacidadDisponible" code="agencia.capacidadDisponible" type="number" min="${ actualCapacity }"/>
-    <br />
+    <form:input path="capacidadDisponible" code="agencia.capacidadDisponible" type="number" />
+    <form:errors class="error" path="capacidadDisponible" />
+    <br>
     
+    <br>
     <!-- Tax -->
     <acme:textbox code="agencia.tasa" path="tasa" />
-    <br />
+    <br>
     
     <!-- Save -->
 	<acme:submit code="agencia.save" name="save" />	
 	<!-- Cancel -->
-	<acme:cancel code="agencia.cancel" url="agencia/listAgencia.do" />
+	<acme:cancel code="agencia.cancel" url="agencia/manager/list.do" />
 
 </form:form>

@@ -15,9 +15,9 @@
 		<put-attribute name="body" value="/views/agencia/manager/list.jsp" />
 	</definition>
 	
-	<definition name="agencia/agenciaForm" extends="master.page">	
-		<put-attribute name="title" value="Modificar la agencia" />
-		<put-attribute name="body" value="/views/agencia/agenciaForm.jsp" />
+	<definition name="agencia/manager/edit" extends="master.page">	
+		<put-attribute name="title" value="Editar Agencia" />
+		<put-attribute name="body" value="/views/agencia/manager/edit.jsp" />
 	</definition>
 	
 		<definition name="agencia/createAgencia" extends="master.page">	

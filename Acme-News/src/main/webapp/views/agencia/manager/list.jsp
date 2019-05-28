@@ -29,7 +29,7 @@
 		<!-- Update -->
 		<spring:message code="agencia.update" var="updateHeader" />
 		<display:column>
-			<a href="agencia/update.do?agenciaId=${ row.id }"> <spring:message code="agencia.update" /> </a>
+			<a href="agencia/manager/edit.do?agenciaId=${ row.id }"> <spring:message code="agencia.update" /> </a>
 		</display:column>
 	
 		<!-- Delete -->
@@ -40,3 +40,7 @@
 	</jstl:if>
 	
 </display:table>
+
+<br>
+<!-- Create Agencia -->
+<a href=agencia/manager/create.do><spring:message code="agencia.create" /></a>

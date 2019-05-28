@@ -1,118 +1,159 @@
+
 package services;
 
+import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
 
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.validation.BindingResult;
-import org.springframework.validation.Validator;
+import org.springframework.util.Assert;
 
-import repositories.ActorRepository;
-import repositories.AgenciaRepository;
-import repositories.ManagerRepository;
-import repositories.PeriodistaRepository;
-import security.LoginService;
+import domain.Actor;
 import domain.Agencia;
+import domain.Evento;
 import domain.Manager;
 import domain.Periodista;
+import repositories.AgenciaRepository;
 
 @Service
 @Transactional
 public class AgenciaService {
 
+	// Manage Repository
 	@Autowired
-	private AgenciaRepository agenciaRepository;
+	private AgenciaRepository	agenciaRepository;
+
+	// Supporting services 
 	@Autowired
-	private ActorRepository actorRepository;
+	private ActorService		actorService;
+
 	@Autowired
-	private PeriodistaRepository periodistaRepository;
+	private PeriodistaService	periodistaService;
+
 	@Autowired
-	private ManagerRepository managerRepository;
+	private ManagerService		managerService;
 
-	public AgenciaService() {
-		super();
-	}
+	//	@Autowired
+	//	private Validator validator;
 
-	public Collection<Agencia> findAllNotFull() {
-		return agenciaRepository.findAllNotFull();
-	}
 
-	public Collection<Agencia> findAll() {
-		return agenciaRepository.findAll();
-	}
+	// CRUD methods -------------------------------------------------------------------------------------------
+	public Agencia create() {
+		Agencia result;
+		Actor principal;
+		Collection<Evento> eventos;
+		Collection<Periodista> periodistas;
 
-	public void join(int agenciaId) {
-		Agencia toJoin = agenciaRepository.findOne(agenciaId);
-		String loggedUsername = LoginService.getPrincipal().getUsername();
-		Periodista logged = (Periodista) actorRepository
-				.findOneByName(loggedUsername);
+		// Check principal must be a Manager
+		principal = this.actorService.findByPrincipal();
+		Assert.isInstanceOf(Manager.class, principal);
 
-		toJoin.addPeriodista(logged);
-		logged.setAgencia(toJoin);
+		eventos = new ArrayList<Evento>();
+		periodistas = new ArrayList<Periodista>();
 
-		agenciaRepository.save(toJoin);
-		periodistaRepository.save(logged);
-	}
+		// Create and settin 
+		result = new Agencia();
+		result.setImportancia((long) 1);
+		result.setEventos(eventos);
+		result.setPeriodistas(periodistas);
 
-	public void left(int agenciaId) {
-		Agencia toJoin = agenciaRepository.findOne(agenciaId);
-		String loggedUsername = LoginService.getPrincipal().getUsername();
-		Periodista logged = (Periodista) actorRepository
-				.findOneByName(loggedUsername);
-
-		toJoin.removePeriodistas(logged);
-		logged.setAgencia(null);
-
-		agenciaRepository.save(toJoin);
-		periodistaRepository.save(logged);
-	}
-
-	public void delete(int agenciaId) {
-		Agencia toDelete = agenciaRepository.findOne(agenciaId);
-
-		for (Periodista p : toDelete.getPeriodistas()) {
-			p.setAgencia(null);
-			periodistaRepository.save(p);
-		}
-
-		Manager manager = toDelete.getManager();
-		manager.removeAgencia(toDelete);
-		managerRepository.save(manager);
-
-		agenciaRepository.delete(agenciaId);
+		return result;
 	}
 
 	public Agencia findOne(int agenciaId) {
 		return agenciaRepository.findOne(agenciaId);
 	}
 
-	public void save(Agencia agencia) {
-		agenciaRepository.save(agencia);
+	public Collection<Agencia> findAll() {
+		return agenciaRepository.findAll();
 	}
 
-	// --------------Reconstruct -----------
-	public Agencia find() {
-		List<Agencia> result = agenciaRepository.findAll();
-
-		return result.get(0);
+	public Agencia save(Agencia agencia) {
+		Assert.notNull(agencia);
+		Actor principal;
+		Manager manager;
+		Agencia saved;
+		
+		// Check principal must be a Manager
+		principal = this.actorService.findByPrincipal();
+		Assert.isInstanceOf(Manager.class, principal);
+		
+		manager = (Manager) principal;
+		
+		if(agencia.getId() == 0) {
+			agencia.setManager(manager);
+			saved = this.agenciaRepository.save(agencia);
+			manager.getAgencias().add(saved);
+		} else {
+			saved = this.agenciaRepository.save(agencia);
+		}
+		
+		return saved;
 	}
 
-	@Autowired
-	private Validator validator;
-
-	public Agencia reconstruct(Agencia agencia, BindingResult binding) {
-		Agencia result = agencia;
-
-		result.setId(find().getId());
-		result.setPeriodistas(find().getPeriodistas());
-		result.setManager(find().getManager());
-
-		validator.validate(agencia, binding);
-
-		return result;
+	public Collection<Agencia> findAllNotFull() {
+		return agenciaRepository.findAllNotFull();
 	}
+
+	public void delete(int agenciaId) {
+		Agencia toDelete = this.findOne(agenciaId);
+
+		for (Periodista p : toDelete.getPeriodistas()) {
+			p.setAgencia(null);
+			this.periodistaService.save(p);
+		}
+
+		Manager manager = toDelete.getManager();
+		manager.removeAgencia(toDelete);
+		this.managerService.save(manager);
+
+		agenciaRepository.delete(agenciaId);
+	}
+
+	// Others Methods ------------------------------------------------------------------------------------------
+	public void join(int agenciaId) {
+		Agencia toJoin = this.findOne(agenciaId);
+		Periodista logged = this.periodistaService.findByPrincipal();
+
+		toJoin.addPeriodista(logged);
+		logged.setAgencia(toJoin);
+
+		agenciaRepository.save(toJoin);
+		this.periodistaService.save(logged);
+	}
+
+	public void left(int agenciaId) {
+		Agencia toLeft = this.findOne(agenciaId);
+		Periodista logged = this.periodistaService.findByPrincipal();
+
+		toLeft.removePeriodistas(logged);
+		logged.setAgencia(null);
+
+		this.agenciaRepository.save(toLeft);
+		this.periodistaService.save(logged);
+	}
+
+	// --------------Reconstruct --------------------------------------------------------------------------------
+	//	public Agencia find() {
+	//		List<Agencia> result = agenciaRepository.findAll();
+	//
+	//		return result.get(0);
+	//	}
+	//
+	//	
+	//
+	//	public Agencia reconstruct(Agencia agencia, BindingResult binding) {
+	//		Agencia result = agencia;
+	//
+	//		result.setId(find().getId());
+	//		result.setPeriodistas(find().getPeriodistas());
+	//		result.setManager(find().getManager());
+	//
+	//		validator.validate(agencia, binding);
+	//
+	//		return result;
+	//	}
 
 }
