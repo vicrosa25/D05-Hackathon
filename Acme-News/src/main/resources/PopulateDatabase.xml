@@ -203,7 +203,27 @@
 		</property>
 	</bean>
 
+	<bean id="userAccountUserUnknown" class="security.UserAccount">
+		<property name="username" value="UnknownUser" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="USUARIO" />
+				</bean>
+			</list>
+		</property>
+	</bean>
 
+	<bean id="userAccountPeriodistaUnknown" class="security.UserAccount">
+		<property name="username" value="UnknownJournalist" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="PERIODISTA" />
+				</bean>
+			</list>
+		</property>
+	</bean>
 
 	<!-- ADMIN ************************************************************************************************-->
 	<bean id="administrador1" class="domain.Administrador">
@@ -473,9 +493,44 @@
 			<list>
 			</list>
 		</property>
-								<property name="sorteos">
+		<property name="sorteos">
 			<list>
 				<ref bean="sorteo3" />
+			</list>
+		</property>
+	</bean>
+
+	<bean id="usuarioUnknown" class="domain.Usuario">
+		<property name="userAccount" ref="userAccountUserUnknown" />
+		<property name="nombre" value="desconocido" />
+		<property name="apellidos" value="desconocido" />
+		<property name="email" value="desconocido@desconocido.com" />
+		<property name="puntos" value="0" />
+		<property name="estatus" value="PRINCIPIANTE" />
+		<property name="banned" value="false" />
+		<property name="buscador" ref="buscadorX" />
+		<property name="seguidores">
+			<list>
+			</list>
+		</property>
+		<property name="siguiendo">
+			<list>
+			</list>
+		</property>
+		<property name="comentarios">
+			<list>
+			</list>
+		</property>
+		<property name="reportes">
+			<list>
+			</list>
+		</property>
+		<property name="informacionCompartida">
+			<list>
+			</list>
+		</property>
+		<property name="sorteos">
+			<list>
 			</list>
 		</property>
 	</bean>
@@ -587,6 +642,19 @@
 		</property>
 	</bean>
 
+	<bean id="periodistaUnknown" class="domain.Periodista">
+		<property name="userAccount" ref="userAccountPeriodistaUnknown" />
+		<property name="nombre" value="desconocido" />
+		<property name="apellidos" value="desconocido" />
+		<property name="email" value="desconocido@desconocido.com" />
+		<property name="cartera" ref="carteraX" />
+		<property name="isBanned" value="false" />
+		<property name="noticias">
+			<list>
+			</list>
+		</property>
+	</bean>
+
 	<!-- CARTERAS **********************************************************************************************-->
 	<bean id="cartera1" class="datatypes.Cartera">
 		<property name="paypalEmail" value="paypalCorreoModerador1@gmail.com" />
@@ -630,6 +698,12 @@
 		<property name="saldoAcumuladoTotal" value="0" />
 	</bean>
 
+	<bean id="carteraX" class="datatypes.Cartera">
+		<property name="paypalEmail" value="desconocido@desconocido.com" />
+		<property name="saldoAcumulado" value="0" />
+		<property name="saldoAcumuladoTotal" value="0" />
+	</bean>
+
 
 	<!-- Buscadores ************************************************************************************************-->
 	<bean id="buscador1" class="domain.Buscador">
@@ -662,6 +736,13 @@
 	</bean>
 	<bean id="buscador5" class="domain.Buscador">
 		<property name="ultimaActualizacion" value="01/01/2000" />
+		<property name="noticias">
+			<list>
+			</list>
+		</property>
+	</bean>
+	<bean id="buscadorX" class="domain.Buscador">
+		<property name="ultimaActualizacion" value="01/01/3000" />
 		<property name="noticias">
 			<list>
 			</list>

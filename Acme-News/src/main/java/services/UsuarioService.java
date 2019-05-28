@@ -14,6 +14,10 @@ import org.springframework.util.Assert;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.Validator;
 
+import repositories.UsuarioRepository;
+import security.Authority;
+import security.LoginService;
+import security.UserAccount;
 import domain.Comentario;
 import domain.Estatus;
 import domain.Informacion;
@@ -23,10 +27,6 @@ import domain.Sorteo;
 import domain.Tasa;
 import domain.Usuario;
 import forms.UsuarioForm;
-import repositories.UsuarioRepository;
-import security.Authority;
-import security.LoginService;
-import security.UserAccount;
 
 @Service
 @Transactional
@@ -94,6 +94,27 @@ public class UsuarioService {
 	}
 
 	public void delete(Usuario usuario){
+		Assert.notNull(usuario);
+		Assert.isTrue(this.findByPrincipal() == usuario);
+
+		Usuario unknown = this.findUnknown();
+
+		for(Comentario comentario:usuario.getComentarios()){
+			comentario.setUsuario(unknown);
+		}
+		for(Informacion info:usuario.getInformacionCompartida()){
+			info.getUsuarios().remove(usuario);
+		}
+		for(Reporte repor:usuario.getReportes()){
+			repor.setUsuario(unknown);
+		}
+		for(Usuario seguidor:usuario.getSeguidores()){
+			seguidor.getSiguiendo().remove(usuario);
+		}
+		for(Sorteo sorteo:usuario.getSorteos()){
+			sorteo.getUsuarios().remove(usuario);
+		}
+
 		this.usuarioRepository.delete(usuario);
 	}
 
@@ -173,21 +194,10 @@ public class UsuarioService {
 		newOne.setBuscador(oldOne.getBuscador());
 	}
 
-	
+
 	// Other Methods
 	private Usuario findByPrincipalToEdit() {
-		Usuario result = (Usuario) this.actorService.findByPrincipal();
-		return result;
-	}
-
-
-
-
-	//añadido
-
-
-	public UsuarioRepository getUsuarioRepository() {
-		return this.usuarioRepository;
+		return this.findByPrincipal();
 	}
 
 
@@ -202,6 +212,12 @@ public class UsuarioService {
 		UserAccount userAccount;
 		userAccount = LoginService.getPrincipal();
 		result = this.usuarioRepository.findByUserAccountId(userAccount.getId());
+		return result;
+	}
+
+	public Usuario findUnknown(){
+		Usuario result = (Usuario) this.actorService.findByUsername("UnknownUser");
+		Assert.notNull(result, "No se encuentra el usuario 'desconocido', hace falta resetear la BDD para eliminar usuarios");
 		return result;
 	}
 
@@ -377,5 +393,13 @@ public class UsuarioService {
 
 	public List<Usuario> getUsuariosToUnBan() {
 		return this.usuarioRepository.getUsersBanned();
+	}
+
+	public int userAccountExist(String username) {
+		return this.usuarioRepository.userAccountExist(username);
+	}
+
+	public Usuario findOneByName(String name) {
+		return this.usuarioRepository.findOneByName(name);
 	}
 }

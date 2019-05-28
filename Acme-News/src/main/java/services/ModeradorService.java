@@ -13,14 +13,14 @@ import org.springframework.util.Assert;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.Validator;
 
-import domain.Moderador;
-import domain.Periodista;
-import domain.Usuario;
-import forms.ModeradorForm;
 import repositories.ModeradorRepository;
 import security.Authority;
 import security.LoginService;
 import security.UserAccount;
+import domain.Moderador;
+import domain.Periodista;
+import domain.Usuario;
+import forms.ModeradorForm;
 
 @Service
 @Transactional
@@ -36,7 +36,7 @@ public class ModeradorService {
 
 	@Autowired
 	private PeriodistaService	periodistaService;
-	
+
 	@Autowired
 	private ActorService		actorService;
 
@@ -64,6 +64,9 @@ public class ModeradorService {
 	}
 
 	public void delete(Moderador moderador) {
+		Assert.notNull(moderador);
+		Assert.isTrue(this.findByPrincipal() == moderador);
+
 		this.moderadorRepository.delete(moderador);
 	}
 
@@ -103,7 +106,7 @@ public class ModeradorService {
 		result.setApellidos(moderadorForm.getApellidos());
 		result.setEmail(moderadorForm.getEmail());
 
-		validator.validate(result, binding);
+		this.validator.validate(result, binding);
 
 		return result;
 	}
@@ -129,7 +132,7 @@ public class ModeradorService {
 		newOne.getCartera().setSaldoAcumuladoTotal(oldOne.getCartera().getSaldoAcumuladoTotal());
 
 	}
-	
+
 	private Moderador findByPrincipalToEdit() {
 		Moderador result = (Moderador) this.actorService.findByPrincipal();
 		return result;

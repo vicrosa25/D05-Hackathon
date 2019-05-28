@@ -616,7 +616,7 @@ public class UsuarioController extends AbstractController {
 		ModelAndView result;
 		try{
 			int banned=0;
-			if(this.usuarioService.getUsuarioRepository().userAccountExist(username)>0)
+			if(this.usuarioService.userAccountExist(username)>0)
 				banned=2;
 			else banned=1;
 
@@ -660,5 +660,25 @@ public class UsuarioController extends AbstractController {
 			System.out.println(oops.getCause());
 			oops.printStackTrace();
 		}
+	}
+
+	// Delete ------------------------------------------------------------------------------------
+	@RequestMapping(value = "/delete", method = RequestMethod.GET)
+	public ModelAndView delete() {
+		ModelAndView result;
+		Usuario usuario;
+
+		try {
+			usuario = this.usuarioService.findByPrincipal();
+			this.usuarioService.delete(usuario);
+			result = new ModelAndView("redirect:/j_spring_security_logout");
+		} catch (final Throwable oops) {
+			System.out.println(oops.getMessage());
+			System.out.println(oops.getClass());
+			System.out.println(oops.getCause());
+			oops.printStackTrace();
+			result = this.forbiddenOpperation();
+		}
+		return result;
 	}
 }
