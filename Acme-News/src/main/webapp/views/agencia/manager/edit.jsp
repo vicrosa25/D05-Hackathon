@@ -28,16 +28,21 @@
     
     <!-- Capacity -->
     <spring:message code="agencia.capacidadDisponible" />
-    <form:input path="capacidadDisponible" code="agencia.capacidadDisponible" type="number" min="${ actualCapacity }"/>
-    <br />
+    <form:input path="capacidadDisponible" code="agencia.capacidadDisponible" type="number" />
+    <form:errors class="error" path="capacidadDisponible" />
+    <br>
     
     <!-- Tax -->
+    <br>
     <acme:textbox code="agencia.tasa" path="tasa" />
     <br />
     
     <!-- Save -->
 	<acme:submit code="agencia.save" name="save" />	
+	
 	<!-- Cancel -->
 	<acme:cancel code="agencia.cancel" url="agencia/manager/list.do" />
 
 </form:form>
+
+<%-- min="${ capacity }" --%>

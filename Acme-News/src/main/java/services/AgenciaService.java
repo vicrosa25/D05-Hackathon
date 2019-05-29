@@ -75,6 +75,7 @@ public class AgenciaService {
 		Actor principal;
 		Manager manager;
 		Agencia saved;
+		Agencia old;
 		
 		// Check principal must be a Manager
 		principal = this.actorService.findByPrincipal();
@@ -87,6 +88,9 @@ public class AgenciaService {
 			saved = this.agenciaRepository.save(agencia);
 			manager.getAgencias().add(saved);
 		} else {
+			old = this.agenciaRepository.findOne(agencia.getId());
+			int capacity = old.getCapacidadDisponible();
+			Assert.isTrue(agencia.getCapacidadDisponible() >= capacity, "No capacidad menor");
 			saved = this.agenciaRepository.save(agencia);
 		}
 		
@@ -134,26 +138,4 @@ public class AgenciaService {
 		this.agenciaRepository.save(toLeft);
 		this.periodistaService.save(logged);
 	}
-
-	// --------------Reconstruct --------------------------------------------------------------------------------
-	//	public Agencia find() {
-	//		List<Agencia> result = agenciaRepository.findAll();
-	//
-	//		return result.get(0);
-	//	}
-	//
-	//	
-	//
-	//	public Agencia reconstruct(Agencia agencia, BindingResult binding) {
-	//		Agencia result = agencia;
-	//
-	//		result.setId(find().getId());
-	//		result.setPeriodistas(find().getPeriodistas());
-	//		result.setManager(find().getManager());
-	//
-	//		validator.validate(agencia, binding);
-	//
-	//		return result;
-	//	}
-
 }

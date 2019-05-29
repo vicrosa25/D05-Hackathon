@@ -20,7 +20,7 @@ public class Agencia extends DomainEntity {
 	// Attributes -------------------------------------------------------------
 	private String 		titulo;
 	private String 		direccion;
-	private int 		capacidadDisponible;
+	private Integer 	capacidadDisponible;
 	private double 		tasa;
 	private Long 		importancia;
 
@@ -55,12 +55,13 @@ public class Agencia extends DomainEntity {
 		this.direccion = direccion;
 	}
 
+	@NotNull
 	@Min(0)
-	public int getCapacidadDisponible() {
+	public Integer getCapacidadDisponible() {
 		return this.capacidadDisponible;
 	}
 
-	public void setCapacidadDisponible(int capacidadDisponible) {
+	public void setCapacidadDisponible(Integer capacidadDisponible) {
 		this.capacidadDisponible = capacidadDisponible;
 	}
 

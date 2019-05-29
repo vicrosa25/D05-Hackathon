@@ -43,7 +43,115 @@ public class AgenciaController extends AbstractController {
 		return new ModelAndView("redirect:/");
 	}
 
-	// List not full Agencias
+	// Manager Agencia LIST --------------------------------------------------------------------------------------
+	@RequestMapping("/manager/list")
+	public ModelAndView list() {
+		ModelAndView result;
+		Manager principal;
+		try {
+			Collection<Agencia> agencias = this.agenciaService.findAll();
+			principal = this.managerService.findByPrincipal();
+
+			result = new ModelAndView("agencia/manager/list");
+			result.addObject("agencias", agencias);
+			result.addObject("requestURI", "agencia/manager/list.do");
+			result.addObject("logged", principal);
+
+		} catch (Throwable oops) {
+			oops.printStackTrace();
+			System.out.println(oops.getMessage());
+			result = super.forbiddenOpperation();
+		}
+		return result;
+	}
+
+	// Manager Agencia CREATE ---------------------------------------------------------------------------------------------
+	@RequestMapping(value = "/manager/create", method = RequestMethod.GET)
+	public ModelAndView create() {
+		ModelAndView result;
+		try {
+			Agencia agencia = new Agencia();
+			result = this.createEditModelAndView(agencia);
+		} catch (Throwable oops) {
+			oops.printStackTrace();
+			System.out.println(oops.getMessage());
+			result = super.forbiddenOpperation();
+		}
+		return result;
+	}
+	@RequestMapping(value = "/manager/create", method = RequestMethod.POST, params = "save")
+	public ModelAndView create(@Valid Agencia agencia, BindingResult binding) {
+		ModelAndView result;
+
+		if (binding.hasErrors()) {
+			final List<ObjectError> errors = binding.getAllErrors();
+			for (final ObjectError e : errors)
+				System.out.println(e.toString());
+			result = this.createEditModelAndView(agencia);
+		} else {
+			try {
+				this.agenciaService.save(agencia);
+				result = new ModelAndView("redirect:list.do");
+			} catch (Throwable oops) {
+				oops.printStackTrace();
+				result = this.createEditModelAndView(agencia);
+			}
+		}
+		return result;
+	}
+
+	// Manager Agencia EDIT -------------------------------------------------------------------------------------
+	@RequestMapping(value = "/manager/edit", method = RequestMethod.GET)
+	public ModelAndView update(@RequestParam int agenciaId) {
+		ModelAndView result;
+		try {
+			Agencia agencia = this.agenciaService.findOne(agenciaId);
+			result = this.editModelAndView(agencia);
+		} catch (Throwable oops) {
+			oops.printStackTrace();
+			System.out.println(oops.getMessage());
+			result = super.forbiddenOpperation();
+		}
+		return result;
+	}
+
+	@RequestMapping(value = "/manager/edit", method = RequestMethod.POST, params = "save")
+	public ModelAndView save(@Valid Agencia agencia, BindingResult binding) {
+		ModelAndView result;
+
+		if (binding.hasErrors()) {
+			result = this.editModelAndView(agencia);
+		} else {
+			try {
+				this.agenciaService.save(agencia);
+				result = new ModelAndView("redirect:list.do");
+			} catch (Throwable oops) {
+				oops.printStackTrace();
+				result = this.editModelAndView(agencia);
+				result.addObject("message", "agencia.commit.error");
+			}
+		}
+
+		return result;
+	}
+
+	// Delete an agency method ------------------------------------------------------------------------------------
+	@RequestMapping(value = "/delete", method = RequestMethod.GET)
+	public ModelAndView delete(@RequestParam int agenciaId) {
+		ModelAndView result;
+		try {
+			result = new ModelAndView("redirect:../agencia/listAgencia.do");
+			this.agenciaService.delete(agenciaId);
+
+		} catch (Throwable oops) {
+			oops.printStackTrace();
+			System.out.println(oops.getMessage());
+			result = super.forbiddenOpperation();
+		}
+		return result;
+	}
+
+	// List not full Agencias ----------------------------------------------------------------------------------------
 	@RequestMapping("/listNotFullAgencia")
 	public ModelAndView listNotFull() {
 		ModelAndView result;
@@ -61,7 +169,7 @@ public class AgenciaController extends AbstractController {
 		return result;
 	}
 
-	// Join to an agency method
+	// Join to an agency method -------------------------------------------------------------------------------------
 	@RequestMapping(value = "/join", method = RequestMethod.GET)
 	public ModelAndView join(@RequestParam int agenciaId) {
 		ModelAndView result;
@@ -86,7 +194,7 @@ public class AgenciaController extends AbstractController {
 		return result;
 	}
 
-	// Left an agency method
+	// Left an agency method -----------------------------------------------------------------------------------------
 	@RequestMapping(value = "/left", method = RequestMethod.GET)
 	public ModelAndView left() {
 		ModelAndView result;
@@ -110,117 +218,6 @@ public class AgenciaController extends AbstractController {
 		return result;
 	}
 
-	// List Agencias for Manager --------------------------------------------------------------------------------------
-	@RequestMapping("/manager/list")
-	public ModelAndView list() {
-		ModelAndView result;
-		Manager principal;
-		try {
-			Collection<Agencia> agencias = this.agenciaService.findAll();
-			principal = this.managerService.findByPrincipal();
-
-			result = new ModelAndView("agencia/manager/list");
-			result.addObject("agencias", agencias);
-			result.addObject("requestURI", "agencia/manager/list.do");
-			result.addObject("logged", principal);
-
-		} catch (Throwable oops) {
-			oops.printStackTrace();
-			System.out.println(oops.getMessage());
-			result = super.forbiddenOpperation();
-		}
-		return result;
-	}
-
-	// update an agency method -------------------------------------------------------------------------------------
-	@RequestMapping(value = "/manager/edit", method = RequestMethod.GET)
-	public ModelAndView update(@RequestParam int agenciaId) {
-		ModelAndView result;
-		try {
-			Agencia agencia = this.agenciaService.findOne(agenciaId);
-			result = this.editModelAndView(agencia);
-		} catch (Throwable oops) {
-			oops.printStackTrace();
-			System.out.println(oops.getMessage());
-			result = super.forbiddenOpperation();
-		}
-		return result;
-	}
-
-	@RequestMapping(value = "/manager/edit", method = RequestMethod.POST, params = "save")
-	public ModelAndView save(@Valid Agencia agencia, BindingResult binding) {
-		ModelAndView result;
-
-		if (binding.hasErrors()) {
-			final List<ObjectError> errors = binding.getAllErrors();
-			for (final ObjectError e : errors)
-				System.out.println(e.toString());
-			result = this.editModelAndView(agencia);
-		} else {
-			try {
-				this.agenciaService.save(agencia);
-				result = new ModelAndView("redirect:list.do");
-			} catch (Throwable oops) {
-				oops.printStackTrace();
-				result = this.editModelAndView(agencia);
-				result.addObject("message", "agencia.commit.error");
-			}
-		}
-
-		return result;
-	}
-
-	//Create an agencia ---------------------------------------------------------------------------------------------
-	@RequestMapping(value = "/manager/create", method = RequestMethod.GET)
-	public ModelAndView create() {
-		ModelAndView result;
-		try {
-			Agencia agencia = new Agencia();
-			result = this.createEditModelAndView(agencia);
-		} catch (Throwable oops) {
-			oops.printStackTrace();
-			System.out.println(oops.getMessage());
-			result = super.forbiddenOpperation();
-		}
-		return result;
-	}
-	@RequestMapping(value = "/manager/create", method = RequestMethod.POST, params = "save")
-	public ModelAndView create(@Valid Agencia agencia, BindingResult binding) {
-		ModelAndView result;
-		
-		if (binding.hasErrors()) {
-			final List<ObjectError> errors = binding.getAllErrors();
-			for (final ObjectError e : errors)
-				System.out.println(e.toString());
-			result = this.createEditModelAndView(agencia);
-		} else {
-			try {
-				this.agenciaService.save(agencia);
-				result = new ModelAndView("redirect:list.do");
-			} catch (Throwable oops) {
-				oops.printStackTrace();
-				result = this.createEditModelAndView(agencia);
-			}
-		}
-		return result;
-	}
-
-	// Delete an agency method ------------------------------------------------------------------------------------
-	@RequestMapping(value = "/delete", method = RequestMethod.GET)
-	public ModelAndView delete(@RequestParam int agenciaId) {
-		ModelAndView result;
-		try {
-			result = new ModelAndView("redirect:../agencia/listAgencia.do");
-			this.agenciaService.delete(agenciaId);
-
-		} catch (Throwable oops) {
-			oops.printStackTrace();
-			System.out.println(oops.getMessage());
-			result = super.forbiddenOpperation();
-		}
-		return result;
-	}
-
 	// Other methods-------------------------------------------------------------------------------------------------------
 	private ModelAndView createEditModelAndView(Agencia agencia) {
 		ModelAndView result;
@@ -236,7 +233,7 @@ public class AgenciaController extends AbstractController {
 		result.addObject("message", message);
 		return result;
 	}
-	
+
 	private ModelAndView editModelAndView(Agencia agencia) {
 		ModelAndView result;
 		result = this.editModelAndView(agencia, null);
@@ -248,6 +245,7 @@ public class AgenciaController extends AbstractController {
 		result = new ModelAndView("agencia/manager/edit");
 		result.addObject("action", "agencia/manager/edit.do");
 		result.addObject("agencia", agencia);
+		result.addObject("capacity", agencia.getCapacidadDisponible());
 		result.addObject("message", message);
 		return result;
 	}
