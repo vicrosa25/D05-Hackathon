@@ -15,11 +15,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import services.EventoService;
+import services.ManagerService;
 import domain.Comentario;
 import domain.Evento;
 import domain.Manager;
-import services.EventoService;
-import services.ManagerService;
 
 @Controller
 @RequestMapping("/evento")
@@ -97,7 +97,7 @@ public class EventoController extends AbstractController {
 		try {
 			evento = this.eventoService.create();
 			result = this.createEditModelAndView(evento);
-			
+
 		} catch (Throwable oops) {
 			oops.printStackTrace();
 			System.out.println(oops.getMessage());
@@ -116,7 +116,7 @@ public class EventoController extends AbstractController {
 		} else {
 			try {
 				this.eventoService.saveNew(evento);
-				result = new ModelAndView("redirect:manager/list.do");
+				result = new ModelAndView("redirect:list.do");
 			} catch (Throwable oops) {
 				oops.printStackTrace();
 				System.out.println(oops.getMessage());
@@ -126,7 +126,7 @@ public class EventoController extends AbstractController {
 
 		return result;
 	}
-	
+
 	// Manager Evento Delete --------------------------------------------------------------------------------------
 	@RequestMapping(value = "/manager/delete", method = RequestMethod.GET)
 	public ModelAndView borrar(@RequestParam int eventoId) {
@@ -135,7 +135,7 @@ public class EventoController extends AbstractController {
 			Evento evento = this.eventoService.findOne(eventoId);
 			this.eventoService.delete(evento);
 
-			result = new ModelAndView("redirect:manager/list.do");
+			result = new ModelAndView("redirect:list.do");
 		} catch (Throwable oops) {
 			oops.printStackTrace();
 			System.out.println(oops.getMessage());
@@ -161,19 +161,19 @@ public class EventoController extends AbstractController {
 		return result;
 	}
 
-//	private ModelAndView editModelAndView(Evento evento) {
-//		ModelAndView result;
-//		result = this.editModelAndView(evento, null);
-//		return result;
-//	}
-//
-//	private ModelAndView editModelAndView(Evento evento, String message) {
-//		ModelAndView result;
-//		result = new ModelAndView("agencia/manager/edit");
-//		result.addObject("action", "agencia/manager/edit.do");
-//		result.addObject("agencia", agencia);
-//		result.addObject("capacity", agencia.getCapacidadDisponible());
-//		result.addObject("message", message);
-//		return result;
-//	}
+	//	private ModelAndView editModelAndView(Evento evento) {
+	//		ModelAndView result;
+	//		result = this.editModelAndView(evento, null);
+	//		return result;
+	//	}
+	//
+	//	private ModelAndView editModelAndView(Evento evento, String message) {
+	//		ModelAndView result;
+	//		result = new ModelAndView("agencia/manager/edit");
+	//		result.addObject("action", "agencia/manager/edit.do");
+	//		result.addObject("agencia", agencia);
+	//		result.addObject("capacity", agencia.getCapacidadDisponible());
+	//		result.addObject("message", message);
+	//		return result;
+	//	}
 }

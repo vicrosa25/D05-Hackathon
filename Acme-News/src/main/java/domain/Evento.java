@@ -23,12 +23,12 @@ public class Evento extends Informacion {
 	// Attributes -------------------------------------------------------------
 	private String 	direccion;
 	private Date 	fecha;
-	
-	
+
+
 	// Relationships  ----------------------------------------------------------
 	private Agencia agencia;
 
-	
+
 
 	@NotBlank
 	public String getDireccion() {
@@ -50,6 +50,7 @@ public class Evento extends Informacion {
 	}
 
 	@ManyToOne(optional=false)
+	@NotNull
 	public Agencia getAgencia() {
 		return this.agencia;
 	}

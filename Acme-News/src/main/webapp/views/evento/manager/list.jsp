@@ -23,7 +23,7 @@
 	<display:column><a href="evento/display.do?eventoId=${row.id}">
  	<spring:message code="evento.display"/></a></display:column> 
 
-	<display:column><a href="evento/manager/borrar.do?eventoId=${row.id}">
+	<display:column><a href="evento/manager/delete.do?eventoId=${row.id}">
  	<spring:message code="evento.borrar"/></a></display:column> 
 </display:table>
  

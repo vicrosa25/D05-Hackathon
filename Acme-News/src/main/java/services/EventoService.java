@@ -11,12 +11,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
+import repositories.EventoRepository;
 import domain.Actor;
 import domain.Comentario;
 import domain.Evento;
 import domain.Manager;
 import domain.Usuario;
-import repositories.EventoRepository;
 
 
 @Service
@@ -31,10 +31,10 @@ public class EventoService {
 	// Supporting services ---------------------------------------------------------------------------------------------
 	@Autowired
 	private ComentarioService 	comentarioService;
-	
+
 	@Autowired
 	private ManagerService 		managerService;
-	
+
 	@Autowired
 	private ActorService		actorService;
 
@@ -56,12 +56,12 @@ public class EventoService {
 	public Evento save(Evento evento){
 		Actor principal;
 		Assert.notNull(evento);
-		
+
 		// Check principal must be a Manager
 		principal = this.actorService.findByPrincipal();
 		Assert.isInstanceOf(Manager.class, principal);
-		
-		
+
+
 		return this.eventoRepository.save(evento);
 	}
 
@@ -71,7 +71,9 @@ public class EventoService {
 		Assert.notNull(evento);
 		Assert.isTrue(manager.getAgencias().contains(evento.getAgencia()));
 
-		return this.save(evento);
+		evento = this.eventoRepository.save(evento);
+		evento.getAgencia().getEventos().add(evento);
+		return evento;
 	}
 
 	public void delete(Evento evento){
@@ -80,16 +82,17 @@ public class EventoService {
 		Assert.notNull(evento);
 		Assert.isTrue(manager.getAgencias().contains(evento.getAgencia()));
 
-		for(Usuario usuario:evento.getUsuarios()){
-			usuario.getInformacionCompartida().remove(evento);
-		}
-
+		evento.getAgencia().getEventos().remove(evento);
 		Iterator<Comentario> comentarios	= new ArrayList<Comentario>(evento.getComentarios()).iterator();
 
 		while (comentarios.hasNext()) {
 			Comentario next = comentarios.next();
 			this.comentarioService.delete(next);
 			comentarios.remove();
+		}
+
+		for(Usuario usuario:evento.getUsuarios()){
+			usuario.getInformacionCompartida().remove(evento);
 		}
 
 		this.eventoRepository.delete(evento);
