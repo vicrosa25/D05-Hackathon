@@ -24,17 +24,23 @@
 	<spring:message code="agencia.tasa" var="taxHeader" />
 	<display:column property="tasa" title="${taxHeader}" />
 	
-	
 	<jstl:if test="${row.manager == logged}">
+		
+		<!-- Periodistas -->
+		<spring:message code="agencia.periodistas" var="periodistasHeader" />
+		<display:column title="${ periodistasHeader }">
+			<a href="agencia/manager/periodista/list.do?agenciaId=${ row.id }"> <spring:message code="agencia.periodistas" /> </a>
+		</display:column>
+		
 		<!-- Update -->
 		<spring:message code="agencia.update" var="updateHeader" />
-		<display:column>
+		<display:column title="${ updateHeader }">
 			<a href="agencia/manager/edit.do?agenciaId=${ row.id }"> <spring:message code="agencia.update" /> </a>
 		</display:column>
 	
 		<!-- Delete -->
 		<spring:message code="agencia.delete" var="deleteHeader" />
-		<display:column>
+		<display:column title="${ deleteHeader }">
 			<a href="agencia/delete.do?agenciaId=${ row.id }"> <spring:message code="agencia.delete" /> </a>
 		</display:column>
 	</jstl:if>

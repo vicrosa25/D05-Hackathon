@@ -32,9 +32,6 @@ public class AgenciaService {
 	@Autowired
 	private PeriodistaService	periodistaService;
 
-	@Autowired
-	private ManagerService		managerService;
-
 	//	@Autowired
 	//	private Validator validator;
 
@@ -111,9 +108,29 @@ public class AgenciaService {
 
 		Manager manager = toDelete.getManager();
 		manager.removeAgencia(toDelete);
-		this.managerService.save(manager);
 
-		agenciaRepository.delete(agenciaId);
+		agenciaRepository.delete(toDelete);
+	}
+	
+	
+	public Agencia periodistaEject (int periodistaId, int agenciaId) {
+		Agencia agencia;
+		Periodista periodista;
+		Actor principal;
+		
+		// Check the principal must to be a Manager
+		principal = this.actorService.findByPrincipal();
+		Assert.isInstanceOf(Manager.class, principal);
+		
+		agencia = this.findOne(agenciaId);
+		periodista = this.periodistaService.findOne(periodistaId);
+		
+		periodista.setAgencia(null);
+		this.periodistaService.save(periodista);
+		
+		agencia.getPeriodistas().remove(periodista);
+	
+		return this.save(agencia);
 	}
 
 	// Others Methods ------------------------------------------------------------------------------------------

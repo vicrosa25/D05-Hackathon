@@ -25,5 +25,10 @@
 		<put-attribute name="title" value="Create Agency" />
 		<put-attribute name="body" value="/views/agencia/manager/create.jsp" />
 	</definition>
+	
+	<definition name="agencia/manager/periodista/list" extends="master.page">	
+		<put-attribute name="title" value="Journalists List" />
+		<put-attribute name="body" value="/views/agencia/manager/periodista/list.jsp" />
+	</definition>
 
 </tiles-definitions>

@@ -140,12 +140,46 @@ public class AgenciaController extends AbstractController {
 	public ModelAndView delete(@RequestParam int agenciaId) {
 		ModelAndView result;
 		try {
-			result = new ModelAndView("redirect:../agencia/listAgencia.do");
 			this.agenciaService.delete(agenciaId);
-
+			result = new ModelAndView("redirect:manager/list.do");
 		} catch (Throwable oops) {
 			oops.printStackTrace();
-			System.out.println(oops.getMessage());
+			result = super.forbiddenOpperation();
+		}
+		return result;
+	}
+
+	// Agencia Periodistas LIST   ------------------------------------------------------------------------------------
+	@RequestMapping(value = "/manager/periodista/list", method = RequestMethod.GET)
+	public ModelAndView periodistasList(@RequestParam int agenciaId) {
+		ModelAndView result;
+
+		try {
+			Agencia agencia = this.agenciaService.findOne(agenciaId);
+			result = new ModelAndView("agencia/manager/periodista/list");
+			result.addObject("periodistas", agencia.getPeriodistas());
+			result.addObject("requestURI", "agencia/manager/periodista/list.do");
+			result.addObject("agenciaId", agencia.getId());
+		} catch (Throwable oops) {
+			oops.printStackTrace();
+			result = super.forbiddenOpperation();
+		}
+		return result;
+	}
+
+	// Agencia Periodistas LIST   ------------------------------------------------------------------------------------
+	@RequestMapping(value = "/manager/periodista/eject", method = RequestMethod.GET)
+	public ModelAndView periodistasEject(@RequestParam int periodistaId, @RequestParam int agenciaId ) {
+		ModelAndView result;
+		Agencia agencia;
+
+		try {
+			agencia = this.agenciaService.periodistaEject(periodistaId, agenciaId);
+			result = new ModelAndView("agencia/manager/periodista/list");
+			result.addObject("periodistas", agencia.getPeriodistas());
+			result.addObject("requestURI", "agencia/manager/periodista/list.do");
+		} catch (Throwable oops) {
+			oops.printStackTrace();
 			result = super.forbiddenOpperation();
 		}
 		return result;

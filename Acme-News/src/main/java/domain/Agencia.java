@@ -4,6 +4,7 @@ import java.util.Collection;
 
 import javax.persistence.Access;
 import javax.persistence.AccessType;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
@@ -122,8 +123,8 @@ public class Agencia extends DomainEntity {
 		this.periodistas.remove(periodista);
 	}
 
-	@NotNull
-	@OneToMany(mappedBy="agencia")
+
+	@OneToMany(cascade = CascadeType.ALL)
 	public Collection<Evento> getEventos() {
 		return this.eventos;
 	}
