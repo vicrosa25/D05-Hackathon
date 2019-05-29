@@ -11,11 +11,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
-import repositories.EventoRepository;
+import domain.Actor;
 import domain.Comentario;
 import domain.Evento;
 import domain.Manager;
 import domain.Usuario;
+import repositories.EventoRepository;
 
 
 @Service
@@ -24,14 +25,18 @@ public class EventoService {
 
 	// Managed repository------------------------------------------------------------------------------------------------
 	@Autowired
-	private EventoRepository eventoRepository;
+	private EventoRepository 	eventoRepository;
 
 
 	// Supporting services ---------------------------------------------------------------------------------------------
 	@Autowired
-	private ComentarioService comentarioService;
+	private ComentarioService 	comentarioService;
+	
 	@Autowired
-	private ManagerService managerService;
+	private ManagerService 		managerService;
+	
+	@Autowired
+	private ActorService		actorService;
 
 
 	public EventoService() {
@@ -49,7 +54,14 @@ public class EventoService {
 	}
 
 	public Evento save(Evento evento){
+		Actor principal;
 		Assert.notNull(evento);
+		
+		// Check principal must be a Manager
+		principal = this.actorService.findByPrincipal();
+		Assert.isInstanceOf(Manager.class, principal);
+		
+		
 		return this.eventoRepository.save(evento);
 	}
 

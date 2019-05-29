@@ -23,8 +23,8 @@ public class Informacion extends DomainEntity {
 	private String descripcion;
 
 	// Relationships ----------------------------------------------------------
-	private Collection<Comentario> comentarios;
-	private Collection<Usuario> usuarios;
+	private Collection<Comentario> 	comentarios;
+	private Collection<Usuario> 	usuarios;
 
 	// Constructor
 	public Informacion() {

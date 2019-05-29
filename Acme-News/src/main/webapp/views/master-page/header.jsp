@@ -114,9 +114,7 @@
 			<li><a class="fNiv"><spring:message	code="master.page.eventos.manage" /></a>
 				<ul>
 					<li class="arrow"></li>
-					<li><a href="evento/manager/misEventos.do"><spring:message code="periodista.misEventos" /></a></li>
-					<li><a href="evento/manager/crear.do"><spring:message code="periodista.evento.create" /></a></li>
-					
+					<li><a href="evento/manager/list.do"><spring:message code="periodista.misEventos" /></a></li>
 				</ul>
 			</li>
 			<li><a class="fNiv"><spring:message	code="master.page.profile" /></a>

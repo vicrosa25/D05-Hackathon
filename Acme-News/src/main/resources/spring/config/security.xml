@@ -88,9 +88,9 @@
 		<!-- EVENTO -->
 		<security:intercept-url pattern="/evento/allEventos.do" access="permitAll" />
 		<security:intercept-url pattern="/evento/display.do" access="permitAll" />
-		<security:intercept-url pattern="/evento/manager/misEventos.do" access="hasRole('MANAGER')" />
-		<security:intercept-url pattern="/evento/manager/borrar.do" access="hasRole('MANAGER')" />
-		<security:intercept-url pattern="/evento/manager/crear.do" access="hasRole('MANAGER')" />
+		<security:intercept-url pattern="/evento/manager/list.do" access="hasRole('MANAGER')" />
+		<security:intercept-url pattern="/evento/manager/delete.do" access="hasRole('MANAGER')" />
+		<security:intercept-url pattern="/evento/manager/create.do" access="hasRole('MANAGER')" />
 		
 		<!-- PERIODISTA -->
 		<security:intercept-url pattern="/periodista/display.do" access="permitAll" />

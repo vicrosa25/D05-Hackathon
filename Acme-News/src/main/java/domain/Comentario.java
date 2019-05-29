@@ -24,7 +24,8 @@ public class Comentario extends DomainEntity {
 
 	// Relationships ----------------------------------------------------------
 	private Informacion informacion;
-	private Usuario usuario;
+	private Evento		evento;
+	private Usuario 	usuario;
 
 	// Constructor -----------------------------------------------------
 	public Comentario() {
@@ -66,7 +67,7 @@ public class Comentario extends DomainEntity {
 	// Relationships Getters and Setters
 	// ----------------------------------------------------------
 
-	@ManyToOne(optional = false)
+	@ManyToOne(optional = true)
 	public Informacion getInformacion() {
 		return informacion;
 	}
@@ -75,7 +76,17 @@ public class Comentario extends DomainEntity {
 		this.informacion = informacion;
 	}
 	
-	 @NotNull
+	@ManyToOne(optional = true)
+	public Evento getEvento() {
+		return evento;
+	}
+
+	
+	public void setEvento(Evento evento) {
+		this.evento = evento;
+	}
+
+	@NotNull
 	 @ManyToOne(optional = false)
 	 public Usuario getUsuario() {
 	 return usuario;

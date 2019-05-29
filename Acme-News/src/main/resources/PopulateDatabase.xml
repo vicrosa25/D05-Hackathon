@@ -1368,8 +1368,7 @@ Twitter, por suerte, sigue funcionando" />
 
 	<bean id="comentario2" class="domain.Comentario">
 		<property name="titulo" value="Fiestaaaa" />
-		<property name="descripcion"
-			value="Deseando que llegue la fecha, MUSICA Y ALCOHOL!!!!" />
+		<property name="descripcion" value="Deseando que llegue la fecha, MUSICA Y ALCOHOL!!!!" />
 		<property name="fecha" value="2019/05/13" />
 		<property name="informacion" ref="evento1" />
 		<property name="usuario" ref="usuario1" />

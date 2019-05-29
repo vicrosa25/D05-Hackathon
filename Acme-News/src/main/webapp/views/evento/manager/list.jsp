@@ -26,5 +26,6 @@
 	<display:column><a href="evento/manager/borrar.do?eventoId=${row.id}">
  	<spring:message code="evento.borrar"/></a></display:column> 
 </display:table>
- <a href="evento/manager/crear.do"><spring:message code="evento.crear" /></a>
+ 
+ <a href="evento/manager/create.do"><spring:message code="evento.crear" /></a>
  <br/>

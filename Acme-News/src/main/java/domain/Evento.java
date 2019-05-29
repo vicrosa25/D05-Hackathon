@@ -21,18 +21,14 @@ public class Evento extends Informacion {
 
 
 	// Attributes -------------------------------------------------------------
-	private String direccion;
-	private Date fecha;
+	private String 	direccion;
+	private Date 	fecha;
+	
+	
+	// Relationships  ----------------------------------------------------------
 	private Agencia agencia;
 
-
-	// Constructor ----------------------------------------------------------
-	public Evento(){
-		super();
-	}
-
-
-	//  ----------------------------------------------------------
+	
 
 	@NotBlank
 	public String getDireccion() {

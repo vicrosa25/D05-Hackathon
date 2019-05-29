@@ -9,12 +9,11 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags" %>
 
-<form:form action="evento/manager/crear.do" modelAttribute="evento">
+<form:form action="evento/manager/create.do" modelAttribute="evento">
+	
 	<%-- Hidden properties from Domain--%>
 	<form:hidden path="id" />
 	<form:hidden path="version" />
-	
-	<%-- Hidden properties from Informacion --%>
 	<form:hidden path="comentarios" />
 	<form:hidden path="usuarios" />
 	
@@ -38,11 +37,8 @@
 	<!-- Select Agencia -->
 	<acme:select items="${ agencias }" itemLabel="titulo" code="evento.agencia" path="agencia"/>
 	<br>
-
-	<input type="submit" name="save"
-		value="<spring:message code="evento.save" />" />&nbsp; 
+		
+	<acme:submit name="save" code="evento.save"/>
+	<acme:cancel url="evento/manager/list.do" code="evento.cancel"/>
 
 </form:form>
-<br/>
-	<input type="button" name="goBack" value="<spring:message code="evento.goBack"/>" 
-	onclick="javascript: window.location.replace('evento/misEventos.do')"/>
