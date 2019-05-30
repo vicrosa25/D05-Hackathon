@@ -26,7 +26,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import services.ActorService;
 import services.InformacionService;
-import services.NoticiaService;
 import services.PeriodistaService;
 import services.SorteoService;
 import services.TasaService;
@@ -49,9 +48,6 @@ public class UsuarioController extends AbstractController {
 
 	@Autowired
 	private ActorService actorService;
-
-	@Autowired
-	private NoticiaService noticiaService;
 
 	@Autowired
 	private SorteoService sorteoService;
@@ -174,6 +170,7 @@ public class UsuarioController extends AbstractController {
 			Collection<Usuario> usuariosSiguiendo= new ArrayList<Usuario>();
 			Collection<Usuario> usuarios = new ArrayList<Usuario>(this.usuarioService.findAll());
 
+			usuarios.remove(this.usuarioService.findUnknown());
 			usuariosSiguiendo=this.usuarioService.usuariosSiguiendo();
 			usuarios.removeAll(usuariosSiguiendo);
 			usuarios.remove(this.usuarioService.findByPrincipal());
