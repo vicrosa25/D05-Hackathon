@@ -73,24 +73,25 @@ public class AgenciaService {
 		Manager manager;
 		Agencia saved;
 		Agencia old;
-		
+
 		// Check principal must be a Manager
 		principal = this.actorService.findByPrincipal();
 		Assert.isInstanceOf(Manager.class, principal);
-		
+
 		manager = (Manager) principal;
-		
-		if(agencia.getId() == 0) {
+
+		if (agencia.getId() == 0) {
 			agencia.setManager(manager);
 			saved = this.agenciaRepository.save(agencia);
 			manager.getAgencias().add(saved);
 		} else {
+			Assert.isTrue(manager.getAgencias().contains(agencia));
 			old = this.agenciaRepository.findOne(agencia.getId());
 			int capacity = old.getCapacidadDisponible();
 			Assert.isTrue(agencia.getCapacidadDisponible() >= capacity, "No capacidad menor");
 			saved = this.agenciaRepository.save(agencia);
 		}
-		
+
 		return saved;
 	}
 
@@ -99,37 +100,48 @@ public class AgenciaService {
 	}
 
 	public void delete(int agenciaId) {
-		Agencia toDelete = this.findOne(agenciaId);
+		Actor 		principal;
+		Manager 	manager;
+		Agencia 	toDelete;
+		
+		
+		toDelete = this.findOne(agenciaId);
+		
+		// Check the manager is the owner of the agency
+		principal = this.actorService.findByPrincipal();
+		Assert.isInstanceOf(Manager.class, principal);
+		manager = (Manager) principal;
+		Assert.isTrue(manager.getAgencias().contains(toDelete));
+
 
 		for (Periodista p : toDelete.getPeriodistas()) {
 			p.setAgencia(null);
 			this.periodistaService.save(p);
 		}
 
-		Manager manager = toDelete.getManager();
+		//Manager manager = toDelete.getManager();
 		manager.removeAgencia(toDelete);
 
-		agenciaRepository.delete(toDelete);
+		this.agenciaRepository.delete(toDelete);
 	}
-	
-	
-	public Agencia periodistaEject (int periodistaId, int agenciaId) {
+
+	public Agencia periodistaEject(int periodistaId, int agenciaId) {
 		Agencia agencia;
 		Periodista periodista;
 		Actor principal;
-		
+
 		// Check the principal must to be a Manager
 		principal = this.actorService.findByPrincipal();
 		Assert.isInstanceOf(Manager.class, principal);
-		
+
 		agencia = this.findOne(agenciaId);
 		periodista = this.periodistaService.findOne(periodistaId);
-		
+
 		periodista.setAgencia(null);
 		this.periodistaService.save(periodista);
-		
+
 		agencia.getPeriodistas().remove(periodista);
-	
+
 		return this.save(agencia);
 	}
 
