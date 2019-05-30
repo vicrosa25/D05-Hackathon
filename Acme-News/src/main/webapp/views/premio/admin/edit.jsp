@@ -47,14 +47,19 @@
 	<br />
 	<br />
 	
-<input type="submit" name="save" value="<spring:message code="premio.save" />" />&nbsp; 
+<%-- <input type="submit" name="save" value="<spring:message code="premio.save" />" />&nbsp;  --%>
 
-<input type="submit" name="delete" 
+
+	<acme:submit name="save" code="premio.save"/>
+
+	<jstl:if test="${ premio.id != 0 }">
+	<input type="submit" name="delete" 
 		onclick="return confirm('<spring:message code="premio.confirm.delete"/>')"
-		value="<spring:message code="premio.delete"/>" />
-		&nbsp;
+		value="<spring:message code="premio.delete"/>" />&nbsp;
+	</jstl:if>
 		
-	<acme:cancel url="premio/admin/listAdmin.do" code="premio.goBack"/>
+	<acme:cancel url="premio/admin/list.do" code="premio.goBack"/>
+
 </form:form>
 	
 	

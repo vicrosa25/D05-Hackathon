@@ -5,19 +5,19 @@
       
 <tiles-definitions>
 
-	<definition name="premio/admin/listAdmin" extends="master.page">
+	<definition name="premio/admin/list" extends="master.page">
 		<put-attribute name="title" value="Awards List" />
-		<put-attribute name="body" value="/views/premio/listAdmin.jsp" />
+		<put-attribute name="body" value="/views/premio/admin/list.jsp" />
 	</definition>
 	
-	<definition name="premio/admin/displayAdmin" extends="master.page">
+	<definition name="premio/admin/display" extends="master.page">
 		<put-attribute name="title" value="Award Info" />
-		<put-attribute name="body" value="/views/premio/displayAdmin.jsp" />
+		<put-attribute name="body" value="/views/premio/admin/display.jsp" />
 	</definition>
 	
 		<definition name="premio/admin/edit" extends="master.page">
 		<put-attribute name="title" value="Edit Award" />
-		<put-attribute name="body" value="/views/premio/edit.jsp" />
+		<put-attribute name="body" value="/views/premio/admin/edit.jsp" />
 	</definition>
 
 	
