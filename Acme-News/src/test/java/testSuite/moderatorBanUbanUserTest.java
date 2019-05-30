@@ -1,8 +1,5 @@
 package testSuite;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import javax.transaction.Transactional;
 
 import org.junit.Test;
@@ -20,7 +17,7 @@ import utilities.AbstractTest;
 @ContextConfiguration(locations = {"classpath:spring/junit.xml"})
 @RunWith(SpringJUnit4ClassRunner.class)
 @Transactional
-public class moderatorBanUserTest extends AbstractTest {
+public class moderatorBanUbanUserTest extends AbstractTest {
 	
 	// System under test ------------------------------------------------------
 	@Autowired
@@ -58,12 +55,24 @@ public class moderatorBanUserTest extends AbstractTest {
 	protected void template(final String username, final Class<?> expected) {
 		Class<?> caught;
 		caught = null;
+		Usuario user;
+		
+		// Get user1
+		user = this.usuarioService.findOne(super.getEntityId("usuario1"));
+		
 		try {
-			List<Usuario> users=new ArrayList<Usuario>();
-			users.addAll(this.usuarioService.findAll());
+			
 			super.authenticate(username);
-			this.moderadorService.saveBanUnban(users.get(0).getId());
+			
+			// Ban the user
+			this.moderadorService.saveBanUnban(user.getId());
+			
+			// Uban the user
+			this.moderadorService.saveBanUnban(user.getId());
+			
 			super.unauthenticate();
+			
+			
 		} catch (final Throwable oops) {
 			caught = oops.getClass();
 		}
