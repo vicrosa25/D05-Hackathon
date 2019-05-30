@@ -26,6 +26,9 @@
 	onclick="return confirm('<spring:message code="periodista.confirmar.noSeguir" />')" />&nbsp;
 	</form:form>
 	</display:column>
+
+	
+	<display:caption><spring:message code="user.periodistas.siguiendo"/></display:caption>
 </display:table>
 </jstl:if>
 <jstl:if test="${empty periodistasSiguiendo}">
@@ -51,6 +54,7 @@
 			onclick="return confirm('<spring:message code="periodista.confirmar.seguir" />')" />&nbsp;
 </form:form>
 </display:column>
+	<display:caption><spring:message code="user.periodistas"/></display:caption>
 
 </display:table>
 </jstl:if>

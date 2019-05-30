@@ -30,6 +30,8 @@
 	onclick="return confirm('<spring:message code="usuario.confirmar.noSeguir" />')" />&nbsp;
 	</form:form>
 	</display:column>
+	
+	<display:caption><spring:message code="user.siguiendo"/></display:caption>
 </display:table>
 </jstl:if>
 <jstl:if test="${empty usuariosSiguiendo}">
@@ -53,12 +55,13 @@
 	<display:column property="estatus" title="${estatusHeader}" sortable="true" />
 	
 	<display:column>
-<form:form action="usuario/seguirUsuario.do?usuarioId=${row.id}">
-<input type="submit" name="Seguir" value="<spring:message code="usuario.seguir" />"
-			onclick="return confirm('<spring:message code="usuario.confirmar.seguir" />')" />&nbsp;
-</form:form>
-</display:column>
+		<form:form action="usuario/seguirUsuario.do?usuarioId=${row.id}">
+		<input type="submit" name="Seguir" value="<spring:message code="usuario.seguir" />"
+					onclick="return confirm('<spring:message code="usuario.confirmar.seguir" />')" />&nbsp;
+		</form:form>
+	</display:column>
 
+	<display:caption><spring:message code="user.usuarios"/></display:caption>
 </display:table>
 </jstl:if>
 <jstl:if test="${empty usuarios}">

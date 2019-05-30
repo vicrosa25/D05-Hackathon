@@ -196,6 +196,7 @@ public class UsuarioController extends AbstractController {
 			Collection<Periodista> periodistasSiguiendo= new ArrayList<Periodista>();
 			Collection<Periodista> periodistas = new ArrayList<Periodista>(this.periodistaService.findAll());
 
+			periodistas.remove(this.periodistaService.findUnknown());
 			periodistasSiguiendo = this.usuarioService.findByPrincipal().getPeriodistas();
 			periodistas.removeAll(periodistasSiguiendo);
 

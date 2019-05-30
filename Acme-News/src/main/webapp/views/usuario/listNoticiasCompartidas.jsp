@@ -19,8 +19,4 @@
 	<spring:message code="informacion.descripcion" var="descripcionHeader" />
 	<display:column property="descripcion" title="${descripcionHeader}" sortable="true" />
 	
-	
-
-
 </display:table>
-
