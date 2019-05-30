@@ -20,7 +20,7 @@ import utilities.AbstractTest;
 @ContextConfiguration(locations = {"classpath:spring/junit.xml"})
 @RunWith(SpringJUnit4ClassRunner.class)
 @Transactional
-public class BanearUsuarioTest extends AbstractTest {
+public class moderatorBanUserTest extends AbstractTest {
 	
 	// System under test ------------------------------------------------------
 	@Autowired
@@ -30,16 +30,23 @@ public class BanearUsuarioTest extends AbstractTest {
 	@Autowired
 	private UsuarioService 	 usuarioService;
 	
+	
+	// Test ------------------------------------------------------
+	/*
+	 * An actor who is not authenticated as a moderator must be able to: Ban an User
+	 * 
+	 * 01- All ok 													- Positive test
+	 * 02- Actor is not autheticate 								- Negative test - error
+	 * 03- Actor is authenticated as a journalist					- Negative test - error
+	 * 
+	 */
 
 	
 	@Test
 	public void driverTestBanChorbi() {
 		final Object testingData[][] = {
-			//Banear usuario como moderador, se espera correcto.
 			{"moderador1", null}, 
-			//Banear usuario sin loguear, se espera excepcion.
 			{null, IllegalArgumentException.class},
-			//Banear usuario logueado como periodista, se espera excepcion.
 			{"periodista", IllegalArgumentException.class}
 		};
 
