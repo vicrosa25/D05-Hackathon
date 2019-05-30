@@ -15,10 +15,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import services.PremioService;
-import services.SorteoService;
 import domain.Premio;
 import domain.Sorteo;
+import services.PremioService;
+import services.SorteoService;
 
 
 @Controller
@@ -152,7 +152,7 @@ public class SorteoController extends AbstractController {
 
 	protected ModelAndView createEditModelAndView2(Sorteo sorteo, String message) {
 		assert sorteo != null;
-		Collection<Premio> premios= this.premioService.getPremioRepository().findAll();
+		Collection<Premio> premios= this.premioService.findAll();
 
 		ModelAndView result;
 

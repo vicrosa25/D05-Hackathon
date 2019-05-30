@@ -19,7 +19,7 @@ import utilities.AbstractTest;
 })
 @RunWith(SpringJUnit4ClassRunner.class)
 @Transactional
-public class adminChangePrincipalAddTest extends AbstractTest {
+public class AdminChangePrincipalAddTest extends AbstractTest {
 
 	// System under test ------------------------------------------------------
 	@Autowired

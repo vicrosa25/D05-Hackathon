@@ -13,10 +13,10 @@ import org.hibernate.validator.constraints.URL;
 @Access(AccessType.PROPERTY)
 public class Premio extends DomainEntity{
 
-	private String nombre;
+	private String 	nombre;
 	private Integer precio;
-	private String imagen;
-	private String descripcion;
+	private String 	imagen;
+	private String 	descripcion;
 
 	// Relationships ----------------------------------------------------------
 	

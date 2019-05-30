@@ -11,12 +11,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
-import repositories.EventoRepository;
 import domain.Actor;
 import domain.Comentario;
 import domain.Evento;
 import domain.Manager;
 import domain.Usuario;
+import repositories.EventoRepository;
 
 
 @Service
@@ -121,7 +121,6 @@ public class EventoService {
 	}
 
 	// other methods
-
 	protected static double round(double value, int places) {
 		if (places < 0) throw new IllegalArgumentException();
 

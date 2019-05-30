@@ -39,7 +39,7 @@ public class PremioController extends AbstractController {
 		ModelAndView result;
 		Collection<Premio> premios;
 
-		premios = premioService.getPremioRepository().findAll();
+		premios = premioService.findAll();
 		result = new ModelAndView("premio/admin/list");
 		result.addObject("premios", premios);
 
@@ -52,7 +52,7 @@ public class PremioController extends AbstractController {
 		ModelAndView result;
 
 		result = new ModelAndView("premio/admin/display");
-		Premio premio = premioService.getPremioRepository().findOne(premioId);
+		Premio premio = premioService.findOne(premioId);
 
 		result.addObject("premio", premio);
 
@@ -76,7 +76,7 @@ public class PremioController extends AbstractController {
 		ModelAndView result;
 		Premio premio;
 
-		premio = premioService.getPremioRepository().findOne(premioId);
+		premio = premioService.findOne(premioId);
 		result = createEditModelAndView2(premio);
 
 		return result;
