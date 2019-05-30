@@ -10,6 +10,7 @@
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@taglib prefix="security" uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
+<%@taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 
 
 <display:table name="premio" id="row" >
@@ -24,9 +25,10 @@
 	<display:column property="descripcion" title="${descripcionHeader}" sortable="false" />
 	
 </display:table>
-<img src="${premio.imagen}" style="width:304px;height:228px;">
+
+<jstl:if test="${not empty premio.imagen}">
+	<img src="${premio.imagen}" style="width:304px;height:228px;">
+</jstl:if>
 <br/>
 
-<br/>
-	<input type="button" name="goBack" value="<spring:message code="premio.goBack"/>" 
-	onclick="javascript: window.location.replace('premio/admin/listAdmin.do')"/>
+<acme:back code="periodista.goBack"/>

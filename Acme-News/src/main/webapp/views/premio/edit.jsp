@@ -7,6 +7,7 @@
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@taglib prefix="security"	uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
+<%@taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 
 <form:form action="premio/admin/edit.do" modelAttribute="premio">
 
@@ -21,9 +22,9 @@
 	<form:errors cssClass="error" path="nombre" />
 	<br />
 	<br />
-	
-		<form:label path="precio">
-		<spring:message code="premio.precio" />:
+
+	<form:label path="precio">
+	<spring:message code="premio.precio" />:
 	</form:label>
 	<form:input type="number" min="1" path="precio" />
 	<form:errors cssClass="error" path="precio" />
@@ -46,14 +47,17 @@
 	<br />
 	<br />
 	
-<input type="submit" name="save"
-		value="<spring:message code="premio.save" />" />&nbsp; 
+<input type="submit" name="save" value="<spring:message code="premio.save" />" />&nbsp; 
 
 <input type="submit" name="delete" 
 		onclick="return confirm('<spring:message code="premio.confirm.delete"/>')"
 		value="<spring:message code="premio.delete"/>" />
 		&nbsp;
+		
+	<acme:cancel url="premio/admin/listAdmin.do" code="premio.goBack"/>
 </form:form>
-<br/>
-	<input type="button" name="goBack" value="<spring:message code="premio.goBack"/>" 
-	onclick="javascript: window.location.replace('premio/admin/listAdmin.do')"/>
+	
+	
+	
+	
+	

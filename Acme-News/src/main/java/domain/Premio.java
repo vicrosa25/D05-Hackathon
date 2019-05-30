@@ -4,17 +4,19 @@ import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Entity;
 import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotBlank;
+import org.hibernate.validator.constraints.URL;
  
 @Entity
 @Access(AccessType.PROPERTY)
 public class Premio extends DomainEntity{
 
-	String nombre;
-	Integer precio;
-	String imagen;
-	String descripcion;
+	private String nombre;
+	private Integer precio;
+	private String imagen;
+	private String descripcion;
 
 	// Relationships ----------------------------------------------------------
 	
@@ -32,7 +34,8 @@ public class Premio extends DomainEntity{
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
-
+	
+	@NotNull
 	@Min(0)
 	public Integer getPrecio() {
 		return precio;
@@ -42,7 +45,7 @@ public class Premio extends DomainEntity{
 		this.precio = precio;
 	}
 	
-	@NotBlank
+	@URL
 	public String getImagen() {
 		return imagen;
 	}
