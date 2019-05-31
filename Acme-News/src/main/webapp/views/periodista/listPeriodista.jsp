@@ -22,7 +22,7 @@
 	
 	<!-- Cartera -->
 	<spring:message code="periodista.cartera" var="carteraHeader" />
-	<display:column property="cartera" title="${carteraHeader}" />
+	<display:column property="cartera.paypalEmail" title="${carteraHeader}" />
 	
 	<!-- Agencia -->
 	<spring:message code="periodista.agencia" var="agenciaHeader" />
