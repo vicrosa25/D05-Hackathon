@@ -67,7 +67,8 @@ public class PeriodistaService {
 
 		Periodista unknown = this.findUnknown();
 
-		periodista.getAgencia().getPeriodistas().remove(periodista);
+		if(periodista.getAgencia() != null)
+			periodista.getAgencia().getPeriodistas().remove(periodista);
 		for(Noticia noticia:periodista.getNoticias()){
 			noticia.setPeriodista(unknown);
 		}
