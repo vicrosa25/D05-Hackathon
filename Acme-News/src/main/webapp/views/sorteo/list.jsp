@@ -28,5 +28,5 @@
 <br>
 <a href="sorteo/admin/create.do"><spring:message code="sorteo.create" /></a>
 <br>
-<a href="sorteo/admin/elegirGanadores.do"><spring:message code="sorteo.elegirGanadores" /></a>
+
 

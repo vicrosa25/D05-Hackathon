@@ -16,8 +16,11 @@
 	<spring:message code="sorteo.descripcion" var="descripcionHeader" />
 	<display:column property="descripcion" title="${descripcionHeader}" sortable="false" />
 	
-	<spring:message code="sorteo.fechaInicio" var="fechaInicioHeader" />
-	<display:column property="fechaInicio" title="${fechaInicioHeader}" sortable="false" />
+	<spring:message code="sorteo.fechaInicio" var="fechaInicioHeader" /> 
+	<display:column property="fechaInicio" title="${fechaInicioHeader}" format="{0,date,dd/MM/yyyy}" />
+	
+	<spring:message code="sorteo.fechaVencimiento" var="fechaVencimientoHeader" />
+	<display:column property="fechaVencimiento" title="${fechaVencimientoHeader}" format="{0,date,dd/MM/yyyy}" />
 	
 	<spring:message code="sorteo.puntosNecesarios" var="puntosNecesariosHeader" />
 	<display:column property="puntosNecesarios" title="${puntosNecesariosHeader}" sortable="false" />
@@ -46,8 +49,14 @@
 	<display:column property="email" title="${descripcionHeader}" sortable="false" />
 	
 </display:table>
+<br>
 	
-
+	<br>
+	<jstl:if test="${ sorteo.ganador == null || sorteo.ganador == '' && not empty sorteo.usuarios }">
+		<a href="sorteo/admin/winner.do?sorteoId=${sorteo.id}"><spring:message code="sorteo.elegirGanadores" /></a>
+	</jstl:if>
+	<br>
+	
 	<br>
 	<input type="button" name="goBack" value="<spring:message code="sorteo.goBack"/>" 
 	onclick="javascript: window.location.replace('sorteo/admin/list.do')"/>

@@ -10,6 +10,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.Future;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
@@ -30,7 +31,7 @@ public class Sorteo extends DomainEntity{
 	
 
 	// Relationships ----------------------------------------------------------
-	private Premio premio;
+	private Premio 				premio;
 	private Collection<Usuario> usuarios;
 	
 
@@ -65,7 +66,7 @@ public class Sorteo extends DomainEntity{
 
 
 	@NotNull
-	//@Future
+	@Future
 	@Temporal(TemporalType.TIMESTAMP)
 	@DateTimeFormat(pattern = "dd/MM/yyyy")	
 	public Date getFechaVencimiento() {

@@ -12,6 +12,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
+import domain.Actor;
+import domain.Administrador;
 import domain.Sorteo;
 import domain.Usuario;
 import repositories.SorteoRepository;
@@ -22,13 +24,13 @@ public class SorteoService {
 
 	// Managed repository -----------------------------------------------------
 	@Autowired
-	private SorteoRepository sorteoRepository;
+	private SorteoRepository 	sorteoRepository;
 	
 	// Supporting services
 	@Autowired
-	private UsuarioService	 usuarioService;
+	private ActorService		actorService;
 
-	// Supporting services ----------------------------------------------------
+
 
 	// Contructors ------------------------------------------------------------
 	public SorteoService() {
@@ -37,6 +39,12 @@ public class SorteoService {
 
 	// Simple CRUD methods ----------------------------------------------------
 	public Sorteo create(){
+		Actor principal;
+		
+		// Check principal must be an admin
+		principal = this.actorService.findByPrincipal();
+		Assert.isInstanceOf(Administrador.class, principal);
+		
 		List<Usuario> usuarios = new ArrayList<Usuario>();
 		Sorteo sorteo= new Sorteo();
 		sorteo.setUsuarios(usuarios);
@@ -57,10 +65,20 @@ public class SorteoService {
 		return this.sorteoRepository.findAll();
 	}
 
+	
+	
 	public Sorteo save(Sorteo sorteo) {
-		assert sorteo != null;
-
+		Assert.notNull(sorteo);
 		Sorteo result;
+		Actor principal;
+
+		// Check principal must be an admin
+		principal = this.actorService.findByPrincipal();
+		Assert.isInstanceOf(Administrador.class, principal);
+		
+		// Assert date
+		Assert.isTrue(sorteo.getFechaInicio().before(sorteo.getFechaVencimiento()));
+		
 
 		result = sorteoRepository.save(sorteo);
 		return result;
@@ -68,7 +86,15 @@ public class SorteoService {
 
 	
 	public void delete(Sorteo sorteo){
-		Collection<Usuario> usuarios = this.usuarioService.findAll();
+		Collection<Usuario> usuarios;
+		Actor principal;
+		
+		// Check principal must be an admin
+		principal = this.actorService.findByPrincipal();
+		Assert.isInstanceOf(Administrador.class, principal);
+		
+		usuarios = new ArrayList<>(sorteo.getUsuarios());
+		
 
 		if(sorteo.getFechaVencimiento().after(new Date()) || sorteo.getGanador().equals("")){
 			throw new IllegalArgumentException("Sorteo No Finalizado o sin ganador, no puede borrarlo");
@@ -76,10 +102,8 @@ public class SorteoService {
 		else{
 
 			for(Usuario usuario : usuarios){
-				if(usuario.getSorteos().contains(sorteo)) {
-					usuario.getSorteos().remove(sorteo);
-					sorteo.getUsuarios().remove(usuario);
-				}
+				usuario.getSorteos().remove(sorteo);
+				sorteo.getUsuarios().remove(usuario);
 			}
 			this.sorteoRepository.delete(sorteo);
 		}
@@ -87,36 +111,51 @@ public class SorteoService {
 	}
 
 	
-	public void computeWinners(){
-		List<Usuario> users= new ArrayList<Usuario>();
-		Collection<Usuario> usuarios = this.usuarioService.findAll();
-		Collection<Sorteo> sorteos= this.sorteoRepository.findAll();
-		if(!sorteos.isEmpty() && !usuarios.isEmpty()){
-		users.addAll(usuarios);
-		int tamaño= users.size()-1;
-		Random r= new Random();
-		int gana=r.nextInt(tamaño);
+	public void computeWinner(int sorteoId){
+		Actor principal;
 		
-		for(Sorteo s: sorteos){
-			if(s.getFechaVencimiento().before(new Date()) && s.getGanador().equals("")){
-				s.setGanador(users.get(gana).getNombre() +" , email: "+users.get(gana).getEmail());
-			}
-			
-		}
-		}
-	}
-
-
-	public Sorteo save2(Sorteo sorteo){
+		// Check principal must be an admin
+		principal = this.actorService.findByPrincipal();
+		Assert.isInstanceOf(Administrador.class, principal);
+		
+		Sorteo sorteo = this.sorteoRepository.findOne(sorteoId);
 		Assert.notNull(sorteo);
 		
-		if(sorteo.getFechaInicio().after(sorteo.getFechaVencimiento()) ||
-				sorteo.getFechaInicio().before(new Date())){
-			throw new IllegalArgumentException("No puede editar un concurso en progreso o que ya ha terminado.");
-		}
-		else{
-			return this.sorteoRepository.save(sorteo);	
-		}
+		List<Usuario> users= new ArrayList<Usuario>();
 		
+		Collection<Usuario> usuarios = sorteo.getUsuarios();
+		
+		if(!usuarios.isEmpty()){
+			users.addAll(usuarios);
+			int tamaño= users.size()-1;
+			Random r= new Random();
+			int gana = r.nextInt(tamaño);
+			
+			sorteo.setGanador(users.get(gana).getNombre() + " , email: " + users.get(gana).getEmail());
+		}
+		this.save(sorteo);
 	}
+
+	public Collection<Sorteo> findSorteosProximos() {
+		return this.sorteoRepository.findSorteosProximos();
+	}
+	
+	public Sorteo findOneByName(String titulo) {
+		Sorteo result = this.sorteoRepository.findOneByName(titulo);
+		Assert.notNull(result);
+		
+		return result;
+	}
+	
+	// s.getFechaVencimiento().before(new Date()) &&
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }

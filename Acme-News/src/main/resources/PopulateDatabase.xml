@@ -1427,9 +1427,9 @@ Twitter, por suerte, sigue funcionando" />
 	<bean id="sorteo1" class="domain.Sorteo">
 		<property name="titulo" value="Sorteo Bicicleta" />
 		<property name="descripcion" value="Sorteamos bicicleta de paseo." />
+		<property name="fechaInicio" value="2019/01/13" />
 		<property name="fechaVencimiento" value="2019/07/18" />
 		<property name="puntosNecesarios" value="20" />
-		<property name="fechaInicio" value="2019/01/13" />
 		<property name="ganador" value="Usuario 1, Email: usuario1@gmail.com." />
 		<property name="premio" ref="premio1" />
 		<property name="usuarios">
@@ -1443,9 +1443,9 @@ Twitter, por suerte, sigue funcionando" />
 	<bean id="sorteo2" class="domain.Sorteo">
 		<property name="titulo" value="Sorteo2" />
 		<property name="descripcion" value="descripcionSorteo2." />
+		<property name="fechaInicio" value="2019/01/13" />
 		<property name="fechaVencimiento" value="2019/07/18" />
 		<property name="puntosNecesarios" value="10" />
-		<property name="fechaInicio" value="2019/01/13" />
 		<property name="ganador" value="" />
 		<property name="premio" ref="premio1" />
 		<property name="usuarios">
@@ -1459,9 +1459,10 @@ Twitter, por suerte, sigue funcionando" />
 	<bean id="sorteo3" class="domain.Sorteo">
 		<property name="titulo" value="Sorteo3" />
 		<property name="descripcion" value="descripcionSorteo3." />
+		<property name="fechaInicio" value="2019/01/13" />
 		<property name="fechaVencimiento" value="2019/08/18" />
 		<property name="puntosNecesarios" value="30" />
-		<property name="fechaInicio" value="2018/01/13" />
+		
 		<property name="ganador" value="" />
 		<property name="premio" ref="premio1" />
 		<property name="usuarios">
@@ -1477,9 +1478,9 @@ Twitter, por suerte, sigue funcionando" />
 	<bean id="sorteo4" class="domain.Sorteo">
 		<property name="titulo" value="Sorteo4" />
 		<property name="descripcion" value="descripcionSorteo4." />
-		<property name="fechaVencimiento" value="2019/03/01" />
-		<property name="puntosNecesarios" value="100" />
 		<property name="fechaInicio" value="2019/01/13" />
+		<property name="fechaVencimiento" value="2019/07/01" />
+		<property name="puntosNecesarios" value="100" />
 		<property name="ganador" value="" />
 		<property name="premio" ref="premio2" />
 		<property name="usuarios">

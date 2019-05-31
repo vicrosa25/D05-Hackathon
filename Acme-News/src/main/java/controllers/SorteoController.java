@@ -25,12 +25,6 @@ import services.SorteoService;
 @RequestMapping("/sorteo")
 public class SorteoController extends AbstractController {
 
-	//constructor
-	public SorteoController() {
-		super();
-
-	}
-
 
 	//Services
 	@Autowired
@@ -71,7 +65,7 @@ public class SorteoController extends AbstractController {
 		return result;
 	}
 
-	// Create & Edit Event ---------------------------------------------------------------
+	// Create & Edit  ---------------------------------------------------------------
 	@RequestMapping(value = "admin/create", method = RequestMethod.GET)
 	public ModelAndView create() {
 		ModelAndView result;
@@ -93,7 +87,7 @@ public class SorteoController extends AbstractController {
 		return result;
 	}
 
-	// save event ---------------------------------------------------------------
+	// save  ---------------------------------------------------------------
 	@RequestMapping(value = "admin/edit", method = RequestMethod.POST, params = "save")
 	public ModelAndView save(@Valid Sorteo sorteo, BindingResult binding) {
 		ModelAndView result;
@@ -131,10 +125,10 @@ public class SorteoController extends AbstractController {
 	}
 
 	// Compute Winners ---------------------------------------------------------------
-	@RequestMapping(value = "admin/elegirGanadores", method = RequestMethod.GET)
-	public ModelAndView elegirGanadores() {
-		this.sorteoService.computeWinners();
-		return this.listAdmin();
+	@RequestMapping(value = "admin/winner", method = RequestMethod.GET)
+	public ModelAndView elegirGanadores(@RequestParam int sorteoId) {
+		this.sorteoService.computeWinner(sorteoId);
+		return this.display(sorteoId);
 
 	}
 	// Other methods ---------------------------------------------------------------

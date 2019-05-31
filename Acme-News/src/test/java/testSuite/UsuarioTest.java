@@ -11,13 +11,13 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.util.Assert;
 
+import domain.Informacion;
+import domain.Sorteo;
+import domain.Usuario;
 import services.InformacionService;
 import services.SorteoService;
 import services.UsuarioService;
 import utilities.AbstractTest;
-import domain.Informacion;
-import domain.Sorteo;
-import domain.Usuario;
 
 
 @ContextConfiguration(locations = {"classpath:spring/junit.xml"})
@@ -148,7 +148,7 @@ public class UsuarioTest extends AbstractTest {
 		try {
 
 			this.authenticate(username);
-			Sorteo sorteo= this.sorteoService.getSorteoRepository().findOneByName(titulo);
+			Sorteo sorteo= this.sorteoService.findOneByName(titulo);
 			Assert.isTrue(this.usuarioService.apuntarseSorteo(sorteo)==resultadoEsperado);
 			this.unauthenticate();
 		} catch (final Throwable oops) {

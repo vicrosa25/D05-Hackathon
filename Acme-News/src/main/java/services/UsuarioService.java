@@ -14,10 +14,6 @@ import org.springframework.util.Assert;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.Validator;
 
-import repositories.UsuarioRepository;
-import security.Authority;
-import security.LoginService;
-import security.UserAccount;
 import domain.Comentario;
 import domain.Estatus;
 import domain.Informacion;
@@ -27,6 +23,10 @@ import domain.Sorteo;
 import domain.Tasa;
 import domain.Usuario;
 import forms.UsuarioForm;
+import repositories.UsuarioRepository;
+import security.Authority;
+import security.LoginService;
+import security.UserAccount;
 
 @Service
 @Transactional
@@ -329,7 +329,7 @@ public class UsuarioService {
 
 	public Collection<Sorteo> findSorteosProximos(){
 		this.usuarioLogued();
-		return this.sorteoService.getSorteoRepository().findSorteosProximos();
+		return this.sorteoService.findSorteosProximos();
 	}
 
 	public Integer apuntarseSorteo(Sorteo sorteo){
