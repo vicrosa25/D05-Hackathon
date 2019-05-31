@@ -194,6 +194,7 @@ public class PeriodistaController extends AbstractController {
 		ModelAndView result;
 		try{
 			Collection<Periodista> allPeriodista = this.periodistaService.findAll();
+			allPeriodista.remove(this.periodistaService.findUnknown());
 
 			result = new ModelAndView("periodista/listPeriodista");
 			result.addObject("periodistas", allPeriodista);

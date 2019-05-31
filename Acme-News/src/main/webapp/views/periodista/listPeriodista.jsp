@@ -6,7 +6,7 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 
 
-<display:table pagesize="5" class="displaytag" name="periodistas" requestURI="agencia/listPeriodistas.do" id="row">	
+<display:table pagesize="5" class="displaytag" name="periodistas" requestURI="periodista/listPeriodista.do" id="row">	
 	
 	<!-- Foto -->
 	<display:column title="${fotoHeader}">		
@@ -22,7 +22,7 @@
 	
 	<!-- Cartera -->
 	<spring:message code="periodista.cartera" var="carteraHeader" />
-	<display:column property="cartera" title="${carteraHeader}" />
+	<display:column property="cartera.paypalEmail" title="${carteraHeader}" />
 	
 	<!-- Agencia -->
 	<spring:message code="periodista.agencia" var="agenciaHeader" />

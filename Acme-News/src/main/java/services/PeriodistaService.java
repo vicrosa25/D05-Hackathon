@@ -17,6 +17,7 @@ import security.LoginService;
 import security.UserAccount;
 import domain.Noticia;
 import domain.Periodista;
+import domain.Usuario;
 import forms.PeriodistaForm;
 
 @Service
@@ -71,6 +72,9 @@ public class PeriodistaService {
 			periodista.getAgencia().getPeriodistas().remove(periodista);
 		for(Noticia noticia:periodista.getNoticias()){
 			noticia.setPeriodista(unknown);
+		}
+		for(Usuario user:this.periodistaRepository.findFollowers(periodista.getId())){
+			user.getPeriodistas().remove(periodista);
 		}
 
 		this.periodistaRepository.delete(periodista);

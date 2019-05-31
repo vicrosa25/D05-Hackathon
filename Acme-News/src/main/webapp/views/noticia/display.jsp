@@ -13,7 +13,7 @@
 
 
 <h1>${noticia.titulo}</h1>
-<h2>${noticia.fecha} | ${noticia.categoria}</h2>
+<h2>${noticia.fecha} | ${noticia.categoria} | ${noticia.periodista.nombre}</h2>
 <br/>
 <div id="descripcion">${noticia.descripcion}</div>
 
