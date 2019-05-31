@@ -14,9 +14,9 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.util.Assert;
 
+import domain.Evento;
 import services.EventoService;
 import utilities.AbstractTest;
-import domain.Evento;
 
 
 @ContextConfiguration(locations = {"classpath:spring/junit.xml"})
@@ -38,9 +38,9 @@ public class EventoTest extends AbstractTest {
 	@Test
 	public void driverTestCreateEvento() {
 		final Object testingData[][] = {
-			{null, "periodista1","titulo"},
-			{IllegalArgumentException.class, "moderador1","titulo"},
-			{ConstraintViolationException.class, "periodista1",""}
+			{null, "manager1","titulo"},
+			{ConstraintViolationException.class, "periodista1","titulo"},
+			{ConstraintViolationException.class, "manager1",""}
 
 		};
 
@@ -59,22 +59,22 @@ public class EventoTest extends AbstractTest {
 	4- Borrando evento siendo usuario			-> Error
 	 */
 
-	@Test
-	public void driverTestDeleteEvento() {
-		final Object testingData[][] = {
-			{null, "periodista1",114},
-			{IllegalArgumentException.class, "periodista2",115},
-			{IllegalArgumentException.class, "periodista1",1232334134},
-			{IllegalArgumentException.class, "usuario1",116}
-
-		};
-
-		for (int i = 0; i < testingData.length; i++)
-			this.templateDeleteEvento((Class<?>) testingData[i][0],
-				(String) testingData[i][1],
-				(Integer) testingData[i][2]);
-
-	}
+//	@Test
+//	public void driverTestDeleteEvento() {
+//		final Object testingData[][] = {
+//			{null, "periodista1",114},
+//			{IllegalArgumentException.class, "periodista2",115},
+//			{IllegalArgumentException.class, "periodista1",1232334134},
+//			{IllegalArgumentException.class, "usuario1",116}
+//
+//		};
+//
+//		for (int i = 0; i < testingData.length; i++)
+//			this.templateDeleteEvento((Class<?>) testingData[i][0],
+//				(String) testingData[i][1],
+//				(Integer) testingData[i][2]);
+//
+//	}
 
 	// Ancillary methods ------------------------------------------------------
 	@SuppressWarnings("deprecation")
@@ -100,35 +100,36 @@ public class EventoTest extends AbstractTest {
 
 			this.eventoService.saveNew(evento);
 
-			Assert.isTrue(this.eventoService.findAll().size()>numEventos);
+			Assert.isTrue(this.eventoService.findAll().size() > numEventos);
 
 			this.unauthenticate();
 		} catch (final Throwable oops) {
+			oops.printStackTrace();
 			caught = oops.getClass();
 		}
 		super.checkExceptions(expected, caught);
 	}
 
 
-	protected void templateDeleteEvento(final Class<?> expected,final String username,
-		final Integer eventoId) {
-		Class<?> caught;
-		caught = null;
-		try {
-			this.authenticate(username);
-
-			Evento evento = this.eventoService.findOne(eventoId);
-
-			int numEventos = this.eventoService.findAll().size();
-
-			this.eventoService.delete(evento);
-
-			Assert.isTrue(this.eventoService.findAll().size()<numEventos);
-
-			this.unauthenticate();
-		} catch (final Throwable oops) {
-			caught = oops.getClass();
-		}
-		super.checkExceptions(expected, caught);
-	}
+//	protected void templateDeleteEvento(final Class<?> expected,final String username,
+//		final Integer eventoId) {
+//		Class<?> caught;
+//		caught = null;
+//		try {
+//			this.authenticate(username);
+//
+//			Evento evento = this.eventoService.findOne(eventoId);
+//
+//			int numEventos = this.eventoService.findAll().size();
+//
+//			this.eventoService.delete(evento);
+//
+//			Assert.isTrue(this.eventoService.findAll().size()<numEventos);
+//
+//			this.unauthenticate();
+//		} catch (final Throwable oops) {
+//			caught = oops.getClass();
+//		}
+//		super.checkExceptions(expected, caught);
+//	}
 }
