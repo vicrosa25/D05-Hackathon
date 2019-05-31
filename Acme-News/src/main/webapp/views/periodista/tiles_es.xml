@@ -17,14 +17,12 @@
 
 	<definition name="periodista/retirarDinero" extends="master.page">
 		<put-attribute name="title" value="Retirar dinero obtenido" />
-		<put-attribute name="body"
-			value="/views/periodista/retirarDinero.jsp" />
+		<put-attribute name="body" value="/views/periodista/retirarDinero.jsp" />
 	</definition>
 
 	<definition name="periodista/listPeriodista" extends="master.page">
 		<put-attribute name="title" value="Lista de periodistas con agencias" />
-		<put-attribute name="body"
-			value="/views/periodista/listPeriodista.jsp" />
+		<put-attribute name="body" value="/views/periodista/listPeriodista.jsp" />
 	</definition>
 
 </tiles-definitions>

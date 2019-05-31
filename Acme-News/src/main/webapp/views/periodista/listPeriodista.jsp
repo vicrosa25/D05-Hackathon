@@ -6,7 +6,7 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 
 
-<display:table pagesize="5" class="displaytag" name="periodistas" requestURI="agencia/listPeriodistas.do" id="row">	
+<display:table pagesize="5" class="displaytag" name="periodistas" requestURI="periodista/listPeriodista.do" id="row">	
 	
 	<!-- Foto -->
 	<display:column title="${fotoHeader}">		
