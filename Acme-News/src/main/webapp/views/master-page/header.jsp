@@ -22,7 +22,7 @@
 					<li><a href="administrator/dashboard.do"><spring:message code="master.page.administrator.dashboard" /></a></li>
 					<li><a href="banner/admin/list.do"><spring:message code="master.page.administrador.banner" /></a></li>
 					<li><a href="premio/admin/list.do"><spring:message code="master.page.administrator.premios" /></a></li>
-					<li><a href="sorteo/admin/listAdmin.do"><spring:message code="master.page.administrator.sorteos" /></a></li>
+					<li><a href="sorteo/admin/list.do"><spring:message code="master.page.administrator.sorteos" /></a></li>
 					<li><a href="tasa/administrator/changeTasa.do"><spring:message code="master.page.administrator.changeFee" /></a></li>
 				</ul>
 			</li>

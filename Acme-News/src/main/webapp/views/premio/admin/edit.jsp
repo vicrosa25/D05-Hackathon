@@ -46,8 +46,6 @@
 	
 	<br />
 	<br />
-	
-<%-- <input type="submit" name="save" value="<spring:message code="premio.save" />" />&nbsp;  --%>
 
 
 	<acme:submit name="save" code="premio.save"/>
