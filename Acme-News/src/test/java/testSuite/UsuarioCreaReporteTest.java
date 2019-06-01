@@ -11,17 +11,17 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.util.Assert;
 
+import domain.Noticia;
+import domain.Reporte;
 import services.NoticiaService;
 import services.ReporteService;
 import utilities.AbstractTest;
-import domain.Noticia;
-import domain.Reporte;
 
 
 @ContextConfiguration(locations = {"classpath:spring/junit.xml"})
 @RunWith(SpringJUnit4ClassRunner.class)
 @Transactional
-public class ReporteTest extends AbstractTest {
+public class UsuarioCreaReporteTest extends AbstractTest {
 
 	// System under test ------------------------------------------------------
 	@Autowired
@@ -33,21 +33,25 @@ public class ReporteTest extends AbstractTest {
 	private NoticiaService noticiaService;
 
 
-
-	//1- Crear reporte como usuario, resultado esperado ok
-	//2- Crear reporte como admin, resultado esperado fail
-	//3- Crear reporte sin autentificarse, resultado esperado fail
-	//4- Crear reporte como usuario a una noticia inventada, resultado esperado fail
-	//5- Crear reporte como usuario, sin pasarle la noticia, resultado esperado fail
-
+	/**
+	 * An actor who is not authenticated as an usuario must be able to: Report a noticia
+	 * 
+			1- Crear reporte como usuario, resultado esperado 		-> ok
+			2- Crear reporte como admin, 							-> fail
+			3- Crear reporte sin autentificarse, resultado esperado -> fail
+			4- Crear reporte como usuario a una noticia inventada, 	-> fail
+			5- Crear reporte como usuario, sin pasarle la noticia, 	-> fail
+	**/
+	
+	
 	@Test
 	public void driverTestCreateReporte() {
 		final Object testingData[][] = {
 			{null, "usuario4","noticia9"},
 			{IllegalArgumentException.class, "admin","noticia9"},
 			{IllegalArgumentException.class, null,"noticia9"},
-			{AssertionError.class,  "usuario4","noticia20"},
-			{AssertionError.class,  "usuario4",null}
+			{IllegalArgumentException.class,  "usuario4","noticia20"},
+			{IllegalArgumentException.class,  "usuario4",null}
 
 		};
 

@@ -28,15 +28,15 @@ public class ModeratorBanUbanUserTest extends AbstractTest {
 	private UsuarioService 	 usuarioService;
 	
 	
-	// Test ------------------------------------------------------
-	/*
+
+	/**
 	 * An actor who is not authenticated as a moderator must be able to: Ban an User
 	 * 
 	 * 01- All ok 													- Positive test
 	 * 02- Actor is not autheticate 								- Negative test - error
 	 * 03- Actor is authenticated as a journalist					- Negative test - error
 	 * 
-	 */
+	 **/
 
 	
 	@Test

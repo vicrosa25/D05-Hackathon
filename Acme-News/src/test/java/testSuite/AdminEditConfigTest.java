@@ -27,10 +27,9 @@ public class AdminEditConfigTest extends AbstractTest {
 	private ConfigurationsService configurationsService;
 
 
-	// Test ------------------------------------------------------
-	/*
-	 * An actor who is not authenticated must be able to:
-	 * Register to the system as a Administrator.
+	
+	/**
+	 * An actor who is not authenticated must be able to: Register to the system as a Administrator.
 	 * 
 	 * 01- All ok 							- Positive test
 	 * 02- Admin is not autheticate 		- Negative test - error
@@ -41,7 +40,8 @@ public class AdminEditConfigTest extends AbstractTest {
 	 * 07- Blank countryCode 				- Negative test - error
 	 * 08- Blank title 						- Negative test - error
 	 * 09- Blank logo 						- Negative test - error
-	 */
+	 *
+	 **/
 
 	@Test
 	public void driver() {

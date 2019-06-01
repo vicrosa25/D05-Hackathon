@@ -26,15 +26,15 @@ public class AdminChangePrincipalAddTest extends AbstractTest {
 	private BannerService bannerService;
 
 
-	// Test ------------------------------------------------------
-	/*
+	
+	/**
 	 * An actor who is not authenticated as a admin must be able to: change the principal page adds
 	 * 
 	 * 01- All ok - Positive test
 	 * 02- Actor is not autheticate - Negative test - error
 	 * 03- Actor is authenticated as a user - Negative test - error
 	 * 
-	 */
+	 **/
 
 	@Test
 	public void testCreateBanner() {

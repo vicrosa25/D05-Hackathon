@@ -31,7 +31,6 @@ public class RegisterModeradorTest extends AbstractTest {
 	private ModeradorService moderadorService;
 	
 	
-	// Test ------------------------------------------------------
 	
 	/**
 	An actor who is not authenticated must be able to: Register to the system as a Moderador.
