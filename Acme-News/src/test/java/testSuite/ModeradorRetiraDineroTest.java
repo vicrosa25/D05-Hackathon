@@ -19,20 +19,24 @@ import utilities.AbstractTest;
 @ContextConfiguration(locations = {"classpath:spring/junit.xml"})
 @RunWith(SpringJUnit4ClassRunner.class)
 @Transactional
-public class RetirarDineroTest extends AbstractTest {
+public class ModeradorRetiraDineroTest extends AbstractTest {
 	
 	// System under test ------------------------------------------------------
 	@Autowired
 	private ModeradorService moderadorService;
 	
 
-	//Retirar Dinero Moderador
+	/**
+	 * Requirement: An actor who is authenticated as an moderador must be able to:  "Retirar Dinero"
+	 * 
+	 * 	1. Positive test.
+	 *  2. Negative test. Business rule that is intended to broke: She or he has to own more than 5 euros
+	 * 
+	 */
 	@Test
 	public void driverTestBanChorbi() {
 		final Object testingData[][] = {
-			//Retirar Dinero como moderador, se espera correcto.
 			{0, null}, 
-			//Retirar dinero con menos de 5 euros en la cartera se espera excepcion.
 			{1, IllegalArgumentException.class}
 		};
 
