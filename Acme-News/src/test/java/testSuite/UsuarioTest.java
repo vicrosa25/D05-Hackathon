@@ -11,9 +11,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.util.Assert;
 
-import domain.Informacion;
 import domain.Sorteo;
-import services.InformacionService;
 import services.SorteoService;
 import services.UsuarioService;
 import utilities.AbstractTest;
@@ -29,27 +27,13 @@ public class UsuarioTest extends AbstractTest {
 	private UsuarioService usuarioService;
 
 
-	@Autowired
-	private InformacionService informacionService;
+	
 
 	@Autowired
 	private SorteoService sorteoService;
 
-	//se intenta compartir informacion que no compartias
-	@Test
-	public void testcompartirInformacionCorrecto(){
-		this.authenticate("usuario2");
-		Informacion informacion = this.informacionService.getInformacionRepository().findOneByName("tituloEvento1");
-		Assert.isTrue(this.usuarioService.compartirInformacion(informacion));
-	}
-
-	//se intenta compartir informacion que ya compartias previamente
-	@Test
-	public void testcompartirInformacionIncorrecto(){
-		this.authenticate("usuario2");
-		Informacion informacion= this.informacionService.getInformacionRepository().findOneByName("tituloEvento4");
-		Assert.isTrue(!this.usuarioService.compartirInformacion(informacion));
-	}
+	
+	
 
 
 
