@@ -11,7 +11,8 @@ import domain.Evento;
 
 @Repository
 public interface EventoRepository extends JpaRepository<Evento, Integer> {
-	@Query("select n from Evento n where n.agencia.manager.id=?1 order by n.fecha asc")
+	
+	@Query("select n from Evento n where n.agencia.manager.id=?1")
 	List<Evento> searchByManager(int managerId);
 
 	@Query("select e from Evento e  where e.fecha > NOW() order by e.agencia.importancia DESC")

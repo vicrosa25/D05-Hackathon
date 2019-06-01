@@ -1,5 +1,4 @@
-<%@page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
+<%@page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 
 <%@taglib prefix="jstl" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
@@ -8,6 +7,7 @@
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@taglib prefix="security" uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
+<%@ taglib prefix="acme" tagdir="/WEB-INF/tags" %>
 
 <jstl:if test="${not empty evento.imagen }">
 <img src="${evento.imagen}" style="width:304px;height:228px;">
@@ -19,7 +19,7 @@
 	<display:column property="titulo" title="${tituloHeader}" sortable="false" />
 	
 	<spring:message code="evento.fecha" var="fechaHeader" />
-	<display:column property="fecha" title="${fechaHeader}" sortable="false" />
+	<display:column property="fecha" title="${fechaHeader}" format="{0,date,dd/MM/yyyy}" />
 	
 	<spring:message code="evento.direccion" var="direccionHeader" />
 	<display:column property="direccion" title="${direccionHeader}" sortable="false" />
@@ -43,7 +43,7 @@
 	<display:column property="descripcion" title="${descripcionHeader}" sortable="false" />
 	
 	<spring:message code="comentario.fecha" var="fechaHeader" />
-	<display:column property="fecha" title="${fechaHeader}" sortable="false" />
+	<display:column property="fecha" title="${fechaHeader}" format="{0,date,dd/MM/yyyy}" />
 	
 	<spring:message code="comentario.usuario" var="usuarioHeader" />
 	<display:column property="usuario.nombre" title="${usuarioHeader}" sortable="false" />
@@ -57,5 +57,9 @@
 	<a href=comentario/create.do?informacionId=${row.id}><spring:message code="comentario.create" /></a>
 </security:authorize>
 
-<input type="button" name="goBack" value="<spring:message code="evento.return"/>" 
-onclick="javascript: window.location.replace('evento/allEventos.do')"/>
+<acme:back code="evento.return"/>
+
+
+
+
+

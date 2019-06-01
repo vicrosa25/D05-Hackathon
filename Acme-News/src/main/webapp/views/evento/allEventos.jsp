@@ -24,11 +24,10 @@
 	<display:column property="agencia.titulo" title="${agenciaHeader}" sortable="false" />
 
 
-<display:column><a href="evento/display.do?eventoId=${row.id}">
+	<display:column><a href="evento/display.do?eventoId=${row.id}">
  	<spring:message code="evento.display"/></a></display:column> 
  	
- 	
- 		<security:authorize access="hasRole('USUARIO')">
+ 	<security:authorize access="hasRole('USUARIO')">
  	<display:column>
 		<form:form action="usuario/compartirInformacion.do?informacionId=${row.id}">
 		<input type="submit" name="Compartir" value="<spring:message code="usuario.compartir" />"
@@ -39,5 +38,3 @@
 	
 	
 </display:table>
-
-<a href="welcome/index.do"><input type="button" name="goBack" value="<spring:message code="evento.return"/>" /></a>	

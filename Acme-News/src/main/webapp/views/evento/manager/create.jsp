@@ -31,7 +31,7 @@
 	<acme:textbox code="evento.direccion" path="direccion"/>
 	<br />
 	
-	<acme:textbox code="evento.fecha" path="fecha" placeholder="yyyy/MM/dd"/>
+	<acme:dateinput code="evento.fecha" path="fecha" format="{0,date,dd/MM/yyyy}" placeholder="dd/mm/yyyy" />
 	<br />
 	
 	<!-- Select Agencia -->

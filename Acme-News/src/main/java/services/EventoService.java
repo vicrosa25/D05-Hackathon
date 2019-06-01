@@ -60,17 +60,10 @@ public class EventoService {
 		// Check principal must be a Manager
 		principal = this.actorService.findByPrincipal();
 		Assert.isInstanceOf(Manager.class, principal);
-
-
-		return this.eventoRepository.save(evento);
-	}
-
-	public Evento saveNew(Evento evento){
-		Manager manager = this.managerService.findByPrincipal();
+		Manager manager = (Manager) principal;
+		
 		Assert.notNull(manager);
-		Assert.notNull(evento);
 		Assert.isTrue(manager.getAgencias().contains(evento.getAgencia()));
-		evento.getAgencia().getEventos().add(evento);
 		
 		return this.eventoRepository.save(evento);
 	}

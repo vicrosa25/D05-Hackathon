@@ -15,11 +15,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import services.EventoService;
-import services.ManagerService;
 import domain.Comentario;
 import domain.Evento;
 import domain.Manager;
+import services.EventoService;
+import services.ManagerService;
 
 @Controller
 @RequestMapping("/evento")
@@ -60,6 +60,7 @@ public class EventoController extends AbstractController {
 			eventos = this.eventoService.buscarPorManager(manager);
 
 			result = new ModelAndView("evento/manager/list");
+			result.addObject("requestURI", "evento/manager/list.do");
 			result.addObject("eventos", eventos);
 		} catch (Throwable oops) {
 			oops.printStackTrace();
@@ -115,7 +116,7 @@ public class EventoController extends AbstractController {
 			result = this.createEditModelAndView(evento);
 		} else {
 			try {
-				this.eventoService.saveNew(evento);
+				this.eventoService.save(evento);
 				result = new ModelAndView("redirect:list.do");
 			} catch (Throwable oops) {
 				oops.printStackTrace();

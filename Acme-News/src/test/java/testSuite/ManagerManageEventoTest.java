@@ -100,7 +100,7 @@ public class ManagerManageEventoTest extends AbstractTest {
 			evento.setDireccion("Direccion");
 			evento.setAgencia(agencia);
 
-			this.eventoService.saveNew(evento);
+			this.eventoService.save(evento);
 
 			super.unauthenticate();
 			
