@@ -13,7 +13,6 @@ import org.springframework.util.Assert;
 
 import domain.Informacion;
 import domain.Sorteo;
-import domain.Usuario;
 import services.InformacionService;
 import services.SorteoService;
 import services.UsuarioService;
@@ -36,76 +35,11 @@ public class UsuarioTest extends AbstractTest {
 	@Autowired
 	private SorteoService sorteoService;
 
-	//Se intenta seguir a un usuario registrado como manager. Resultado esperado es que no se pueda.
-	@Test(expected = IllegalArgumentException.class)
-	public void testseguirUsuarioSinSerUsuario(){
-		this.authenticate("manager");
-		Usuario usuario= this.usuarioService.findOneByName("usuario1");
-		Assert.isTrue(this.usuarioService.seguirUsuario(usuario));
-
-	}
-
-	//Se intenta seguir a un usuario sin autentificarse. Resultado esperado es que no se pueda.
-	@Test(expected = IllegalArgumentException.class)
-	public void testseguirUsuarioSinAutentificarse(){
-
-		this.authenticate(null);
-		Usuario usuario= this.usuarioService.findOneByName("usuario1");
-		Assert.isTrue(this.usuarioService.seguirUsuario(usuario));
-
-	}
-
-	//Se intenta seguir a si mismo el. Resultado esperado es que no se pueda.
-	@Test
-	public void testseguirUsuarioSeguirseAsiMismo(){
-		this.authenticate("usuario1");
-		Usuario usuario= this.usuarioService.findOneByName("usuario1");
-		Assert.isTrue(!this.usuarioService.seguirUsuario(usuario));
-
-
-	}
-
-	//Un usuario intenta seguir a un usuario que ya seguia de antes, el resultado esperado es que no se pueda.
-	@Test
-	public void testseguirUsuarioVolverASeguirAlMismo(){
-		this.authenticate("usuario2");
-		Usuario usuario= this.usuarioService.findOneByName("usuario1");
-		Assert.isTrue(!this.usuarioService.seguirUsuario(usuario));
-
-
-	}
-
-	//Un usuario intenta seguir a otro usuario. El resultado esperado es que se pueda.
-	@Test
-	public void testseguirUsuarioCorrecto(){
-		this.authenticate("usuario1");
-		Usuario usuario= this.usuarioService.findOneByName("usuario2");
-		Assert.isTrue(this.usuarioService.seguirUsuario(usuario));
-
-
-	}
-
-	//Se intenta dejar de seguir a alguien que no seguia. Resultado esperado False
-	@Test
-	public void testnoSeguirUsuarioIncorrecto(){
-		this.authenticate("usuario1");
-		Usuario usuario= this.usuarioService.findOneByName("usuario2");
-		Assert.isTrue(!this.usuarioService.noSeguirUsuario(usuario));
-	}
-
-	//Se intenta dejar de seguir a alguien que no seguias.Resultrado esperado True
-	@Test
-	public void testnoSeguirUsuarioCorrecto(){
-		this.authenticate("usuario2");
-		Usuario usuario= this.usuarioService.findOneByName("usuario1");
-		Assert.isTrue(this.usuarioService.noSeguirUsuario(usuario));
-	}
-
 	//se intenta compartir informacion que no compartias
 	@Test
 	public void testcompartirInformacionCorrecto(){
 		this.authenticate("usuario2");
-		Informacion informacion= this.informacionService.getInformacionRepository().findOneByName("tituloEvento1");
+		Informacion informacion = this.informacionService.getInformacionRepository().findOneByName("tituloEvento1");
 		Assert.isTrue(this.usuarioService.compartirInformacion(informacion));
 	}
 

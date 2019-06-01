@@ -230,9 +230,11 @@ public class UsuarioService {
 
 	public Boolean seguirUsuario(Usuario usuario){
 		this.usuarioLogued();
-		Boolean res =false;
+		Boolean res = false;
 		Assert.notNull(usuario);
 		Usuario usuarioLogued=  this.findByPrincipal();
+		
+		Assert.isTrue(!usuarioLogued.getSiguiendo().contains(usuario));
 
 		if(!usuarioLogued.getSiguiendo().contains(usuario)&&!usuario.equals(usuarioLogued)){
 			usuarioLogued.getSiguiendo().add(usuario);
@@ -249,7 +251,7 @@ public class UsuarioService {
 		this.usuarioLogued();
 		Boolean res =false;
 		Assert.notNull(periodista);
-		Usuario usuarioLogued=  this.findByPrincipal();
+		Usuario usuarioLogued =  this.findByPrincipal();
 
 		if(!usuarioLogued.getPeriodistas().contains(periodista)){
 			usuarioLogued.getPeriodistas().add(periodista);
@@ -259,21 +261,19 @@ public class UsuarioService {
 		return res;
 	}
 
-	public Boolean noSeguirUsuario(Usuario usuario){
+	public void noSeguirUsuario(Usuario usuario){
 		this.usuarioLogued();
-		Boolean res =false;
+//		Boolean res = false;
 		assert usuario != null;
-		Usuario usuarioLogued=  this.findByPrincipal();
+		Usuario usuarioLogued =  this.findByPrincipal();
+		
+		Assert.isTrue(usuarioLogued.getSiguiendo().contains(usuario));
 
-		if(usuarioLogued.getSiguiendo().contains(usuario)){
-			usuarioLogued.getSiguiendo().remove(usuario);
-			usuario.getSeguidores().remove(usuarioLogued);
-			this.save(usuarioLogued);
-			this.save(usuario);
-			res=true;
-		}
 
-		return res;
+		usuarioLogued.getSiguiendo().remove(usuario);
+		usuario.getSeguidores().remove(usuarioLogued);
+		this.save(usuarioLogued);
+		this.save(usuario);
 	}
 
 
