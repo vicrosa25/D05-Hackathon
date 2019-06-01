@@ -15,14 +15,6 @@ public class Moderador extends Actor {
 	// Relationships ----------------------------------------------------------
 	private Cartera cartera;
 
-	// Constructor
-	public Moderador() {
-		super();
-	}
-
-	// Relationships Getters and Setters
-	// ----------------------------------------------------------
-
 	@Valid
 	@NotNull
 	public Cartera getCartera() {

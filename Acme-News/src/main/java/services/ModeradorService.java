@@ -13,14 +13,14 @@ import org.springframework.util.Assert;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.Validator;
 
-import repositories.ModeradorRepository;
-import security.Authority;
-import security.LoginService;
-import security.UserAccount;
 import domain.Moderador;
 import domain.Periodista;
 import domain.Usuario;
 import forms.ModeradorForm;
+import repositories.ModeradorRepository;
+import security.Authority;
+import security.LoginService;
+import security.UserAccount;
 
 @Service
 @Transactional
@@ -53,8 +53,21 @@ public class ModeradorService {
 
 	// Simple SCRUD methods----------------------------------------------------------------------------------------------
 	public Moderador create() {
+		// Authority
+		Authority authority = new Authority();
+		authority.setAuthority(Authority.MODERADOR);
+		Collection<Authority> authorities = new ArrayList<Authority>();
+		authorities.add(authority);
+
+		// UserAccount
+		UserAccount userAccount = new UserAccount();
+		userAccount.setAuthorities(authorities);
+		
+		
 		Moderador result = new Moderador();
+		result.setUserAccount(userAccount);
 		Assert.notNull(result);
+		
 		return result;
 	}
 
