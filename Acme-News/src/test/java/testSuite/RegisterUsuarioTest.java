@@ -8,11 +8,13 @@ import javax.validation.ConstraintViolationException;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.util.Assert;
 
 import domain.Usuario;
+import services.BuscadorService;
 import services.UsuarioService;
 import utilities.AbstractTest;
 import utilities.Md5;
@@ -28,6 +30,10 @@ public class RegisterUsuarioTest extends AbstractTest {
 	// System under test ------------------------------------------------------
 	@Autowired
 	private UsuarioService usuarioService;
+	
+	
+	@Autowired
+	private BuscadorService	buscadorService;
 	
 	// Test ------------------------------------------------------
 	
@@ -47,16 +53,11 @@ public class RegisterUsuarioTest extends AbstractTest {
 	public void driver() {
 		final Object testingData[][] = {
 			{null, "username1", "pass1", "emailTest1@example.com", "nombre1", "apellidos1"},
-			{ConstraintViolationException.class,	
-				"", "pass2", "emailTest2@example.com", "nombre2", "apellidos2"},
-			{ConstraintViolationException.class,	
-				"username3", "", "emailTest3@example.com", "nombre3", "apellidos3"},
-			{ConstraintViolationException.class,	
-				"username4", "pass4", "", "nombre4", "apellidos4"},
-			{ConstraintViolationException.class,	
-				"username1", "pass5", "emailTest5@example.com", "nombre5", "apellidos5"},
-			{ConstraintViolationException.class,	
-				"username6", "pass6", "emailTest1@example.com", "nombre6", "apellidos6"},
+			{ConstraintViolationException.class, "", "pass2", "emailTest2@example.com", "nombre2", "apellidos2"},
+			{DataIntegrityViolationException.class, "username3", "", "emailTest3@example.com", "nombre3", "apellidos3"},
+			{DataIntegrityViolationException.class, "username4", "pass4", "", "nombre4", "apellidos4"},
+			{DataIntegrityViolationException.class, "username1", "pass5", "emailTest5@example.com", "nombre5", "apellidos5"},
+			{DataIntegrityViolationException.class, "username6", "pass6", "emailTest1@example.com", "nombre6", "apellidos6"},
 		};
 
 		for (int i = 0; i < testingData.length; i++)
@@ -75,7 +76,7 @@ public class RegisterUsuarioTest extends AbstractTest {
 			
 			authenticate(null);
 			
-			// Create new Chorbi
+			// Create Usuario
 			Usuario usuario= this.usuarioService.create();
 			// Setting Chorbi
 			password = Md5.encodeMd5(pass);
@@ -84,8 +85,9 @@ public class RegisterUsuarioTest extends AbstractTest {
 			usuario.setEmail(email);
 			usuario.setNombre(name);
 			usuario.setApellidos(surname);
+			usuario.setBuscador(this.buscadorService.create());
 
-			// Save new Chorbi
+			// Save usuario
 			this.usuarioService.save(usuario);
 			
 			Assert.isTrue(this.usuarioService.findAll().size() > i);
