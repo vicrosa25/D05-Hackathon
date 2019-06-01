@@ -24,6 +24,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import domain.Estatus;
+import domain.Informacion;
+import domain.Periodista;
+import domain.Sorteo;
+import domain.Tasa;
+import domain.Usuario;
 import services.ActorService;
 import services.InformacionService;
 import services.PeriodistaService;
@@ -31,12 +37,6 @@ import services.SorteoService;
 import services.TasaService;
 import services.UsuarioService;
 import utilities.Md5;
-import domain.Estatus;
-import domain.Informacion;
-import domain.Periodista;
-import domain.Sorteo;
-import domain.Tasa;
-import domain.Usuario;
 
 @Controller
 @RequestMapping("/usuario")
@@ -278,18 +278,15 @@ public class UsuarioController extends AbstractController {
 	public ModelAndView noSeguirUsuario(@RequestParam int usuarioId) {
 		ModelAndView result;
 		Usuario usuario;
+		usuario= this.usuarioService.findOne(usuarioId);
 		try{
-			usuario= this.usuarioService.findOne(usuarioId);
 			Assert.notNull(usuario);
-			if(this.usuarioService.noSeguirUsuario(usuario)){
-				result = this.createEditModelAndViewSeguir(usuario, "usuario.noSeguir.exito");
-			}else{
-				result = this.createEditModelAndViewSeguir(usuario, "usuario.noSeguir.error");
-			}
+			this.usuarioService.noSeguirUsuario(usuario);
+			result = this.createEditModelAndViewSeguir(usuario, "usuario.noSeguir.exito");	
 		} catch (Throwable oops) {
 			oops.printStackTrace();
 			System.out.println(oops.getMessage());
-			result = super.forbiddenOpperation();
+			result = this.createEditModelAndViewSeguir(usuario, "usuario.noSeguir.error");
 		}
 
 		return result;

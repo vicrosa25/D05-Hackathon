@@ -334,11 +334,10 @@ public class UsuarioService {
 
 	public Integer apuntarseSorteo(Sorteo sorteo){
 		this.usuarioLogued();
-		Integer res =null;
-		Usuario usuarioLogued=  this.findByPrincipal();
+		Integer res = null;
+		Usuario usuarioLogued =  this.findByPrincipal();
 		assert sorteo != null;
 		if(usuarioLogued.getSorteos().contains(sorteo)){
-
 			res=0; //significa que usuario ya contenia el sortea y no deberia poder apuntarse
 		}else if(usuarioLogued.getPuntos()<sorteo.getPuntosNecesarios()){
 			res=1; //significa que el usuario no tiene suficientes puntos para apuntarse al sorteo

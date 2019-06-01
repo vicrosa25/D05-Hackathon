@@ -74,7 +74,8 @@ public class SorteoService {
 
 		// Check principal must be an admin
 		principal = this.actorService.findByPrincipal();
-		Assert.isInstanceOf(Administrador.class, principal);
+		//Assert.isInstanceOf(Administrador.class, principal);
+		Assert.isTrue(principal.getClass().isInstance(new Administrador()) || principal.getClass().isInstance(new Usuario()));
 		
 		// Assert date
 		Assert.isTrue(sorteo.getFechaInicio().before(sorteo.getFechaVencimiento()));
