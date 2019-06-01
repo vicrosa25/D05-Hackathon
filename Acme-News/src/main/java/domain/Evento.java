@@ -41,7 +41,7 @@ public class Evento extends Informacion {
 	@Future
 	@NotNull
 	@Temporal(TemporalType.DATE)
-	@DateTimeFormat(pattern = "yyyy/MM/dd")
+	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	public Date getFecha() {
 		return this.fecha;
 	}

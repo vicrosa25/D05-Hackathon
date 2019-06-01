@@ -70,10 +70,9 @@ public class EventoService {
 		Assert.notNull(manager);
 		Assert.notNull(evento);
 		Assert.isTrue(manager.getAgencias().contains(evento.getAgencia()));
-
-		evento = this.eventoRepository.save(evento);
 		evento.getAgencia().getEventos().add(evento);
-		return evento;
+		
+		return this.eventoRepository.save(evento);
 	}
 
 	public void delete(Evento evento){
