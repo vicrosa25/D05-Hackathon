@@ -15,7 +15,7 @@ import utilities.AbstractTest;
 @ContextConfiguration(locations = { "classpath:spring/junit.xml" })
 @RunWith(SpringJUnit4ClassRunner.class)
 @Transactional
-public class periodistaJoinAgency extends AbstractTest {
+public class PeriodistaUneAgencia extends AbstractTest {
 
 	// System under test ------------------------------------------------------
 	@Autowired
