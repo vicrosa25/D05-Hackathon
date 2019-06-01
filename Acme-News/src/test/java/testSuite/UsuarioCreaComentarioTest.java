@@ -3,26 +3,26 @@ package testSuite;
 
 
 import javax.transaction.Transactional;
+import javax.validation.ConstraintViolationException;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.util.Assert;
 
+import domain.Comentario;
+import domain.Informacion;
 import services.ComentarioService;
 import services.InformacionService;
 import utilities.AbstractTest;
-import domain.Comentario;
-import domain.Informacion;
 
 
 @ContextConfiguration(locations = {"classpath:spring/junit.xml"})
 @RunWith(SpringJUnit4ClassRunner.class)
 @Transactional
-public class ComentarioTest extends AbstractTest {
+public class UsuarioCreaComentarioTest extends AbstractTest {
 
 	// System under test ------------------------------------------------------
 	@Autowired
@@ -34,28 +34,31 @@ public class ComentarioTest extends AbstractTest {
 	private InformacionService informacionService;
 
 
-
-	//1- Crear comentario como usuario a una noticia, resultado esperado ok
-	//2- Crear comentario como admin, resultado esperado fail
-	//3- Crear comentario sin autentificarse, resultado esperado fail
-	//4- Crear comentario como usuario a una informacion inventada, resultado esperado fail
-	//5- Crear comentario como usuario, sin pasarle la informacion, resultado esperado fail
-	//6- Crear comentario como usuario, sin titulo, resultado esperado fail
-	//7- Crear comentario como usuario, sin descripcion, resultado esperado fail
-	//8- Crear comentario como usuario a un evento,  resultado esperado ok
-
+	/**
+	 * Requirement: An actor who is authenticated as an usuario must be able to:  "Create a Comment"
+	 *  
+	 * 	1- Crear comentario como usuario a una noticia, 					resultado esperado ok
+	 *	2- Crear comentario como usuario a un evento,  						resultado esperado ok
+	 *	3- Crear comentario como admin, 									resultado esperado fail
+	 *	4- Crear comentario sin autentificarse, 							resultado esperado fail
+	 *	5- Crear comentario como usuario, sin titulo, 						resultado esperado fail
+	 *	6- Crear comentario como usuario, sin descripcion, 					resultado esperado fail
+	 *	7- Crear comentario como usuario a una informacion inventada 		resultado esperado fail
+	 *	8- Crear comentario como usuario, sin pasarle la noticia o evento 	resultado esperado fail
+	 *  
+	 *
+	**/
 	@Test
 	public void driverTestCreateComentario() {
 		final Object testingData[][] = {
 			{null, "usuario4","noticia9","titulo","descripcion"},
+			{null,  "usuario4","tituloEvento3","titulo","descripcion"},
 			{IllegalArgumentException.class, "admin","noticia9","titulo","descripcion"},
 			{IllegalArgumentException.class, null,"informacion9","titulo","descripcion"},
-
 			{AssertionError.class,  "usuario4","noticia9",null,"descripcion"},
 			{AssertionError.class,  "usuario4","noticia9","titulo",null},
-			{null,  "usuario4","tituloEvento3","titulo","descripcion"},
-			{DataIntegrityViolationException.class,  "usuario4","informacion20","titulo","descripcion"},
-			{DataIntegrityViolationException.class,  "usuario4",null,"titulo","descripcion"},
+			{ConstraintViolationException.class,  "usuario4","informacion20","titulo",""},
+			{ConstraintViolationException.class,  "usuario4",null,"titulo","descripcion"},
 
 		};
 
