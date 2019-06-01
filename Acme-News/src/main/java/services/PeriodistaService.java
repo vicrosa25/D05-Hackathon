@@ -1,3 +1,4 @@
+
 package services;
 
 import java.util.ArrayList;
@@ -11,91 +12,96 @@ import org.springframework.util.Assert;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.Validator;
 
-import repositories.PeriodistaRepository;
-import security.Authority;
-import security.LoginService;
-import security.UserAccount;
 import domain.Noticia;
 import domain.Periodista;
 import domain.Usuario;
 import forms.PeriodistaForm;
+import repositories.PeriodistaRepository;
+import security.Authority;
+import security.LoginService;
+import security.UserAccount;
 
 @Service
 @Transactional
 public class PeriodistaService {
 
-
 	// Managed repository------------------------------------------------------------------------------------------------
 	@Autowired
-	private PeriodistaRepository periodistaRepository;
-
+	private PeriodistaRepository	periodistaRepository;
 
 	// Supporting services ----------------------------------------------------------------------------------------------
 	@Autowired
-	private ActorService actorService;
-
+	private ActorService			actorService;
 
 	// Validator
 	@Autowired
 	@Qualifier("validator")
-	private Validator validator;
+	private Validator				validator;
 
 
 	// Constructor
-	public PeriodistaService(){
+	public PeriodistaService() {
 		super();
 	}
 
-
-
-
 	// Simple SCRUD methods----------------------------------------------------------------------------------------------
-	public Periodista create(){
+	public Periodista create() {
+		// Authority
+		Authority authority = new Authority();
+		authority.setAuthority(Authority.PERIODISTA);
+		Collection<Authority> authorities = new ArrayList<Authority>();
+		authorities.add(authority);
+
+		// UserAccount
+		UserAccount userAccount = new UserAccount();
+		userAccount.setAuthorities(authorities);
+		
 		Periodista result = new Periodista();
-		System.out.println(result);
+		result.setUserAccount(userAccount);
+		result.setNoticias(new ArrayList<Noticia>());
+
+
 		return result;
 	}
 
-
-	public Periodista save(Periodista periodista){
+	public Periodista save(Periodista periodista) {
 		Assert.notNull(periodista);
 		return this.periodistaRepository.save(periodista);
 	}
 
-	public void delete(Periodista periodista){
+	public void delete(Periodista periodista) {
 		Assert.notNull(periodista);
 		Assert.isTrue(this.findByPrincipal() == periodista);
 
 		Periodista unknown = this.findUnknown();
 
-		if(periodista.getAgencia() != null)
+		if (periodista.getAgencia() != null)
 			periodista.getAgencia().getPeriodistas().remove(periodista);
-		for(Noticia noticia:periodista.getNoticias()){
+		for (Noticia noticia : periodista.getNoticias()) {
 			noticia.setPeriodista(unknown);
 		}
-		for(Usuario user:this.periodistaRepository.findFollowers(periodista.getId())){
+		for (Usuario user : this.periodistaRepository.findFollowers(periodista.getId())) {
 			user.getPeriodistas().remove(periodista);
 		}
 
 		this.periodistaRepository.delete(periodista);
 	}
 
-	public Periodista findUnknown(){
+	public Periodista findUnknown() {
 		Periodista result = (Periodista) this.actorService.findByUsername("UnknownJournalist");
 		Assert.notNull(result, "No se encuentra el periodista 'desconocido', hace falta resetear la BDD para eliminar periodistas");
 		return result;
 	}
 
-	public Collection<Periodista> findAll(){
+	public Collection<Periodista> findAll() {
 		return this.periodistaRepository.findAll();
 	}
 
-	public Periodista findOne(int id){
+	public Periodista findOne(int id) {
 		Periodista periodista = this.periodistaRepository.findOne(id);
 		Assert.notNull(periodista);
 		return periodista;
 	}
-
 
 	public Collection<Periodista> findWithBannedNews() {
 		Collection<Periodista> result = new ArrayList<Periodista>();
@@ -110,14 +116,12 @@ public class PeriodistaService {
 		return result;
 	}
 
-
 	public Collection<Periodista> findBanned() {
 		return this.getPeriodistaRepository().findBanned();
 	}
 
-
 	// check password
-	public boolean isPasswordCorrect(String pass1, String pass2){
+	public boolean isPasswordCorrect(String pass1, String pass2) {
 		return pass1.equals(pass2);
 	}
 
@@ -134,7 +138,6 @@ public class PeriodistaService {
 		result.setUserAccount(periodistaForm.getUserAccount());
 		result.getUserAccount().setAuthorities(authorities);
 
-
 		// Informacion
 		Collection<Noticia> noticias = new ArrayList<Noticia>();
 		result.setNoticias(noticias);
@@ -149,12 +152,10 @@ public class PeriodistaService {
 		result.setApellidos(periodistaForm.getApellidos());
 		result.setEmail(periodistaForm.getEmail());
 
-
 		this.validator.validate(result, binding);
 
 		return result;
 	}
-
 
 	// To edit
 	public Periodista reconstruct(Periodista periodista, BindingResult binding) {
@@ -189,7 +190,7 @@ public class PeriodistaService {
 		return this.periodistaRepository;
 	}
 
-	public Periodista findByPrincipal(){
+	public Periodista findByPrincipal() {
 		Periodista result;
 		UserAccount userAccount;
 		userAccount = LoginService.getPrincipal();
@@ -198,11 +199,11 @@ public class PeriodistaService {
 		return result;
 	}
 
-	public Boolean checkAgencia(){
+	public Boolean checkAgencia() {
 		Boolean res = false;
 		Periodista p = this.findByPrincipal();
-		if(p.getAgencia() != null){
-			res=true;
+		if (p.getAgencia() != null) {
+			res = true;
 		}
 		return res;
 	}
@@ -212,14 +213,13 @@ public class PeriodistaService {
 		Authority authority = new Authority();
 		authority.setAuthority(Authority.PERIODISTA);
 		Assert.notNull(actual);
-		Assert.isTrue(LoginService.getPrincipal().getAuthorities()
-			.contains(authority));
-		Assert.isTrue(actual.getCartera().getSaldoAcumulado()>=5.0);
+		Assert.isTrue(LoginService.getPrincipal().getAuthorities().contains(authority));
+		Assert.isTrue(actual.getCartera().getSaldoAcumulado() >= 5.0);
 
-		actual.getCartera().setSaldoAcumuladoTotal(actual.getCartera().getSaldoAcumulado()+actual.getCartera().getSaldoAcumuladoTotal());
+		actual.getCartera().setSaldoAcumuladoTotal(actual.getCartera().getSaldoAcumulado() + actual.getCartera().getSaldoAcumuladoTotal());
 		actual.getCartera().setSaldoAcumulado(0);
 		Periodista saved = this.periodistaRepository.save(actual);
-		Assert.isTrue(saved.getCartera().getSaldoAcumulado()==0);
+		Assert.isTrue(saved.getCartera().getSaldoAcumulado() == 0);
 		return saved;
 	}
 }
