@@ -61,13 +61,12 @@ public class ComentarioController extends AbstractController {
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
 	public ModelAndView save(@Valid Comentario comentario, BindingResult binding) {
 		ModelAndView result;
-
 		if (binding.hasErrors()) {
 			System.out.println(binding.getAllErrors().toString());
 			result = this.createEditModelAndView(comentario);
 		} else {
 			try {
-				this.comentarioService.save(comentario);
+				//this.comentarioService.save(comentario); TODO
 				String redirect=null;
 				if(comentario.getInformacion() instanceof Noticia){
 					redirect="redirect:/noticia/display.do?noticiaId=";

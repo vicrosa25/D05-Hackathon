@@ -175,7 +175,7 @@ public class UsuarioController extends AbstractController {
 			usuarios.removeAll(usuariosSiguiendo);
 			usuarios.remove(this.usuarioService.findByPrincipal());
 
-			result.addObject("usuarios", usuarios);
+			//result.addObject("usuarios", usuarios); TODO
 			result.addObject("usuariosSiguiendo", usuariosSiguiendo);
 
 		} catch (Throwable oops) {
@@ -200,7 +200,7 @@ public class UsuarioController extends AbstractController {
 			periodistasSiguiendo = this.usuarioService.findByPrincipal().getPeriodistas();
 			periodistas.removeAll(periodistasSiguiendo);
 
-			result.addObject("periodistas", periodistas);
+			//result.addObject("periodistas", periodistas); TODO
 			result.addObject("periodistasSiguiendo", periodistasSiguiendo);
 
 		} catch (Throwable oops) {
