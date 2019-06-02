@@ -24,12 +24,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import domain.Estatus;
-import domain.Informacion;
-import domain.Periodista;
-import domain.Sorteo;
-import domain.Tasa;
-import domain.Usuario;
 import services.ActorService;
 import services.InformacionService;
 import services.PeriodistaService;
@@ -37,6 +31,12 @@ import services.SorteoService;
 import services.TasaService;
 import services.UsuarioService;
 import utilities.Md5;
+import domain.Estatus;
+import domain.Informacion;
+import domain.Periodista;
+import domain.Sorteo;
+import domain.Tasa;
+import domain.Usuario;
 
 @Controller
 @RequestMapping("/usuario")
@@ -282,7 +282,7 @@ public class UsuarioController extends AbstractController {
 		try{
 			Assert.notNull(usuario);
 			this.usuarioService.noSeguirUsuario(usuario);
-			result = this.createEditModelAndViewSeguir(usuario, "usuario.noSeguir.exito");	
+			result = this.createEditModelAndViewSeguir(usuario, "usuario.noSeguir.exito");
 		} catch (Throwable oops) {
 			oops.printStackTrace();
 			System.out.println(oops.getMessage());
@@ -335,6 +335,7 @@ public class UsuarioController extends AbstractController {
 			usuariosSiguiendo=this.usuarioService.usuariosSiguiendo();
 			usuarios.removeAll(usuariosSiguiendo);
 			usuarios.remove(this.usuarioService.findByPrincipal());
+			usuarios.remove(this.usuarioService.findUnknown());
 
 			result.addObject("usuarios", usuarios);
 			result.addObject("message", message);
@@ -358,6 +359,7 @@ public class UsuarioController extends AbstractController {
 
 			periodistasSiguiendo=this.usuarioService.findByPrincipal().getPeriodistas();
 			periodistas.removeAll(periodistasSiguiendo);
+			periodistas.remove(this.periodistaService.findUnknown());
 
 			result.addObject("periodistas", periodistas);
 			result.addObject("message", message);
