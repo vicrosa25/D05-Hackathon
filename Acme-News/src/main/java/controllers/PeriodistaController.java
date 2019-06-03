@@ -1,3 +1,4 @@
+
 package controllers;
 
 import java.io.ByteArrayOutputStream;
@@ -22,11 +23,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import domain.Periodista;
 import security.LoginService;
 import services.ActorService;
 import services.PeriodistaService;
 import utilities.Md5;
-import domain.Periodista;
 
 @Controller
 @RequestMapping("/periodista")
@@ -34,28 +35,27 @@ public class PeriodistaController extends AbstractController {
 
 	// Services
 	@Autowired
-	private PeriodistaService periodistaService;
+	private PeriodistaService	periodistaService;
 
 	@Autowired
-	private ActorService actorService;
+	private ActorService		actorService;
+
 
 	// Constructors -----------------------------------------------------------
 	public PeriodistaController() {
 		super();
 	}
 
-
 	@ExceptionHandler(TypeMismatchException.class)
 	public ModelAndView handleMismatchException(final TypeMismatchException oops) {
 		return new ModelAndView("redirect:/");
 	}
 
-
 	// Display --------------------------------------------------------------
 	@RequestMapping(value = "/display", method = RequestMethod.GET)
 	public ModelAndView display() {
 		ModelAndView result;
-		try{
+		try {
 			Periodista periodista = this.periodistaService.findByPrincipal();
 			result = new ModelAndView("periodista/display");
 			result.addObject("periodista", periodista);
@@ -64,17 +64,16 @@ public class PeriodistaController extends AbstractController {
 			System.out.println(oops.getClass());
 			System.out.println(oops.getCause());
 			oops.printStackTrace();
-			result =super.forbiddenOpperation();
+			result = super.forbiddenOpperation();
 		}
 		return result;
 	}
 
-	// Display
-	// --------------------------------------------------------------------------------------
+	// Display --------------------------------------------------------------------------------------
 	@RequestMapping("/display")
 	public ModelAndView display(@RequestParam int periodistaId) {
 		ModelAndView result;
-		try{
+		try {
 			result = new ModelAndView("periodista/display");
 			Periodista periodista = this.periodistaService.findOne(periodistaId);
 			result.addObject("periodista", periodista);
@@ -84,17 +83,16 @@ public class PeriodistaController extends AbstractController {
 			System.out.println(oops.getClass());
 			System.out.println(oops.getCause());
 			oops.printStackTrace();
-			result =super.forbiddenOpperation();
+			result = super.forbiddenOpperation();
 		}
 		return result;
 	}
 
-	// Edit
-	// --------------------------------------------------------------------------------------------------------
+	// Edit --------------------------------------------------------------------------------------------------------
 	@RequestMapping(value = "/edit", method = RequestMethod.GET)
 	public ModelAndView edit() {
 		ModelAndView result;
-		try{
+		try {
 			Periodista periodista = (Periodista) this.actorService.findByPrincipal();
 			result = this.createEditModelAndView(periodista);
 		} catch (final Throwable oops) {
@@ -102,14 +100,12 @@ public class PeriodistaController extends AbstractController {
 			System.out.println(oops.getClass());
 			System.out.println(oops.getCause());
 			oops.printStackTrace();
-			result =super.forbiddenOpperation();
+			result = super.forbiddenOpperation();
 		}
 		return result;
 	}
 
-	// Save
-	// --------------------------------------------------------------------------------------------------------------
-
+	// Save --------------------------------------------------------------------------------------------------------------
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
 	public ModelAndView save(Periodista periodista, BindingResult binding) {
 		ModelAndView result;
@@ -124,30 +120,27 @@ public class PeriodistaController extends AbstractController {
 			result = this.createEditModelAndView(periodista);
 		} else {
 			try {
-				password = Md5.encodeMd5(periodista.getUserAccount()
-					.getPassword());
-				periodista.getUserAccount().setPassword(password);
+				if(periodista.getId() == 0){
+					password = Md5.encodeMd5(periodista.getUserAccount().getPassword());
+					periodista.getUserAccount().setPassword(password);
+				}
 				this.periodistaService.save(periodista);
 				result = new ModelAndView("redirect:/welcome/index.do");
 			} catch (Throwable oops) {
-				result = this.createEditModelAndView(periodista,
-					"periodista.duplicated");
+				result = this.createEditModelAndView(periodista, "periodista.duplicated");
 			}
 		}
 
 		return result;
 	}
 
-
 	@RequestMapping(value = "/retirarDinero", method = RequestMethod.GET)
 	public ModelAndView retirarDinero() {
 		ModelAndView result;
-		try{
-			Periodista actual = this.periodistaService.getPeriodistaRepository()
-				.findByUserAccountId(LoginService.getPrincipal().getId());
+		try {
+			Periodista actual = this.periodistaService.getPeriodistaRepository().findByUserAccountId(LoginService.getPrincipal().getId());
 			Double dineroAcumulado = actual.getCartera().getSaldoAcumulado();
-			Double dineroAcumuladoTotal = actual.getCartera()
-				.getSaldoAcumuladoTotal();
+			Double dineroAcumuladoTotal = actual.getCartera().getSaldoAcumuladoTotal();
 			result = new ModelAndView("periodista/retirarDinero");
 			result.addObject("dineroAcumulado", dineroAcumulado);
 			result.addObject("dineroAcumuladoTotal", dineroAcumuladoTotal);
@@ -157,7 +150,7 @@ public class PeriodistaController extends AbstractController {
 			System.out.println(oops.getClass());
 			System.out.println(oops.getCause());
 			oops.printStackTrace();
-			result =super.forbiddenOpperation();
+			result = super.forbiddenOpperation();
 		}
 		return result;
 	}
@@ -165,9 +158,8 @@ public class PeriodistaController extends AbstractController {
 	@RequestMapping(value = "/retirarDinero", method = RequestMethod.POST)
 	public ModelAndView retirar() {
 		ModelAndView result;
-		try{
-			Periodista actual = this.periodistaService.getPeriodistaRepository()
-				.findByUserAccountId(LoginService.getPrincipal().getId());
+		try {
+			Periodista actual = this.periodistaService.getPeriodistaRepository().findByUserAccountId(LoginService.getPrincipal().getId());
 			Double dineroAcumulado = actual.getCartera().getSaldoAcumulado();
 			if (dineroAcumulado >= 5.0) {
 				this.periodistaService.retirarDinero();
@@ -182,7 +174,7 @@ public class PeriodistaController extends AbstractController {
 			System.out.println(oops.getClass());
 			System.out.println(oops.getCause());
 			oops.printStackTrace();
-			result =super.forbiddenOpperation();
+			result = super.forbiddenOpperation();
 		}
 
 		return result;
@@ -192,7 +184,7 @@ public class PeriodistaController extends AbstractController {
 	@RequestMapping("/listPeriodista")
 	public ModelAndView listNotFull() {
 		ModelAndView result;
-		try{
+		try {
 			Collection<Periodista> allPeriodista = this.periodistaService.findAll();
 			allPeriodista.remove(this.periodistaService.findUnknown());
 
@@ -204,11 +196,10 @@ public class PeriodistaController extends AbstractController {
 			System.out.println(oops.getClass());
 			System.out.println(oops.getCause());
 			oops.printStackTrace();
-			result =super.forbiddenOpperation();
+			result = super.forbiddenOpperation();
 		}
 		return result;
 	}
-
 
 	// Other methods-------------------------------------------------------------------------------------------------------
 	private ModelAndView createEditModelAndView(Periodista periodista) {
@@ -217,14 +208,33 @@ public class PeriodistaController extends AbstractController {
 		return result;
 	}
 
-	private ModelAndView createEditModelAndView(Periodista periodista,
-		String message) {
+	private ModelAndView createEditModelAndView(Periodista periodista, String message) {
 		ModelAndView result;
 		result = new ModelAndView("periodista/edit");
 		result.addObject("action", "periodista/edit.do");
 		result.addObject("modelAttribute", "periodista");
 		result.addObject("periodista", periodista);
 		result.addObject("message", message);
+		return result;
+	}
+
+	// Delete ------------------------------------------------------------------------------------
+	@RequestMapping(value = "/delete", method = RequestMethod.GET)
+	public ModelAndView delete() {
+		ModelAndView result;
+		Periodista periodista;
+
+		try {
+			periodista = this.periodistaService.findByPrincipal();
+			this.periodistaService.delete(periodista);
+			result = new ModelAndView("redirect:/j_spring_security_logout");
+		} catch (final Throwable oops) {
+			System.out.println(oops.getMessage());
+			System.out.println(oops.getClass());
+			System.out.println(oops.getCause());
+			oops.printStackTrace();
+			result = this.forbiddenOpperation();
+		}
 		return result;
 	}
 
@@ -255,25 +265,5 @@ public class PeriodistaController extends AbstractController {
 			System.out.println(oops.getCause());
 			oops.printStackTrace();
 		}
-	}
-
-	// Delete ------------------------------------------------------------------------------------
-	@RequestMapping(value = "/delete", method = RequestMethod.GET)
-	public ModelAndView delete() {
-		ModelAndView result;
-		Periodista periodista;
-
-		try {
-			periodista = this.periodistaService.findByPrincipal();
-			this.periodistaService.delete(periodista);
-			result = new ModelAndView("redirect:/j_spring_security_logout");
-		} catch (final Throwable oops) {
-			System.out.println(oops.getMessage());
-			System.out.println(oops.getClass());
-			System.out.println(oops.getCause());
-			oops.printStackTrace();
-			result = this.forbiddenOpperation();
-		}
-		return result;
 	}
 }

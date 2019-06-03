@@ -21,12 +21,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import services.ActorService;
-import services.ModeradorService;
-import utilities.Md5;
 import domain.Moderador;
 import domain.Periodista;
 import domain.Usuario;
+import services.ActorService;
+import services.ModeradorService;
+import utilities.Md5;
 
 @Controller
 @RequestMapping("/moderador")
@@ -95,8 +95,10 @@ public class ModeradorController extends AbstractController {
 			result = this.createEditModelAndView(moderador);
 		} else {
 			try {
-				password = Md5.encodeMd5(moderador.getUserAccount().getPassword());
-				moderador.getUserAccount().setPassword(password);
+				if(moderador.getId() == 0) {
+					password = Md5.encodeMd5(moderador.getUserAccount().getPassword());
+					moderador.getUserAccount().setPassword(password);
+				}
 				this.moderadorService.save(moderador);
 				result = new ModelAndView("redirect:/welcome/index.do");
 			} catch (Throwable oops) {

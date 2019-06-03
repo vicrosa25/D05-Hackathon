@@ -24,6 +24,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import domain.Estatus;
+import domain.Informacion;
+import domain.Periodista;
+import domain.Sorteo;
+import domain.Tasa;
+import domain.Usuario;
 import services.ActorService;
 import services.InformacionService;
 import services.PeriodistaService;
@@ -31,12 +37,6 @@ import services.SorteoService;
 import services.TasaService;
 import services.UsuarioService;
 import utilities.Md5;
-import domain.Estatus;
-import domain.Informacion;
-import domain.Periodista;
-import domain.Sorteo;
-import domain.Tasa;
-import domain.Usuario;
 
 @Controller
 @RequestMapping("/usuario")
@@ -123,8 +123,10 @@ public class UsuarioController extends AbstractController {
 			result = this.createEditModelAndView(usuario);
 		} else {
 			try {
-				password = Md5.encodeMd5(usuario.getUserAccount().getPassword());
-				usuario.getUserAccount().setPassword(password);
+				if(usuario.getId() == 0){
+					password = Md5.encodeMd5(usuario.getUserAccount().getPassword());
+					usuario.getUserAccount().setPassword(password);
+				}
 				this.usuarioService.save(usuario);
 				result = new ModelAndView("redirect:/welcome/index.do");
 			} catch(Throwable oops) {
