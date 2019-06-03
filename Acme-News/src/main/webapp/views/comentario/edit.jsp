@@ -24,5 +24,5 @@
 	
 	<acme:submit name="save" code="comentario.save"/>
 
-	<a href=""><input type="button" name="goBack" value="<spring:message code="comentario.goBack"/>" /></a>
+	<acme:back code="evento.cancel" />
 </form:form>

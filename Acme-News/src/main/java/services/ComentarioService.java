@@ -37,11 +37,11 @@ public class ComentarioService {
 
 	// Simple CRUD methods ----------------------------------------------------
 
-	public Comentario create(Informacion informacionId) {
+	public Comentario create(Informacion informacion) {
 		Comentario result = new Comentario();
 		result.setUsuario(this.usuarioService.findByPrincipal());
 
-		result.setInformacion(informacionId);
+		result.setInformacion(informacion);
 		result.setFecha(new Date());
 
 		return result;

@@ -44,15 +44,19 @@ public class ComentarioController extends AbstractController {
 	// Comentar --------------------------------------------------
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
 	public ModelAndView create(@RequestParam int informacionId) {
-
 		ModelAndView result;
 		Comentario comentario;
-		Informacion informacion= this.informacionService.findOne(informacionId);
+		try{
+			Informacion informacion= this.informacionService.findOne(informacionId);
 
-		comentario = this.comentarioService.create(informacion);
-		result = new ModelAndView("comentario/edit");
-		result.addObject("comentario", comentario);
-
+			comentario = this.comentarioService.create(informacion);
+			result = new ModelAndView("comentario/edit");
+			result.addObject("comentario", comentario);
+		}catch(Throwable oops){
+			result = super.forbiddenOpperation();
+			oops.printStackTrace();
+			System.out.println(oops.getMessage());
+		}
 		return result;
 	}
 
@@ -67,7 +71,7 @@ public class ComentarioController extends AbstractController {
 			result = this.createEditModelAndView(comentario);
 		} else {
 			try {
-				this.comentarioService.save(comentario);
+				comentario = this.comentarioService.save(comentario);
 				String redirect=null;
 				if(comentario.getInformacion() instanceof Noticia){
 					redirect="redirect:/noticia/display.do?noticiaId=";
@@ -76,10 +80,10 @@ public class ComentarioController extends AbstractController {
 				}
 				redirect=redirect+comentario.getInformacion().getId();
 				result = new ModelAndView(redirect);
-				System.out.println(redirect);
 
 			} catch (Throwable oops) {
-
+				oops.printStackTrace();
+				System.out.println(oops.getMessage());
 				result = this.createEditModelAndView(comentario, "comentario.commit.error");
 			}
 

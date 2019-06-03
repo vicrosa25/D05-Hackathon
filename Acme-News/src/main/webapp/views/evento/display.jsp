@@ -54,12 +54,7 @@
 <br/>
 
 <security:authorize access="hasRole('USUARIO')">
-	<a href=comentario/create.do?informacionId=${row.id}><spring:message code="comentario.create" /></a>
+	<acme:cancel code="comentario.create" url="comentario/create.do?informacionId=${evento.id}"/>
 </security:authorize>
-
+<br>
 <acme:back code="evento.return"/>
-
-
-
-
-
