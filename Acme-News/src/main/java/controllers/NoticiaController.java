@@ -344,7 +344,6 @@ public class NoticiaController extends AbstractController {
 		Noticia noticia = this.noticiaService.findOneToDisplay(noticiaId);
 
 		result.addObject("noticia",noticia);
-		result.addObject("key", "noticia");
 
 		return result;
 	}

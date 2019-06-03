@@ -24,12 +24,12 @@
 	
 	<acme:submit name="save" code="comentario.save"/>
 	
-	<jstl:if test="${ key == 'envento' }">
+	<jstl:if test="${ key == 'evento' }">
 		<acme:cancel url="evento/allEventos.do" code="evento.cancel"/>
 	</jstl:if>
 	
 	<jstl:if test="${ key == 'noticia' }">
-		<acme:cancel url="noticia/list.do" code="evento.cancel"/>
+		<acme:cancel url="noticia/lista.do" code="evento.cancel"/>
 	</jstl:if>
 	
 </form:form>

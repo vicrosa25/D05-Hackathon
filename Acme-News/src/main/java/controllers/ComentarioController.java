@@ -43,12 +43,17 @@ public class ComentarioController extends AbstractController {
 	/** METHODS **/
 	// Comentar --------------------------------------------------
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
-	public ModelAndView create(@RequestParam int informacionId, @RequestParam String key) {
+	public ModelAndView create(@RequestParam int informacionId) {
 		ModelAndView result;
 		Comentario comentario;
+		String key;
 		try{
 			Informacion informacion= this.informacionService.findOne(informacionId);
-
+			if(informacion instanceof Noticia){
+				key = "noticia";
+			}else{
+				key = "evento";
+			}
 			comentario = this.comentarioService.create(informacion);
 			result = new ModelAndView("comentario/edit");
 			result.addObject("comentario", comentario);
@@ -101,9 +106,16 @@ public class ComentarioController extends AbstractController {
 
 	protected ModelAndView createEditModelAndView(Comentario comentario, String message) {
 		ModelAndView result;
+		String key;
 		result = new ModelAndView("comentario/edit");
 		result.addObject("comentario", comentario);
+		if(comentario.getInformacion() instanceof Noticia){
+			key = "noticia";
+		}else{
+			key = "evento";
+		}
 		result.addObject("message", message);
+		result.addObject("key", key);
 
 		return result;
 	}
