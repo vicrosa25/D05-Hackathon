@@ -119,7 +119,7 @@ public class AgenciaService {
 			this.periodistaService.save(p);
 		}
 
-		//Manager manager = toDelete.getManager();
+
 		manager.removeAgencia(toDelete);
 
 		this.agenciaRepository.delete(toDelete);

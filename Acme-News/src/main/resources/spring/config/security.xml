@@ -125,7 +125,7 @@
 		<security:intercept-url pattern="/agencia/manager/list.do" access="hasRole('MANAGER')" />
 		<security:intercept-url pattern="/agencia/manager/create.do" access="hasRole('MANAGER')" />
 		<security:intercept-url pattern="/agencia/manager/edit.do" access="hasRole('MANAGER')" />
-		<security:intercept-url pattern="/agencia/delete.do" access="hasRole('MANAGER')" />
+		<security:intercept-url pattern="/agencia/manager/delete.do" access="hasRole('MANAGER')" />
 		<security:intercept-url pattern="/agencia/manager/periodista/list.do" access="hasRole('MANAGER')" />
 		<security:intercept-url pattern="/agencia/manager/periodista/eject.do" access="hasRole('MANAGER')" />
 		

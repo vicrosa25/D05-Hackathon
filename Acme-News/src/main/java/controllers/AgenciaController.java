@@ -137,12 +137,13 @@ public class AgenciaController extends AbstractController {
 	}
 
 	// Delete an agency method ------------------------------------------------------------------------------------
-	@RequestMapping(value = "/delete", method = RequestMethod.GET)
+	@RequestMapping(value = "manager/delete", method = RequestMethod.GET)
 	public ModelAndView delete(@RequestParam int agenciaId) {
 		ModelAndView result;
 		try {
 			this.agenciaService.delete(agenciaId);
-			result = new ModelAndView("redirect:manager/list.do");
+			//result = new ModelAndView("redirect:manager/list.do");
+			result = this.list();
 		} catch (Throwable oops) {
 			oops.printStackTrace();
 			result = super.forbiddenOpperation();

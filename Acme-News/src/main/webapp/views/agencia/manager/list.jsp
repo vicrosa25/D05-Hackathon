@@ -41,7 +41,7 @@
 		<!-- Delete -->
 		<spring:message code="agencia.delete" var="deleteHeader" />
 		<display:column title="${ deleteHeader }">
-			<a href="agencia/delete.do?agenciaId=${ row.id }"> <spring:message code="agencia.delete" /> </a>
+			<a href="agencia/manager/delete.do?agenciaId=${ row.id }"> <spring:message code="agencia.delete" /> </a>
 		</display:column>
 	</jstl:if>
 	
