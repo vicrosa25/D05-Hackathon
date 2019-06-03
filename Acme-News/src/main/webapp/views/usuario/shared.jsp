@@ -11,7 +11,7 @@
 
 <link rel="stylesheet" href="styles/display.css" type="text/css">
 
-<display:table name="noticiasCompartidas" id="row" requestURI="/usuario/listNoticiasCompartidas.do" pagesize="5" class="displaytag">
+<display:table name="noticiasCompartidas" id="row" requestURI="/usuario/shared.do" pagesize="5" class="displaytag">
 
 	 <spring:message code="informacion.titulo" var="tituloHeader" />
 	<display:column property="titulo" title="${tituloHeader}" sortable="true" />

@@ -30,9 +30,9 @@
 		<put-attribute name="body" value="/views/usuario/listInformacionDeQuienSigues.jsp" />
 	</definition>
 	
-		<definition name="usuario/listNoticiasCompartidas" extends="master.page">	
+		<definition name="usuario/shared" extends="master.page">	
 		<put-attribute name="title" value="Information that you are sharing" />
-		<put-attribute name="body" value="/views/usuario/listNoticiasCompartidas.jsp" />
+		<put-attribute name="body" value="/views/usuario/shared.jsp" />
 	</definition>
 	
 	<definition name="usuario/listSorteosProximos" extends="master.page">	

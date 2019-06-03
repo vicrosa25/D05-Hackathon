@@ -384,12 +384,10 @@ public class UsuarioController extends AbstractController {
 			Assert.notNull(informacion);
 
 			if(this.usuarioService.compartirInformacion(informacion)){
-
-				result = this.createEditModelAndViewCompartirNoticia("usuario.compartirInformacion.exito");
+				result = new ModelAndView("redirect:shared.do?message=usuario.compartirInformacion.exito");
 
 			}else{
-
-				result = this.createEditModelAndViewCompartirNoticia("usuario.compartirInformacion.error");
+				result = new ModelAndView("redirect:shared.do?message=usuario.compartirInformacion.error");
 			}
 		} catch (final Throwable oops) {
 			System.out.println(oops.getMessage());
@@ -402,10 +400,11 @@ public class UsuarioController extends AbstractController {
 		return result;
 	}
 
-	protected ModelAndView createEditModelAndViewCompartirNoticia(String message) {
+	@RequestMapping(value = "/shared", method = RequestMethod.GET)
+	public ModelAndView shared(String message) {
 		ModelAndView result;
 		try{
-			result = new ModelAndView("usuario/listNoticiasCompartidas");
+			result = new ModelAndView("usuario/shared");
 			result.addObject("noticiasCompartidas", this.usuarioService.findByPrincipal().getInformacionCompartida());
 			result.addObject("message", message);
 		} catch (final Throwable oops) {

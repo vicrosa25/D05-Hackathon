@@ -56,6 +56,7 @@
 		<security:intercept-url pattern="/usuario/cambiarEstatus.do" access="hasRole('USUARIO')" />
 		<security:intercept-url pattern="/usuario/cambiarEstatusMetodo.do" access="hasRole('USUARIO')" />
 		<security:intercept-url pattern="/usuario/display.do" access="hasRole('USUARIO')" />
+		<security:intercept-url pattern="/usuario/shared.do" access="hasRole('USUARIO')" />
 		<security:intercept-url pattern="/usuario/edit.do" access="hasRole('USUARIO')" />
 		<security:intercept-url pattern="/usuario/generatePDF.do" access="hasRole('USUARIO')" />
 		<security:intercept-url pattern="/usuario/delete.do" access="hasRole('USUARIO')" />
@@ -103,12 +104,6 @@
 		<security:intercept-url pattern="/moderador/generatePDF.do" access="hasRole('MODERADOR')" />
 		<security:intercept-url pattern="/moderador/delete.do" access="hasRole('MODERADOR')" />
 		<security:intercept-url pattern="/moderador/retirarDinero.do" access="hasRole('MODERADOR')" />
-		<security:intercept-url pattern="/noticia/reportes.do" access="hasRole('MODERADOR')" />
-		<security:intercept-url pattern="/noticia/listBanear.do" access="hasRole('MODERADOR')" />
-		<security:intercept-url pattern="/noticia/banear.do" access="hasRole('MODERADOR')" />
-		<security:intercept-url pattern="/noticia/listPendientes.do" access="hasRole('MODERADOR')" />
-		<security:intercept-url pattern="/noticia/aceptar.do" access="hasRole('MODERADOR')" />
-		<security:intercept-url pattern="/noticia/denegar.do" access="hasRole('MODERADOR')" />
 		<security:intercept-url pattern="/moderador/usuarios/ban.do" access="hasRole('MODERADOR')" />
 		<security:intercept-url pattern="/moderador/periodistas/ban.do" access="hasRole('MODERADOR')" />
 		
@@ -154,6 +149,12 @@
 		<security:intercept-url pattern="/noticia/usuario/enviar.do" access="hasRole('USUARIO')" />
 		<security:intercept-url pattern="/noticia/usuario/recibidas.do" access="hasRole('USUARIO')" />
 		<security:intercept-url pattern="/noticia/lista.do" access="permitAll" />
+		<security:intercept-url pattern="/noticia/reportes.do" access="hasRole('MODERADOR')" />
+		<security:intercept-url pattern="/noticia/listBanear.do" access="hasRole('MODERADOR')" />
+		<security:intercept-url pattern="/noticia/banear.do" access="hasRole('MODERADOR')" />
+		<security:intercept-url pattern="/noticia/listPendientes.do" access="hasRole('MODERADOR')" />
+		<security:intercept-url pattern="/noticia/aceptar.do" access="hasRole('MODERADOR')" />
+		<security:intercept-url pattern="/noticia/denegar.do" access="hasRole('MODERADOR')" />
 		
 		<!-- BANNER  -->
 		<security:intercept-url pattern="/banner/admin/list.do" 	access="hasRole('ADMIN')" />
