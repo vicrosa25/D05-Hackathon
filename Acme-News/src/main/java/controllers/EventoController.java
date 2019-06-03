@@ -81,6 +81,7 @@ public class EventoController extends AbstractController {
 			result = new ModelAndView("evento/display");
 			result.addObject("evento", evento);
 			result.addObject("comentarios", comentarios);
+			result.addObject("key", "evento");
 		} catch (Throwable oops) {
 			oops.printStackTrace();
 			System.out.println(oops.getMessage());

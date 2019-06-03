@@ -54,7 +54,7 @@
 <br/>
 
 <security:authorize access="hasRole('USUARIO')">
-	<acme:cancel code="comentario.create" url="comentario/create.do?informacionId=${evento.id}"/>
+	<acme:cancel code="comentario.create" url="comentario/create.do?informacionId=${evento.id}&key=${key}"/>
 </security:authorize>
 <br>
 <acme:back code="evento.return"/>

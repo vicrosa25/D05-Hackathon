@@ -12,11 +12,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import services.ComentarioService;
-import services.InformacionService;
 import domain.Comentario;
 import domain.Informacion;
 import domain.Noticia;
+import services.ComentarioService;
+import services.InformacionService;
 
 @Controller
 @RequestMapping("/comentario")
@@ -43,7 +43,7 @@ public class ComentarioController extends AbstractController {
 	/** METHODS **/
 	// Comentar --------------------------------------------------
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
-	public ModelAndView create(@RequestParam int informacionId) {
+	public ModelAndView create(@RequestParam int informacionId, @RequestParam String key) {
 		ModelAndView result;
 		Comentario comentario;
 		try{
@@ -52,6 +52,7 @@ public class ComentarioController extends AbstractController {
 			comentario = this.comentarioService.create(informacion);
 			result = new ModelAndView("comentario/edit");
 			result.addObject("comentario", comentario);
+			result.addObject("key", key);
 		}catch(Throwable oops){
 			result = super.forbiddenOpperation();
 			oops.printStackTrace();

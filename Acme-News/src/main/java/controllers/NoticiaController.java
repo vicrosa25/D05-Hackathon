@@ -17,11 +17,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import services.MensajeService;
-import services.NoticiaService;
-import services.PeriodistaService;
-import services.UsuarioService;
-import utilities.Search;
 import domain.Categoria;
 import domain.Estado;
 import domain.Mensaje;
@@ -29,6 +24,11 @@ import domain.Noticia;
 import domain.Periodista;
 import domain.Usuario;
 import forms.EnviarNoticiaForm;
+import services.MensajeService;
+import services.NoticiaService;
+import services.PeriodistaService;
+import services.UsuarioService;
+import utilities.Search;
 
 @Controller
 @RequestMapping("/noticia")
@@ -344,6 +344,7 @@ public class NoticiaController extends AbstractController {
 		Noticia noticia = this.noticiaService.findOneToDisplay(noticiaId);
 
 		result.addObject("noticia",noticia);
+		result.addObject("key", "noticia");
 
 		return result;
 	}
