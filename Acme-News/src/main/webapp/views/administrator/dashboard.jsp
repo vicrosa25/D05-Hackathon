@@ -21,6 +21,7 @@
 <spring:message code="administrator.dashboard.query7" var="query7Header" />
 <spring:message code="administrator.dashboard.query8" var="query8Header" />
 <spring:message code="administrator.dashboard.query9" var="query9Header" />
+<spring:message code="administrator.dashboard.query10" var="query10Header" />
 <spring:message code="administrator.dashboard.min" var="minHeader" />
 <spring:message code="administrator.dashboard.max" var="maxHeader" />
 <spring:message code="administrator.dashboard.avg" var="avgHeader" />
@@ -160,7 +161,6 @@
       </tr>
  
 </table>
-
 <br>
 
 
@@ -174,7 +174,17 @@
       </tr>
  
 </table>
-
 <br>
+
+ <table>
+<caption><jstl:out value="${query10Header}"></jstl:out></caption>
+  <tr>
+    <th><jstl:out value="${numberHeader}"></jstl:out></th>
+  </tr>
+      <tr>
+           <td>${query10}</td>
+      </tr>
+ 
+</table>
 
 

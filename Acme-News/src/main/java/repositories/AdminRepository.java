@@ -46,8 +46,11 @@ public interface AdminRepository extends JpaRepository<Administrador, Integer> {
 	
 	@Query("select count(c)  from Noticia c where c.estado=(0)")
 	Integer query8();
+	
+	@Query("select count(c)  from Noticia c where c.estado=(0)")
+	Integer query9();
 
 	@Query("select count(c)  from Sorteo c")
-	Integer query9();
+	Integer query10();
 }
 

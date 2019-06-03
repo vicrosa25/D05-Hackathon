@@ -164,6 +164,9 @@ public class AdminController extends AbstractController {
 
 		//query9
 		Integer query9 = this.adminService.query9();
+		
+		//query10
+		Integer query10 = this.adminService.query10();
 
 		result = new ModelAndView("administrator/dashboard");
 		result.addObject("query1", query1);
@@ -177,6 +180,8 @@ public class AdminController extends AbstractController {
 		result.addObject("query7", query7);
 		result.addObject("query8", query8);
 		result.addObject("query9", query9);
+		result.addObject("query10", query10);
+		
 		return result;
 	}
 
