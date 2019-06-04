@@ -21,7 +21,7 @@
 	<display:column property="apellidos" title="${apellidosHeader}" sortable="false"/>
 	
 	<spring:message code="periodista.email" var="emailHeader" />
-	<display:column property="email" title="${fechaHeader}" sortable="false"/>
+	<display:column property="email" title="${emailHeader}" sortable="false"/>
 </display:table>
 
 <br/>
