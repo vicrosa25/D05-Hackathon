@@ -7,7 +7,7 @@ Due to https implementation, to deploy in the developer machine, is necessary to
 
 #Generate keystore
 
-Open a command promp and go to the java folder (cd %JAVA_HOME%/bin)
+Open a command promp and go to the java folder (<cd %JAVA_HOME%/bin> or C:\Program Files\Java\jdk1.7.0_13\bin)
 In the bin folder inside, execute the following
 	keytool -genkey -alias tomcat -keyalg RSA
 
@@ -34,6 +34,7 @@ By this: (change the password field with yours)
 	    protocol="org.apache.coyote.http11.Http11NioProtocol" scheme="https"
 	    secure="true" sslProtocol="TLS" />
 
+Restart tomcat.
 
 #Functional testing
 
