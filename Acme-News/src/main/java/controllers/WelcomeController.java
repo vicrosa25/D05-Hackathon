@@ -15,29 +15,29 @@ import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import domain.Actor;
-import domain.Banner;
 import services.ActorService;
 import services.BannerService;
 import services.ConfigurationsService;
+import domain.Actor;
+import domain.Banner;
 
 @Controller
 @RequestMapping("/welcome")
 public class WelcomeController extends AbstractController {
 
-	
+
 
 	@Autowired
 	private ActorService			actorService;
-	
+
 	@Autowired
 	private ConfigurationsService	configurationsService;
-	
+
 	@Autowired
 	private BannerService 			bannerService;
 
-	
-	
+
+
 	// Constructors -----------------------------------------------------------
 	public WelcomeController() {
 		super();
@@ -57,19 +57,19 @@ public class WelcomeController extends AbstractController {
 
 		formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm");
 		moment = formatter.format(new Date());
-		
+
 		//Banner  banner = this.bannerService.getBannerWellcome();
-		
+
 		englishMessage = this.configurationsService.getConfiguration().getEnglishMessage();
 		spanishMessage = this.configurationsService.getConfiguration().getSpanishMessage();
-		
+
 
 		List<Banner> banners= new ArrayList<Banner>(this.bannerService.findAll());
 		Integer aleatorio=(int) (Math.random() * banners.size()); // numero aleatorio generado entre 0 y el numero de urls
 		String bannerAleatorio = banners.get(aleatorio).getUrl();
-		
-		
-		
+
+
+
 		try {
 			actor = this.actorService.findByPrincipal();
 			name = actor.getNombre() + " " + actor.getApellidos();
@@ -90,6 +90,13 @@ public class WelcomeController extends AbstractController {
 			result.addObject("bannerAleatorio", bannerAleatorio);
 		}
 
+		return result;
+	}
+
+	@RequestMapping(value = "/legal")
+	public ModelAndView legal(){
+		ModelAndView result;
+		result = new ModelAndView("welcome/legal");
 		return result;
 	}
 }
