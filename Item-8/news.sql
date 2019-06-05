@@ -322,7 +322,7 @@ CREATE TABLE `configurations` (
 
 LOCK TABLES `configurations` WRITE;
 /*!40000 ALTER TABLE `configurations` DISABLE KEYS */;
-INSERT INTO `configurations` VALUES (1395,0,1,'+34','Welcome to Acme News!',10,'https://i.imgur.com/JAsKMdd.jpg','¡Bienvenidos a Acme News!','Acme Hacker News Co., Inc.');
+INSERT INTO `configurations` VALUES (1395,0,1,'+34','Welcome to Acme News!',10,'https://i.imgur.com/JAsKMdd.jpg','¡Bienvenidos a Acme News!','Acme News Co., Inc.');
 /*!40000 ALTER TABLE `configurations` ENABLE KEYS */;
 UNLOCK TABLES;
 

@@ -1521,7 +1521,7 @@ Twitter, por suerte, sigue funcionando" />
 		<property name="cacheTime" value="1" />
 		<property name="finderMaxResult" value="10" />
 		<property name="countryCode" value="+34" />
-		<property name="title" value="Acme Hacker News Co., Inc." />
+		<property name="title" value="Acme News Co., Inc." />
 		<property name="logo" value="https://i.imgur.com/JAsKMdd.jpg" />
 		<property name="spanishMessage" value="¡Bienvenidos a Acme News!" />
 		<property name="englishMessage" value="Welcome to Acme News!" />
